@@ -73,6 +73,8 @@
   <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#222">
 
 
+  <link rel="manifest" href="/images/manifest.json">
+
 
 
 
@@ -86,7 +88,7 @@
     root: '/',
     scheme: 'Gemini',
     version: '6.4.2',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
     fancybox: false,
     fastclick: false,
     lazyload: false,
@@ -320,8 +322,8 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QJun">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://unsplash.com/photos/Wm03w2F7HL8">
+      <meta itemprop="description" content="Stay Hungry, Stay Foolish!">
+      <meta itemprop="image" content="/images/10.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -476,6 +478,8 @@
 
   <aside id="sidebar" class="sidebar">
     
+      <div id="sidebar-dimmer"></div>
+    
     <div class="sidebar-inner">
 
       
@@ -487,11 +491,11 @@
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
               <img class="site-author-image" itemprop="image"
-                src="https://unsplash.com/photos/Wm03w2F7HL8"
+                src="/images/10.jpg"
                 alt="QJun" />
             
               <p class="site-author-name" itemprop="name">QJun</p>
-              <p class="site-description motion-element" itemprop="description"></p>
+              <p class="site-description motion-element" itemprop="description">Stay Hungry, Stay Foolish!</p>
           </div>
 
           
@@ -522,6 +526,20 @@
 
           
           
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://leesen998.github.io/" title="关于此博客" target="_blank">关于此博客</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
 
           
             
@@ -545,7 +563,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; 2017 – <span itemprop="copyrightYear">2018</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
@@ -559,15 +577,9 @@
 
 
 
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
 
 
 
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Gemini</a> v6.4.2</div>
 
 
 
@@ -588,6 +600,8 @@
     
       <div class="back-to-top">
         <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
         
       </div>
     
@@ -620,6 +634,8 @@
 
 
 
+  
+
 
 
 
@@ -645,6 +661,11 @@
   
   
     <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 
