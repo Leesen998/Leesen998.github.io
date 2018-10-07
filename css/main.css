@@ -1909,7 +1909,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #acd188;
+  background: #ffdab0;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2874,9 +2874,16 @@ h6 {
 .post-gallery .post-gallery-img img {
   padding: 3px;
 }
-code {
-  color: #f07600;
+.highlight figcaption {
+  margin: 0em;
+  padding: 0.5em;
   background: #36bf36;
+  border-bottom: 1px solid #473c8b;
+}
+.highlight figcaption a {
+  color: #500501;
+}
+code {
   margin: 0px 4px;
 }
 .highlight,
@@ -2889,22 +2896,13 @@ pre {
 .highlight,
 code,
 pre {
-  border: 1px solid #ffeef0;
-}
-.highlight figcaption {
-  margin: 0em;
-  padding: 0.5em;
-  background: #36bf36;
-  border-bottom: 1px solid #eee;
-}
-.highlight figcaption a {
-  color: #5073b8;
+  border: 1px solid #473c8b;
 }
 pre .addition {
   background: #e6ffed;
 }
 pre .deletion {
-  background: #ffeef0;
+  background: #473c8b;
 }
 .sidebar-toggle {
   right: 10px;
@@ -3180,17 +3178,17 @@ h2.about-title {
 }
 ::-webkit-scrollbar {
   width: 5px;
-  height: 5px;
+  height: 15px;
 }
 ::-webkit-scrollbar-track {
-  background: #eee;
+  background: #3d3d3d;
 }
 ::-webkit-scrollbar-thumb {
   border-radius: 5px;
-  background-color: #ccc;
+  background-color: #458b00;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #f79533;
+  background-color: #f7f933;
 }
 .aplayer {
   font-family: Lato, -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Heiti SC", STHeiti, "Source Han Sans SC", "Noto Sans CJK SC", "WenQuanYi Micro Hei", "Droid Sans Fallback", "Microsoft YaHei", sans-serif !important;
