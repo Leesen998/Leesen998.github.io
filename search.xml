@@ -32,4 +32,15 @@
         <tag>test</tag>
       </tags>
   </entry>
+  <entry>
+    <title><![CDATA[java入门]]></title>
+    <url>%2F2016%2F10%2F02%2Fjava%E5%85%A5%E9%97%A8%2F</url>
+    <content type="text"><![CDATA[java入门笔记 第一个Java程序Java代码Java程序是大小写敏感的 对格式没有严格要求，但用空格或Tab键缩进会比较好看 Hello.java12345public class Hello &#123; public static void main(String[] args) &#123; System.out.println("Hello, world!");&#125;&#125; 文件名必须是Hello.java，文件名也要注意大小写，必须与程序的类名完全一致，扩展名是.java。 编译切换到Hello.java所在目录：1javac Hello.java 无任何输出表示成功，可查看编译出的Hello.class文件。 执行1java Hello 代码格式：public 和 static 是修饰符static表示静态方法123456789101112131415161718192021/**可以自动创建文档的注释*/public class 类名 &#123; public static void 方法名(参数) &#123; //单行注释 你的程序代码; /* 多行注释 */&#125;&#125;//class定义结束``` ## Quick Start### Create a new post``` bash$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+      <categories>
+        <category>程序设计</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
 </search>
