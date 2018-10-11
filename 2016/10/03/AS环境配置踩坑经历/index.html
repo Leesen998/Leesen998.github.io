@@ -157,24 +157,24 @@
 
 
 
-  <meta name="description" content="hello world">
+  <meta name="keywords" content="AS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="article title">
-<meta property="og:url" content="https://leesen998.github.io/2018/10/02/article-title/index.html">
+<meta property="og:title" content="AS环境配置踩坑经历">
+<meta property="og:url" content="https://leesen998.github.io/2016/10/03/AS环境配置踩坑经历/index.html">
 <meta property="og:site_name" content="QJun">
-<meta property="og:description" content="hello world">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-10-02T03:51:53.919Z">
+<meta property="og:image" content="https://source.unsplash.com/random/1600x900">
+<meta property="og:updated_time" content="2018-10-11T13:02:02.444Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="article title">
-<meta name="twitter:description" content="hello world">
+<meta name="twitter:title" content="AS环境配置踩坑经历">
+<meta name="twitter:image" content="https://source.unsplash.com/random/1600x900">
 
 
 
 
 
 
-  <link rel="canonical" href="https://leesen998.github.io/2018/10/02/article-title/"/>
+  <link rel="canonical" href="https://leesen998.github.io/2016/10/03/AS环境配置踩坑经历/"/>
 
 
 
@@ -184,7 +184,7 @@
   };
 </script>
 
-  <title>article title | QJun</title>
+  <title>AS环境配置踩坑经历 | QJun</title>
   
 
 
@@ -398,7 +398,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://leesen998.github.io/2018/10/02/article-title/">
+    <link itemprop="mainEntityOfPage" href="https://leesen998.github.io/2016/10/03/AS环境配置踩坑经历/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QJun">
@@ -415,7 +415,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">article title
+          <h1 class="post-title" itemprop="name headline">AS环境配置踩坑经历
               
             
           </h1>
@@ -440,16 +440,46 @@
                 
               
 
-              <time title="创建时间：2018-10-02 11:47:29 / 修改时间：11:51:53" itemprop="dateCreated datePublished" datetime="2018-10-02T11:47:29+08:00">2018-10-02</time>
+              <time title="创建时间：2016-10-03 10:41:53" itemprop="dateCreated datePublished" datetime="2016-10-03T10:41:53+08:00">2016-10-03</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-10-11 21:02:02" itemprop="dateModified" datetime="2018-10-11T21:02:02+08:00">2018-10-11</time>
               
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/软件安装/" itemprop="url" rel="index"><span itemprop="name">软件安装</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -486,8 +516,36 @@
       
 
       
-        <p>hello world</p>
+        <p class="description"></p>
 
+<p><img src="https://source.unsplash.com/random/1600x900" alt="" style="width:100%"></p>
+<a id="more"></a>
+<h2 id="遇到的bug"><a href="#遇到的bug" class="headerlink" title="遇到的bug"></a><font color="#551A8B" size="">遇到的bug</font></h2><pre><code>Unable to resolve dependency for &apos;:app@debug/compileClasspath&apos;
+</code></pre><p>这是由于配置文件的依赖是通过Google下载的，然而该下载被墙了！<br>[解决办法]：</p>
+<h3 id="在整个工程的build-gradle中添加以下框内代码："><a href="#在整个工程的build-gradle中添加以下框内代码：" class="headerlink" title="在整个工程的build.gradle中添加以下框内代码："></a>在整个工程的build.gradle中添加以下框内代码：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">maven &#123;</span><br><span class="line">        url <span class="string">'http://maven.aliyun.com/nexus/content/groups/public/'</span></span><br><span class="line">        &#125;</span><br><span class="line">maven &#123; url <span class="string">'http://repo1.maven.org/maven2'</span> &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="app下的build-gradle配置如下"><a href="#app下的build-gradle配置如下" class="headerlink" title="app下的build.gradle配置如下:"></a>app下的build.gradle配置如下:</h3><p>buildToolsVersion 需要和你的sdk安装目录 ~\sdk\build-tools文件里面已有的版本对应<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    compileSdkVersion 26</span><br><span class="line">    buildToolsVersion <span class="string">'27.0.3'</span></span><br><span class="line">    defaultConfig &#123;</span><br><span class="line">        applicationId <span class="string">"com.example.administrator.myapplication"</span></span><br><span class="line">        minSdkVersion 19</span><br><span class="line">        targetSdkVersion 22</span><br><span class="line">        versionCode 1</span><br><span class="line">        versionName <span class="string">"1.0"</span></span><br><span class="line">        testInstrumentationRunner <span class="string">"android.support.test.runner.AndroidJUnitRunner"</span></span><br><span class="line">    &#125;</span><br><span class="line">    buildTypes &#123;</span><br><span class="line">        release &#123;</span><br><span class="line">            minifyEnabled <span class="literal">false</span></span><br><span class="line">            proguardFiles getDefaultProguardFile(<span class="string">'proguard-android.txt'</span>), <span class="string">'proguard-rules.pro'</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>implementation ‘com.android.support:appcompat-v7:26.+’ 中v7:26.+表示使用的sdk版本<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    implementation fileTree(dir: <span class="string">'libs'</span>, include: [<span class="string">'*.jar'</span>])</span><br><span class="line">    implementation <span class="string">'com.android.support:appcompat-v7:26.+'</span></span><br><span class="line">    implementation <span class="string">'com.android.support.constraint:constraint-layout:1.0.2'</span></span><br><span class="line">    testImplementation <span class="string">'junit:junit:4.12'</span></span><br><span class="line">    androidTestImplementation <span class="string">'com.android.support.test:runner:0.4'</span></span><br><span class="line">    androidTestImplementation <span class="string">'com.android.support.test.espresso:espresso-core:2.2.2'</span></span><br><span class="line">//    androidTestImplementation <span class="string">'com.android.support.test:runner:1.0.1'</span></span><br><span class="line">//    androidTestImplementation <span class="string">'com.android.support.test.espresso:espresso-core:3.0.1'</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="若配置后还没解决问题，依然报错"><a href="#若配置后还没解决问题，依然报错" class="headerlink" title="若配置后还没解决问题，依然报错"></a>若配置后还没解决问题，依然报错</h3><p><font color="#FF00FF" size="">打开 C:/Users/(用户名)/.gradle/gradle.properties</font><br>把http代理的配置注释掉，例如：</p>
+<pre><code>## For more details on how to configure your build environment visit
+# http://www.gradle.org/docs/current/userguide/build_environment.html
+#
+# Specifies the JVM arguments used for the daemon process.
+# The setting is particularly useful for tweaking memory settings.
+# Default value: -Xmx1024m -XX:MaxPermSize=256m
+# org.gradle.jvmargs=-Xmx2048m -XX:MaxPermSize=512m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8
+#
+# When configured, Gradle will run in incubating parallel mode.
+# This option should only be used with decoupled projects. More details, visit
+# http://www.gradle.org/docs/current/userguide/multi_project_builds.html#sec:decoupled_projects
+# org.gradle.parallel=true
+#Sat Sep 29 23:37:12 CST 2018
+
+#systemProp.http.proxyHost=mirrors.neusoft.edu.cn
+#systemProp.https.proxyPort=80
+#systemProp.https.proxyHost=mirrors.neusoft.edu.cn
+#systemProp.http.proxyPort=80
+</code></pre><p>More info: <a href="https://blog.csdn.net/magicbaby810/article/details/79848425" target="_blank" rel="noopener">参考该问题的csdn博客</a></p>
+<hr>
       
     </div>
 
@@ -516,6 +574,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/AS/" rel="tag"># AS</a>
+          
+        </div>
+      
 
       
       
@@ -525,8 +589,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/10/02/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2016/10/02/java入门/" rel="next" title="java入门">
+                <i class="fa fa-chevron-left"></i> java入门
               </a>
             
           </div>
@@ -535,8 +599,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/10/02/new-post/" rel="prev" title="new_post">
-                new_post <i class="fa fa-chevron-right"></i>
+              <a href="/2018/10/02/hello-world/" rel="prev" title="Hello">
+                Hello <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -589,8 +653,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -609,7 +682,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-count">3</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -626,7 +699,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">2</span>
+                      
+                    
+                    <span class="site-state-item-count">3</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -643,7 +718,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">2</span>
+                      
+                    
+                    <span class="site-state-item-count">3</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -668,7 +745,15 @@
               <ul class="links-of-blogroll-list">
                 
                   <li class="links-of-blogroll-item">
-                    <a href="https://leesen998.github.io/" title="关于此博客" target="_blank">关于此博客</a>
+                    <a href="https://leesen998.github.io/about/" title="关于此博客" target="_blank">关于此博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://poetryscience.ink/" title="Huixin" target="_blank">Huixin</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://ultimatehy.github.io/" title="Yong Huang" target="_blank">Yong Huang</a>
                   </li>
                 
               </ul>
@@ -683,6 +768,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#遇到的bug"><span class="nav-number">1.</span> <span class="nav-text">遇到的bug</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#在整个工程的build-gradle中添加以下框内代码："><span class="nav-number">1.1.</span> <span class="nav-text">在整个工程的build.gradle中添加以下框内代码：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#app下的build-gradle配置如下"><span class="nav-number">1.2.</span> <span class="nav-text">app下的build.gradle配置如下:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#若配置后还没解决问题，依然报错"><span class="nav-number">1.3.</span> <span class="nav-text">若配置后还没解决问题，依然报错</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -860,7 +961,7 @@
   
     <script type="text/javascript">
       window.livereOptions = {
-        refer: '2018/10/02/article-title/'
+        refer: '2016/10/03/AS环境配置踩坑经历/'
       };
       (function(d, s) {
         var j, e = d.getElementsByTagName(s)[0];
@@ -1238,7 +1339,7 @@
   
   
 
-  <script type="text/javascript" color="0,229,238" opacity='0.8' zIndex="-1" count="150" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  <script type="text/javascript" color="0,0,255" opacity='0.7' zIndex="-1" count="100" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
 
   
   

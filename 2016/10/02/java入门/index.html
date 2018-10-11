@@ -166,7 +166,7 @@
 <meta property="og:description" content="java入门笔记">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://desk-fd.zol-img.com.cn/t_s1920x1080c5/g5/M00/00/0C/ChMkJ1gF5IyIVpQZAAfWfSNJAuoAAXABwHjE1wAB9aV014.jpg">
-<meta property="og:updated_time" content="2018-10-08T03:43:04.779Z">
+<meta property="og:updated_time" content="2018-10-08T09:03:21.126Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java入门">
 <meta name="twitter:description" content="java入门笔记">
@@ -460,7 +460,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-10-08 11:43:04" itemprop="dateModified" datetime="2018-10-08T11:43:04+08:00">2018-10-08</time>
+                <time title="修改时间：2018-10-08 17:03:21" itemprop="dateModified" datetime="2018-10-08T17:03:21+08:00">2018-10-08</time>
               
             
           </span>
@@ -571,16 +571,13 @@
 </li>
 </ul>
 <h3 id="算数运算符-2"><a href="#算数运算符-2" class="headerlink" title="算数运算符_2"></a>算数运算符_2</h3><ul>
-<li>A:算数运算符++、–的使用<ul>
-<li>a: ++运算符，会在原有值的基础上自增1</li>
-<li>b: –运算符，会在原有值的基础上自减1。</li>
-</ul>
-</li>
-<li>B:++  – 位置的使用<ul>
-<li>a:++,–运算符后置时，先使用变量a原有值参与运算操作，运算操作完成后，变量a的值自增1或者自减1；</li>
-<li>b:++，–运算符前置时，先将变量a的值自增1或者自减1，然后使用更新后的新值参与运算操作。</li>
-</ul>
-</li>
+<li>算数运算符++、–<pre><code>* A:算数运算符++、--的使用
+    * a: ++运算符，会在原有值的基础上自增1
+    * b: --运算符，会在原有值的基础上自减1。
+* B:++  -- 位置的使用
+    * a:++,--运算符后置时，先使用变量a原有值参与运算操作，运算操作完成后，变量a的值自增1或者自减1；
+    * b:++，--运算符前置时，先将变量a的值自增1或者自减1，然后使用更新后的新值参与运算操作。
+</code></pre></li>
 </ul>
 <h3 id="赋值运算符"><a href="#赋值运算符" class="headerlink" title="赋值运算符"></a>赋值运算符</h3><ul>
 <li><p>A: 赋值运算符的使用</p>
@@ -597,12 +594,24 @@
 <h3 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h3><p>A: 逻辑运算符的使用</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">运算符	运算规则		范例		结果</span><br><span class="line">&amp;	与		<span class="literal">false</span>&amp;<span class="literal">true</span>	False</span><br><span class="line">|	或		<span class="literal">false</span>|<span class="literal">true</span>	True</span><br><span class="line">^	异或		<span class="literal">true</span>^flase	True</span><br><span class="line">!	非		!<span class="literal">true</span>		Flase</span><br><span class="line">&amp;&amp;	短路与		<span class="literal">false</span>&amp;&amp;<span class="literal">true</span>	False</span><br><span class="line">||	短路或		<span class="literal">false</span>||<span class="literal">true</span>	True</span><br><span class="line"></span><br><span class="line">规律小结:</span><br><span class="line">	短路与&amp;&amp;:参与运算的两边数据，有<span class="literal">false</span>，则运算结果为<span class="literal">false</span>；</span><br><span class="line">	短路或||:参与运算的两边数据，有<span class="literal">true</span>，则运算结果为<span class="literal">true</span>；</span><br><span class="line">	逻辑非! : 参与运算的数据，原先是<span class="literal">true</span>则变成<span class="literal">false</span>，原先是<span class="literal">false</span>则变成<span class="literal">true</span>。</span><br></pre></td></tr></table></figure>
 <h3 id="三元运算符"><a href="#三元运算符" class="headerlink" title="三元运算符"></a>三元运算符</h3><ul>
-<li><p>A: 格式:<br>  (条件表达式)？表达式1：表达式2；</p>
-</li>
-<li><p>B: 代码案例<br>  方式一：<br>  System.out.println( 3&gt;2 ? “正确” : “错误” );<br>  // 三元运算符运算后的结果为true，运算结果为表达式1的值“正确”，然后将结果“正确”，在控制台输出打印</p>
-<p>  方式二：<br>  int a = 3;<br>  int b = 4;<br>  String result = (a==b) ? “相等” : “不相等”;<br>  //三元运算符运算后的结果为false，运算结果为表达式2的值“不相等”，然后将结果赋值给了变量result</p>
-<p>  方式三：<br>  int n = (3&gt;2 &amp;&amp; 4&gt;6) ? 100 : 200;<br>  //三元运算符运算后的结果为false，运算结果为表达式2的值200,然后将结果200赋值给了变量n</p>
-</li>
+<li>A: 格式:</li>
+<li><pre><code>(条件表达式)？表达式1：表达式2；
+</code></pre></li>
+<li><p>B: 代码案例</p>
+<pre><code>方式一：
+System.out.println( 3&gt;2 ? “正确” : “错误” ); 
+// 三元运算符运算后的结果为true，运算结果为表达式1的值“正确”，然后将结果“正确”，在控制台输出打印
+
+方式二：
+int a = 3;
+int b = 4;
+String result = (a==b) ? “相等” : “不相等”;  
+//三元运算符运算后的结果为false，运算结果为表达式2的值“不相等”，然后将结果赋值给了变量result
+
+方式三：
+int n = (3&gt;2 &amp;&amp; 4&gt;6) ? 100 : 200;
+//三元运算符运算后的结果为false，运算结果为表达式2的值200,然后将结果200赋值给了变量n
+</code></pre></li>
 </ul>
 <h3 id="运算符优先级"><a href="#运算符优先级" class="headerlink" title="运算符优先级"></a>运算符优先级</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">优先级		描述		运算符</span><br><span class="line">1		括号		()、[]</span><br><span class="line">2		正负号		+、-</span><br><span class="line">3		自增自减，非	++、--、!</span><br><span class="line">4		乘除，取余	*、/、%</span><br><span class="line">5		加减			+、-</span><br><span class="line">6		移位运算		&lt;&lt;、&gt;&gt;、&gt;&gt;&gt;</span><br><span class="line">7		大小关系		&gt;、&gt;=、&lt;、&lt;=</span><br><span class="line">8		相等关系		==、!=</span><br><span class="line">9		按位与		&amp;</span><br><span class="line">10		按位异或		^</span><br><span class="line">11		按位或		|</span><br><span class="line">12		逻辑与		&amp;&amp;</span><br><span class="line">13		逻辑或		||</span><br><span class="line">14		条件运算		?:</span><br><span class="line">15		赋值运算		=、+=、-=、*=、/=、%=</span><br><span class="line">16		位赋值运算	&amp;=、|=、&lt;&lt;=、&gt;&gt;=、&gt;&gt;&gt;=</span><br></pre></td></tr></table></figure>
 <h3 id="商场库存清单案例"><a href="#商场库存清单案例" class="headerlink" title="商场库存清单案例"></a>商场库存清单案例</h3><p>A: 案例分析.</p>
@@ -665,8 +674,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/10/02/hello-world/" rel="prev" title="Hello World">
-                Hello World <i class="fa fa-chevron-right"></i>
+              <a href="/2016/10/03/AS环境配置踩坑经历/" rel="prev" title="AS环境配置踩坑经历">
+                AS环境配置踩坑经历 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -748,7 +757,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-count">3</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -765,7 +774,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">2</span>
+                      
+                    
+                    <span class="site-state-item-count">3</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -782,7 +793,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">2</span>
+                      
+                    
+                    <span class="site-state-item-count">3</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -807,7 +820,15 @@
               <ul class="links-of-blogroll-list">
                 
                   <li class="links-of-blogroll-item">
-                    <a href="https://leesen998.github.io/" title="关于此博客" target="_blank">关于此博客</a>
+                    <a href="https://leesen998.github.io/about/" title="关于此博客" target="_blank">关于此博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://poetryscience.ink/" title="Huixin" target="_blank">Huixin</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://ultimatehy.github.io/" title="Yong Huang" target="_blank">Yong Huang</a>
                   </li>
                 
               </ul>
@@ -1393,7 +1414,7 @@
   
   
 
-  <script type="text/javascript" color="0,229,238" opacity='0.8' zIndex="-1" count="150" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  <script type="text/javascript" color="0,0,255" opacity='0.7' zIndex="-1" count="100" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
 
   
   
