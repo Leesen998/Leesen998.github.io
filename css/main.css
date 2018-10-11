@@ -1908,7 +1908,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #361f2d;
+  background: #1db652;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2900,28 +2900,30 @@ pre .deletion {
   background: #e6ffed;
 }
 .sidebar-toggle {
-  right: 10px;
-  bottom: 43px;
-  background-color: rgba(247,149,51,0.75);
-  border-radius: 5px;
-  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.35);
+  right: 70px;
+  bottom: 115px;
+  width: 26px;
+  height: 16px;
+  background-color: rgba(138,43,226,0.9);
+  border-radius: 8px;
+  box-shadow: 0px 0px 40px 0px rgba(247,149,51,0.35);
 }
 .page-post-detail .sidebar-toggle-line {
-  background: #07b39b;
+  background: #0e0;
 }
 .back-to-top {
   line-height: 1.5;
-  right: 10px;
-  padding-right: 5px;
-  padding-left: 5px;
-  padding-top: 2.5px;
-  padding-bottom: 2.5px;
+  right: 60px;
+  padding-right: 10px;
+  padding-left: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   background-color: rgba(247,149,51,0.75);
   border-radius: 5px;
-  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.35);
+  box-shadow: 0px 0px 40px 0px rgba(0,0,0,0.35);
 }
 .back-to-top.back-to-top-on {
-  bottom: 10px;
+  bottom: 65px;
 }
 .sidebar {
   box-shadow: inset 0px 0px 10px 0px rgba(0,0,0,0.5);
@@ -3172,7 +3174,7 @@ h2.about-title {
   color: #555;
 }
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 8px;
   height: 15px;
 }
 ::-webkit-scrollbar-track {
