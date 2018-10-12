@@ -2018,7 +2018,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #b1aaa6;
+  background: #ffff47;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2832,9 +2832,10 @@ embed {
   padding-bottom: 3px;
   font-weight: bold;
   color: #00ff7f;
-  border-bottom-width: 3px;
+  border-bottom-width: 5px;
   border-bottom-style: solid;
-  border-bottom-color: #a166ab;
+  border-bottom-color: #32cd32;
+  border-radius: 100px;
 }
 .menu {
   text-align: center;
@@ -2921,6 +2922,7 @@ embed {
   line-height: 1.5;
   background-color: rgba(255,255,255,0.75);
   color: #333;
+  bottom: -32px;
   border-top-width: 3px;
   border-top-style: solid;
   border-top-color: #a166ab;
@@ -3012,16 +3014,22 @@ pre .deletion {
   background: #e6ffed;
 }
 .sidebar-toggle {
-  right: 70px;
-  bottom: 115px;
-  width: 26px;
-  height: 16px;
-  background-color: rgba(138,43,226,0.9);
+  right: 64px;
+  bottom: 125px;
+  width: 36px;
+  height: 20px;
+  background-color: rgba(138,43,226,0.8);
   border-radius: 8px;
   box-shadow: 0px 0px 40px 0px rgba(247,149,51,0.35);
 }
 .page-post-detail .sidebar-toggle-line {
   background: #0e0;
+}
+.sidebar-toggle-line {
+  height: 3.5px;
+  background: #00ff7f;
+  vertical-align: 0;
+  margin-top: 0;
 }
 .back-to-top {
   line-height: 1.5;
@@ -3035,7 +3043,7 @@ pre .deletion {
   box-shadow: 0px 0px 40px 0px rgba(0,0,0,0.35);
 }
 .back-to-top.back-to-top-on {
-  bottom: 65px;
+  bottom: 85px;
 }
 .sidebar {
   box-shadow: inset 0px 0px 10px 0px rgba(0,0,0,0.5);
@@ -3362,13 +3370,13 @@ a.fancybox {
 .weixin-box {
   position: absolute;
   bottom: 43px;
-  left: 20px;
+  left: 350px;
   border-radius: 5px;
   box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.35);
 }
 .weixin-menu {
   position: absolute;
-  bottom: 3851px;
+  bottom: 43px;
   height: 48px;
   width: 48px;
   cursor: pointer;
