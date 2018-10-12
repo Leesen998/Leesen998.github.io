@@ -1908,7 +1908,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #e3ffb0;
+  background: #ffff2e;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2711,7 +2711,7 @@ embed {
 .site-title {
   font-size: 75px;
   font-weight: bold;
-  color: #fff;
+  color: #00bfff;
   line-height: 80px;
   letter-spacing: 3px;
 }
@@ -2721,7 +2721,7 @@ embed {
   letter-spacing: 1px;
   padding-bottom: 3px;
   font-weight: bold;
-  color: #fff;
+  color: #00ff7f;
   border-bottom-width: 3px;
   border-bottom-style: solid;
   border-bottom-color: #a166ab;
@@ -2731,7 +2731,8 @@ embed {
   margin-top: 0px;
   margin-bottom: 0px;
   padding: 5px;
-  background-color: rgba(255,255,255,0.75);
+  border-radius: 10px;
+  background-color: rgba(255,255,240,0.55);
   box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.15);
 }
 .menu .menu-item a {
@@ -2748,6 +2749,7 @@ embed {
   padding: 45px 36px 36px 36px;
   box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
   background-color: #fff;
+  border-radius: 40px;
 }
 .posts-expand .post-title {
   font-size: 26px;
@@ -2847,7 +2849,7 @@ embed {
   margin: 80px 0px 40px 0px;
 }
 a {
-  color: #5073b8;
+  color: #8a2be2;
   border-bottom-color: #5073b8;
 }
 a:hover {
