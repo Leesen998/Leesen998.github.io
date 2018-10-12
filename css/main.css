@@ -1908,7 +1908,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ffff2e;
+  background: #fff;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3252,13 +3252,13 @@ a.fancybox {
 .weixin-box {
   position: absolute;
   bottom: 43px;
-  left: 10px;
+  left: 20px;
   border-radius: 5px;
   box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.35);
 }
 .weixin-menu {
   position: absolute;
-  bottom: 43px;
+  bottom: 251px;
   height: 48px;
   width: 48px;
   cursor: pointer;
