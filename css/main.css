@@ -1908,7 +1908,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #9c62d4;
+  background: #ffb1ff;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3005,7 +3005,7 @@ img:hover {
   color: #fff;
 }
 .links-of-author {
-  margin-top: 0px;
+  margin-top: 20px;
 }
 .links-of-blogroll-title {
   margin-bottom: 10px;
@@ -3016,7 +3016,7 @@ img:hover {
   font-weight: bold;
 }
 .sidebar a {
-  color: #ccc;
+  color: #00bfff;
   border-bottom: none;
 }
 .sidebar a:hover {
