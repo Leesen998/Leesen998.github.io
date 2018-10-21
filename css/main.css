@@ -2018,7 +2018,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #794536;
+  background: #dafcff;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2794,6 +2794,12 @@ embed {
 .header-inner {
   padding-top: 0px;
   padding-bottom: 0px;
+}
+body {
+  background-image: url("https://source.unsplash.com/random/2100x1000");
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 .posts-expand {
   padding-top: 80px;
