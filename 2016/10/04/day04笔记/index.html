@@ -166,7 +166,8 @@
 <meta property="og:description" content="1、流程控制语句switch2、数组3、随机点名器案例">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://source.unsplash.com/random/1601x900">
-<meta property="og:updated_time" content="2018-10-16T13:28:45.596Z">
+<meta property="og:image" content="https://leesen998.github.io/cover.jpg">
+<meta property="og:updated_time" content="2018-10-23T04:08:25.728Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java学习笔记——基础4">
 <meta name="twitter:description" content="1、流程控制语句switch2、数组3、随机点名器案例">
@@ -580,6 +581,7 @@
 </code></pre><h3 id="04case穿透"><a href="#04case穿透" class="headerlink" title="04case穿透"></a>04case穿透</h3><pre><code>* A:case穿透
     * a: 在使用switch语句的过程中，如果多个case条件后面的执行语句是一样的，则该执行语句只需书写一次即可，这是一种简写的方式。
     * b: 例如，要判断一周中的某一天是否为工作日，同样使用数字1~7来表示星期一到星期天，当输入的数字为1、2、3、4、5时就视为工作日，否则就视为休息日。
+    * 注意：case 语句后面 没有break 就会一直穿透下去。
 </code></pre><h3 id="05数组的概述"><a href="#05数组的概述" class="headerlink" title="05数组的概述"></a>05数组的概述</h3><pre><code>* A: 数组的概述
     * a:数组的需求
         现在需要统计某公司员工的工资情况，例如计算平均工资、最高工资等。假设该公司有50名员工，用前面所学的知识完成，
@@ -619,12 +621,14 @@
       * c: 方法和数据共享: 运行时期class文件进入的地方
       * d: 方法栈:所有的方法运行的时候进入内存
       * e: 堆:存储的是容器和对象
-</code></pre><h3 id="08数组的内存"><a href="#08数组的内存" class="headerlink" title="08数组的内存"></a>08数组的内存</h3><pre><code>* A: 数组的内存
+</code></pre><p><img src="/cover.jpg" alt="&quot;tyty&quot;"></p>
+<h3 id="08数组的内存"><a href="#08数组的内存" class="headerlink" title="08数组的内存"></a>08数组的内存</h3><pre><code>* A: 数组的内存
 * int[] x;                    // 声明一个int[]类型的变量
 *    x = new int[100];        // 创建一个长度为100的数组
 *    接下来，通过两张内存图来详细地说明数组在创建过程中内存的分配情况。
 *    第一行代码 int[] x; 声明了一个变量x，该变量的类型为int[]，即一个int类型的数组。变量x会占用一块内存单元，它没有被分配初始值
 *    第二行代码 x = new int[100]; 创建了一个数组，将数组的地址赋值给变量x。在程序运行期间可以使用变量x来引用数组，这时内存中的状态会发生变化
+*    引用数据类型 存的是变量的地址
 </code></pre><h3 id="09使用索引访问数组的元素"><a href="#09使用索引访问数组的元素" class="headerlink" title="09使用索引访问数组的元素"></a>09使用索引访问数组的元素</h3><pre><code>* A: 使用索引访问数组的元素
     * 组中有100个元素，初始值都为0。数组中的每个元素都有一个索引(也可称为角标)，要想访问数组中的元素可以通过“x[0]、x[1]、……、x[98]、x[99]”的形式。
     * 需要注意的是，数组中最小的索引是0，最大的索引是“数组的长度-1”
@@ -956,8 +960,8 @@ public class CallName{
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/10/03/hello-world/" rel="prev" title="Hello">
-                Hello <i class="fa fa-chevron-right"></i>
+              <a href="/2016/10/08/day05笔记/" rel="prev" title="java学习笔记——基础5">
+                java学习笔记——基础5 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -1039,7 +1043,7 @@ public class CallName{
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-count">6</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
