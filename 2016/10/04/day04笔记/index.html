@@ -169,7 +169,7 @@
 <meta property="og:image" content="https://res.cloudinary.com/leesen/image/upload/v1540278233/samples/java%20files/JVM%E7%9A%84%E5%86%85%E5%AD%98%E5%88%92%E5%88%86.jpg">
 <meta property="og:image" content="https://res.cloudinary.com/leesen/image/upload/v1540278233/samples/java%20files/%E6%95%B0%E7%BB%84%E7%9A%84%E5%86%85%E5%AD%98%E5%9B%BE.jpg">
 <meta property="og:image" content="https://res.cloudinary.com/leesen/image/upload/v1540278233/samples/java%20files/%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E7%9A%84%E5%86%85%E5%AD%98%E5%9B%BE.jpg">
-<meta property="og:updated_time" content="2018-10-23T13:16:21.989Z">
+<meta property="og:updated_time" content="2018-10-24T03:01:52.648Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java学习笔记——基础4">
 <meta name="twitter:description" content="1、流程控制语句switch2、数组3、随机点名器案例">
@@ -672,9 +672,19 @@
         静态初始化: 在初始化数组时还有一种方式叫做静态初始化，就是在定义数组的同时就为数组的每个元素赋值。
         2、类型[] 数组名 = new 类型[]{元素，元素，……};
         int[] arr = new int[]{1,2,3,4};
+        使用这种语法形式可以在不创建新变量的情况下重新初始化一个数组。 例如：
+        arr = new int[] { 17, 19, 23, 29, 31, 37 };
         3、类型[] 数组名 = {元素，元素，元素，……};     
         int[] arr = { 1, 2, 3, 4 };
-</code></pre><h3 id="13遍历数组"><a href="#13遍历数组" class="headerlink" title="13遍历数组"></a>13遍历数组</h3><pre><code>* A:遍历数组
+    * 数组拷贝
+        int[] smallPrimes = { 2, 3, 5, 7, 11, 13 };
+        int[] luckyNumbers = smallPrimes;
+</code></pre><font color="#DD66" size=""><br>如果希望将一个数组的所有值拷贝到一个新的数组中去，<br>就要使用 Arrays 类的 copyOf方法：<br></font>    
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int[] copiedLuckyNumbers = Arrays.copyOf(luckyNumbers, luckyNumbers.length) ;</span><br><span class="line">//第 2 个参数是新数组的长度。这个方法通常用来增加数组的大小</span><br><span class="line">luckyNumbers = Arrays.copyOf(luckyNumbers, 2 * luckyNumbers.length);</span><br></pre></td></tr></table></figure>
+<font color="#DD66" size=""><br>如果数组元素是数值型，那么多余的元素将被赋值为 0 ; 如果数组元素是布尔型， 则将赋值<br>为 false。相反， 如果长度小于原始数组的长度，则只拷贝最前面的数据元素。<br></font>    
+
+<h3 id="13遍历数组"><a href="#13遍历数组" class="headerlink" title="13遍历数组"></a>13遍历数组</h3><pre><code>* A:遍历数组
     * 在操作数组时，经常需要依次访问数组中的每个元素，这种操作称作数组的遍历
 * B:练习
     public class ArrayDemo04 {
@@ -687,7 +697,12 @@
         }
     }
     上述代码中，定义一个长度为5的数组arr，数组的角标为0~4。由于for循环中定义的变量i的值在循环过程中为0~4，因此可以作为索引，依次去访问数组中的元素，并将元素的值打印出来
-</code></pre><h3 id="14数组中常见的异常"><a href="#14数组中常见的异常" class="headerlink" title="14数组中常见的异常"></a>14数组中常见的异常</h3><pre><code>* A: 数组操作中,常见的两个异常
+</code></pre><p>for each 循环 =&gt; 遍历数组<br>for (variable : collection) {statement}<br>例如:</p>
+<pre><code>for(int element : a)
+   System.out.println(element);
+</code></pre><font color="#DD66" size=""><br>提示：有个更加简单的方式打印数组中的所有值， 即利用 Arrays 类的 toString 方法。 调用 Arrays.toString(a), 返回一个包含数组元素的字符串， 这些元素被放置在括号内， 并用逗号分隔， 例如，“ [2, 3, 5,7，11 ，13]”、 要想打印数组， 可以调用<br>System.out.println(Arrays.toString(a));<br></font>
+
+<h3 id="14数组中常见的异常"><a href="#14数组中常见的异常" class="headerlink" title="14数组中常见的异常"></a>14数组中常见的异常</h3><pre><code>* A: 数组操作中,常见的两个异常
      数组的索引越界异常
       空指针异常
 
@@ -706,8 +721,12 @@
             System.out.println(arr2[2]);//java.lang.NullPointerException
         }
     }
-</code></pre><h3 id="15数组最值"><a href="#15数组最值" class="headerlink" title="15数组最值"></a>15数组最值</h3><pre><code>* A: 数组获取最值的原理思想
+</code></pre><h3 id="15数组最值和排序"><a href="#15数组最值和排序" class="headerlink" title="15数组最值和排序"></a>15数组最值和排序</h3><pre><code>* A: 数组获取最值的原理思想
     * 定义数组的第一个元素arr[0]为最大值;循环arr数组,判断如果有比arr[0] 大的就交换,直到arr数组遍历完毕,那么arr[0]中就保存了最大的元素
+* B: 数组排序
+    * 要想对数值型数组进行排序， 可以使用 Arrays 类中的 sort 方法：
+    int[] a = new int[10000];
+    Arrays.sort(a)
 </code></pre><h3 id="16数组获取最值代码实现"><a href="#16数组获取最值代码实现" class="headerlink" title="16数组获取最值代码实现"></a>16数组获取最值代码实现</h3><pre><code>* A: 代码实现
     public class ArrayDemo05 {
         public static void main(String[] args) {
@@ -818,7 +837,12 @@
           System.out.println(&quot;sum2= &quot;+ sum2);
       }
   }
-</code></pre><h3 id="22二维数组的求和练习"><a href="#22二维数组的求和练习" class="headerlink" title="22二维数组的求和练习"></a>22二维数组的求和练习</h3><pre><code>* A 例如要统计一个公司三个销售小组中每个小组的总销售额以及整个公司的销售额。如下所示
+</code></pre><font color="#DD66" size=""><br>for each 循环语句不能自动处理二维数组的每一个元素。它是按照行， 也就是一维数组处理的要想访问二维教组 a 的所有元素， 需要使用两个嵌套的循环， 如下所示：<br></font>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (double [] row : a)</span><br><span class="line">	<span class="keyword">for</span> (double value : row)</span><br><span class="line">		//<span class="keyword">do</span> something with value</span><br><span class="line">		System.out.println(value);</span><br></pre></td></tr></table></figure>
+<font color="#DD66" size=""><br>提示： 要想快速地打印一个二维数组的数据元素列表， 可以调用：<br>System.out.println(Arrays.deepToString(a)) ;<br>输出格式为：<br>[[16, B, 2, 13], [5, 10, 11, 8], [9, 6, 7, 12], [4, 15, 14, 1]]<br></font>
+
+<h3 id="22二维数组的求和练习"><a href="#22二维数组的求和练习" class="headerlink" title="22二维数组的求和练习"></a>22二维数组的求和练习</h3><pre><code>* A 例如要统计一个公司三个销售小组中每个小组的总销售额以及整个公司的销售额。如下所示
    * 第一小组销售额为{11, 12}万元
    * 第二小组销售额为{21, 22, 23}万元
    * 第三小组销售额为{31, 32, 33, 34}万元。
@@ -1179,7 +1203,7 @@ public class CallName{
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#01switch语句解构"><span class="nav-number">1.</span> <span class="nav-text">01switch语句解构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#02switch语句的星期判断"><span class="nav-number">2.</span> <span class="nav-text">02switch语句的星期判断</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#03switch语句接受的数据类型"><span class="nav-number">3.</span> <span class="nav-text">03switch语句接受的数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#04case穿透"><span class="nav-number">4.</span> <span class="nav-text">04case穿透</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#05数组的概述"><span class="nav-number">5.</span> <span class="nav-text">05数组的概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#06数组的定义"><span class="nav-number">6.</span> <span class="nav-text">06数组的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#07JVM内存划分"><span class="nav-number">7.</span> <span class="nav-text">07JVM内存划分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#08数组的内存"><span class="nav-number">8.</span> <span class="nav-text">08数组的内存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#09使用索引访问数组的元素"><span class="nav-number">9.</span> <span class="nav-text">09使用索引访问数组的元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10数组的length属性"><span class="nav-number">10.</span> <span class="nav-text">10数组的length属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11为数组的元素赋值"><span class="nav-number">11.</span> <span class="nav-text">11为数组的元素赋值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12数组的定义-2"><span class="nav-number">12.</span> <span class="nav-text">12数组的定义_2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13遍历数组"><span class="nav-number">13.</span> <span class="nav-text">13遍历数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14数组中常见的异常"><span class="nav-number">14.</span> <span class="nav-text">14数组中常见的异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15数组最值"><span class="nav-number">15.</span> <span class="nav-text">15数组最值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16数组获取最值代码实现"><span class="nav-number">16.</span> <span class="nav-text">16数组获取最值代码实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17二维数组的定义"><span class="nav-number">17.</span> <span class="nav-text">17二维数组的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#18二维数组元素的访问"><span class="nav-number">18.</span> <span class="nav-text">18二维数组元素的访问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#19二维数组内存图"><span class="nav-number">19.</span> <span class="nav-text">19二维数组内存图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#20二维数组的定义和访问"><span class="nav-number">20.</span> <span class="nav-text">20二维数组的定义和访问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#21二维数组的遍历"><span class="nav-number">21.</span> <span class="nav-text">21二维数组的遍历</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#22二维数组的求和练习"><span class="nav-number">22.</span> <span class="nav-text">22二维数组的求和练习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#23随机点名器案例分析"><span class="nav-number">23.</span> <span class="nav-text">23随机点名器案例分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#24随机点名器代码实现"><span class="nav-number">24.</span> <span class="nav-text">24随机点名器代码实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#25随机点名器代码实现-2"><span class="nav-number">25.</span> <span class="nav-text">25随机点名器代码实现_2</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#01switch语句解构"><span class="nav-number">1.</span> <span class="nav-text">01switch语句解构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#02switch语句的星期判断"><span class="nav-number">2.</span> <span class="nav-text">02switch语句的星期判断</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#03switch语句接受的数据类型"><span class="nav-number">3.</span> <span class="nav-text">03switch语句接受的数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#04case穿透"><span class="nav-number">4.</span> <span class="nav-text">04case穿透</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#05数组的概述"><span class="nav-number">5.</span> <span class="nav-text">05数组的概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#06数组的定义"><span class="nav-number">6.</span> <span class="nav-text">06数组的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#07JVM内存划分"><span class="nav-number">7.</span> <span class="nav-text">07JVM内存划分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#08数组的内存"><span class="nav-number">8.</span> <span class="nav-text">08数组的内存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#09使用索引访问数组的元素"><span class="nav-number">9.</span> <span class="nav-text">09使用索引访问数组的元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10数组的length属性"><span class="nav-number">10.</span> <span class="nav-text">10数组的length属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11为数组的元素赋值"><span class="nav-number">11.</span> <span class="nav-text">11为数组的元素赋值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12数组的定义-2"><span class="nav-number">12.</span> <span class="nav-text">12数组的定义_2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13遍历数组"><span class="nav-number">13.</span> <span class="nav-text">13遍历数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14数组中常见的异常"><span class="nav-number">14.</span> <span class="nav-text">14数组中常见的异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15数组最值和排序"><span class="nav-number">15.</span> <span class="nav-text">15数组最值和排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16数组获取最值代码实现"><span class="nav-number">16.</span> <span class="nav-text">16数组获取最值代码实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17二维数组的定义"><span class="nav-number">17.</span> <span class="nav-text">17二维数组的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#18二维数组元素的访问"><span class="nav-number">18.</span> <span class="nav-text">18二维数组元素的访问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#19二维数组内存图"><span class="nav-number">19.</span> <span class="nav-text">19二维数组内存图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#20二维数组的定义和访问"><span class="nav-number">20.</span> <span class="nav-text">20二维数组的定义和访问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#21二维数组的遍历"><span class="nav-number">21.</span> <span class="nav-text">21二维数组的遍历</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#22二维数组的求和练习"><span class="nav-number">22.</span> <span class="nav-text">22二维数组的求和练习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#23随机点名器案例分析"><span class="nav-number">23.</span> <span class="nav-text">23随机点名器案例分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#24随机点名器代码实现"><span class="nav-number">24.</span> <span class="nav-text">24随机点名器代码实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#25随机点名器代码实现-2"><span class="nav-number">25.</span> <span class="nav-text">25随机点名器代码实现_2</span></a></li></ol></div>
             
 
           </div>
