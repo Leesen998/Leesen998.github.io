@@ -165,12 +165,14 @@
 <meta property="og:site_name" content="QJun">
 <meta property="og:description" content="1、自定义类型的定义及使用2、自定义类的内存图3、ArrayList集合的基本功能4、随机点名器案例及库存案例代码优化">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://source.unsplash.com/random/1000x600">
-<meta property="og:updated_time" content="2018-10-29T07:58:49.744Z">
+<meta property="og:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1540864054/java/photo-1540543144-2570163afee1.jpg">
+<meta property="og:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1540864297/java/%E5%AF%B9%E8%B1%A1%E5%86%85%E5%AD%98%E5%9B%BE.jpg">
+<meta property="og:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1540864298/java/%E4%B8%A4%E4%B8%AA%E5%BC%95%E7%94%A8%E5%8F%98%E9%87%8F%E5%86%85%E5%AD%98%E5%9B%BE.jpg">
+<meta property="og:updated_time" content="2018-10-30T02:07:09.919Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java学习笔记——基础6">
 <meta name="twitter:description" content="1、自定义类型的定义及使用2、自定义类的内存图3、ArrayList集合的基本功能4、随机点名器案例及库存案例代码优化">
-<meta name="twitter:image" content="https://source.unsplash.com/random/1000x600">
+<meta name="twitter:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1540864054/java/photo-1540543144-2570163afee1.jpg">
 
 
 
@@ -499,7 +501,7 @@
       
         <p class="description"></p>
 
-<p><img src="https://source.unsplash.com/random/1000x600" alt="" style="width:100%"></p>
+<p><img src="https://res.cloudinary.com/dpvywdzxv/image/upload/v1540864054/java/photo-1540543144-2570163afee1.jpg" alt="" style="width:100%"></p>
 <p>1、自定义类型的定义及使用<br>2、自定义类的内存图<br>3、ArrayList集合的基本功能<br>4、随机点名器案例及库存案例代码优化</p>
 <a id="more"></a>
 <h3 id="01引用数据类型-类"><a href="#01引用数据类型-类" class="headerlink" title="01引用数据类型_类"></a>01引用数据类型_类</h3><pre><code>* A: 数据类型
@@ -537,7 +539,10 @@
             String brand ;
             double size ; 
         }
-</code></pre><h3 id="05测试手机类"><a href="#05测试手机类" class="headerlink" title="05测试手机类"></a>05测试手机类</h3><pre><code>* A: 调用方法执行流程
+</code></pre><h3 id="05测试手机类"><a href="#05测试手机类" class="headerlink" title="05测试手机类"></a>05测试手机类</h3><p>导包：我们将所有的类放到同一个文件夹下，可以避免导包。</p>
+<p>创建对象：数据类型  变量名 = new 数据类型();</p>
+<p>调用方法：目前我们定义的自定义类不涉及方法，只是属性（自定义类中的方法部分在面向对象部分讲解）<br>访问属性：变量名.属性 (这是当前的方式，后期会采取调用方法的方式替代掉直接访问的方式来完成对属性的访问。)</p>
+<pre><code>* A: 调用方法执行流程
     * a: 实现引用类型的步骤
         * 1: 导入包 , 类都是在同一个文件夹,不需要导入包
         * 2: 创建引用类型的变量
@@ -561,12 +566,11 @@
             }
         }
 </code></pre><h3 id="06自定义类的内存图-1"><a href="#06自定义类的内存图-1" class="headerlink" title="06自定义类的内存图_1"></a>06自定义类的内存图_1</h3><pre><code>* A: 自定义类的内存图_1
-    * a: 参见\day06\day06(面向对象\day06_source\对象内存图.JPG
-</code></pre><h3 id="07自定义类的内存图-2"><a href="#07自定义类的内存图-2" class="headerlink" title="07自定义类的内存图_2"></a>07自定义类的内存图_2</h3><pre><code>* A: 自定义类的内存图_1
-    * a: 参见\day06\day06(面向对象\day06_source\对象内存图.JPG
+</code></pre><p><img src="https://res.cloudinary.com/dpvywdzxv/image/upload/v1540864297/java/%E5%AF%B9%E8%B1%A1%E5%86%85%E5%AD%98%E5%9B%BE.jpg" alt="方法调用的内存图"></p>
+<h3 id="07自定义类的内存图-2"><a href="#07自定义类的内存图-2" class="headerlink" title="07自定义类的内存图_2"></a>07自定义类的内存图_2</h3><pre><code>* A: 自定义类的内存图_1
 </code></pre><h3 id="08两个引用类型变量内存图"><a href="#08两个引用类型变量内存图" class="headerlink" title="08两个引用类型变量内存图"></a>08两个引用类型变量内存图</h3><pre><code>* A: 自定义类的内存图_1
-    * a: 参见\day06\day06(面向对象\day06_source\两个引用变量内存图.JPG
-</code></pre><h3 id="09自定义类的练习"><a href="#09自定义类的练习" class="headerlink" title="09自定义类的练习"></a>09自定义类的练习</h3><pre><code>* A: 实体类的代码
+</code></pre><p>   <img src="https://res.cloudinary.com/dpvywdzxv/image/upload/v1540864298/java/%E4%B8%A4%E4%B8%AA%E5%BC%95%E7%94%A8%E5%8F%98%E9%87%8F%E5%86%85%E5%AD%98%E5%9B%BE.jpg" alt="方法调用的内存图"></p>
+<h3 id="09自定义类的练习"><a href="#09自定义类的练习" class="headerlink" title="09自定义类的练习"></a>09自定义类的练习</h3><pre><code>* A: 实体类的代码
     /*
         电饭锅，包含属性（品牌、容量大小、颜色等）
         定义类,描述事物,电饭锅
@@ -638,7 +642,10 @@
 
         }
     }
-</code></pre><h3 id="10ArrayList创建变量的步骤"><a href="#10ArrayList创建变量的步骤" class="headerlink" title="10ArrayList创建变量的步骤"></a>10ArrayList创建变量的步骤</h3><pre><code>* A: ArrayList创建变量的步骤
+</code></pre><h3 id="10ArrayList创建变量的步骤"><a href="#10ArrayList创建变量的步骤" class="headerlink" title="10ArrayList创建变量的步骤"></a>10ArrayList创建变量的步骤</h3><p>为了保存这些数目不确定的元素，JDK中提供了一系列特殊的类，这些类可以存储任意类型的元素，并且长度可变，统称为集合。在这里，我们先介绍ArrayList集合.<br>导包：import java.util.ArrayList;</p>
+<p><font color="#DD66" size=""> 创建对象：与其他普通的引用数据类型创建方式完全相同，但是要指定容器中存储的数据类型：</font></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;要存储元素的数据类型&gt;  变量名  =  new  ArrayList&lt;要存储元素的数据类型&gt;();</span><br></pre></td></tr></table></figure>
+<pre><code>* A: ArrayList创建变量的步骤
     * a: 导入包 java.util包中
     * b: 创建引用类型的变量
         数据类型&lt; 集合存储的数据类型&gt;  变量名 = new 数据类型&lt;集合存储的数据类型&gt;();
@@ -647,7 +654,10 @@
     * c: 变量名.方法 
         注意: 集合存储的数据,8个基本类型对应8个引用类型
          存储引用类型,不存储基本类型
-</code></pre><h3 id="11ArrayList创建变量举例"><a href="#11ArrayList创建变量举例" class="headerlink" title="11ArrayList创建变量举例"></a>11ArrayList创建变量举例</h3><pre><code>* A: ArrayList创建变量的示例代码
+</code></pre><p><font color="#DD66" size=""><br>“&lt;要存储元素的数据类型&gt;”中的数据类型必须是【引用数据类型】，不能是基本数据类型；<br></font><br>下面给出8种基本数据类型所对应的引用数据类型表示形式:</p>
+<pre><code>基本数据类型        对应的引用数据类型表示形式
+</code></pre><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">byte		Byte</span><br><span class="line">short		Short</span><br><span class="line">Int		Integer</span><br><span class="line">long		Long</span><br><span class="line"><span class="built_in">float</span>		Float</span><br><span class="line">double		Double</span><br><span class="line">char		Character</span><br><span class="line">boolean		Boolean</span><br></pre></td></tr></table></figure>
+<h3 id="11ArrayList创建变量举例"><a href="#11ArrayList创建变量举例" class="headerlink" title="11ArrayList创建变量举例"></a>11ArrayList创建变量举例</h3><pre><code>* A: ArrayList创建变量的示例代码
     import java.util.ArrayList;
     public class ArrayListDemo{
         public static void main(String[] args){
@@ -1180,8 +1190,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/10/03/hello-world/" rel="prev" title="Hello">
-                Hello <i class="fa fa-chevron-right"></i>
+              <a href="/2016/10/10/day09笔记/" rel="prev" title="java学习笔记——基础7">
+                java学习笔记——基础7 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -1263,7 +1273,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>

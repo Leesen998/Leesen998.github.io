@@ -157,17 +157,24 @@
 
 
 
-  <meta name="keywords" content="AS">
+  <meta name="description" content="1、面向对象思想2、类与对象的关系3、局部变量和成员变量的关系4、封装思想5、private,this关键字6、随机点名器">
+<meta name="keywords" content="java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="AS环境配置踩坑经历">
-<meta property="og:url" content="https://leesen998.github.io/2016/10/03/AS环境配置踩坑经历/index.html">
+<meta property="og:title" content="java学习笔记——基础7">
+<meta property="og:url" content="https://leesen998.github.io/2016/10/10/day09笔记/index.html">
 <meta property="og:site_name" content="QJun">
+<meta property="og:description" content="1、面向对象思想2、类与对象的关系3、局部变量和成员变量的关系4、封装思想5、private,this关键字6、随机点名器">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://res.cloudinary.com/leesen/image/upload/v1540280253/samples/java%20files/photo-1538150096488-cda7e455f3ee.jpg">
-<meta property="og:updated_time" content="2018-10-23T07:41:31.702Z">
+<meta property="og:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1541058368/java/photo-1538831539254-abe4ffd1a812.jpg">
+<meta property="og:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1541058377/java/%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%86%85%E5%AD%98%E5%9B%BE.jpg">
+<meta property="og:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1541058377/java/%E6%96%B9%E6%B3%95%E5%8F%82%E6%95%B0%E6%98%AF%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%BC%95%E7%94%A8%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.jpg">
+<meta property="og:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1541058375/java/this%E5%86%85%E5%AD%98%E5%9B%BE.jpg">
+<meta property="og:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1541058375/java/this%E4%BD%BF%E7%94%A8-%E5%B9%B4%E9%BE%84%E6%AF%94%E8%BE%83.jpg">
+<meta property="og:updated_time" content="2018-11-01T07:55:30.106Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="AS环境配置踩坑经历">
-<meta name="twitter:image" content="https://res.cloudinary.com/leesen/image/upload/v1540280253/samples/java%20files/photo-1538150096488-cda7e455f3ee.jpg">
+<meta name="twitter:title" content="java学习笔记——基础7">
+<meta name="twitter:description" content="1、面向对象思想2、类与对象的关系3、局部变量和成员变量的关系4、封装思想5、private,this关键字6、随机点名器">
+<meta name="twitter:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1541058368/java/photo-1538831539254-abe4ffd1a812.jpg">
 
 
 
@@ -176,7 +183,7 @@
 
 
 
-  <link rel="canonical" href="https://leesen998.github.io/2016/10/03/AS环境配置踩坑经历/"/>
+  <link rel="canonical" href="https://leesen998.github.io/2016/10/10/day09笔记/"/>
 
 
 
@@ -186,7 +193,7 @@
   };
 </script>
 
-  <title>AS环境配置踩坑经历 | QJun</title>
+  <title>java学习笔记——基础7 | QJun</title>
   
 
 
@@ -392,7 +399,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://leesen998.github.io/2016/10/03/AS环境配置踩坑经历/">
+    <link itemprop="mainEntityOfPage" href="https://leesen998.github.io/2016/10/10/day09笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QJun">
@@ -409,7 +416,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">AS环境配置踩坑经历
+          <h1 class="post-title" itemprop="name headline">java学习笔记——基础7
               
             
           </h1>
@@ -434,7 +441,7 @@
                 
               
 
-              <time title="创建时间：2016-10-03 10:41:53" itemprop="dateCreated datePublished" datetime="2016-10-03T10:41:53+08:00">2016-10-03</time>
+              <time title="创建时间：2016-10-10 21:21:53" itemprop="dateCreated datePublished" datetime="2016-10-10T21:21:53+08:00">2016-10-10</time>
             
 
             
@@ -452,7 +459,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/软件安装/" itemprop="url" rel="index"><span itemprop="name">软件安装</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/程序设计/" itemprop="url" rel="index"><span itemprop="name">程序设计</span></a></span>
 
                 
                 
@@ -496,34 +503,425 @@
       
         <p class="description"></p>
 
-<p><img src="https://res.cloudinary.com/leesen/image/upload/v1540280253/samples/java%20files/photo-1538150096488-cda7e455f3ee.jpg" alt="" style="width:100%"></p>
+<p><img src="https://res.cloudinary.com/dpvywdzxv/image/upload/v1541058368/java/photo-1538831539254-abe4ffd1a812.jpg" alt="" style="width:100%"></p>
+<p>1、面向对象思想<br>2、类与对象的关系<br>3、局部变量和成员变量的关系<br>4、封装思想<br>5、private,this关键字<br>6、随机点名器</p>
 <a id="more"></a>
-<h2 id="遇到的bug"><a href="#遇到的bug" class="headerlink" title="遇到的bug"></a><font color="#551A8B" size="">遇到的bug</font></h2><pre><code>Unable to resolve dependency for &apos;:app@debug/compileClasspath&apos;
-</code></pre><p>这是由于配置文件的依赖是通过Google下载的，然而该下载被墙了！<br>[解决办法]：</p>
-<h3 id="在整个工程的build-gradle中添加以下框内代码："><a href="#在整个工程的build-gradle中添加以下框内代码：" class="headerlink" title="在整个工程的build.gradle中添加以下框内代码："></a>在整个工程的build.gradle中添加以下框内代码：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">maven &#123;</span><br><span class="line">        url <span class="string">'http://maven.aliyun.com/nexus/content/groups/public/'</span></span><br><span class="line">        &#125;</span><br><span class="line">maven &#123; url <span class="string">'http://repo1.maven.org/maven2'</span> &#125;</span><br></pre></td></tr></table></figure>
-<h3 id="app下的build-gradle配置如下"><a href="#app下的build-gradle配置如下" class="headerlink" title="app下的build.gradle配置如下:"></a>app下的build.gradle配置如下:</h3><p>buildToolsVersion 需要和你的sdk安装目录 ~\sdk\build-tools文件里面已有的版本对应<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    compileSdkVersion 26</span><br><span class="line">    buildToolsVersion <span class="string">'27.0.3'</span></span><br><span class="line">    defaultConfig &#123;</span><br><span class="line">        applicationId <span class="string">"com.example.administrator.myapplication"</span></span><br><span class="line">        minSdkVersion 19</span><br><span class="line">        targetSdkVersion 22</span><br><span class="line">        versionCode 1</span><br><span class="line">        versionName <span class="string">"1.0"</span></span><br><span class="line">        testInstrumentationRunner <span class="string">"android.support.test.runner.AndroidJUnitRunner"</span></span><br><span class="line">    &#125;</span><br><span class="line">    buildTypes &#123;</span><br><span class="line">        release &#123;</span><br><span class="line">            minifyEnabled <span class="literal">false</span></span><br><span class="line">            proguardFiles getDefaultProguardFile(<span class="string">'proguard-android.txt'</span>), <span class="string">'proguard-rules.pro'</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>implementation ‘com.android.support:appcompat-v7:26.+’ 中v7:26.+表示使用的sdk版本<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    implementation fileTree(dir: <span class="string">'libs'</span>, include: [<span class="string">'*.jar'</span>])</span><br><span class="line">    implementation <span class="string">'com.android.support:appcompat-v7:26.+'</span></span><br><span class="line">    implementation <span class="string">'com.android.support.constraint:constraint-layout:1.0.2'</span></span><br><span class="line">    testImplementation <span class="string">'junit:junit:4.12'</span></span><br><span class="line">    androidTestImplementation <span class="string">'com.android.support.test:runner:0.4'</span></span><br><span class="line">    androidTestImplementation <span class="string">'com.android.support.test.espresso:espresso-core:2.2.2'</span></span><br><span class="line">//    androidTestImplementation <span class="string">'com.android.support.test:runner:1.0.1'</span></span><br><span class="line">//    androidTestImplementation <span class="string">'com.android.support.test.espresso:espresso-core:3.0.1'</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="若配置后还没解决问题，依然报错"><a href="#若配置后还没解决问题，依然报错" class="headerlink" title="若配置后还没解决问题，依然报错"></a>若配置后还没解决问题，依然报错</h3><p><font color="#FF00FF" size="">打开 C:/Users/(用户名)/.gradle/gradle.properties</font><br>把http代理的配置注释掉，例如：</p>
-<pre><code>## For more details on how to configure your build environment visit
-# http://www.gradle.org/docs/current/userguide/build_environment.html
-#
-# Specifies the JVM arguments used for the daemon process.
-# The setting is particularly useful for tweaking memory settings.
-# Default value: -Xmx1024m -XX:MaxPermSize=256m
-# org.gradle.jvmargs=-Xmx2048m -XX:MaxPermSize=512m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8
-#
-# When configured, Gradle will run in incubating parallel mode.
-# This option should only be used with decoupled projects. More details, visit
-# http://www.gradle.org/docs/current/userguide/multi_project_builds.html#sec:decoupled_projects
-# org.gradle.parallel=true
-#Sat Sep 29 23:37:12 CST 2018
+<h2 id="面向对象思想"><a href="#面向对象思想" class="headerlink" title="面向对象思想"></a>面向对象思想</h2><h3 id="面向对象和面向过程的思想"><a href="#面向对象和面向过程的思想" class="headerlink" title="面向对象和面向过程的思想"></a>面向对象和面向过程的思想</h3><pre><code>* A: 面向过程与面向对象都是我们编程中，编写程序的一种思维方式
+    * a: 面向过程的程序设计方式，是遇到一件事时，思考“我该怎么做”，然后一步步实现的过程。
+    * b: 面向对象的程序设计方式，是遇到一件事时，思考“我该让谁来做”，然后那个“谁”就是对象，他要怎么做这件事是他自己的事，反正最后一群对象合力能把事就好就行了。
+</code></pre><h3 id="面向对象的思想的生活案例"><a href="#面向对象的思想的生活案例" class="headerlink" title="面向对象的思想的生活案例"></a>面向对象的思想的生活案例</h3><pre><code>* A: 买电脑（组装机）
+    * a: 面向过程：自己该怎么做
+    * b: 面向对象：找人帮我们做
+</code></pre><h3 id="面向对象好处"><a href="#面向对象好处" class="headerlink" title="面向对象好处"></a>面向对象好处</h3><pre><code>* A: 面向对象好处
+    * a: 面向对象思维方式是一种更符合人们思考习惯的思想
+    * b: 面向过程思维方式中更多的体现的是执行者（自己做事情），面向对象中更多的体现是指挥者（指挥对象做事情）。
+    * c: 面向对象思维方式将复杂的问题简单化。
+</code></pre><h3 id="大象装进冰箱的代码案例"><a href="#大象装进冰箱的代码案例" class="headerlink" title="大象装进冰箱的代码案例"></a>大象装进冰箱的代码案例</h3><pre><code>* A: 需求：把大象装冰箱里
+    * a: 面向过程         
+        * 自己打开冰箱门
+        * 自己将大象装进去
+        * 自己关闭冰箱门    
+    * b: 面向对象
+        * 分析发现打开、装、关闭都是冰箱的功能。即冰箱对象具    备如下功能
+        * 冰箱打开
+        * 冰箱存储
+        * 冰箱关闭
 
-#systemProp.http.proxyHost=mirrors.neusoft.edu.cn
-#systemProp.https.proxyPort=80
-#systemProp.https.proxyHost=mirrors.neusoft.edu.cn
-#systemProp.http.proxyPort=80
-</code></pre><p>More info: <a href="https://blog.csdn.net/magicbaby810/article/details/79848425" target="_blank" rel="noopener">参考该问题的csdn博客</a></p>
-<hr>
+* B: 通过伪代码描述大象和冰箱
+    * 描述大象：
+        class 大象
+        {
+        }
+    * 描述冰箱
+        class冰箱
+        {
+            void 打开(){}
+            void 存储(大象){}
+            void 关闭(){}
+        }
+
+
+* C: 使用对象：
+    * 1、创建冰箱的对象
+        * 冰箱 bx = new 冰箱();  
+    * 2、调用冰箱的功能
+        * 对象.功能()；
+        * bx.打开();
+        * bx.存储(new 大象());
+        * bx.关闭();
+* D：总结：
+    * 1、先按照名词提炼问题领域中的对象
+    * 2、对对象进行描述，其实就是在明确对象中应该具备的属性和功能
+    * 3、通过new的方式就可以创建该事物的具体对象
+    * 4、通过该对象调用它以后的功能。
+</code></pre><h2 id="类与对象的关系"><a href="#类与对象的关系" class="headerlink" title="类与对象的关系"></a>类与对象的关系</h2><h3 id="定义小汽车类"><a href="#定义小汽车类" class="headerlink" title="定义小汽车类"></a>定义小汽车类</h3><pre><code>* A: 分析小汽车的属性和功能
+    * 属性
+        * 颜色
+        * 轮胎个数
+    * 功能
+        * 运行    
+* B: 通过伪代码描述小汽车
+    * 小汽车{
+        * 颜色
+        * 轮胎个数
+        * 运行(){}
+    * }
+* C：通过JAVA代码描述小汽车
+    * public class Car {
+        * String color;
+        * int number;
+
+        * void run() {
+            * System.out.println(color + &quot;:&quot; + number);
+        * }
+    * }
+</code></pre><h3 id="测试汽车类"><a href="#测试汽车类" class="headerlink" title="测试汽车类"></a>测试汽车类</h3><pre><code>* A: 创见对象的格式
+    * a: 类名 变量名 = new 类名();
+* B: 测试汽车类
+    public class CarDemo {
+        public static void main(String[] args) { 
+            /*
+             测试：Car类中的run方法。
+             */
+            // 1,创建Car的对象。给对象起个名字。
+            Car c = new Car();// c是类类型的变量。c指向了一个具体的Car类型的对象。
+            // 2,通过已有的对象调用该对象的功能。格式：对象.对象成员;
+            // 3,可以该对象的属性赋值。
+            c.color = &quot;red&quot;;
+            c.number = 4;
+            c.run();
+        }
+    }
+</code></pre><h3 id="对象的内存图"><a href="#对象的内存图" class="headerlink" title="对象的内存图"></a>对象的内存图</h3><p><img src="https://res.cloudinary.com/dpvywdzxv/image/upload/v1541058377/java/%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%86%85%E5%AD%98%E5%9B%BE.jpg" alt="方法调用的内存图"></p>
+<h3 id="类和对象的关系"><a href="#类和对象的关系" class="headerlink" title="类和对象的关系"></a>类和对象的关系</h3><pre><code>* A: 类和对象的关系
+    * 类是对某一类事物的抽象描述，而对象用于表示现实中该类事物的个体
+* B: 举例
+    * 可以将玩具模型看作是一个类，将一个个玩具看作对象，从玩具模型和玩具之间的关系便可以看出类与对象之间的关系
+</code></pre><h2 id="局部变量和成员变量的关系"><a href="#局部变量和成员变量的关系" class="headerlink" title="局部变量和成员变量的关系"></a>局部变量和成员变量的关系</h2><h3 id="成员变量和局部变量的区别"><a href="#成员变量和局部变量的区别" class="headerlink" title="成员变量和局部变量的区别"></a>成员变量和局部变量的区别</h3><ul>
+<li>区别一：定义的位置不同<ul>
+<li>定义在类中的变量是成员变量</li>
+<li>定义在方法中或者{}语句里面的变量是局部变量</li>
+</ul>
+</li>
+<li>区别二：在内存中的位置不同<ul>
+<li>成员变量存储在对内存的对象中</li>
+<li>局部变量存储在栈内存的方法中</li>
+</ul>
+</li>
+<li>区别三：声明周期不同<ul>
+<li>成员变量随着对象的出现而出现在堆中，随着对象的消失而从堆中消失</li>
+<li>局部变量随着方法的运行而出现在栈中，随着方法的弹栈而消失</li>
+</ul>
+</li>
+<li>区别四：初始化不同<ul>
+<li>成员变量因为在堆内存中，所有默认的初始化值</li>
+<li>局部变量没有默认的初始化值，必须手动的给其赋值才可以使用。</li>
+</ul>
+</li>
+</ul>
+<h2 id="封装思想"><a href="#封装思想" class="headerlink" title="封装思想"></a>封装思想</h2><h3 id="01方法参数是基本数据类型和引用数据类型"><a href="#01方法参数是基本数据类型和引用数据类型" class="headerlink" title="01方法参数是基本数据类型和引用数据类型"></a>01方法参数是基本数据类型和引用数据类型</h3><pre><code>* A.基本类型
+    class Demo
+    {
+        public static void main(String[] args)
+        {
+            int x = 4;
+            show(x);
+            System.out.println(&quot;x=&quot;+x);
+        }
+        public static void show(int x)
+        {
+            x = 5;
+
+        }
+    }     
+    基本类型作为参数传递时，其实就是将基本类型变量x空间中的值复制了一份传递给调用的方法show()，当在show()方法中x接受到了复制的值，再在show()方法中对x变量进行操作，这时只会影响到show中的x。当show方法执行完成，弹栈后，程序又回到main方法执行，main方法中的x值还是原来的值。
+* B.引用类型
+    class Demo 
+    {
+        int x ;
+        public static void main(String[] args) 
+        {
+
+            Demo d = new Demo();
+            d.x = 5;
+            show(d);
+            System.out.println(&quot;x=&quot;+d.x);
+        }
+        public static void show(Demo d)
+        {
+            d.x = 6;
+        }
+    }     
+    当引用变量作为参数传递时，这时其实是将引用变量空间中的内存地址(引用)复制了一份传递给了show方法的d引用变量。这时会有两个引用同时指向堆中的同一个对象。当执行show方法中的d.x=6时，会根据d所持有的引用找到堆中的对象，并将其x属性的值改为6.show方法弹栈。
+    由于是两个引用指向同一个对象，不管是哪一个引用改变了引用的所指向的对象的中的值，其他引用再次使用都是改变后的值。
+* C.结论
+    * 对于基本类型形式参数改变不会影响到实际参数
+    * 对于引用类型形式参数改变会影响到实际参数 
+</code></pre><p><img src="https://res.cloudinary.com/dpvywdzxv/image/upload/v1541058377/java/%E6%96%B9%E6%B3%95%E5%8F%82%E6%95%B0%E6%98%AF%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%BC%95%E7%94%A8%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.jpg" alt="方法调用的内存图"></p>
+<h3 id="02封装的概述"><a href="#02封装的概述" class="headerlink" title="02封装的概述"></a>02封装的概述</h3><pre><code>* A.面向对象三大特征
+    * 封装、继承、多态
+* B.封装表现
+    * 1、方法就是一个最基本封装体
+    * 2、类其实也是一个封装体    
+* C.封装的好处
+    * 1、提高了代码的复用性
+    * 2、隐藏了实现细节，还要对外提供可以访问的方式。便于调用者的使用。这是核心之一，也可以理解为就是封装的概念
+    * 3、提高了安全性     
+</code></pre><h3 id="03封装的生活中的举例"><a href="#03封装的生活中的举例" class="headerlink" title="03封装的生活中的举例"></a>03封装的生活中的举例</h3><pre><code>* A.封装的生活中的举例
+    机箱：
+    一台电脑，它是由CPU、主板、显卡、内存、硬盘、电源等部件组长，其实我们将这些部件组装在一起就可以使用电脑了，但是发现这些部件都散落在外面，很容造成不安全因素，于是，使用机箱壳子，把这些部件都装在里面，并在机箱壳上留下一些插口等，若不留插口，大家想想会是什么情况。
+    总结：机箱其实就是隐藏了办卡设备的细节，对外提供了插口以及开关等访问内部细节的方式。
+* B.总结
+    * 机箱其实就是隐藏了办卡设备的细节，对外提供了插口以及开关等访问内部细节的方式
+</code></pre><h2 id="private-this关键字"><a href="#private-this关键字" class="headerlink" title="private,this关键字"></a>private,this关键字</h2><h3 id="private关键字"><a href="#private关键字" class="headerlink" title="private关键字"></a>private关键字</h3><pre><code>* A.private概述
+    * private可以修饰成员内容包括成员方法和成员变量
+    * 被private修饰的内容不能在其他类访问
+* B.使用步骤
+    * 1、通过private修饰属性
+* C.完整代码 
+    class Person {
+        private int age;
+        private String name;
+
+        public void show() {
+            System.out.println(&quot;age=&quot; + age + &quot;,name&quot; + name);
+        }
+    }
+</code></pre><h3 id="get和set方法"><a href="#get和set方法" class="headerlink" title="get和set方法"></a>get和set方法</h3><pre><code>* A.get和set方法
+    * 年龄已被私有，错误的值无法赋值，可是正确的值也赋值不了，这样还是不行，那肿么办呢？按照之前所学习的封装的原理，隐藏后，还需要提供访问方式。只要对外提供可以访问的方法，让其他程序访问这些方法。同时在方法中可以对数据进行验证。
+</code></pre><p>一般对成员属性的访问动作：赋值(设置 set)，取值(获取 get)，因此对私有的变量访问的方式可以提供对应的 setXxx或者getXxx的方法。</p>
+<pre><code>class Person {
+    // 私有成员变量
+    private int age;
+    private String name;
+
+    // 对外提供设置成员变量的方法
+    public void setAge(int a) {
+        // 由于是设置成员变量的值，这里可以加入数据的验证
+        if (a &lt; 0 || a &gt; 130) {
+            System.out.println(a + &quot;不符合年龄的数据范围&quot;);
+            return;
+        }
+        age = a; 
+    }
+
+    // 对外提供访问成员变量的方法
+    public void getAge() {
+        return age;
+    }
+}
+* 总结
+    * 类中不需要对外提供的内容都私有化，包括属性和方法。
+</code></pre><p>以后再描述事物，属性都私有化，并提供setXxx getXxx方法对其进行访问</p>
+<pre><code>* 注意
+    * 私有仅仅是封装的体现形式而已
+</code></pre><h3 id="私有化Person类带get-set"><a href="#私有化Person类带get-set" class="headerlink" title="私有化Person类带get,set"></a>私有化Person类带get,set</h3><pre><code>* 标准代码
+    package cn.itcast.demo05;
+
+    /*
+     *   类描述人:
+     *     属性: 姓名和年龄
+     *     方法: 说话
+     *   
+     *   私有化所有的属性 (成员变量) ,必须写对应的get/set方法
+     *   凡是自定义的类,自定义成员变量,应该私有化,提供get/set
+     *   
+     *   this关键字:
+     *     区分成员变量和局部变量同名情况
+     *     方法中,方位成员变量,写this.
+     */
+    public class Person {
+        private String name;
+        private int age;
+
+        // set方法,变量name,age赋值
+        public void setAge(int age) {
+            this.age = age;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        // get方法,变量name,age获取值
+        public int getAge() {
+            return age;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void speak() {
+            String  name = &quot;哈哈&quot;;
+            int age = 16;
+
+            System.out.println(&quot;人在说话  &quot; + this.name + &quot;...&quot; + this.age);
+        }
+    }
+* 标准测试代码
+    package cn.itcast.demo05;
+
+    public class PersonTest {
+        public static void main(String[] args) {
+            Person p = new Person();
+            //调用set方法,对成员变量赋值
+            p.setAge(18);
+            p.setName(&quot;旺财&quot;);
+            p.speak();
+
+
+            //调用get方法,获取成员变量的值
+    //        System.out.println(p.getName());
+    //        System.out.println(p.getAge());
+        }
+    }
+</code></pre><h3 id="this关键字-区分成员变量和局部变量的同名"><a href="#this关键字-区分成员变量和局部变量的同名" class="headerlink" title="this关键字_区分成员变量和局部变量的同名"></a>this关键字_区分成员变量和局部变量的同名</h3><pre><code>* A.什么时候用
+    * 当类中存在成员变量和局部变量同名的时候为了区分，就需要使用this关键字
+* B.代码
+    class Person {
+        private int age;
+        private String name;
+
+        public void speak() {
+            this.name = &quot;小强&quot;;
+            this.age = 18;
+            System.out.println(&quot;name=&quot; + this.name + &quot;,age=&quot; + this.age);
+        }
+    }
+
+    class PersonDemo {
+        public static void main(String[] args) {
+            Person p = new Person();
+            p.speak();
+        }
+    }
+</code></pre><h3 id="this内存图"><a href="#this内存图" class="headerlink" title="this内存图"></a>this内存图</h3><pre><code>* A.this内存图
+</code></pre><p><img src="https://res.cloudinary.com/dpvywdzxv/image/upload/v1541058375/java/this%E5%86%85%E5%AD%98%E5%9B%BE.jpg" alt="方法调用的内存图"></p>
+<h3 id="this的年龄比较"><a href="#this的年龄比较" class="headerlink" title="this的年龄比较"></a>this的年龄比较</h3><pre><code>* A.需求：在Person类中定义功能，判断两个人是否是同龄人
+* B.代码
+    class Person {
+        private int age;
+        private String name;
+
+        public int getAge() {
+            return age;
+        }
+
+        public void setAge(int age) {
+            this.age = age;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public void speak() {
+            System.out.println(&quot;name=&quot; + this.name + &quot;,age=&quot; + this.age);
+        }
+
+        // 判断是否为同龄人
+        public boolean equalsAge(Person p) {
+            // 使用当前调用该equalsAge方法对象的age和传递进来p的age进行比较
+            // 由于无法确定具体是哪一个对象调用equalsAge方法，这里就可以使用this来代替
+            /*
+             * if(this.age == p.age) { return true; } return false;
+             */
+            return this.age == p.age;
+        }
+    }
+</code></pre><p><img src="https://res.cloudinary.com/dpvywdzxv/image/upload/v1541058375/java/this%E4%BD%BF%E7%94%A8-%E5%B9%B4%E9%BE%84%E6%AF%94%E8%BE%83.jpg" alt="方法调用的内存图 "></p>
+<h2 id="随机点名器"><a href="#随机点名器" class="headerlink" title="随机点名器"></a>随机点名器</h2><h3 id="随机点名器案例重构"><a href="#随机点名器案例重构" class="headerlink" title="随机点名器案例重构"></a>随机点名器案例重构</h3><pre><code>* A.需求：随机点名器，即在全班同学中随机的找出一名同学，打印这名同学的个人信息
+    它具备以下3个内容：
+    存储所有同学姓名
+    总览全班同学姓名
+    随机点名其中一人，打印到控制台
+* B.代码
+    import java.util.ArrayList;
+    import java.util.Random;
+    import java.util.Scanner;
+
+    /**
+     * 思路：
+     * 第一步：存储全班同学信息
+     * 第二步：打印全班同学每一个人的信息
+     * 第三部：随机对学生点名，打印学生信息
+     */
+    public class Test {
+        public static void main(String[] args) {
+            ArrayList&lt;Student&gt; list = new ArrayList&lt;Student&gt;(); //1.1创建一个可以存储多个同学名字的容器
+             //1.存储全班同学信息
+            addStudent(list);
+             //2.打印全班同学每一个人的信息（姓名、年龄）
+            printStudent(list);
+             //3.随机对学生点名，打印学生信息
+            randomStudent(list);
+        }
+        public static void addStudent(ArrayList&lt;Student&gt; list) {
+            //键盘输入多个同学名字存储到容器中
+            Scanner sc = new Scanner(System.in);
+            for (int i = 0; i &lt; 3; i++) {
+                //创建学生
+                Student s = new Student();
+                System.out.println(&quot;存储第&quot;+i+&quot;个学生姓名：&quot;);
+                String name = sc.next();
+                s.setName(name);
+                System.out.println(&quot;存储第&quot;+i+&quot;个学生年龄：&quot;);
+                int age = sc.nextInt();
+                s.setAge(age);
+                //添加学生到集合
+                list.add(s);
+            }
+        }
+        /**
+         2.打印全班同学每一个人的信息（姓名、年龄）
+         */
+        public static void printStudent (ArrayList&lt;Student&gt; list) {
+            for (int i = 0; i &lt; list.size(); i++) {
+                Student s = list.get(i);
+                System.out.println(&quot;姓名：&quot;+s.getName() +&quot;,年龄：&quot;+s.getAge());
+            }
+        }
+        /**
+         3.随机对学生点名，打印学生信息
+         */
+        public static void randomStudent (ArrayList&lt;Student&gt; list) {
+            //在班级总人数范围内，随机产生一个随机数
+            int index = new Random().nextInt(list.size());
+            //在容器（ArrayList集合）中，查找该随机数所对应的同学信息（姓名、年龄）
+            Student s = list.get(index);
+            System.out.println(&quot;被随机点名的同学：&quot;+s.getName() + &quot;，年龄:&quot; + s.getAge());
+        }
+    }
+
+    /**
+     * 学生信息类
+     */
+    public class Student {
+        private String name; // 姓名
+        private int age; // 年龄
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public int getAge() {
+            return age;
+        }
+
+        public void setAge(int age) {
+            this.age = age;
+        }
+    }    
+</code></pre><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">* A.类与对象</span><br><span class="line">	* 类，用于描述多个对象的共同特征，它是对象的模板。</span><br><span class="line">	* 对象，用于描述现实中的个体，它是类的实例。</span><br><span class="line">	* 类的定义：使用关键字class来定义java中的类</span><br><span class="line">	* 格式：</span><br><span class="line">	*		class 类名 &#123;</span><br><span class="line">	*			//属性</span><br><span class="line">	*			数据类型 变量名;</span><br><span class="line">	*			…</span><br><span class="line">	*			//方法</span><br><span class="line">	*			修饰符 返回值类型 方法名(参数)&#123;   &#125;</span><br><span class="line">	*			…</span><br><span class="line">	*		&#125;</span><br><span class="line">	*		</span><br><span class="line">* B.创建对象：</span><br><span class="line">	* 格式：</span><br><span class="line">	* 类名 对象名 = new 类名();</span><br><span class="line"></span><br><span class="line">* C.封装（private关键字）</span><br><span class="line">	* 封装，把对象的属性与方法的实现细节隐藏，仅对外提供一些公共的访问方式</span><br><span class="line">	* 封装的体现：</span><br><span class="line">	* 变量:使用 private 修饰，这就是变量的封装</span><br><span class="line">	* 方法:也是一种封装，封装了多条代码</span><br><span class="line">	* 类： 也是一种封装，封装了多个方法</span><br><span class="line">* D.private关键字，私有的意思</span><br><span class="line">	* 它可以用来修饰类中的成员(成员变量，成员方法)</span><br><span class="line">	* private的特点：</span><br><span class="line">	* private修饰的成员只能在当前类中访问，其他类中无法直接访问</span><br><span class="line">* E.this关键字</span><br><span class="line">	* this关键字，本类对象的引用</span><br><span class="line">	* this是在方法中使用的，哪个对象调用了该方法，那么，this就代表调用该方法的对象引用</span><br><span class="line">	* this什么时候存在的？当创建对象的时候，this存在的</span><br><span class="line">	* this的作用：用来区别同名的成员变量与局部变量（this.成员变量）</span><br><span class="line">	* public void setName(String name) &#123;</span><br><span class="line">	* 	this.name = name;</span><br><span class="line">	* &#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -578,7 +976,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/AS/" rel="tag"># AS</a>
+            <a href="/tags/java/" rel="tag"># java</a>
           
         </div>
       
@@ -591,8 +989,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/10/02/java入门/" rel="next" title="java入门">
-                <i class="fa fa-chevron-left"></i> java入门
+              <a href="/2016/10/09/day06笔记/" rel="next" title="java学习笔记——基础6">
+                <i class="fa fa-chevron-left"></i> java学习笔记——基础6
               </a>
             
           </div>
@@ -601,8 +999,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/10/04/day03笔记/" rel="prev" title="java学习笔记——基础3">
-                java学习笔记——基础3 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/10/03/hello-world/" rel="prev" title="Hello">
+                Hello <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -816,7 +1214,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#遇到的bug"><span class="nav-number">1.</span> <span class="nav-text">遇到的bug</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#在整个工程的build-gradle中添加以下框内代码："><span class="nav-number">1.1.</span> <span class="nav-text">在整个工程的build.gradle中添加以下框内代码：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#app下的build-gradle配置如下"><span class="nav-number">1.2.</span> <span class="nav-text">app下的build.gradle配置如下:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#若配置后还没解决问题，依然报错"><span class="nav-number">1.3.</span> <span class="nav-text">若配置后还没解决问题，依然报错</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#面向对象思想"><span class="nav-number">1.</span> <span class="nav-text">面向对象思想</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#面向对象和面向过程的思想"><span class="nav-number">1.1.</span> <span class="nav-text">面向对象和面向过程的思想</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#面向对象的思想的生活案例"><span class="nav-number">1.2.</span> <span class="nav-text">面向对象的思想的生活案例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#面向对象好处"><span class="nav-number">1.3.</span> <span class="nav-text">面向对象好处</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#大象装进冰箱的代码案例"><span class="nav-number">1.4.</span> <span class="nav-text">大象装进冰箱的代码案例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类与对象的关系"><span class="nav-number">2.</span> <span class="nav-text">类与对象的关系</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义小汽车类"><span class="nav-number">2.1.</span> <span class="nav-text">定义小汽车类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试汽车类"><span class="nav-number">2.2.</span> <span class="nav-text">测试汽车类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对象的内存图"><span class="nav-number">2.3.</span> <span class="nav-text">对象的内存图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类和对象的关系"><span class="nav-number">2.4.</span> <span class="nav-text">类和对象的关系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#局部变量和成员变量的关系"><span class="nav-number">3.</span> <span class="nav-text">局部变量和成员变量的关系</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#成员变量和局部变量的区别"><span class="nav-number">3.1.</span> <span class="nav-text">成员变量和局部变量的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#封装思想"><span class="nav-number">4.</span> <span class="nav-text">封装思想</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#01方法参数是基本数据类型和引用数据类型"><span class="nav-number">4.1.</span> <span class="nav-text">01方法参数是基本数据类型和引用数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#02封装的概述"><span class="nav-number">4.2.</span> <span class="nav-text">02封装的概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#03封装的生活中的举例"><span class="nav-number">4.3.</span> <span class="nav-text">03封装的生活中的举例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#private-this关键字"><span class="nav-number">5.</span> <span class="nav-text">private,this关键字</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#private关键字"><span class="nav-number">5.1.</span> <span class="nav-text">private关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#get和set方法"><span class="nav-number">5.2.</span> <span class="nav-text">get和set方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#私有化Person类带get-set"><span class="nav-number">5.3.</span> <span class="nav-text">私有化Person类带get,set</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#this关键字-区分成员变量和局部变量的同名"><span class="nav-number">5.4.</span> <span class="nav-text">this关键字_区分成员变量和局部变量的同名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#this内存图"><span class="nav-number">5.5.</span> <span class="nav-text">this内存图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#this的年龄比较"><span class="nav-number">5.6.</span> <span class="nav-text">this的年龄比较</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#随机点名器"><span class="nav-number">6.</span> <span class="nav-text">随机点名器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#随机点名器案例重构"><span class="nav-number">6.1.</span> <span class="nav-text">随机点名器案例重构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
@@ -999,7 +1397,7 @@
   
     <script type="text/javascript">
       window.livereOptions = {
-        refer: '2016/10/03/AS环境配置踩坑经历/'
+        refer: '2016/10/10/day09笔记/'
       };
       (function(d, s) {
         var j, e = d.getElementsByTagName(s)[0];
