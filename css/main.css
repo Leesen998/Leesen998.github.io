@@ -2018,7 +2018,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #81205c;
+  background: #ffc8d9;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3609,6 +3609,13 @@ code.description {
 }
 .highlight:hover .btn-copy {
   opacity: 1;
+}
+strong {
+  color: #0019a5;
+  size: 50px;
+  margin: 0em;
+  font-size: large;
+font-style
 }
 @-moz-keyframes heartAnimate {
   0%, 100% {

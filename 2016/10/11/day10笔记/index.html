@@ -166,7 +166,7 @@
 <meta property="og:description" content="1、继承2、抽象类3、综合案例—员工类系列定义">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1541167132/samples/java%20files/photo-1539452851739-c57dee0c0859.jpg">
-<meta property="og:updated_time" content="2018-11-04T13:42:07.572Z">
+<meta property="og:updated_time" content="2018-11-04T14:15:50.233Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java学习笔记——基础8">
 <meta name="twitter:description" content="1、继承2、抽象类3、综合案例—员工类系列定义">
@@ -923,7 +923,7 @@ public class Test {
          and.work();//&quot;Android工程师开发手机软件&quot;
     }
 }
-</code></pre><h3 id="14抽象类特点"><a href="#14抽象类特点" class="headerlink" title="14抽象类特点"></a>14抽象类特点</h3> <font color="#D66" size=""><br>A:抽象类的特点<br>a:抽象类和抽象方法都需要被abstract修饰。抽象方法一定要定义在抽象类中。<br>b:抽象类不可以直接创建对象，原因：调用抽象方法没有意义。<br>c:只有覆盖了抽象类中所有的抽象方法后，其子类才可以创建对象。否则该子类还是一个抽象类。<br>之所以继承抽象类，更多的是在思想，是面对共性类型操作会更简单。<br>  abstract class A{<br>      public abstract void func();<br>      public abstract void func2();<br>  }<br>  class A2 extends A{//A2把A中的两个抽象方法都重写掉了<br>                       //A2类不再是抽象类<br>       public void func(){}<br>       public void func2(){}<br>  }<br><br>  abstract class A3 extends A{//含有抽象方法的类一定是抽象类<br>       public void func(){<br><br>       }<br>       //public abstract void func2();//func2相当于被继承下来<br>  }<br></font>
+</code></pre><h3 id="14抽象类特点"><a href="#14抽象类特点" class="headerlink" title="14抽象类特点"></a>14抽象类特点</h3> <font color="#D66" size=""><br>A:抽象类的特点<br><strong>a:抽象类和抽象方法都需要被abstract修饰。抽象方法一定要定义在抽象类中。<br>b:抽象类不可以直接创建对象，原因：调用抽象方法没有意义。<br>c:【只有覆盖了抽象类中所有的抽象方法后】，其子类才可以创建对象。否则该子类还是一个抽象类。</strong><br>之所以继承抽象类，更多的是在思想，是面对共性类型操作会更简单。<br>  abstract class A{<br>      public abstract void func();<br>      public abstract void func2();<br>  }<br>  class A2 extends A{//A2把A中的两个抽象方法都重写掉了<br>                       //A2类不再是抽象类<br>       public void func(){}<br>       public void func2(){}<br>  }<br><br>  abstract class A3 extends A{//含有抽象方法的类一定是抽象类<br>       public void func(){<br><br>       }<br>       //public abstract void func2();//func2相当于被继承下来<br>  }<br></font>
 
 <h3 id="15抽象类的设计思想"><a href="#15抽象类的设计思想" class="headerlink" title="15抽象类的设计思想"></a>15抽象类的设计思想</h3><pre><code>A:抽象类的设计思想
   a:抽象类的作用:继承的体系抽象类,强制子类重写抽象的方法
@@ -1104,6 +1104,61 @@ public class Hardware extends Maintainer {
         System.out.println(&quot;员工号为 &quot; + getId() + &quot; 的 &quot; + getName() + &quot; 员工，正在修复打印机&quot;);
     }
 }
+</code></pre><h3 id="20小结"><a href="#20小结" class="headerlink" title="20小结"></a>20小结</h3><p>（1）    继承：是指在一个现有类的基础上去构建一个新的类，构建出来的新类被称作子类，现有类被称作父类，子类会自动拥有父类所有<br>继承的好处：可继承的属性和方法。</p>
+<pre><code>提高了代表的可维护性
+提高了代码的复用性
+让类与类之间产生了继承关系
+</code></pre><p>继承的弊端：</p>
+<pre><code>类与类之间的耦合度过高
+</code></pre><p>继承特点：</p>
+<pre><code>java中类只能够单继承，不能多继承，可以多层继承
+    class Yy extends Object {}
+    class Fu extends Yy{}
+    class Zi extends Fu {}
+所有的类都直接或者间接的继承了 Object类，Object类称为祖宗类
+</code></pre><p>继承的注意事项：</p>
+<pre><code>1，使用关键字 extends 让类与类之间 产生继承关系
+2, 父类私有的成员，子类不能继承，因为根本看不到
+3，不能为了继承某个功能而随意进行继承操作， 必须要符合 is a 的关系
+    苹果 is a 水果
+    男人 is a 人
+    狗   is a 人 ， 这种情况就不能继承了
+</code></pre><p>继承中的成员变量关系：</p>
+<pre><code>  不同名的变量：
+      子类直接继承使用
+  同名的变量：
+默认访问的是子类自己的成员变量(this.成员变量), 想访问父类中的同名变量，请使用 (super.成员变量);
+</code></pre><p>继承中的成员方法关系：</p>
+<pre><code>不同名的方法：
+子类直接继承使用
+同名的方法：
+默认访问的是子类自己的成员方法，想访问父类中的同名方法，请使用 super.成员方法();
+super:用来表示当前对象中包含的父类对象空间的引用
+
+调用父类的成员变量：
+super.成员变量;
+
+调用方法的成员方法:
+super.成员方法();
+</code></pre><p>(2)方法重写(override)：指 在子父类中，出现了方法声明相同的情况，也叫做方法覆盖，方法复写<br>方法重写的注意事项：</p>
+<pre><code>1，子类的方法声明要与父类相同
+2, 子类要重写方法的方法，方法的权限修饰符不能比父类的更低
+3, 父类私有的方法，子类不能够进行方法重写
+</code></pre><p>(3)方法重载(overload)：指 在同一个类中，多个方法名称相同，它们的参数列表不同(个数不同，数据类型不同)</p>
+<p>(4)抽象</p>
+<pre><code>抽象方法： 方法只有声明部分，没有方法体,即 public abstract void method();
+抽象类： 包含抽象方法的类，一定是抽象类
+  使用 abstract 修饰的类，是抽象类
+</code></pre><p>抽象类的特点：</p>
+<pre><code>1，抽象类与抽象方法都必须使用 abstract来修饰         
+    2，抽象类不能直接创建对象
+    3，抽象类中可以有抽象方法，也可以没有抽象方法
+    4，抽象类的子类
+        a，实现了抽象方法的具体类
+        b，抽象类
+</code></pre><p>抽象类面试题：</p>
+<pre><code>    1，抽象类中是否可以没有抽象方法？如果可以，那么，该类还定义成抽象类有意义吗？为什么？
+可以没有抽象方法，有意义，不会让其他人直接创建该类对象
 </code></pre>
       
     </div>
@@ -1397,7 +1452,7 @@ public class Hardware extends Maintainer {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#01继承的概述"><span class="nav-number">1.</span> <span class="nav-text">01继承的概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#02继承的定义格式和使用"><span class="nav-number">2.</span> <span class="nav-text">02继承的定义格式和使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#03继承的好处"><span class="nav-number">3.</span> <span class="nav-text">03继承的好处</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#04继承的注意事项"><span class="nav-number">4.</span> <span class="nav-text">04继承的注意事项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#05继承的体系"><span class="nav-number">5.</span> <span class="nav-text">05继承的体系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#06继承后子类父类成员变量的特点"><span class="nav-number">6.</span> <span class="nav-text">06继承后子类父类成员变量的特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#07继承后子类父类成员方法的特性-子类重写父类方法"><span class="nav-number">7.</span> <span class="nav-text">07继承后子类父类成员方法的特性_子类重写父类方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#08方法覆盖的需求"><span class="nav-number">8.</span> <span class="nav-text">08方法覆盖的需求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#09方法覆盖的手机案例实现"><span class="nav-number">9.</span> <span class="nav-text">09方法覆盖的手机案例实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10方法覆盖的注意事项"><span class="nav-number">10.</span> <span class="nav-text">10方法覆盖的注意事项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11抽象类的产生"><span class="nav-number">11.</span> <span class="nav-text">11抽象类的产生</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12抽象类的定义格式"><span class="nav-number">12.</span> <span class="nav-text">12抽象类的定义格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13抽象类的使用方式"><span class="nav-number">13.</span> <span class="nav-text">13抽象类的使用方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14抽象类特点"><span class="nav-number">14.</span> <span class="nav-text">14抽象类特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15抽象类的设计思想"><span class="nav-number">15.</span> <span class="nav-text">15抽象类的设计思想</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16抽象类的细节"><span class="nav-number">16.</span> <span class="nav-text">16抽象类的细节</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17员工案例分析"><span class="nav-number">17.</span> <span class="nav-text">17员工案例分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#18员工案例Employee类的编写"><span class="nav-number">18.</span> <span class="nav-text">18员工案例Employee类的编写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#19员工案例的子类的编写"><span class="nav-number">19.</span> <span class="nav-text">19员工案例的子类的编写</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#01继承的概述"><span class="nav-number">1.</span> <span class="nav-text">01继承的概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#02继承的定义格式和使用"><span class="nav-number">2.</span> <span class="nav-text">02继承的定义格式和使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#03继承的好处"><span class="nav-number">3.</span> <span class="nav-text">03继承的好处</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#04继承的注意事项"><span class="nav-number">4.</span> <span class="nav-text">04继承的注意事项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#05继承的体系"><span class="nav-number">5.</span> <span class="nav-text">05继承的体系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#06继承后子类父类成员变量的特点"><span class="nav-number">6.</span> <span class="nav-text">06继承后子类父类成员变量的特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#07继承后子类父类成员方法的特性-子类重写父类方法"><span class="nav-number">7.</span> <span class="nav-text">07继承后子类父类成员方法的特性_子类重写父类方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#08方法覆盖的需求"><span class="nav-number">8.</span> <span class="nav-text">08方法覆盖的需求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#09方法覆盖的手机案例实现"><span class="nav-number">9.</span> <span class="nav-text">09方法覆盖的手机案例实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10方法覆盖的注意事项"><span class="nav-number">10.</span> <span class="nav-text">10方法覆盖的注意事项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11抽象类的产生"><span class="nav-number">11.</span> <span class="nav-text">11抽象类的产生</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12抽象类的定义格式"><span class="nav-number">12.</span> <span class="nav-text">12抽象类的定义格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13抽象类的使用方式"><span class="nav-number">13.</span> <span class="nav-text">13抽象类的使用方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14抽象类特点"><span class="nav-number">14.</span> <span class="nav-text">14抽象类特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15抽象类的设计思想"><span class="nav-number">15.</span> <span class="nav-text">15抽象类的设计思想</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16抽象类的细节"><span class="nav-number">16.</span> <span class="nav-text">16抽象类的细节</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17员工案例分析"><span class="nav-number">17.</span> <span class="nav-text">17员工案例分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#18员工案例Employee类的编写"><span class="nav-number">18.</span> <span class="nav-text">18员工案例Employee类的编写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#19员工案例的子类的编写"><span class="nav-number">19.</span> <span class="nav-text">19员工案例的子类的编写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#20小结"><span class="nav-number">20.</span> <span class="nav-text">20小结</span></a></li></ol></div>
             
 
           </div>
