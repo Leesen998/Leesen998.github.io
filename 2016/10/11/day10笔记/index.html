@@ -95,7 +95,7 @@
   
     
     
-    <link href="https://fonts.cat.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.cat.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
   
 
 
@@ -166,7 +166,7 @@
 <meta property="og:description" content="1、继承2、抽象类3、综合案例—员工类系列定义">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1541167132/samples/java%20files/photo-1539452851739-c57dee0c0859.jpg">
-<meta property="og:updated_time" content="2018-11-04T14:15:50.233Z">
+<meta property="og:updated_time" content="2018-11-05T08:00:15.466Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java学习笔记——基础8">
 <meta name="twitter:description" content="1、继承2、抽象类3、综合案例—员工类系列定义">
@@ -508,93 +508,12 @@
        构建出来的新类被称作子类，现有类被称作父类
  *B:继承关系的子类特点  
    *a:子类会自动拥有父类所有非private修饰的属性和方法
-</code></pre><h3 id="02继承的定义格式和使用"><a href="#02继承的定义格式和使用" class="headerlink" title="02继承的定义格式和使用"></a>02继承的定义格式和使用</h3><pre><code>*A:继承的格式
-   class 子类 extends 父类 {}
-*B:雇员(Employee)与研发部员工(Developer)案例:
-   *cn.itcast.demo01包下:
-   *Employee.java:
-        /*
-        * 定义员工类Employee
-        */
-       class Employee {
-           String name; // 定义name属性
-
-           public void work() {// 定义员工的工作方法
-               System.out.println(&quot;尽心尽力地工作&quot;);
-           }
-       }
-   *Developer.java:
-       /*
-        * 定义研发部员工类Developer 继承 员工类Employee
-        * 继承了父类中所有非private修饰的成员变量
-        */
-       class Developer extends Employee {
-           // 定义一个打印name的方法
-           public void printName() {
-               System.out.println(&quot;name=&quot; + name);
-           }
-       }
-   *测试员工类与研发部员工类:
-       /*
-         * 定义测试类
-        */
-       public class Example01 {
-           public static void main(String[] args) {
-               Developer d = new Developer(); // 创建一个研发部员工类对象
-               d.name = &quot;小明&quot;; // 为该员工类的name属性进行赋值
-               d.printName(); // 调用该员工的printName()方法
-               d.work(); // 调用Developer类继承来的work()方法
-           }
-       }
-   *通过子类对象既可以调用自身的非private修饰的成员,也可以调用父类的非private修饰的成员
-</code></pre><h3 id="03继承的好处"><a href="#03继承的好处" class="headerlink" title="03继承的好处"></a>03继承的好处</h3><pre><code>*A:继承的好处：
+</code></pre><h3 id="02继承的定义格式和使用"><a href="#02继承的定义格式和使用" class="headerlink" title="02继承的定义格式和使用"></a>02继承的定义格式和使用</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">*A:继承的格式</span><br><span class="line">   <span class="class"><span class="keyword">class</span> 子类 <span class="keyword">extends</span> 父类 </span>&#123;&#125;</span><br><span class="line">*B:雇员(Employee)与研发部员工(Developer)案例:</span><br><span class="line">   *cn.itcast.demo01包下:</span><br><span class="line">   *Employee.java:</span><br><span class="line">	 <span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * 定义员工类Employee</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="class"><span class="keyword">class</span> <span class="title">Employee</span> </span>&#123;</span><br><span class="line">		String name; <span class="comment">// 定义name属性</span></span><br><span class="line">		</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">work</span><span class="params">()</span> </span>&#123;<span class="comment">// 定义员工的工作方法</span></span><br><span class="line">			System.out.println(<span class="string">"尽心尽力地工作"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">      *Developer.java:</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * 定义研发部员工类Developer 继承 员工类Employee</span></span><br><span class="line"><span class="comment">	 * 继承了父类中所有非private修饰的成员变量</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="class"><span class="keyword">class</span> <span class="title">Developer</span> <span class="keyword">extends</span> <span class="title">Employee</span> </span>&#123;</span><br><span class="line">		<span class="comment">// 定义一个打印name的方法</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">			System.out.println(<span class="string">"name="</span> + name);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">      *测试员工类与研发部员工类:</span><br><span class="line">          <span class="comment">/*</span></span><br><span class="line"><span class="comment">	     * 定义测试类</span></span><br><span class="line"><span class="comment">           */</span></span><br><span class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Example01</span> </span>&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">			Developer d = <span class="keyword">new</span> Developer(); <span class="comment">// 创建一个研发部员工类对象</span></span><br><span class="line">			d.name = <span class="string">"小明"</span>; <span class="comment">// 为该员工类的name属性进行赋值</span></span><br><span class="line">			d.printName(); <span class="comment">// 调用该员工的printName()方法</span></span><br><span class="line">			d.work(); <span class="comment">// 调用Developer类继承来的work()方法</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">      *通过子类对象既可以调用自身的非<span class="keyword">private</span>修饰的成员,也可以调用父类的非<span class="keyword">private</span>修饰的成员</span><br></pre></td></tr></table></figure>
+<h3 id="03继承的好处"><a href="#03继承的好处" class="headerlink" title="03继承的好处"></a>03继承的好处</h3><pre><code>*A:继承的好处：
     *1、继承的出现提高了代码的复用性，提高软件开发效率。
     *2、继承的出现让类与类之间产生了关系，提供了多态的前提。
-</code></pre><h3 id="04继承的注意事项"><a href="#04继承的注意事项" class="headerlink" title="04继承的注意事项"></a>04继承的注意事项</h3><pre><code> *A:继承的注意事项 
-     *a:在Java中，类只支持单继承，不允许多继承，也就是说一个类只能有一个直接父类，例如下面这种情况是不合法的。
-         class A{} 
-         class B{}
-         class C extends A,B{}  // C类不可以同时继承A类和B类
-      假如支持多继承例如:
-         class A{
-             int a=3;
-            public void method(){
-
-            }
-         } 
-         class B{
-             int a=5;
-             public void method(){
-
-             }
-         }
-         class C extends A,B{
-
-         } 
-         class Demo{
-             public static void main(String[] args){
-                 C c=new C();
-                 System.out.println(c.a);//到底是调用A的还是B的成员变量??无法确定
-                 c.method();//到底是调用A的还是B的成员方法??无法确定
-             }    
-         }
-   
-      *b:多个类可以继承一个父类，例如下面这种情况是允许的(就像你爹可以多个儿子,但是这些儿子都只有一个爹)
-         class A{}
-         class B extends A{}
-         class C extends A{}   // 类B和类C都可以继承类A
-     
-     *c:在Java中，多层继承是可以的，
-        即一个类的父类可以再去继承另外的父类，
-        例如C类继承自B类，而B类又可以去继承A类，这时，C类也可称作A类的子类。下面这种情况是允许的。
-         class A{}
-         class B extends A{}   // 类B继承类A，类B是类A的子类
-         class C extends B{}   // 类C继承类B，类C是类B的子类，同时也是类A的子类
-         
-      *d:在Java中，子类和父类是一种相对概念，
-        也就是说一个类是某个类父类的同时，也可以是另一个类的子类。
-        例如上面的这种情况中，B类是A类的子类，同时又是C类的父类。
-</code></pre><h3 id="05继承的体系"><a href="#05继承的体系" class="headerlink" title="05继承的体系"></a>05继承的体系</h3><p>   *A:继承的体系:</p>
+</code></pre><h3 id="04继承的注意事项"><a href="#04继承的注意事项" class="headerlink" title="04继承的注意事项"></a>04继承的注意事项</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"> *A:继承的注意事项 </span><br><span class="line">	 *a:在Java中，类只支持单继承，不允许多继承，也就是说一个类只能有一个直接父类，例如下面这种情况是不合法的。</span><br><span class="line">	     <span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;&#125; </span><br><span class="line">	     <span class="class"><span class="keyword">class</span> <span class="title">B</span></span>&#123;&#125;</span><br><span class="line">	     <span class="class"><span class="keyword">class</span> <span class="title">C</span> <span class="keyword">extends</span> <span class="title">A</span>,<span class="title">B</span></span>&#123;&#125;  <span class="comment">// C类不可以同时继承A类和B类</span></span><br><span class="line">	  假如支持多继承例如:</span><br><span class="line">            <span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;</span><br><span class="line">            	<span class="keyword">int</span> a=<span class="number">3</span>;</span><br><span class="line">               <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">               &#125;</span><br><span class="line">            &#125; </span><br><span class="line">	     <span class="class"><span class="keyword">class</span> <span class="title">B</span></span>&#123;</span><br><span class="line">	     	<span class="keyword">int</span> a=<span class="number">5</span>;</span><br><span class="line">	     	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	     	&#125;</span><br><span class="line">	     &#125;</span><br><span class="line">	     <span class="class"><span class="keyword">class</span> <span class="title">C</span> <span class="keyword">extends</span> <span class="title">A</span>,<span class="title">B</span></span>&#123;</span><br><span class="line">               </span><br><span class="line">	     &#125; </span><br><span class="line">	     <span class="class"><span class="keyword">class</span> <span class="title">Demo</span></span>&#123;</span><br><span class="line">	     	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">	     		C c=<span class="keyword">new</span> C();</span><br><span class="line">	     		System.out.println(c.a);<span class="comment">//到底是调用A的还是B的成员变量??无法确定</span></span><br><span class="line">	     		c.method();<span class="comment">//到底是调用A的还是B的成员方法??无法确定</span></span><br><span class="line">	     	&#125;	</span><br><span class="line">	     &#125;</span><br><span class="line">   </span><br><span class="line">      *b:多个类可以继承一个父类，例如下面这种情况是允许的(就像你爹可以多个儿子,但是这些儿子都只有一个爹)</span><br><span class="line">	     <span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;&#125;</span><br><span class="line">	     <span class="class"><span class="keyword">class</span> <span class="title">B</span> <span class="keyword">extends</span> <span class="title">A</span></span>&#123;&#125;</span><br><span class="line">	     <span class="class"><span class="keyword">class</span> <span class="title">C</span> <span class="keyword">extends</span> <span class="title">A</span></span>&#123;&#125;   <span class="comment">// 类B和类C都可以继承类A</span></span><br><span class="line">	 </span><br><span class="line">     *c:在Java中，多层继承是可以的，</span><br><span class="line">        即一个类的父类可以再去继承另外的父类，</span><br><span class="line">        例如C类继承自B类，而B类又可以去继承A类，这时，C类也可称作A类的子类。下面这种情况是允许的。</span><br><span class="line">	     <span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;&#125;</span><br><span class="line">	     <span class="class"><span class="keyword">class</span> <span class="title">B</span> <span class="keyword">extends</span> <span class="title">A</span></span>&#123;&#125;   <span class="comment">// 类B继承类A，类B是类A的子类</span></span><br><span class="line">	     <span class="class"><span class="keyword">class</span> <span class="title">C</span> <span class="keyword">extends</span> <span class="title">B</span></span>&#123;&#125;   <span class="comment">// 类C继承类B，类C是类B的子类，同时也是类A的子类</span></span><br><span class="line">	     </span><br><span class="line">         *d:在Java中，子类和父类是一种相对概念，</span><br><span class="line">           也就是说一个类是某个类父类的同时，也可以是另一个类的子类。</span><br><span class="line">           例如上面的这种情况中，B类是A类的子类，同时又是C类的父类。</span><br></pre></td></tr></table></figure>
+<h3 id="05继承的体系"><a href="#05继承的体系" class="headerlink" title="05继承的体系"></a>05继承的体系</h3><p>   *A:继承的体系:</p>
 <pre><code>                                  动物(吃)
                                     |
                            -------------------------
@@ -610,120 +529,12 @@
 *b:父类:具有所有子类的共性内容
    子类:不但有共性还有自身特有的内容
 *c:整个继承体系,越向上越抽象,越向下越具体
-</code></pre><h3 id="06继承后子类父类成员变量的特点"><a href="#06继承后子类父类成员变量的特点" class="headerlink" title="06继承后子类父类成员变量的特点"></a>06继承后子类父类成员变量的特点</h3><pre><code>A:继承后子类父类成员变量的特点
-  a:子类的对象调用成员变量的时候,子类自己有,使用子类,子类自己没有调用的父类
-      class Fu{
-           //Fu中的成员变量。
-           int num = 5;
-       }
-
-       class Zi extends Fu{
-           //Zi中的成员变量
-           int num2 = 6;
-           //Zi中的成员方法
-           public void show()
-           {
-               //访问父类中的num
-               System.out.println(&quot;Fu num=&quot;+num);
-               //访问子类中的num2
-               System.out.println(&quot;Zi num2=&quot;+num2);
-           }
-       }
-
-       class Demo{
-           public static void main(String[] args) 
-           {
-               Zi z = new Zi(); //创建子类对象
-               z.show(); //调用子类中的show方法
-           }
-       }
-b:当子父类中出现了同名成员变量
-    class Fu{
-       //Fu中的成员变量。
-       int num = 5;
-   }
-
-   class Zi extends Fu{
-       //Zi中的成员变量
-       int num = 6;
-       void show(){   
-           //子类的局部变量
-           int num=7
-
-           //直接访问,遵循就近查找原则
-           System.out.println(num);//7
-
-           //子父类中出现了同名的成员变量时
-           //在子类中需要访问父类中非私有成员变量时，需要使用super关键字
-           //访问父类中的num
-           System.out.println(&quot;Fu num=&quot;+super.num);//5
-
-
-           //访问子类中的num2
-           System.out.println(&quot;Zi num2=&quot;+this.num);//6
-       }
-   }
-
-   class Demo5 {
-       public static void main(String[] args) 
-       {
-           Zi z = new Zi(); //创建子类对象
-           z.show(); //调用子类中的show方法
-       }
-   }
-</code></pre><h3 id="07继承后子类父类成员方法的特性-子类重写父类方法"><a href="#07继承后子类父类成员方法的特性-子类重写父类方法" class="headerlink" title="07继承后子类父类成员方法的特性_子类重写父类方法"></a>07继承后子类父类成员方法的特性_子类重写父类方法</h3><pre><code>A:继承后子类父类成员方法的特性
-  a:子类的对象调用方法的时候,子类自己有,使用子类,子类自己没有调用的父类
-    class Fu{
-        public void show(){
-            System.out.println(&quot;Fu类中的show方法执行&quot;);
-        }
-    }
-    class Zi extends Fu{
-        public void show2(){
-            System.out.println(&quot;Zi类中的show2方法执行&quot;);
-        }
-    }
-    public  class Test{
-        public static void main(String[] args) {
-            Zi z = new Zi();
-            z.show(); //子类中没有show方法，但是可以找到父类方法去执行
-            z.show2();
-        }
-    }  
-
- b:为什么要有重写?
-     class Fu{
-         public void method(){
-             //上千行代码
-            //Fu类中的方法最先存在,那么如果项目需求变了,该方法
-            //功能不能够满足我们的需求,此时我们也不会去改这个方法
-            //因为项目中可能有大量的功能已经使用到该方法,如果随意修改可能使调用该方法的功能出现问题
-            //所以使用重写方式基于原有功能提供更强的功能
-         }   
-     }
-     class Zi extends Fu{
-
-     }
- c:子类中出现与父类一模一样的方法时，会出现覆盖操作，也称为override重写、复写或者覆盖
-   class Fu{
-        public void show(){
-            System.out.println(&quot;Fu show&quot;);
-        }
-   }
-
-   class Zi extends Fu{
-        //子类复写了父类的show方法
-        public void show(){
-            System.out.println(&quot;Zi show&quot;);
-        }
-    }
-   public  class Test{
-        public static void main(String[] args) {
-            Zi z = new Zi();
-            z.show(); //Zi show 子类有直接使用子类
-        }
-    }  
-</code></pre><h3 id="08方法覆盖的需求"><a href="#08方法覆盖的需求" class="headerlink" title="08方法覆盖的需求"></a>08方法覆盖的需求</h3><pre><code>A:方法覆盖的需求 
+</code></pre><h3 id="06继承后子类父类成员变量的特点"><a href="#06继承后子类父类成员变量的特点" class="headerlink" title="06继承后子类父类成员变量的特点"></a>06继承后子类父类成员变量的特点</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">A:继承后子类父类成员变量的特点</span><br><span class="line">  a:子类的对象调用成员变量的时候,子类自己有,使用子类,子类自己没有调用的父类</span><br><span class="line">   <span class="class"><span class="keyword">class</span> <span class="title">Fu</span></span>&#123;</span><br><span class="line">		<span class="comment">//Fu中的成员变量。</span></span><br><span class="line">		<span class="keyword">int</span> num = <span class="number">5</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="class"><span class="keyword">class</span> <span class="title">Zi</span> <span class="keyword">extends</span> <span class="title">Fu</span></span>&#123;</span><br><span class="line">		<span class="comment">//Zi中的成员变量</span></span><br><span class="line">		<span class="keyword">int</span> num2 = <span class="number">6</span>;</span><br><span class="line">		<span class="comment">//Zi中的成员方法</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span></span><br><span class="line"><span class="function">		</span>&#123;</span><br><span class="line">			<span class="comment">//访问父类中的num</span></span><br><span class="line">			System.out.println(<span class="string">"Fu num="</span>+num);</span><br><span class="line">			<span class="comment">//访问子类中的num2</span></span><br><span class="line">			System.out.println(<span class="string">"Zi num2="</span>+num2);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="class"><span class="keyword">class</span> <span class="title">Demo</span></span>&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span></span><br><span class="line"><span class="function">		</span>&#123;</span><br><span class="line">			Zi z = <span class="keyword">new</span> Zi(); <span class="comment">//创建子类对象</span></span><br><span class="line">			z.show(); <span class="comment">//调用子类中的show方法</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">   b:当子父类中出现了同名成员变量</span><br><span class="line">	<span class="class"><span class="keyword">class</span> <span class="title">Fu</span></span>&#123;</span><br><span class="line">	<span class="comment">//Fu中的成员变量。</span></span><br><span class="line">	<span class="keyword">int</span> num = <span class="number">5</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Zi</span> <span class="keyword">extends</span> <span class="title">Fu</span></span>&#123;</span><br><span class="line">	<span class="comment">//Zi中的成员变量</span></span><br><span class="line">	<span class="keyword">int</span> num = <span class="number">6</span>;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span>&#123;   </span><br><span class="line">		<span class="comment">//子类的局部变量</span></span><br><span class="line">		<span class="keyword">int</span> num=<span class="number">7</span></span><br><span class="line">		</span><br><span class="line">		<span class="comment">//直接访问,遵循就近查找原则</span></span><br><span class="line">              System.out.println(num);<span class="comment">//7</span></span><br><span class="line">		</span><br><span class="line">		<span class="comment">//子父类中出现了同名的成员变量时</span></span><br><span class="line">		<span class="comment">//在子类中需要访问父类中非私有成员变量时，需要使用super关键字</span></span><br><span class="line">		<span class="comment">//访问父类中的num</span></span><br><span class="line">		System.out.println(<span class="string">"Fu num="</span>+<span class="keyword">super</span>.num);<span class="comment">//5</span></span><br><span class="line">		</span><br><span class="line"></span><br><span class="line">		<span class="comment">//访问子类中的num2</span></span><br><span class="line">		System.out.println(<span class="string">"Zi num2="</span>+<span class="keyword">this</span>.num);<span class="comment">//6</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo5</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		Zi z = <span class="keyword">new</span> Zi(); <span class="comment">//创建子类对象</span></span><br><span class="line">		z.show(); <span class="comment">//调用子类中的show方法</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="07继承后子类父类成员方法的特性-子类重写父类方法"><a href="#07继承后子类父类成员方法的特性-子类重写父类方法" class="headerlink" title="07继承后子类父类成员方法的特性_子类重写父类方法"></a>07继承后子类父类成员方法的特性_子类重写父类方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">A:继承后子类父类成员方法的特性</span><br><span class="line">  a:子类的对象调用方法的时候,子类自己有,使用子类,子类自己没有调用的父类</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Fu</span></span>&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span>&#123;</span><br><span class="line">			System.out.println(<span class="string">"Fu类中的show方法执行"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="class"><span class="keyword">class</span> <span class="title">Zi</span> <span class="keyword">extends</span> <span class="title">Fu</span></span>&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show2</span><span class="params">()</span></span>&#123;</span><br><span class="line">			System.out.println(<span class="string">"Zi类中的show2方法执行"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">public</span>  <span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">			Zi z = <span class="keyword">new</span> Zi();</span><br><span class="line">			z.show(); <span class="comment">//子类中没有show方法，但是可以找到父类方法去执行</span></span><br><span class="line">			z.show2();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">b:为什么要有重写?</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Fu</span></span>&#123;</span><br><span class="line">    	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">()</span></span>&#123;</span><br><span class="line">    		<span class="comment">//上千行代码</span></span><br><span class="line">           <span class="comment">//Fu类中的方法最先存在,那么如果项目需求变了,该方法</span></span><br><span class="line">           <span class="comment">//功能不能够满足我们的需求,此时我们也不会去改这个方法</span></span><br><span class="line">           <span class="comment">//因为项目中可能有大量的功能已经使用到该方法,如果随意修改可能使调用该方法的功能出现问题</span></span><br><span class="line">           <span class="comment">//所以使用重写方式基于原有功能提供更强的功能</span></span><br><span class="line">    	&#125;   </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Zi</span> <span class="keyword">extends</span> <span class="title">Fu</span></span>&#123;</span><br><span class="line">     </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">   c:子类中出现与父类一模一样的方法时，会出现覆盖操作，也称为override重写、复写或者覆盖</span><br><span class="line">     <span class="class"><span class="keyword">class</span> <span class="title">Fu</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"Fu show"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">     &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">Zi</span> <span class="keyword">extends</span> <span class="title">Fu</span></span>&#123;</span><br><span class="line">	<span class="comment">//子类复写了父类的show方法</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"Zi show"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">     <span class="keyword">public</span>  <span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		Zi z = <span class="keyword">new</span> Zi();</span><br><span class="line">		z.show(); <span class="comment">//Zi show 子类有直接使用子类</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="08方法覆盖的需求"><a href="#08方法覆盖的需求" class="headerlink" title="08方法覆盖的需求"></a>08方法覆盖的需求</h3><pre><code>A:方法覆盖的需求 
     a:案例:比如手机，当描述一个手机时，它具有发短信，打电话，显示来电号码功能，
     后期由于手机需要在来电显示功能中增加显示姓名和头像，
     这时可以重新定义一个类描述智能手机，并继承原有描述手机的类。
@@ -753,114 +564,11 @@ b:当子父类中出现了同名成员变量
       2:继承关系分析:
         对于发短信和打电话功能,让智能手机直接沿用(继承)手机的就可以
         但是在智能手机中的来电显示不但实现号码,还显示姓名和头像,同样的都是来电显示功能,智能手机的来电显示比手机的功能更加强大,我们考虑使用重写
-</code></pre><h3 id="09方法覆盖的手机案例实现"><a href="#09方法覆盖的手机案例实现" class="headerlink" title="09方法覆盖的手机案例实现"></a>09方法覆盖的手机案例实现</h3><pre><code>//手机类
-class Phone{
-    public void sendMessage(){
-        System.out.println(&quot;发短信&quot;);
-    }
-    public void call(){
-        System.out.println(&quot;打电话&quot;);
-    }
-    public void showNum(){
-        System.out.println(&quot;来电显示号码&quot;);
-    }
-}
-
-//智能手机类
-class NewPhone extends Phone{
-    //覆盖父类的来电显示号码功能，并增加自己的显示姓名和图片功能
-    //从现实生活角度考虑沿用原有的showNum方法名便于用户更快熟悉和接受,而不是再起个新的名字
-    //用户还需要花费大量时间慢慢接受
-
-    public void showNum(){
-        //调用父类已经存在的功能使用super
-        //如果不加super这是调用子类自身的showNum(),自己调用自己,递归
-        //方法不断入栈导致内存溢出
-        super.showNum();
-
-
-        //增加自己特有显示姓名和图片功能
-        System.out.println(&quot;显示来电姓名&quot;);
-        System.out.println(&quot;显示头像&quot;);
-    }
-}
-
-public class Test {
-    public static void main(String[] args) {
-        new NewPhone().showNum();//来电显示  显示来电姓名 显示头像
-    }
-}
-</code></pre><h3 id="10方法覆盖的注意事项"><a href="#10方法覆盖的注意事项" class="headerlink" title="10方法覆盖的注意事项"></a>10方法覆盖的注意事项</h3><p>   A:方法覆盖的注意事项<br>    a:权限:子类方法覆盖父类方法，必须要保证权限大于等于父类权限。<br>      四大权限:public&gt;默认=protected&gt;private</p>
-<pre><code>  class Fu{    
-       void show(){
-
-       }
-       public void method(){
-
-       }
-   }
-   class Zi() extends Fu{
-       public void show(){//编译运行没问题
-
-       }  
-       void method(){//编译错误
-
-       }     
-   }
-b:方法定义:子类方法和要重写的父类的方法:方法的方法名和参数列表都要一样。
-  关于方法的返回值:
-    如果是基本数据类型,子类的方法和重写的父类的方法返回值类型必须相同
-    如果是引用数据类型,子类的方法和重写的父类的方法返回值类型可以相同或者子类方法的返回值类型是父类方法返回值类型的子类
-    class Fu{    
-       int show(){
-
-       }
-       public Fu method(){
-
-       }
-
-       public Fu method2(){
-
-       }
-
-   }
-   class Zi() extends Fu{
-       public int show(){//返回值为基本类型的重写
-
-       }  
-       public Fu method(){//子类的方法和重写的父类的方法返回值类型可以相同
-
-       }     
-       public Zi method2(){//子类方法的返回值类型是父类方法返回值类型的子类
-
-       }     
-   }
-c:重载与重写对比:
-   重载:
-       权限修饰符(public private 默认):无关
-       方法名:重载的两个方法的方法名必须相同
-       形参列表:
-         形参类型的顺序不同
-         形参的个数不同
-         形参的类型不同
-         三者至少满足一个
-       返回值类型:
-         重载与返回值类型无关
-   重写:
-       权限修饰符(public private 默认): 
-         子类方法的权限&gt;=父类的方法的权限
-       方法名: 
-         子类方法和父类方法必须相同
-       形参列表: 
-          子类方法和父类方法的形参列表必须相同
-       返回值类型:
-         基本类数据类型:
-           必须相同
-         引用数据类型:
-          子类方法的返回值类型和父类方法的返回值类型相同
-          或者
-          子类方法的返回值类型是父类方法的返回值类型的 子类
-</code></pre><h3 id="11抽象类的产生"><a href="#11抽象类的产生" class="headerlink" title="11抽象类的产生"></a>11抽象类的产生</h3><pre><code>A:抽象类的产生
+</code></pre><h3 id="09方法覆盖的手机案例实现"><a href="#09方法覆盖的手机案例实现" class="headerlink" title="09方法覆盖的手机案例实现"></a>09方法覆盖的手机案例实现</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//手机类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Phone</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sendMessage</span><span class="params">()</span></span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"发短信"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">()</span></span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"打电话"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">showNum</span><span class="params">()</span></span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"来电显示号码"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//智能手机类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NewPhone</span> <span class="keyword">extends</span> <span class="title">Phone</span></span>&#123;</span><br><span class="line">	<span class="comment">//覆盖父类的来电显示号码功能，并增加自己的显示姓名和图片功能</span></span><br><span class="line">	<span class="comment">//从现实生活角度考虑沿用原有的showNum方法名便于用户更快熟悉和接受,而不是再起个新的名字</span></span><br><span class="line">	<span class="comment">//用户还需要花费大量时间慢慢接受</span></span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">showNum</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="comment">//调用父类已经存在的功能使用super</span></span><br><span class="line">              <span class="comment">//如果不加super这是调用子类自身的showNum(),自己调用自己,递归</span></span><br><span class="line">              <span class="comment">//方法不断入栈导致内存溢出</span></span><br><span class="line">		<span class="keyword">super</span>.showNum();</span><br><span class="line">		</span><br><span class="line"></span><br><span class="line">		<span class="comment">//增加自己特有显示姓名和图片功能</span></span><br><span class="line">		System.out.println(<span class="string">"显示来电姓名"</span>);</span><br><span class="line">		System.out.println(<span class="string">"显示头像"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">new</span> NewPhone().showNum();<span class="comment">//来电显示  显示来电姓名 显示头像</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="10方法覆盖的注意事项"><a href="#10方法覆盖的注意事项" class="headerlink" title="10方法覆盖的注意事项"></a>10方法覆盖的注意事项</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">A:方法覆盖的注意事项 </span><br><span class="line"> a:权限:子类方法覆盖父类方法，必须要保证权限大于等于父类权限。</span><br><span class="line">   四大权限:<span class="keyword">public</span>&gt;默认=<span class="keyword">protected</span>&gt;<span class="keyword">private</span></span><br><span class="line"> </span><br><span class="line"> <span class="class"><span class="keyword">class</span> <span class="title">Fu</span></span>&#123;	</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">Zi</span>() <span class="keyword">extends</span> <span class="title">Fu</span></span>&#123;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span>&#123;<span class="comment">//编译运行没问题</span></span><br><span class="line"></span><br><span class="line">&#125;  </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">method</span><span class="params">()</span></span>&#123;<span class="comment">//编译错误</span></span><br><span class="line"></span><br><span class="line">   &#125;     </span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">b:方法定义:子类方法和要重写的父类的方法:方法的方法名和参数列表都要一样。</span><br><span class="line">  关于方法的返回值:</span><br><span class="line">    如果是基本数据类型,子类的方法和重写的父类的方法返回值类型必须相同</span><br><span class="line">    如果是引用数据类型,子类的方法和重写的父类的方法返回值类型可以相同或者子类方法的返回值类型是父类方法返回值类型的子类</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Fu</span></span>&#123;	</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">show</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> Fu <span class="title">method</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> Fu <span class="title">method2</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="class"><span class="keyword">class</span> <span class="title">Zi</span>() <span class="keyword">extends</span> <span class="title">Fu</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">show</span><span class="params">()</span></span>&#123;<span class="comment">//返回值为基本类型的重写</span></span><br><span class="line"></span><br><span class="line">	&#125;  </span><br><span class="line">	<span class="function"><span class="keyword">public</span> Fu <span class="title">method</span><span class="params">()</span></span>&#123;<span class="comment">//子类的方法和重写的父类的方法返回值类型可以相同</span></span><br><span class="line"></span><br><span class="line">    &#125;     </span><br><span class="line">    <span class="function"><span class="keyword">public</span> Zi <span class="title">method2</span><span class="params">()</span></span>&#123;<span class="comment">//子类方法的返回值类型是父类方法返回值类型的子类</span></span><br><span class="line"></span><br><span class="line">    &#125;     </span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">   c:重载与重写对比:</span><br><span class="line">      重载:</span><br><span class="line">    权限修饰符(<span class="keyword">public</span> <span class="keyword">private</span> 默认):无关</span><br><span class="line">    方法名:重载的两个方法的方法名必须相同</span><br><span class="line">    形参列表:</span><br><span class="line">      形参类型的顺序不同</span><br><span class="line">      形参的个数不同</span><br><span class="line">      形参的类型不同</span><br><span class="line">      三者至少满足一个</span><br><span class="line">    返回值类型:</span><br><span class="line">      重载与返回值类型无关</span><br><span class="line">重写:</span><br><span class="line">    权限修饰符(<span class="keyword">public</span> <span class="keyword">private</span> 默认): </span><br><span class="line">      子类方法的权限&gt;=父类的方法的权限</span><br><span class="line">    方法名: </span><br><span class="line">      子类方法和父类方法必须相同</span><br><span class="line">    形参列表: </span><br><span class="line">       子类方法和父类方法的形参列表必须相同</span><br><span class="line">    返回值类型:</span><br><span class="line">      基本类数据类型:</span><br><span class="line">        必须相同</span><br><span class="line">      引用数据类型:</span><br><span class="line">       子类方法的返回值类型和父类方法的返回值类型相同</span><br><span class="line">       或者</span><br><span class="line">       子类方法的返回值类型是父类方法的返回值类型的 子类</span><br></pre></td></tr></table></figure>
+<h3 id="11抽象类的产生"><a href="#11抽象类的产生" class="headerlink" title="11抽象类的产生"></a>11抽象类的产生</h3><pre><code>A:抽象类的产生
   a:分析事物时，发现了共性内容，就出现向上抽取。会有这样一种特殊情况，就是方法功能声明相同，但方法功能主体不同。那么这时也可以抽取，但只抽取方法声明，不抽取方法主体。那么此方法就是一个抽象方法。
 </code></pre><h3 id="12抽象类的定义格式"><a href="#12抽象类的定义格式" class="headerlink" title="12抽象类的定义格式"></a>12抽象类的定义格式</h3><pre><code>A:抽象方法定义的格式：
   a:public abstract 返回值类型 方法名(参数);
@@ -887,43 +595,8 @@ c:重载与重写对比:
            //抽象的方法,必须存在于抽象的类中,类也必须用abstract修饰
            public abstract void work();
        }
-</code></pre><h3 id="13抽象类的使用方式"><a href="#13抽象类的使用方式" class="headerlink" title="13抽象类的使用方式"></a>13抽象类的使用方式</h3><pre><code>A:抽象类的使用方式
- /*
- *  定义类,JavaEE的开发人员
- *  继承抽象类Develop,重写抽象的方法
- */
-public class JavaEE extends Develop{
-    //重写父类的抽象方法
-    //去掉abstract修饰符,加上方法主体
-    public void work(){
-        System.out.println(&quot;JavaEE工程师在开发B/S 软件&quot;);
-
-    }
-}
-/*
- *  定义Android类,继承开发人员类
- *  重写抽象方法
- */
-public class Android extends Develop{
-     public void work(){
-         System.out.println(&quot;Android工程师开发手机软件&quot;);
-     }
-}
-
-/*
- *  测试抽象类
- *    创建他的子类的对象,使用子类的对象调用方法
- */
-public class Test {
-    public static void main(String[] args) {
-         JavaEE ee = new JavaEE();
-         ee.work();//&quot;JavaEE工程师在开发B/S 软件&quot;
-
-         Android and = new Android();
-         and.work();//&quot;Android工程师开发手机软件&quot;
-    }
-}
-</code></pre><h3 id="14抽象类特点"><a href="#14抽象类特点" class="headerlink" title="14抽象类特点"></a>14抽象类特点</h3> <font color="#D66" size=""><br>A:抽象类的特点<br><strong>a:抽象类和抽象方法都需要被abstract修饰。抽象方法一定要定义在抽象类中。<br>b:抽象类不可以直接创建对象，原因：调用抽象方法没有意义。<br>c:【只有覆盖了抽象类中所有的抽象方法后】，其子类才可以创建对象。否则该子类还是一个抽象类。</strong><br>之所以继承抽象类，更多的是在思想，是面对共性类型操作会更简单。<br>  abstract class A{<br>      public abstract void func();<br>      public abstract void func2();<br>  }<br>  class A2 extends A{//A2把A中的两个抽象方法都重写掉了<br>                       //A2类不再是抽象类<br>       public void func(){}<br>       public void func2(){}<br>  }<br><br>  abstract class A3 extends A{//含有抽象方法的类一定是抽象类<br>       public void func(){<br><br>       }<br>       //public abstract void func2();//func2相当于被继承下来<br>  }<br></font>
+</code></pre><h3 id="13抽象类的使用方式"><a href="#13抽象类的使用方式" class="headerlink" title="13抽象类的使用方式"></a>13抽象类的使用方式</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">   A:抽象类的使用方式</span><br><span class="line"> <span class="comment">/*</span></span><br><span class="line"><span class="comment"> *  定义类,JavaEE的开发人员</span></span><br><span class="line"><span class="comment"> *  继承抽象类Develop,重写抽象的方法</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JavaEE</span> <span class="keyword">extends</span> <span class="title">Develop</span></span>&#123;</span><br><span class="line">	<span class="comment">//重写父类的抽象方法</span></span><br><span class="line">	<span class="comment">//去掉abstract修饰符,加上方法主体</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">work</span><span class="params">()</span></span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"JavaEE工程师在开发B/S 软件"</span>);</span><br><span class="line">	</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *  定义Android类,继承开发人员类</span></span><br><span class="line"><span class="comment"> *  重写抽象方法</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Android</span> <span class="keyword">extends</span> <span class="title">Develop</span></span>&#123;</span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">work</span><span class="params">()</span></span>&#123;</span><br><span class="line">    	 System.out.println(<span class="string">"Android工程师开发手机软件"</span>);</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *  测试抽象类</span></span><br><span class="line"><span class="comment"> *    创建他的子类的对象,使用子类的对象调用方法</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		 JavaEE ee = <span class="keyword">new</span> JavaEE();</span><br><span class="line">		 ee.work();<span class="comment">//"JavaEE工程师在开发B/S 软件"</span></span><br><span class="line">		 </span><br><span class="line">		 Android and = <span class="keyword">new</span> Android();</span><br><span class="line">		 and.work();<span class="comment">//"Android工程师开发手机软件"</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="14抽象类特点"><a href="#14抽象类特点" class="headerlink" title="14抽象类特点"></a>14抽象类特点</h3> <font color="#D66" size=""><br>A:抽象类的特点<br><strong>a:抽象类和抽象方法都需要被abstract修饰。抽象方法一定要定义在抽象类中。<br>b:抽象类不可以直接创建对象，原因：调用抽象方法没有意义。<br>c:【只有覆盖了抽象类中所有的抽象方法后】，其子类才可以创建对象。否则该子类还是一个抽象类。</strong><br>之所以继承抽象类，更多的是在思想，是面对共性类型操作会更简单。<br>  abstract class A{<br>      public abstract void func();<br>      public abstract void func2();<br>  }<br>  class A2 extends A{//A2把A中的两个抽象方法都重写掉了<br>                       //A2类不再是抽象类<br>       public void func(){}<br>       public void func2(){}<br>  }<br><br>  abstract class A3 extends A{//含有抽象方法的类一定是抽象类<br>       public void func(){<br><br>       }<br>       //public abstract void func2();//func2相当于被继承下来<br>  }<br></font>
 
 <h3 id="15抽象类的设计思想"><a href="#15抽象类的设计思想" class="headerlink" title="15抽象类的设计思想"></a>15抽象类的设计思想</h3><pre><code>A:抽象类的设计思想
   a:抽象类的作用:继承的体系抽象类,强制子类重写抽象的方法
@@ -941,31 +614,8 @@ public class Test {
 </code></pre><h3 id="16抽象类的细节"><a href="#16抽象类的细节" class="headerlink" title="16抽象类的细节"></a>16抽象类的细节</h3><p>   A:抽象类的细节</p>
 <p> a:抽象类一定是个父类？</p>
 <pre><code>是的，因为不断抽取而来的。
-</code></pre><p> b:抽象类中是否可以不定义抽象方法?</p>
-<pre><code>是可以的，那这个抽象类的存在到底有什么意义呢？不让该类创建对象,方法可以直接让子类去使用
-(适配器设计模式)
-
- /*
-  *   抽象类,可以没有抽象方法,可以定义带有方法体的方法
-  *   让子类继承后,可以直接使用
-  */
- public  abstract class Animal {
-      public void sleep(){
-          System.out.println(&quot;动物睡觉&quot;);
-      }
-
- }
- public class Cat extends Animal{
-
- }     
-
- public class Test {
-     public static void main(String[] args) {
-         //Cat c = new Cat();
-         new Cat().sleep();//不让该类创建对象,方法可以直接让子类去使用
-     }
- }
-</code></pre><p> c:抽象关键字abstract不可以和哪些关键字共存？    </p>
+</code></pre><p> b:抽象类中是否可以不定义抽象方法?<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">     是可以的，那这个抽象类的存在到底有什么意义呢？不让该类创建对象,方法可以直接让子类去使用</span><br><span class="line">     (适配器设计模式)</span><br><span class="line"></span><br><span class="line">      <span class="comment">/*</span></span><br><span class="line"><span class="comment"> *   抽象类,可以没有抽象方法,可以定义带有方法体的方法</span></span><br><span class="line"><span class="comment"> *   让子类继承后,可以直接使用</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span>  <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Animal</span> </span>&#123;</span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sleep</span><span class="params">()</span></span>&#123;</span><br><span class="line">    	 System.out.println(<span class="string">"动物睡觉"</span>);</span><br><span class="line">     &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Cat</span> <span class="keyword">extends</span> <span class="title">Animal</span></span>&#123;</span><br><span class="line"></span><br><span class="line">      &#125;     </span><br><span class="line">      </span><br><span class="line">      <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="comment">//Cat c = new Cat();</span></span><br><span class="line">		<span class="keyword">new</span> Cat().sleep();<span class="comment">//不让该类创建对象,方法可以直接让子类去使用</span></span><br><span class="line">	&#125;</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure></p>
+<p> c:抽象关键字abstract不可以和哪些关键字共存？    </p>
 <pre><code> 1:private：私有的方法子类是无法继承到的，也不存在覆盖，
             而abstract和private一起使用修饰方法，abstract既要子类去实现这个方法,
             而private修饰子类根本无法得到父类这个方法。互相矛盾。 
@@ -1015,96 +665,9 @@ JavaEE工程师   Android工程师         网络维护工程师    硬件维护
         网络维护工程师：员工号为xxx的 xxx员工，正在检查网络是否畅通
         硬件维护工程师：员工号为xxx的 xxx员工，正在修复打印机
     创建JavaEE工程师对象，完成工作方法的调用
-</code></pre><h3 id="18员工案例Employee类的编写"><a href="#18员工案例Employee类的编写" class="headerlink" title="18员工案例Employee类的编写"></a>18员工案例Employee类的编写</h3><p>   A:员工案例Employee类的编写:按照分析的继承体系来逐个实现</p>
-<pre><code>    /*
-    *  定义员工类
-    *    内容,都是所有子类的共性抽取
-    *      属性: 姓名,工号
-    *      方法: 工作
-    */
-  public abstract class Employee {
-       private String id;// 员工编号
-       private String name; // 员工姓名
-
-       public String getId() {
-           return id;
-       }
-       public void setId(String id) {
-           this.id = id;
-       }
-       public String getName() {
-           return name;
-       }
-       public void setName(String name) {
-           this.name = name;
-       }
-
-       //工作方法（抽象方法）
-       public abstract void work(); 
-}
-</code></pre><h3 id="19员工案例的子类的编写"><a href="#19员工案例的子类的编写" class="headerlink" title="19员工案例的子类的编写"></a>19员工案例的子类的编写</h3><p>   B:员工案例的子类的编写:</p>
-<pre><code> /*
- *  定义研发员工类
- *    属于员工中的一种, 继承员工类 
- *    抽象类Develop 给自己的员工定义自己有的属性
- */
-public abstract class Develop extends Employee{
-
-}
-
-/*
- *  描述JavaEE开发工程师类
- *    工号,姓名 工作方法
- *  其他的员工,也具备这些共性,抽取到父类中,自己就不需要定义了
- *  是研发部员工的一种,继承研发部类
- */
-public class JavaEE extends Develop{
-    //重写他父类的父类的抽象方法
-    public void work(){
-        //调用父类的get方法,获取name,id值
-        System.out.println(&quot;JavaEE的工程师开发淘宝&quot;+ super.getName()+&quot;..&quot;+super.getId());
-    }
-}
-    /*
-    *定义Android工程师 继承 研发部员工类，重写工作方法
-    */
-public class Android extends Developer {
-  @Override
-   public void work() {
-    System.out.println(&quot;员工号为 &quot; + getId() + &quot; 的 &quot; + getName() + &quot; 员工，正在研发淘宝手机客户端软件&quot;);
-  }
-}
-
-
-/*
- *   定义维护员工类,属于员工中的一种
- *   继承员工类
- *   抽象类Maintainer 给自己的员工定义自己有的属性
- */
-public abstract class Maintainer extends Employee{
-
-}
-
-/*
- *  描述的是网络维护工程师
- *  属于维护部的员工,继承维护部类
- */
-public class Network extends Maintainer{
-    public void work(){
-        System.out.println(&quot;网络工程师在检查网络是否畅通&quot;+super.getName()+&quot;...&quot;+super.getId());
-    }
-}
-
-/*
- *定义Hardware硬件维护工程师 继承 维护部员工类，重写工作方法
- */
-public class Hardware extends Maintainer {
-    @Override
-    public void work() {
-        System.out.println(&quot;员工号为 &quot; + getId() + &quot; 的 &quot; + getName() + &quot; 员工，正在修复打印机&quot;);
-    }
-}
-</code></pre><h3 id="20小结"><a href="#20小结" class="headerlink" title="20小结"></a>20小结</h3><p>（1）    继承：是指在一个现有类的基础上去构建一个新的类，构建出来的新类被称作子类，现有类被称作父类，子类会自动拥有父类所有<br>继承的好处：可继承的属性和方法。</p>
+</code></pre><h3 id="18员工案例Employee类的编写"><a href="#18员工案例Employee类的编写" class="headerlink" title="18员工案例Employee类的编写"></a>18员工案例Employee类的编写</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"> A:员工案例Employee类的编写:按照分析的继承体系来逐个实现</span><br><span class="line"></span><br><span class="line"> <span class="comment">/*</span></span><br><span class="line"><span class="comment"> *  定义员工类</span></span><br><span class="line"><span class="comment"> *    内容,都是所有子类的共性抽取</span></span><br><span class="line"><span class="comment"> *      属性: 姓名,工号</span></span><br><span class="line"><span class="comment"> *      方法: 工作</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Employee</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> String id;<span class="comment">// 员工编号</span></span><br><span class="line">	<span class="keyword">private</span> String name; <span class="comment">// 员工姓名</span></span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> id;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(String id)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.id = id;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> name;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.name = name;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//工作方法（抽象方法）</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">work</span><span class="params">()</span></span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="19员工案例的子类的编写"><a href="#19员工案例的子类的编写" class="headerlink" title="19员工案例的子类的编写"></a>19员工案例的子类的编写</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">  B:员工案例的子类的编写:</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment"> *  定义研发员工类</span></span><br><span class="line"><span class="comment"> *    属于员工中的一种, 继承员工类 </span></span><br><span class="line"><span class="comment"> *    抽象类Develop 给自己的员工定义自己有的属性</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Develop</span> <span class="keyword">extends</span> <span class="title">Employee</span></span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *  描述JavaEE开发工程师类</span></span><br><span class="line"><span class="comment"> *    工号,姓名 工作方法</span></span><br><span class="line"><span class="comment"> *  其他的员工,也具备这些共性,抽取到父类中,自己就不需要定义了</span></span><br><span class="line"><span class="comment"> *  是研发部员工的一种,继承研发部类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JavaEE</span> <span class="keyword">extends</span> <span class="title">Develop</span></span>&#123;</span><br><span class="line">	<span class="comment">//重写他父类的父类的抽象方法</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">work</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="comment">//调用父类的get方法,获取name,id值</span></span><br><span class="line">		System.out.println(<span class="string">"JavaEE的工程师开发淘宝"</span>+ <span class="keyword">super</span>.getName()+<span class="string">".."</span>+<span class="keyword">super</span>.getId());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	*定义Android工程师 继承 研发部员工类，重写工作方法</span></span><br><span class="line"><span class="comment">	*/</span></span><br><span class="line">   <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Android</span> <span class="keyword">extends</span> <span class="title">Developer</span> </span>&#123;</span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">work</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	System.out.println(<span class="string">"员工号为 "</span> + getId() + <span class="string">" 的 "</span> + getName() + <span class="string">" 员工，正在研发淘宝手机客户端软件"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">   &#125;</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">   <span class="comment">/*</span></span><br><span class="line"><span class="comment"> *   定义维护员工类,属于员工中的一种</span></span><br><span class="line"><span class="comment"> *   继承员工类</span></span><br><span class="line"><span class="comment"> *   抽象类Maintainer 给自己的员工定义自己有的属性</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Maintainer</span> <span class="keyword">extends</span> <span class="title">Employee</span></span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">   </span><br><span class="line">   <span class="comment">/*</span></span><br><span class="line"><span class="comment"> *  描述的是网络维护工程师</span></span><br><span class="line"><span class="comment"> *  属于维护部的员工,继承维护部类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Network</span> <span class="keyword">extends</span> <span class="title">Maintainer</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">work</span><span class="params">()</span></span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"网络工程师在检查网络是否畅通"</span>+<span class="keyword">super</span>.getName()+<span class="string">"..."</span>+<span class="keyword">super</span>.getId());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">/*</span></span><br><span class="line"><span class="comment">    *定义Hardware硬件维护工程师 继承 维护部员工类，重写工作方法</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Hardware</span> <span class="keyword">extends</span> <span class="title">Maintainer</span> </span>&#123;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">work</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"员工号为 "</span> + getId() + <span class="string">" 的 "</span> + getName() + <span class="string">" 员工，正在修复打印机"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="20小结"><a href="#20小结" class="headerlink" title="20小结"></a>20小结</h3><p>（1）    继承：是指在一个现有类的基础上去构建一个新的类，构建出来的新类被称作子类，现有类被称作父类，子类会自动拥有父类所有<br>继承的好处：可继承的属性和方法。</p>
 <pre><code>提高了代表的可维护性
 提高了代码的复用性
 让类与类之间产生了继承关系
@@ -1128,35 +691,12 @@ public class Hardware extends Maintainer {
       子类直接继承使用
   同名的变量：
 默认访问的是子类自己的成员变量(this.成员变量), 想访问父类中的同名变量，请使用 (super.成员变量);
-</code></pre><p>继承中的成员方法关系：</p>
-<pre><code>不同名的方法：
-子类直接继承使用
-同名的方法：
-默认访问的是子类自己的成员方法，想访问父类中的同名方法，请使用 super.成员方法();
-super:用来表示当前对象中包含的父类对象空间的引用
-
-调用父类的成员变量：
-super.成员变量;
-
-调用方法的成员方法:
-super.成员方法();
-</code></pre><p>(2)方法重写(override)：指 在子父类中，出现了方法声明相同的情况，也叫做方法覆盖，方法复写<br>方法重写的注意事项：</p>
-<pre><code>1，子类的方法声明要与父类相同
-2, 子类要重写方法的方法，方法的权限修饰符不能比父类的更低
-3, 父类私有的方法，子类不能够进行方法重写
-</code></pre><p>(3)方法重载(overload)：指 在同一个类中，多个方法名称相同，它们的参数列表不同(个数不同，数据类型不同)</p>
-<p>(4)抽象</p>
-<pre><code>抽象方法： 方法只有声明部分，没有方法体,即 public abstract void method();
-抽象类： 包含抽象方法的类，一定是抽象类
-  使用 abstract 修饰的类，是抽象类
-</code></pre><p>抽象类的特点：</p>
-<pre><code>1，抽象类与抽象方法都必须使用 abstract来修饰         
-    2，抽象类不能直接创建对象
-    3，抽象类中可以有抽象方法，也可以没有抽象方法
-    4，抽象类的子类
-        a，实现了抽象方法的具体类
-        b，抽象类
-</code></pre><p>抽象类面试题：</p>
+</code></pre><p>继承中的成员方法关系：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">不同名的方法：</span><br><span class="line">子类直接继承使用</span><br><span class="line">同名的方法：</span><br><span class="line">默认访问的是子类自己的成员方法，想访问父类中的同名方法，请使用 <span class="keyword">super</span>.成员方法();</span><br><span class="line"><span class="keyword">super</span>:用来表示当前对象中包含的父类对象空间的引用</span><br><span class="line"></span><br><span class="line">调用父类的成员变量：</span><br><span class="line"><span class="keyword">super</span>.成员变量;</span><br><span class="line"></span><br><span class="line">调用方法的成员方法:</span><br><span class="line"><span class="keyword">super</span>.成员方法();</span><br></pre></td></tr></table></figure></p>
+<p>(2)方法重写(override)：指 在子父类中，出现了方法声明相同的情况，也叫做方法覆盖，方法复写<br>方法重写的注意事项：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>，子类的方法声明要与父类相同</span><br><span class="line"><span class="number">2</span>, 子类要重写方法的方法，方法的权限修饰符不能比父类的更低</span><br><span class="line"><span class="number">3</span>, 父类私有的方法，子类不能够进行方法重写</span><br></pre></td></tr></table></figure></p>
+<p>(3)方法重载(overload)：指 在同一个类中，多个方法名称相同，它们的参数列表不同(个数不同，数据类型不同)</p>
+<p>(4)抽象<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">抽象方法： 方法只有声明部分，没有方法体,即 <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">()</span></span>;</span><br><span class="line">抽象类： 包含抽象方法的类，一定是抽象类</span><br><span class="line">     使用 <span class="keyword">abstract</span> 修饰的类，是抽象类</span><br></pre></td></tr></table></figure></p>
+<p>抽象类的特点：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>，抽象类与抽象方法都必须使用 <span class="keyword">abstract</span>来修饰		 </span><br><span class="line">	<span class="number">2</span>，抽象类不能直接创建对象</span><br><span class="line">	<span class="number">3</span>，抽象类中可以有抽象方法，也可以没有抽象方法</span><br><span class="line">	<span class="number">4</span>，抽象类的子类</span><br><span class="line">		a，实现了抽象方法的具体类</span><br><span class="line">		b，抽象类</span><br></pre></td></tr></table></figure></p>
+<p>抽象类面试题：</p>
 <pre><code>    1，抽象类中是否可以没有抽象方法？如果可以，那么，该类还定义成抽象类有意义吗？为什么？
 可以没有抽象方法，有意义，不会让其他人直接创建该类对象
 </code></pre>

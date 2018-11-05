@@ -95,7 +95,7 @@
   
     
     
-    <link href="https://fonts.cat.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.cat.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
   
 
 
@@ -170,7 +170,7 @@
 <meta property="og:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1541058377/java/%E6%96%B9%E6%B3%95%E5%8F%82%E6%95%B0%E6%98%AF%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%BC%95%E7%94%A8%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.jpg">
 <meta property="og:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1541058375/java/this%E5%86%85%E5%AD%98%E5%9B%BE.jpg">
 <meta property="og:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1541058375/java/this%E4%BD%BF%E7%94%A8-%E5%B9%B4%E9%BE%84%E6%AF%94%E8%BE%83.jpg">
-<meta property="og:updated_time" content="2018-11-01T13:01:55.695Z">
+<meta property="og:updated_time" content="2018-11-05T08:12:02.674Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java学习笔记——基础7">
 <meta name="twitter:description" content="1、面向对象思想2、类与对象的关系3、局部变量和成员变量的关系4、封装思想5、private,this关键字6、随机点名器">
@@ -567,97 +567,22 @@
         * 运行(){}
     * }
 * C：通过JAVA代码描述小汽车
-    * public class Car {
-        * String color;
-        * int number;
-
-        * void run() {
-            * System.out.println(color + &quot;:&quot; + number);
-        * }
-    * }
-</code></pre><h3 id="测试汽车类"><a href="#测试汽车类" class="headerlink" title="测试汽车类"></a>测试汽车类</h3><pre><code>* A: 创见对象的格式
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">* <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Car</span> </span>&#123;</span><br><span class="line">	* String color;</span><br><span class="line">	* <span class="keyword">int</span> number;</span><br><span class="line"></span><br><span class="line">	* <span class="function"><span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		* System.out.println(color + <span class="string">":"</span> + number);</span><br><span class="line">	* &#125;</span><br><span class="line">* &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="测试汽车类"><a href="#测试汽车类" class="headerlink" title="测试汽车类"></a>测试汽车类</h3><pre><code>* A: 创见对象的格式
     * a: 类名 变量名 = new 类名();
 * B: 测试汽车类
-    public class CarDemo {
-        public static void main(String[] args) { 
-            /*
-             测试：Car类中的run方法。
-             */
-            // 1,创建Car的对象。给对象起个名字。
-            Car c = new Car();// c是类类型的变量。c指向了一个具体的Car类型的对象。
-            // 2,通过已有的对象调用该对象的功能。格式：对象.对象成员;
-            // 3,可以该对象的属性赋值。
-            c.color = &quot;red&quot;;
-            c.number = 4;
-            c.run();
-        }
-    }
-</code></pre><h3 id="对象的内存图"><a href="#对象的内存图" class="headerlink" title="对象的内存图"></a>对象的内存图</h3><p><img src="https://res.cloudinary.com/dpvywdzxv/image/upload/v1541058377/java/%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%86%85%E5%AD%98%E5%9B%BE.jpg" alt="方法调用的内存图"></p>
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CarDemo</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123; </span><br><span class="line">		<span class="comment">/*</span></span><br><span class="line"><span class="comment">		 测试：Car类中的run方法。</span></span><br><span class="line"><span class="comment">		 */</span></span><br><span class="line">		<span class="comment">// 1,创建Car的对象。给对象起个名字。</span></span><br><span class="line">		Car c = <span class="keyword">new</span> Car();<span class="comment">// c是类类型的变量。c指向了一个具体的Car类型的对象。</span></span><br><span class="line">		<span class="comment">// 2,通过已有的对象调用该对象的功能。格式：对象.对象成员;</span></span><br><span class="line">		<span class="comment">// 3,可以该对象的属性赋值。</span></span><br><span class="line">		c.color = <span class="string">"red"</span>;</span><br><span class="line">		c.number = <span class="number">4</span>;</span><br><span class="line">		c.run();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="对象的内存图"><a href="#对象的内存图" class="headerlink" title="对象的内存图"></a>对象的内存图</h3><p><img src="https://res.cloudinary.com/dpvywdzxv/image/upload/v1541058377/java/%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%86%85%E5%AD%98%E5%9B%BE.jpg" alt="方法调用的内存图"></p>
 <h3 id="类和对象的关系"><a href="#类和对象的关系" class="headerlink" title="类和对象的关系"></a>类和对象的关系</h3><pre><code>* A: 类和对象的关系
     * 类是对某一类事物的抽象描述，而对象用于表示现实中该类事物的个体
 * B: 举例
     * 可以将玩具模型看作是一个类，将一个个玩具看作对象，从玩具模型和玩具之间的关系便可以看出类与对象之间的关系
-</code></pre><h2 id="局部变量和成员变量的关系"><a href="#局部变量和成员变量的关系" class="headerlink" title="局部变量和成员变量的关系"></a>局部变量和成员变量的关系</h2><h3 id="成员变量和局部变量的区别"><a href="#成员变量和局部变量的区别" class="headerlink" title="成员变量和局部变量的区别"></a>成员变量和局部变量的区别</h3><ul>
-<li>区别一：定义的位置不同<ul>
-<li>定义在【类】中的变量是【成员变量】</li>
-<li>定义在【方法】中或者{}语句里面的变量是【局部变量】</li>
-</ul>
-</li>
-<li>区别二：在内存中的位置不同<ul>
-<li>【成员变量】存储在【堆内存】的对象中</li>
-<li>【局部变量】存储在【栈内存】的方法中（局部变量跟随方法进栈）</li>
-</ul>
-</li>
-<li>区别三：声明周期不同<ul>
-<li>成员变量随着对象的出现而出现在堆中，随着对象的消失而从堆中消失</li>
-<li>局部变量随着方法的运行而出现在栈中，随着方法的弹栈而消失</li>
-</ul>
-</li>
-<li>区别四：初始化不同<ul>
-<li>【成员变量】因为在堆内存中，【所有默认的初始化值】</li>
-<li>【局部变量】【没有默认】的初始化值，必须手动的给其赋值才可以使用。</li>
-</ul>
-</li>
-</ul>
+</code></pre><h2 id="局部变量和成员变量的关系"><a href="#局部变量和成员变量的关系" class="headerlink" title="局部变量和成员变量的关系"></a>局部变量和成员变量的关系</h2><h3 id="成员变量和局部变量的区别"><a href="#成员变量和局部变量的区别" class="headerlink" title="成员变量和局部变量的区别"></a>成员变量和局部变量的区别</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">* 区别一：定义的位置不同</span><br><span class="line">	* 定义在【类】中的变量是【成员变量】</span><br><span class="line">	* 定义在【方法】中或者&#123;&#125;语句里面的变量是【局部变量】</span><br><span class="line">* 区别二：在内存中的位置不同</span><br><span class="line">	* 【成员变量】存储在【堆内存】的对象中</span><br><span class="line">	* 【局部变量】存储在【栈内存】的方法中（局部变量跟随方法进栈）</span><br><span class="line">* 区别三：声明周期不同</span><br><span class="line">	* 成员变量随着对象的出现而出现在堆中，随着对象的消失而从堆中消失</span><br><span class="line">	* 局部变量随着方法的运行而出现在栈中，随着方法的弹栈而消失</span><br><span class="line">* 区别四：初始化不同</span><br><span class="line">	* 【成员变量】因为在堆内存中，【所有默认的初始化值】</span><br><span class="line">	* 【局部变量】【没有默认】的初始化值，必须手动的给其赋值才可以使用。</span><br></pre></td></tr></table></figure>
 <h2 id="封装思想"><a href="#封装思想" class="headerlink" title="封装思想"></a>封装思想</h2><h3 id="01方法参数是基本数据类型和引用数据类型"><a href="#01方法参数是基本数据类型和引用数据类型" class="headerlink" title="01方法参数是基本数据类型和引用数据类型"></a>01方法参数是基本数据类型和引用数据类型</h3><pre><code>* A.基本类型
-    class Demo
-    {
-        public static void main(String[] args)
-        {
-            int x = 4;
-            show(x);
-            System.out.println(&quot;x=&quot;+x);
-        }
-        public static void show(int x)
-        {
-            x = 5;
-
-        }
-    }     
-    基本类型作为参数传递时，其实就是将基本类型变量x空间中的值复制了一份传递给调用的方法show()，当在show()方法中x接受到了复制的值，再在show()方法中对x变量进行操作，这时只会影响到show中的x。当show方法执行完成，弹栈后，程序又回到main方法执行，main方法中的x值还是原来的值。
-* B.引用类型
-    class Demo 
-    {
-        int x ;
-        public static void main(String[] args) 
-        {
-
-            Demo d = new Demo();
-            d.x = 5;
-            show(d);
-            System.out.println(&quot;x=&quot;+d.x);
-        }
-        public static void show(Demo d)
-        {
-            d.x = 6;
-        }
-    }     
-    当引用变量作为参数传递时，这时其实是将引用变量空间中的内存地址(引用)复制了一份传递给了show方法的d引用变量。这时会有两个引用同时指向堆中的同一个对象。当执行show方法中的d.x=6时，会根据d所持有的引用找到堆中的对象，并将其x属性的值改为6.show方法弹栈。
-    由于是两个引用指向同一个对象，不管是哪一个引用改变了引用的所指向的对象的中的值，其他引用再次使用都是改变后的值。
-* C.结论
-    * 对于基本类型形式参数改变不会影响到实际参数
-    * 对于引用类型形式参数改变会影响到实际参数 
-</code></pre><p><img src="https://res.cloudinary.com/dpvywdzxv/image/upload/v1541058377/java/%E6%96%B9%E6%B3%95%E5%8F%82%E6%95%B0%E6%98%AF%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%BC%95%E7%94%A8%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.jpg" alt="方法调用的内存图"></p>
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">int</span> x = <span class="number">4</span>;</span><br><span class="line">		show(x);</span><br><span class="line">		System.out.println(<span class="string">"x="</span>+x);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		x = <span class="number">5</span>;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;	 </span><br><span class="line">基本类型作为参数传递时，其实就是将基本类型变量x空间中的值复制了一份传递给调用的方法show()，当在show()方法中x接受到了复制的值，再在show()方法中对x变量进行操作，这时只会影响到show中的x。当show方法执行完成，弹栈后，程序又回到main方法执行，main方法中的x值还是原来的值。</span><br></pre></td></tr></table></figure>
+<pre><code>* B.引用类型
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo</span> </span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> x ;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line"></span><br><span class="line">		Demo d = <span class="keyword">new</span> Demo();</span><br><span class="line">		d.x = <span class="number">5</span>;</span><br><span class="line">		show(d);</span><br><span class="line">		System.out.println(<span class="string">"x="</span>+d.x);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">(Demo d)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		d.x = <span class="number">6</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;	 </span><br><span class="line">当引用变量作为参数传递时，这时其实是将引用变量空间中的内存地址(引用)复制了一份传递给了show方法的d引用变量。这时会有两个引用同时指向堆中的同一个对象。当执行show方法中的d.x=<span class="number">6</span>时，会根据d所持有的引用找到堆中的对象，并将其x属性的值改为<span class="number">6</span>.show方法弹栈。</span><br><span class="line">由于是两个引用指向同一个对象，不管是哪一个引用改变了引用的所指向的对象的中的值，其他引用再次使用都是改变后的值。</span><br><span class="line"></span><br><span class="line">* C.结论</span><br><span class="line">* 对于基本类型形式参数改变不会影响到实际参数</span><br><span class="line">* 对于引用类型形式参数改变会影响到实际参数</span><br></pre></td></tr></table></figure>
+<p><img src="https://res.cloudinary.com/dpvywdzxv/image/upload/v1541058377/java/%E6%96%B9%E6%B3%95%E5%8F%82%E6%95%B0%E6%98%AF%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%BC%95%E7%94%A8%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.jpg" alt="方法调用的内存图"></p>
 <h3 id="02封装的概述"><a href="#02封装的概述" class="headerlink" title="02封装的概述"></a>02封装的概述</h3><pre><code>* A.面向对象三大特征
     * 封装、继承、多态
 * B.封装表现
@@ -673,110 +598,15 @@
     总结：机箱其实就是隐藏了办卡设备的细节，对外提供了插口以及开关等访问内部细节的方式。
 * B.总结
     * 机箱其实就是隐藏了办卡设备的细节，对外提供了插口以及开关等访问内部细节的方式
-</code></pre><h2 id="private-this关键字"><a href="#private-this关键字" class="headerlink" title="private,this关键字"></a>private,this关键字</h2><h3 id="private关键字"><a href="#private关键字" class="headerlink" title="private关键字"></a>private关键字</h3><pre><code>* A.private概述
-    * private可以修饰成员内容包括成员方法和成员变量
-    * 被private修饰的内容不能在其他类访问
-* B.使用步骤
-    * 1、通过private修饰属性
-* C.完整代码 
-    class Person {
-        private int age;
-        private String name;
-
-        public void show() {
-            System.out.println(&quot;age=&quot; + age + &quot;,name&quot; + name);
-        }
-    }
-</code></pre><h3 id="get和set方法"><a href="#get和set方法" class="headerlink" title="get和set方法"></a>get和set方法</h3><pre><code>* A.get和set方法
+</code></pre><h2 id="private-this关键字"><a href="#private-this关键字" class="headerlink" title="private,this关键字"></a>private,this关键字</h2><h3 id="private关键字"><a href="#private关键字" class="headerlink" title="private关键字"></a>private关键字</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">* A.<span class="keyword">private</span>概述</span><br><span class="line">	* <span class="keyword">private</span>可以修饰成员内容包括成员方法和成员变量</span><br><span class="line">	* 被<span class="keyword">private</span>修饰的内容不能在其他类访问</span><br><span class="line">* B.使用步骤</span><br><span class="line">	* <span class="number">1</span>、通过<span class="keyword">private</span>修饰属性</span><br><span class="line">* C.完整代码 </span><br><span class="line">	<span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">		<span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">		<span class="keyword">private</span> String name;</span><br><span class="line">	</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span> </span>&#123;</span><br><span class="line">			System.out.println(<span class="string">"age="</span> + age + <span class="string">",name"</span> + name);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="get和set方法"><a href="#get和set方法" class="headerlink" title="get和set方法"></a>get和set方法</h3><pre><code>* A.get和set方法
     * 年龄已被私有，错误的值无法赋值，可是正确的值也赋值不了，这样还是不行，那肿么办呢？按照之前所学习的封装的原理，隐藏后，还需要提供访问方式。只要对外提供可以访问的方法，让其他程序访问这些方法。同时在方法中可以对数据进行验证。
-</code></pre><p>一般对成员属性的访问动作：赋值(设置 set)，取值(获取 get)，因此对私有的变量访问的方式可以提供对应的 setXxx或者getXxx的方法。</p>
-<pre><code>class Person {
-    // 私有成员变量
-    private int age;
-    private String name;
-
-    // 对外提供设置成员变量的方法
-    public void setAge(int a) {
-        // 由于是设置成员变量的值，这里可以加入数据的验证
-        if (a &lt; 0 || a &gt; 130) {
-            System.out.println(a + &quot;不符合年龄的数据范围&quot;);
-            return;
-        }
-        age = a; 
-    }
-
-    // 对外提供访问成员变量的方法
-    public void getAge() {
-        return age;
-    }
-}
-* 总结
-    * 类中不需要对外提供的内容都私有化，包括属性和方法。
-</code></pre><p>以后再描述事物，属性都私有化，并提供setXxx getXxx方法对其进行访问</p>
-<pre><code>* 注意
-    * 私有仅仅是封装的体现形式而已
-</code></pre><h3 id="私有化Person类带get-set"><a href="#私有化Person类带get-set" class="headerlink" title="私有化Person类带get,set"></a>私有化Person类带get,set</h3><pre><code>* 标准代码
-    package cn.itcast.demo05;
-
-    /*
-     *   类描述人:
-     *     属性: 姓名和年龄
-     *     方法: 说话
-     *   
-     *   私有化所有的属性 (成员变量) ,必须写对应的get/set方法
-     *   凡是自定义的类,自定义成员变量,应该私有化,提供get/set
-     *   
-     *   this关键字:
-     *     区分成员变量和局部变量同名情况
-     *     方法中,方位成员变量,写this.
-     */
-    public class Person {
-        private String name;
-        private int age;
-
-        // set方法,变量name,age赋值
-        public void setAge(int age) {
-            this.age = age;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        // get方法,变量name,age获取值
-        public int getAge() {
-            return age;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void speak() {
-            String  name = &quot;哈哈&quot;;
-            int age = 16;
-
-            System.out.println(&quot;人在说话  &quot; + this.name + &quot;...&quot; + this.age);
-        }
-    }
-* 标准测试代码
-    package cn.itcast.demo05;
-
-    public class PersonTest {
-        public static void main(String[] args) {
-            Person p = new Person();
-            //调用set方法,对成员变量赋值
-            p.setAge(18);
-            p.setName(&quot;旺财&quot;);
-            p.speak();
-
-
-            //调用get方法,获取成员变量的值
-    //        System.out.println(p.getName());
-    //        System.out.println(p.getAge());
-        }
-    }
-</code></pre><h3 id="this关键字-区分成员变量和局部变量的同名"><a href="#this关键字-区分成员变量和局部变量的同名" class="headerlink" title="this关键字_区分成员变量和局部变量的同名"></a>this关键字_区分成员变量和局部变量的同名</h3><pre><code>* A.什么时候用
+</code></pre><p>一般对成员属性的访问动作：赋值(设置 set)，取值(获取 get)，因此对私有的变量访问的方式可以提供对应的 setXxx或者getXxx的方法。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">	<span class="comment">// 私有成员变量</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">	<span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 对外提供设置成员变量的方法</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// 由于是设置成员变量的值，这里可以加入数据的验证</span></span><br><span class="line">		<span class="keyword">if</span> (a &lt; <span class="number">0</span> || a &gt; <span class="number">130</span>) &#123;</span><br><span class="line">			System.out.println(a + <span class="string">"不符合年龄的数据范围"</span>);</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		age = a; </span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 对外提供访问成员变量的方法</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> age;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">* 总结</span><br><span class="line">	* 类中不需要对外提供的内容都私有化，包括属性和方法。</span><br><span class="line">以后再描述事物，属性都私有化，并提供setXxx getXxx方法对其进行访问</span><br><span class="line">* 注意</span><br><span class="line">	* 私有仅仅是封装的体现形式而已</span><br></pre></td></tr></table></figure></p>
+<h3 id="私有化Person类带get-set"><a href="#私有化Person类带get-set" class="headerlink" title="私有化Person类带get,set"></a>私有化Person类带get,set</h3><pre><code>* 标准代码
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.demo05;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *   类描述人:</span></span><br><span class="line"><span class="comment"> *     属性: 姓名和年龄</span></span><br><span class="line"><span class="comment"> *     方法: 说话</span></span><br><span class="line"><span class="comment"> *   </span></span><br><span class="line"><span class="comment"> *   私有化所有的属性 (成员变量) ,必须写对应的get/set方法</span></span><br><span class="line"><span class="comment"> *   凡是自定义的类,自定义成员变量,应该私有化,提供get/set</span></span><br><span class="line"><span class="comment"> *   </span></span><br><span class="line"><span class="comment"> *   this关键字:</span></span><br><span class="line"><span class="comment"> *     区分成员变量和局部变量同名情况</span></span><br><span class="line"><span class="comment"> *     方法中,方位成员变量,写this.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> String name;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// set方法,变量name,age赋值</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.age = age;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.name = name;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// get方法,变量name,age获取值</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> age;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> name;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">speak</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		String  name = <span class="string">"哈哈"</span>;</span><br><span class="line">		<span class="keyword">int</span> age = <span class="number">16</span>;</span><br><span class="line">		</span><br><span class="line">		System.out.println(<span class="string">"人在说话  "</span> + <span class="keyword">this</span>.name + <span class="string">"..."</span> + <span class="keyword">this</span>.age);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>* 标准测试代码
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.demo05;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PersonTest</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		Person p = <span class="keyword">new</span> Person();</span><br><span class="line">		<span class="comment">//调用set方法,对成员变量赋值</span></span><br><span class="line">		p.setAge(<span class="number">18</span>);</span><br><span class="line">		p.setName(<span class="string">"旺财"</span>);</span><br><span class="line">		p.speak();</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//调用get方法,获取成员变量的值</span></span><br><span class="line"><span class="comment">//		System.out.println(p.getName());</span></span><br><span class="line"><span class="comment">//		System.out.println(p.getAge());</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="this关键字-区分成员变量和局部变量的同名"><a href="#this关键字-区分成员变量和局部变量的同名" class="headerlink" title="this关键字_区分成员变量和局部变量的同名"></a>this关键字_区分成员变量和局部变量的同名</h3><pre><code>* A.什么时候用
     * 当类中存在成员变量和局部变量同名的时候为了区分，就需要使用this关键字
 * B.代码
     class Person {
@@ -800,128 +630,17 @@
 </code></pre><p><img src="https://res.cloudinary.com/dpvywdzxv/image/upload/v1541058375/java/this%E5%86%85%E5%AD%98%E5%9B%BE.jpg" alt="方法调用的内存图"></p>
 <h3 id="this的年龄比较"><a href="#this的年龄比较" class="headerlink" title="this的年龄比较"></a>this的年龄比较</h3><pre><code>* A.需求：在Person类中定义功能，判断两个人是否是同龄人
 * B.代码
-    class Person {
-        private int age;
-        private String name;
-
-        public int getAge() {
-            return age;
-        }
-
-        public void setAge(int age) {
-            this.age = age;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public void speak() {
-            System.out.println(&quot;name=&quot; + this.name + &quot;,age=&quot; + this.age);
-        }
-
-        // 判断是否为同龄人
-        public boolean equalsAge(Person p) {
-            // 使用当前调用该equalsAge方法对象的age和传递进来p的age进行比较
-            // 由于无法确定具体是哪一个对象调用equalsAge方法，这里就可以使用this来代替
-            /*
-             * if(this.age == p.age) { return true; } return false;
-             */
-            return this.age == p.age;
-        }
-    }
-</code></pre><p><img src="https://res.cloudinary.com/dpvywdzxv/image/upload/v1541058375/java/this%E4%BD%BF%E7%94%A8-%E5%B9%B4%E9%BE%84%E6%AF%94%E8%BE%83.jpg" alt="方法调用的内存图 "></p>
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">	<span class="keyword">private</span> String name;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> age;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.age = age;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> name;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.name = name;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">speak</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"name="</span> + <span class="keyword">this</span>.name + <span class="string">",age="</span> + <span class="keyword">this</span>.age);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 判断是否为同龄人</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equalsAge</span><span class="params">(Person p)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// 使用当前调用该equalsAge方法对象的age和传递进来p的age进行比较</span></span><br><span class="line">		<span class="comment">// 由于无法确定具体是哪一个对象调用equalsAge方法，这里就可以使用this来代替</span></span><br><span class="line">		<span class="comment">/*</span></span><br><span class="line"><span class="comment">		 * if(this.age == p.age) &#123; return true; &#125; return false;</span></span><br><span class="line"><span class="comment">		 */</span></span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">this</span>.age == p.age;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://res.cloudinary.com/dpvywdzxv/image/upload/v1541058375/java/this%E4%BD%BF%E7%94%A8-%E5%B9%B4%E9%BE%84%E6%AF%94%E8%BE%83.jpg" alt="方法调用的内存图 "></p>
 <h2 id="随机点名器"><a href="#随机点名器" class="headerlink" title="随机点名器"></a>随机点名器</h2><h3 id="随机点名器案例重构"><a href="#随机点名器案例重构" class="headerlink" title="随机点名器案例重构"></a>随机点名器案例重构</h3><pre><code>* A.需求：随机点名器，即在全班同学中随机的找出一名同学，打印这名同学的个人信息
     它具备以下3个内容：
     存储所有同学姓名
     总览全班同学姓名
     随机点名其中一人，打印到控制台
 * B.代码
-    import java.util.ArrayList;
-    import java.util.Random;
-    import java.util.Scanner;
-
-    /**
-     * 思路：
-     * 第一步：存储全班同学信息
-     * 第二步：打印全班同学每一个人的信息
-     * 第三部：随机对学生点名，打印学生信息
-     */
-    public class Test {
-        public static void main(String[] args) {
-            ArrayList&lt;Student&gt; list = new ArrayList&lt;Student&gt;(); //1.1创建一个可以存储多个同学名字的容器
-             //1.存储全班同学信息
-            addStudent(list);
-             //2.打印全班同学每一个人的信息（姓名、年龄）
-            printStudent(list);
-             //3.随机对学生点名，打印学生信息
-            randomStudent(list);
-        }
-        public static void addStudent(ArrayList&lt;Student&gt; list) {
-            //键盘输入多个同学名字存储到容器中
-            Scanner sc = new Scanner(System.in);
-            for (int i = 0; i &lt; 3; i++) {
-                //创建学生
-                Student s = new Student();
-                System.out.println(&quot;存储第&quot;+i+&quot;个学生姓名：&quot;);
-                String name = sc.next();
-                s.setName(name);
-                System.out.println(&quot;存储第&quot;+i+&quot;个学生年龄：&quot;);
-                int age = sc.nextInt();
-                s.setAge(age);
-                //添加学生到集合
-                list.add(s);
-            }
-        }
-        /**
-         2.打印全班同学每一个人的信息（姓名、年龄）
-         */
-        public static void printStudent (ArrayList&lt;Student&gt; list) {
-            for (int i = 0; i &lt; list.size(); i++) {
-                Student s = list.get(i);
-                System.out.println(&quot;姓名：&quot;+s.getName() +&quot;,年龄：&quot;+s.getAge());
-            }
-        }
-        /**
-         3.随机对学生点名，打印学生信息
-         */
-        public static void randomStudent (ArrayList&lt;Student&gt; list) {
-            //在班级总人数范围内，随机产生一个随机数
-            int index = new Random().nextInt(list.size());
-            //在容器（ArrayList集合）中，查找该随机数所对应的同学信息（姓名、年龄）
-            Student s = list.get(index);
-            System.out.println(&quot;被随机点名的同学：&quot;+s.getName() + &quot;，年龄:&quot; + s.getAge());
-        }
-    }
-
-    /**
-     * 学生信息类
-     */
-    public class Student {
-        private String name; // 姓名
-        private int age; // 年龄
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public int getAge() {
-            return age;
-        }
-
-        public void setAge(int age) {
-            this.age = age;
-        }
-    }    
-</code></pre><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">* A.类与对象</span><br><span class="line">	* 类，用于描述多个对象的共同特征，它是对象的模板。</span><br><span class="line">	* 对象，用于描述现实中的个体，它是类的实例。</span><br><span class="line">	* 类的定义：使用关键字class来定义java中的类</span><br><span class="line">	* 格式：</span><br><span class="line">	*		class 类名 &#123;</span><br><span class="line">	*			//属性</span><br><span class="line">	*			数据类型 变量名;</span><br><span class="line">	*			…</span><br><span class="line">	*			//方法</span><br><span class="line">	*			修饰符 返回值类型 方法名(参数)&#123;   &#125;</span><br><span class="line">	*			…</span><br><span class="line">	*		&#125;</span><br><span class="line">	*		</span><br><span class="line">* B.创建对象：</span><br><span class="line">	* 格式：</span><br><span class="line">	* 类名 对象名 = new 类名();</span><br><span class="line"></span><br><span class="line">* C.封装（private关键字）</span><br><span class="line">	* 封装，把对象的属性与方法的实现细节隐藏，仅对外提供一些公共的访问方式</span><br><span class="line">	* 封装的体现：</span><br><span class="line">	* 变量:使用 private 修饰，这就是变量的封装</span><br><span class="line">	* 方法:也是一种封装，封装了多条代码</span><br><span class="line">	* 类： 也是一种封装，封装了多个方法</span><br><span class="line">* D.private关键字，私有的意思</span><br><span class="line">	* 它可以用来修饰类中的成员(成员变量，成员方法)</span><br><span class="line">	* private的特点：</span><br><span class="line">	* private修饰的成员只能在当前类中访问，其他类中无法直接访问</span><br><span class="line">* E.this关键字</span><br><span class="line">	* this关键字，本类对象的引用</span><br><span class="line">	* this是在方法中使用的，哪个对象调用了该方法，那么，this就代表调用该方法的对象引用</span><br><span class="line">	* this什么时候存在的？当创建对象的时候，this存在的</span><br><span class="line">	* this的作用：用来区别同名的成员变量与局部变量（this.成员变量）</span><br><span class="line">	* public void setName(String name) &#123;</span><br><span class="line">	* 	this.name = name;</span><br><span class="line">	* &#125;</span><br></pre></td></tr></table></figure>
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Random;</span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 思路：</span></span><br><span class="line"><span class="comment"> * 第一步：存储全班同学信息</span></span><br><span class="line"><span class="comment"> * 第二步：打印全班同学每一个人的信息</span></span><br><span class="line"><span class="comment"> * 第三部：随机对学生点名，打印学生信息</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		ArrayList&lt;Student&gt; list = <span class="keyword">new</span> ArrayList&lt;Student&gt;(); <span class="comment">//1.1创建一个可以存储多个同学名字的容器</span></span><br><span class="line">		 <span class="comment">//1.存储全班同学信息</span></span><br><span class="line">		addStudent(list);</span><br><span class="line">		 <span class="comment">//2.打印全班同学每一个人的信息（姓名、年龄）</span></span><br><span class="line">		printStudent(list);</span><br><span class="line">		 <span class="comment">//3.随机对学生点名，打印学生信息</span></span><br><span class="line">		randomStudent(list);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">addStudent</span><span class="params">(ArrayList&lt;Student&gt; list)</span> </span>&#123;</span><br><span class="line">		<span class="comment">//键盘输入多个同学名字存储到容器中</span></span><br><span class="line">		Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</span><br><span class="line">			<span class="comment">//创建学生</span></span><br><span class="line">			Student s = <span class="keyword">new</span> Student();</span><br><span class="line">			System.out.println(<span class="string">"存储第"</span>+i+<span class="string">"个学生姓名："</span>);</span><br><span class="line">			String name = sc.next();</span><br><span class="line">			s.setName(name);</span><br><span class="line">			System.out.println(<span class="string">"存储第"</span>+i+<span class="string">"个学生年龄："</span>);</span><br><span class="line">			<span class="keyword">int</span> age = sc.nextInt();</span><br><span class="line">			s.setAge(age);</span><br><span class="line">			<span class="comment">//添加学生到集合</span></span><br><span class="line">			list.add(s);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 2.打印全班同学每一个人的信息（姓名、年龄）</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printStudent</span> <span class="params">(ArrayList&lt;Student&gt; list)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; list.size(); i++) &#123;</span><br><span class="line">			Student s = list.get(i);</span><br><span class="line">			System.out.println(<span class="string">"姓名："</span>+s.getName() +<span class="string">",年龄："</span>+s.getAge());</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 3.随机对学生点名，打印学生信息</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">randomStudent</span> <span class="params">(ArrayList&lt;Student&gt; list)</span> </span>&#123;</span><br><span class="line">		<span class="comment">//在班级总人数范围内，随机产生一个随机数</span></span><br><span class="line">		<span class="keyword">int</span> index = <span class="keyword">new</span> Random().nextInt(list.size());</span><br><span class="line">		<span class="comment">//在容器（ArrayList集合）中，查找该随机数所对应的同学信息（姓名、年龄）</span></span><br><span class="line">		Student s = list.get(index);</span><br><span class="line">		System.out.println(<span class="string">"被随机点名的同学："</span>+s.getName() + <span class="string">"，年龄:"</span> + s.getAge());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 学生信息类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> String name; <span class="comment">// 姓名</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> age; <span class="comment">// 年龄</span></span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> name;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.name = name;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> age;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.age = age;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">* A.类与对象</span><br><span class="line">	* 类，用于描述多个对象的共同特征，它是对象的模板。</span><br><span class="line">	* 对象，用于描述现实中的个体，它是类的实例。</span><br><span class="line">	* 类的定义：使用关键字<span class="class"><span class="keyword">class</span>来定义<span class="title">java</span>中的类</span></span><br><span class="line"><span class="class">	* 格式：</span></span><br><span class="line"><span class="class">	*		<span class="title">class</span> 类名 </span>&#123;</span><br><span class="line">	*			<span class="comment">//属性</span></span><br><span class="line">	*			数据类型 变量名;</span><br><span class="line">	*			…</span><br><span class="line">	*			<span class="comment">//方法</span></span><br><span class="line">	*			修饰符 返回值类型 方法名(参数)&#123;   &#125;</span><br><span class="line">	*			…</span><br><span class="line">	*		&#125;</span><br><span class="line">	*		</span><br><span class="line">* B.创建对象：</span><br><span class="line">	* 格式：</span><br><span class="line">	* 类名 对象名 = <span class="keyword">new</span> 类名();</span><br><span class="line"></span><br><span class="line">* C.封装（<span class="keyword">private</span>关键字）</span><br><span class="line">	* 封装，把对象的属性与方法的实现细节隐藏，仅对外提供一些公共的访问方式</span><br><span class="line">	* 封装的体现：</span><br><span class="line">	* 变量:使用 <span class="keyword">private</span> 修饰，这就是变量的封装</span><br><span class="line">	* 方法:也是一种封装，封装了多条代码</span><br><span class="line">	* 类： 也是一种封装，封装了多个方法</span><br><span class="line">* D.<span class="keyword">private</span>关键字，私有的意思</span><br><span class="line">	* 它可以用来修饰类中的成员(成员变量，成员方法)</span><br><span class="line">	* <span class="keyword">private</span>的特点：</span><br><span class="line">	* <span class="keyword">private</span>修饰的成员只能在当前类中访问，其他类中无法直接访问</span><br><span class="line">* E.<span class="keyword">this</span>关键字</span><br><span class="line">	* <span class="keyword">this</span>关键字，本类对象的引用</span><br><span class="line">	* <span class="keyword">this</span>是在方法中使用的，哪个对象调用了该方法，那么，<span class="keyword">this</span>就代表调用该方法的对象引用</span><br><span class="line">	* <span class="keyword">this</span>什么时候存在的？当创建对象的时候，<span class="keyword">this</span>存在的</span><br><span class="line">	* <span class="keyword">this</span>的作用：用来区别同名的成员变量与局部变量（<span class="keyword">this</span>.成员变量）</span><br><span class="line">	* <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">	* 	<span class="keyword">this</span>.name = name;</span><br><span class="line">	* &#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 

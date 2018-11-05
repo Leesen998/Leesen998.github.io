@@ -95,7 +95,7 @@
   
     
     
-    <link href="https://fonts.cat.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.cat.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
   
 
 
@@ -168,7 +168,7 @@
 <meta property="og:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1540864054/java/photo-1540543144-2570163afee1.jpg">
 <meta property="og:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1540864297/java/%E5%AF%B9%E8%B1%A1%E5%86%85%E5%AD%98%E5%9B%BE.jpg">
 <meta property="og:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1540864298/java/%E4%B8%A4%E4%B8%AA%E5%BC%95%E7%94%A8%E5%8F%98%E9%87%8F%E5%86%85%E5%AD%98%E5%9B%BE.jpg">
-<meta property="og:updated_time" content="2018-10-30T02:07:09.919Z">
+<meta property="og:updated_time" content="2018-11-05T08:21:41.219Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java学习笔记——基础6">
 <meta name="twitter:description" content="1、自定义类型的定义及使用2、自定义类的内存图3、ArrayList集合的基本功能4、随机点名器案例及库存案例代码优化">
@@ -520,131 +520,24 @@
         * 方法: 这个事物具备的功能。
         * 属性: 这个事物具备的特征。
     * c: 格式
-        public class 类名{
-            属性定义
-              修饰符 数据类型 变量名 = 值
-
-            方法定义
-              修饰符 返回值类型  方法名(参数列表){
-
-              }
-        }
-</code></pre><h3 id="04自定义的手机类"><a href="#04自定义的手机类" class="headerlink" title="04自定义的手机类"></a>04自定义的手机类</h3><pre><code>* A: 自定义的手机类
-    * a: 案例代码
-        public class Phone{
-            /*
-                定义手机的属性
-            */
-            String color ;
-            String brand ;
-            double size ; 
-        }
-</code></pre><h3 id="05测试手机类"><a href="#05测试手机类" class="headerlink" title="05测试手机类"></a>05测试手机类</h3><p>导包：我们将所有的类放到同一个文件夹下，可以避免导包。</p>
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> 类名</span>&#123;</span><br><span class="line">	属性定义</span><br><span class="line">	  修饰符 数据类型 变量名 = 值</span><br><span class="line">	</span><br><span class="line">	方法定义</span><br><span class="line">	  修饰符 返回值类型  方法名(参数列表)&#123;</span><br><span class="line">		  </span><br><span class="line">	  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="04自定义的手机类"><a href="#04自定义的手机类" class="headerlink" title="04自定义的手机类"></a>04自定义的手机类</h3><pre><code>* A: 自定义的手机类
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">* a: 案例代码</span><br><span class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Phone</span></span>&#123;</span><br><span class="line">		<span class="comment">/*</span></span><br><span class="line"><span class="comment">		    定义手机的属性</span></span><br><span class="line"><span class="comment">		*/</span></span><br><span class="line">		String color ;</span><br><span class="line">		String brand ;</span><br><span class="line">		<span class="keyword">double</span> size ; </span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="05测试手机类"><a href="#05测试手机类" class="headerlink" title="05测试手机类"></a>05测试手机类</h3><p>导包：我们将所有的类放到同一个文件夹下，可以避免导包。</p>
 <p>创建对象：数据类型  变量名 = new 数据类型();</p>
-<p>调用方法：目前我们定义的自定义类不涉及方法，只是属性（自定义类中的方法部分在面向对象部分讲解）<br>访问属性：变量名.属性 (这是当前的方式，后期会采取调用方法的方式替代掉直接访问的方式来完成对属性的访问。)</p>
-<pre><code>* A: 调用方法执行流程
-    * a: 实现引用类型的步骤
-        * 1: 导入包 , 类都是在同一个文件夹,不需要导入包
-        * 2: 创建引用类型的变量
-        * 3: 变量.类型中的功能
-    * b: 案例代码
-        public class TestPhone{
-            public static void main(String[] args){
-                // 2: 创建引用类型的变量
-                Phone p = new Phone();
-                //System.out.println(p);  //输出内存的地址
-
-                 //3: 变量.类型中的功能
-                //变量 p.的方式,调用类中的属性
-                //属性就是变量 , 赋值和获取值
-                p.color = &quot;土豪金&quot;;
-                p.brand = &quot;爱立信&quot;;
-                p.size = 5.0;
-
-                //获取属性值
-                System.out.println(p.color+&quot;  &quot;+p.brand+&quot;  &quot;+p.size);
-            }
-        }
-</code></pre><h3 id="06自定义类的内存图-1"><a href="#06自定义类的内存图-1" class="headerlink" title="06自定义类的内存图_1"></a>06自定义类的内存图_1</h3><pre><code>* A: 自定义类的内存图_1
+<p>调用方法：目前我们定义的自定义类不涉及方法，只是属性（自定义类中的方法部分在面向对象部分讲解）<br>访问属性：变量名.属性 (这是当前的方式，后期会采取调用方法的方式替代掉直接访问的方式来完成对属性的访问。)<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">* A: 调用方法执行流程</span><br><span class="line">* a: 实现引用类型的步骤</span><br><span class="line">	* <span class="number">1</span>: 导入包 , 类都是在同一个文件夹,不需要导入包</span><br><span class="line">	* <span class="number">2</span>: 创建引用类型的变量</span><br><span class="line">	* <span class="number">3</span>: 变量.类型中的功能</span><br><span class="line">* b: 案例代码</span><br><span class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestPhone</span></span>&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">			<span class="comment">// 2: 创建引用类型的变量</span></span><br><span class="line">			Phone p = <span class="keyword">new</span> Phone();</span><br><span class="line">			<span class="comment">//System.out.println(p);  //输出内存的地址</span></span><br><span class="line">		</span><br><span class="line">	     	<span class="comment">//3: 变量.类型中的功能</span></span><br><span class="line">			<span class="comment">//变量 p.的方式,调用类中的属性</span></span><br><span class="line">			<span class="comment">//属性就是变量 , 赋值和获取值</span></span><br><span class="line">			p.color = <span class="string">"土豪金"</span>;</span><br><span class="line">			p.brand = <span class="string">"爱立信"</span>;</span><br><span class="line">			p.size = <span class="number">5.0</span>;</span><br><span class="line">			</span><br><span class="line">			<span class="comment">//获取属性值</span></span><br><span class="line">			System.out.println(p.color+<span class="string">"  "</span>+p.brand+<span class="string">"  "</span>+p.size);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="06自定义类的内存图-1"><a href="#06自定义类的内存图-1" class="headerlink" title="06自定义类的内存图_1"></a>06自定义类的内存图_1</h3><pre><code>* A: 自定义类的内存图_1
 </code></pre><p><img src="https://res.cloudinary.com/dpvywdzxv/image/upload/v1540864297/java/%E5%AF%B9%E8%B1%A1%E5%86%85%E5%AD%98%E5%9B%BE.jpg" alt="方法调用的内存图"></p>
 <h3 id="07自定义类的内存图-2"><a href="#07自定义类的内存图-2" class="headerlink" title="07自定义类的内存图_2"></a>07自定义类的内存图_2</h3><pre><code>* A: 自定义类的内存图_1
 </code></pre><h3 id="08两个引用类型变量内存图"><a href="#08两个引用类型变量内存图" class="headerlink" title="08两个引用类型变量内存图"></a>08两个引用类型变量内存图</h3><pre><code>* A: 自定义类的内存图_1
 </code></pre><p>   <img src="https://res.cloudinary.com/dpvywdzxv/image/upload/v1540864298/java/%E4%B8%A4%E4%B8%AA%E5%BC%95%E7%94%A8%E5%8F%98%E9%87%8F%E5%86%85%E5%AD%98%E5%9B%BE.jpg" alt="方法调用的内存图"></p>
 <h3 id="09自定义类的练习"><a href="#09自定义类的练习" class="headerlink" title="09自定义类的练习"></a>09自定义类的练习</h3><pre><code>* A: 实体类的代码
-    /*
-        电饭锅，包含属性（品牌、容量大小、颜色等）
-        定义类,描述事物,电饭锅
-          属性: 品牌,大小 ,颜色
-
-        定义类,类名字,电饭锅
-        类的范围,定义三个属性
-    */
-    public class DianFanGuo{
-        //定义三个属性
-        String brand ;
-        double size ;
-        String color ;
-    }
-
-    /*
-       汽车，包含属性（品牌、排量、类型等）
-       定义类,类名 Car
-         属性 品牌 排量 类型
-     */
-    public class Car{
-        //定义汽车三个属性
-        String brand ;
-        double paiLiang ;
-        String type;
-    }
-
-     /*
-       学生，包含属性（姓名，年龄，性别等）
-       定义类,类名Student
-         三个属性: 姓名,年龄,性别 (char)
-    */
-    public class Student{
-        String name;
-        int age ;
-        char sex ;
-    }
-
-* B: 测试类的代码
-    /*
-       定义的测试类
-       同时测试,电饭锅,汽车,学生
-    */
-    public class Test{
-        public static void main(String[] args){
-            //创建电饭锅引用类型
-            DianFanGuo dfg = new DianFanGuo();
-
-            dfg.brand = &quot;特斯拉&quot;;
-            dfg.color = &quot;红色&quot;;
-            dfg.size = 30;
-
-            System.out.println(dfg.brand+&quot;  &quot;+dfg.color+&quot;  &quot;+dfg.size);
-
-            //创建汽车引用类型
-            Car c = new Car();
-            c.brand = &quot;巨力&quot;;
-            c.type = &quot;拖拉机&quot;;
-            c.paiLiang = 0.5;
-
-            System.out.println(c.brand+&quot;  &quot;+c.type+&quot;  &quot;+c.paiLiang);
-
-            //创建学生引用类型
-            Student stu = new Student();
-            stu.name = &quot;张三&quot;;
-            stu.age = 20;
-            stu.sex = &apos;男&apos;;
-            System.out.println(stu.name+&quot;  &quot;+stu.age+&quot;  &quot;+stu.sex);
-
-        }
-    }
-</code></pre><h3 id="10ArrayList创建变量的步骤"><a href="#10ArrayList创建变量的步骤" class="headerlink" title="10ArrayList创建变量的步骤"></a>10ArrayList创建变量的步骤</h3><p>为了保存这些数目不确定的元素，JDK中提供了一系列特殊的类，这些类可以存储任意类型的元素，并且长度可变，统称为集合。在这里，我们先介绍ArrayList集合.<br>导包：import java.util.ArrayList;</p>
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    电饭锅，包含属性（品牌、容量大小、颜色等）</span></span><br><span class="line"><span class="comment">	定义类,描述事物,电饭锅</span></span><br><span class="line"><span class="comment">	  属性: 品牌,大小 ,颜色</span></span><br><span class="line"><span class="comment">	</span></span><br><span class="line"><span class="comment">	定义类,类名字,电饭锅</span></span><br><span class="line"><span class="comment">	类的范围,定义三个属性</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DianFanGuo</span></span>&#123;</span><br><span class="line">	<span class="comment">//定义三个属性</span></span><br><span class="line">	String brand ;</span><br><span class="line">    <span class="keyword">double</span> size ;</span><br><span class="line">	String color ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">   汽车，包含属性（品牌、排量、类型等）</span></span><br><span class="line"><span class="comment">   定义类,类名 Car</span></span><br><span class="line"><span class="comment">     属性 品牌 排量 类型</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Car</span></span>&#123;</span><br><span class="line">	<span class="comment">//定义汽车三个属性</span></span><br><span class="line">	String brand ;</span><br><span class="line">	<span class="keyword">double</span> paiLiang ;</span><br><span class="line">	String type;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> <span class="comment">/*</span></span><br><span class="line"><span class="comment">   学生，包含属性（姓名，年龄，性别等）</span></span><br><span class="line"><span class="comment">   定义类,类名Student</span></span><br><span class="line"><span class="comment">     三个属性: 姓名,年龄,性别 (char)</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span></span>&#123;</span><br><span class="line">	String name;</span><br><span class="line">	<span class="keyword">int</span> age ;</span><br><span class="line">	<span class="keyword">char</span> sex ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>* B: 测试类的代码
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">   定义的测试类</span></span><br><span class="line"><span class="comment">   同时测试,电饭锅,汽车,学生</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">		<span class="comment">//创建电饭锅引用类型</span></span><br><span class="line">		DianFanGuo dfg = <span class="keyword">new</span> DianFanGuo();</span><br><span class="line">		</span><br><span class="line">		dfg.brand = <span class="string">"特斯拉"</span>;</span><br><span class="line">		dfg.color = <span class="string">"红色"</span>;</span><br><span class="line">		dfg.size = <span class="number">30</span>;</span><br><span class="line">		</span><br><span class="line">		System.out.println(dfg.brand+<span class="string">"  "</span>+dfg.color+<span class="string">"  "</span>+dfg.size);</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//创建汽车引用类型</span></span><br><span class="line">		Car c = <span class="keyword">new</span> Car();</span><br><span class="line">		c.brand = <span class="string">"巨力"</span>;</span><br><span class="line">		c.type = <span class="string">"拖拉机"</span>;</span><br><span class="line">		c.paiLiang = <span class="number">0.5</span>;</span><br><span class="line">		</span><br><span class="line">		System.out.println(c.brand+<span class="string">"  "</span>+c.type+<span class="string">"  "</span>+c.paiLiang);</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//创建学生引用类型</span></span><br><span class="line">		Student stu = <span class="keyword">new</span> Student();</span><br><span class="line">		stu.name = <span class="string">"张三"</span>;</span><br><span class="line">		stu.age = <span class="number">20</span>;</span><br><span class="line">		stu.sex = <span class="string">'男'</span>;</span><br><span class="line">		System.out.println(stu.name+<span class="string">"  "</span>+stu.age+<span class="string">"  "</span>+stu.sex);</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="10ArrayList创建变量的步骤"><a href="#10ArrayList创建变量的步骤" class="headerlink" title="10ArrayList创建变量的步骤"></a>10ArrayList创建变量的步骤</h3><p>为了保存这些数目不确定的元素，JDK中提供了一系列特殊的类，这些类可以存储任意类型的元素，并且长度可变，统称为集合。在这里，我们先介绍ArrayList集合.<br>导包：import java.util.ArrayList;</p>
 <p><font color="#DD66" size=""> 创建对象：与其他普通的引用数据类型创建方式完全相同，但是要指定容器中存储的数据类型：</font></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;要存储元素的数据类型&gt;  变量名  =  new  ArrayList&lt;要存储元素的数据类型&gt;();</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;要存储元素的数据类型&gt;  变量名  =  <span class="keyword">new</span>  ArrayList&lt;要存储元素的数据类型&gt;();</span><br></pre></td></tr></table></figure>
 <pre><code>* A: ArrayList创建变量的步骤
     * a: 导入包 java.util包中
     * b: 创建引用类型的变量
@@ -656,110 +549,46 @@
          存储引用类型,不存储基本类型
 </code></pre><p><font color="#DD66" size=""><br>“&lt;要存储元素的数据类型&gt;”中的数据类型必须是【引用数据类型】，不能是基本数据类型；<br></font><br>下面给出8种基本数据类型所对应的引用数据类型表示形式:</p>
 <pre><code>基本数据类型        对应的引用数据类型表示形式
-</code></pre><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">byte		Byte</span><br><span class="line">short		Short</span><br><span class="line">Int		Integer</span><br><span class="line">long		Long</span><br><span class="line"><span class="built_in">float</span>		Float</span><br><span class="line">double		Double</span><br><span class="line">char		Character</span><br><span class="line">boolean		Boolean</span><br></pre></td></tr></table></figure>
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">byte</span>		Byte</span><br><span class="line"><span class="keyword">short</span>		Short</span><br><span class="line">Int		Integer</span><br><span class="line"><span class="keyword">long</span>		Long</span><br><span class="line"><span class="keyword">float</span>		Float</span><br><span class="line"><span class="keyword">double</span>		Double</span><br><span class="line"><span class="keyword">char</span>		Character</span><br><span class="line"><span class="keyword">boolean</span>		Boolean</span><br></pre></td></tr></table></figure>
 <h3 id="11ArrayList创建变量举例"><a href="#11ArrayList创建变量举例" class="headerlink" title="11ArrayList创建变量举例"></a>11ArrayList创建变量举例</h3><pre><code>* A: ArrayList创建变量的示例代码
-    import java.util.ArrayList;
-    public class ArrayListDemo{
-        public static void main(String[] args){
-            //创建集合容器,指定存储的数据类型
-            //存储字符串
-            ArrayList&lt;String&gt; array = new ArrayList&lt;String&gt;();
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayListDemo</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">		<span class="comment">//创建集合容器,指定存储的数据类型</span></span><br><span class="line">		<span class="comment">//存储字符串</span></span><br><span class="line">		ArrayList&lt;String&gt; array = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//创建集合容器,存储整数</span></span><br><span class="line">		ArrayList&lt;Integer&gt; array2 = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//创建集合容器,存储手机类型</span></span><br><span class="line">		ArrayList&lt;Phone&gt; array3 = <span class="keyword">new</span> ArrayList&lt;Phone&gt;();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="12ArrayList的常见方法"><a href="#12ArrayList的常见方法" class="headerlink" title="12ArrayList的常见方法"></a>12ArrayList的常见方法</h3><pre><code>* A: ArrayList的常见方法
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">* a: add(参数) 向集合中添加元素</span><br><span class="line">* b: get(<span class="keyword">int</span> index) 取出集合中的元素,get方法的参数,写入索引</span><br><span class="line">* c: size() 返回集合的长度, 集合存储元素的个数</span><br></pre></td></tr></table></figure>
+<pre><code>* B: 案例代码
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayListDemo_1</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">		<span class="comment">//定义集合,存储字符串元素</span></span><br><span class="line">		ArrayList&lt;String&gt; array = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">		<span class="comment">//调用集合方法add存储元素</span></span><br><span class="line">		array.add(<span class="string">"abc"</span>);</span><br><span class="line">		array.add(<span class="string">"itcast"</span>);</span><br><span class="line">	    array.add(<span class="string">"love"</span>);</span><br><span class="line">		array.add(<span class="string">"java"</span>);</span><br><span class="line">		<span class="comment">//输出集合的长度,调用集合方法size, size方法的返回值类型 int</span></span><br><span class="line">		<span class="keyword">int</span> size = array.size();</span><br><span class="line">		System.out.println(size);</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//获取出集合中的一个元素,获取1索引的元素</span></span><br><span class="line">		<span class="comment">//集合的方法get, 获取元素后结果数据类型</span></span><br><span class="line">		String s = array.get(<span class="number">1</span>);</span><br><span class="line">		System.out.println(s);</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		System.out.println(array.get(<span class="number">0</span>));</span><br><span class="line">		System.out.println(array.get(<span class="number">1</span>));</span><br><span class="line">		System.out.println(array.get(<span class="number">2</span>));</span><br><span class="line">		System.out.println(array.get(<span class="number">3</span>));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="13ArrayList集合的遍历"><a href="#13ArrayList集合的遍历" class="headerlink" title="13ArrayList集合的遍历"></a>13ArrayList集合的遍历</h3><pre><code>* A: 案例代码
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">   集合的遍历</span></span><br><span class="line"><span class="comment">   实现思想也是索引思想</span></span><br><span class="line"><span class="comment">   集合的索引从0开始,到 size()-1</span></span><br><span class="line"><span class="comment">   方法get(int index)</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayListDemo_2</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">		ArrayList&lt;Integer&gt; array = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</span><br><span class="line">		array.add(<span class="number">121</span>);</span><br><span class="line">		array.add(<span class="number">125</span>);</span><br><span class="line">		array.add(<span class="number">123</span>);</span><br><span class="line">		array.add(<span class="number">120</span>);</span><br><span class="line">		array.add(<span class="number">128</span>);</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//对集合进行遍历</span></span><br><span class="line">		<span class="comment">//使用方法 size+get组合进行遍历</span></span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; array.size(); i++)&#123;</span><br><span class="line">			System.out.println( array.get(i) );</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="14ArrayList补充方法"><a href="#14ArrayList补充方法" class="headerlink" title="14ArrayList补充方法"></a>14ArrayList补充方法</h3><pre><code>* A: ArrayList补充方法
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">* a: add(<span class="keyword">int</span> 索引,存储的元素) 	将元素添加到指定的索引上</span><br><span class="line">* b: set(<span class="keyword">int</span> 索引,修改后的元素) 	将指定索引的元素,进行修改</span><br><span class="line">* c: remove(<span class="keyword">int</span> 索引) 			删除指定索引上的元素</span><br><span class="line">* d: clear() 					清空集合中的所有元素</span><br></pre></td></tr></table></figure>
+<pre><code>* B: 案例代码
 
-            //创建集合容器,存储整数
-            ArrayList&lt;Integer&gt; array2 = new ArrayList&lt;Integer&gt;();
+import java.util.ArrayList;
+public class ArrayListDemo_3{
+    public static void main(String[] args){
 
-            //创建集合容器,存储手机类型
-            ArrayList&lt;Phone&gt; array3 = new ArrayList&lt;Phone&gt;();
+        ArrayList&lt;Integer&gt; array = new ArrayList&lt;Integer&gt;();
+        array.add(1);
+        array.add(2);
+        array.add(3);
+        array.add(4);
+
+        //在索引2上,添加元素7
+        array.add(2,7);
+
+        //将0索引上的元素,修改成10
+        array.set(0,10);
+
+        //将4索引上的元素,删除
+        array.remove(4);
+
+        array.clear();
+
+        //使用方法 size+get组合进行遍历
+        for(int i = 0 ; i &lt; array.size(); i++){
+            System.out.println( array.get(i) );
         }
     }
-</code></pre><h3 id="12ArrayList的常见方法"><a href="#12ArrayList的常见方法" class="headerlink" title="12ArrayList的常见方法"></a>12ArrayList的常见方法</h3><pre><code>* A: ArrayList的常见方法
-    * a: add(参数) 向集合中添加元素
-    * b: get(int index) 取出集合中的元素,get方法的参数,写入索引
-    * c: size() 返回集合的长度, 集合存储元素的个数
-* B: 案例代码
-    import java.util.ArrayList;
-    public class ArrayListDemo_1{
-        public static void main(String[] args){
-            //定义集合,存储字符串元素
-            ArrayList&lt;String&gt; array = new ArrayList&lt;String&gt;();
-            //调用集合方法add存储元素
-            array.add(&quot;abc&quot;);
-            array.add(&quot;itcast&quot;);
-            array.add(&quot;love&quot;);
-            array.add(&quot;java&quot;);
-            //输出集合的长度,调用集合方法size, size方法的返回值类型 int
-            int size = array.size();
-            System.out.println(size);
-
-            //获取出集合中的一个元素,获取1索引的元素
-            //集合的方法get, 获取元素后结果数据类型
-            String s = array.get(1);
-            System.out.println(s);
-
-
-            System.out.println(array.get(0));
-            System.out.println(array.get(1));
-            System.out.println(array.get(2));
-            System.out.println(array.get(3));
-        }
-    }
-</code></pre><h3 id="13ArrayList集合的遍历"><a href="#13ArrayList集合的遍历" class="headerlink" title="13ArrayList集合的遍历"></a>13ArrayList集合的遍历</h3><pre><code>* A: 案例代码
-    /*
-       集合的遍历
-       实现思想也是索引思想
-       集合的索引从0开始,到 size()-1
-       方法get(int index)
-    */
-    import java.util.ArrayList;
-    public class ArrayListDemo_2{
-        public static void main(String[] args){
-            ArrayList&lt;Integer&gt; array = new ArrayList&lt;Integer&gt;();
-            array.add(121);
-            array.add(125);
-            array.add(123);
-            array.add(120);
-            array.add(128);
-
-            //对集合进行遍历
-            //使用方法 size+get组合进行遍历
-            for(int i = 0 ; i &lt; array.size(); i++){
-                System.out.println( array.get(i) );
-            }
-        }
-    }
-</code></pre><h3 id="14ArrayList补充方法"><a href="#14ArrayList补充方法" class="headerlink" title="14ArrayList补充方法"></a>14ArrayList补充方法</h3><pre><code>* A: ArrayList补充方法
-    * a: add(int 索引,存储的元素)     将元素添加到指定的索引上
-    * b: set(int 索引,修改后的元素)     将指定索引的元素,进行修改
-    * c: remove(int 索引)             删除指定索引上的元素
-    * d: clear()                     清空集合中的所有元素
-* B: 案例代码
-    import java.util.ArrayList;
-    public class ArrayListDemo_3{
-        public static void main(String[] args){
-
-            ArrayList&lt;Integer&gt; array = new ArrayList&lt;Integer&gt;();
-            array.add(1);
-            array.add(2);
-            array.add(3);
-            array.add(4);
-
-            //在索引2上,添加元素7
-            array.add(2,7);
-
-            //将0索引上的元素,修改成10
-            array.set(0,10);
-
-            //将4索引上的元素,删除
-            array.remove(4);
-
-            array.clear();
-
-            //使用方法 size+get组合进行遍历
-            for(int i = 0 ; i &lt; array.size(); i++){
-                System.out.println( array.get(i) );
-            }
-        }
-    }
+}
 </code></pre><h3 id="15随机点名器案例分析"><a href="#15随机点名器案例分析" class="headerlink" title="15随机点名器案例分析"></a>15随机点名器案例分析</h3><pre><code>* A: 随机点名器案例分析
     全班同学中随机的找出一名同学，打印这名同学的个人信息。
     我们对本案例进行分析，得出如下分析结果：
@@ -771,348 +600,15 @@
         随机点名器明确地分为了三个功能。如果将多个独立功能的代码写到一起，则代码相对冗长，我们可以针对不同的功能可以将其封装到一个方法中，将完整独立的功能分离出来。
         而在存储同学姓名时，如果对每一个同学都定义一个变量进行姓名存储，则会出现过多孤立的变量，很难一次性将全部数据持有。此时，我们采用ArrayList集合来解决多个学生信息的存储问题
 </code></pre><h3 id="16随机点名器代码实现"><a href="#16随机点名器代码实现" class="headerlink" title="16随机点名器代码实现"></a>16随机点名器代码实现</h3><pre><code>* A: 随机点名器案例代码
-    /*
-       随机点名器,集合改进 (学生的姓名和年龄)
-       现实中有学生这个事物,使用定义类的形式,描述学生事物
-       属性: 姓名,年龄
-
-       姓名存储了数组, 将容器换成是集合
-       String[] s = {&quot;&quot;,&quot;&quot;};
-       集合中,存储的是学生的姓名吗?  应该存储Student类型
-
-       存储学生:
-          学生类型,存储到集合中
-       总览: 遍历集合
-       随机: 随机数,作为索引,到集合中找到元素
-       三个功能,共享的数据,集合容器,
-       定义三个方法,必须参数传递集合
-    */
-    import java.util.ArrayList;
-    import java.util.Random;
-    public class CallName{
-        public static void main(String[] args){
-            //定义集合,存储的是StudentName类型变量
-            ArrayList &lt;StudentName&gt; array = new ArrayList&lt;StudentName&gt;();
-            //调用添加方法
-            add (array);
-            //调用遍历集合
-            printArrayList(array);
-
-            randomStudentName(array);
-        }
-        /*
-          随机数,当作集合的索引,到集合中找到元素
-        */
-        public static void randomStudentName(ArrayList&lt;StudentName&gt; array ){
-            Random r = new Random();
-            int number = r.nextInt( array.size());
-            //随机数,索引,到集合中get
-            StudentName s = array.get(number);
-            System.out.println( s.name +&quot;  &quot;+s.age);
-        }
-
-        /*
-            总览学生的信息,遍历集合
-        */
-        public static void printArrayList(ArrayList&lt;StudentName&gt; array){
-            for(int i = 0 ; i &lt; array.size();i++){
-                //存储集合的时候, 集合.add(sn1)  sn1 是StudentName类型变量
-                //获取的时候,集合.get方法,获取出来的是什么, 还是StudentName类型变量
-                StudentName s = array.get(i);
-                System.out.println(s.name+&quot;  &quot;+s.age);
-            }
-        }
-
-        /*
-           定义方法,实现存储学生的姓名和年龄
-           创建StudentName类型变量,存储到集合中
-        */
-        public static void add (ArrayList&lt;StudentName&gt; array){
-            //创建StudentName类型变量
-            StudentName sn1 = new StudentName();
-            StudentName sn2 = new StudentName();
-            StudentName sn3 = new StudentName();
-            StudentName sn4 = new StudentName();
-            StudentName sn5 = new StudentName();
-
-            sn1.name = &quot;张三1&quot;;
-            sn1.age = 201;
-
-            sn2.name = &quot;张三2&quot;;
-            sn2.age = 202;
-
-            sn3.name = &quot;张三3&quot;;
-            sn3.age = 203;
-
-            sn4.name = &quot;张三4&quot;;
-            sn4.age = 204;
-
-            sn5.name = &quot;张三5&quot;;
-            sn5.age = 205;
-
-            //将StudentName变量,存储到集合中
-            array.add(sn1);
-            array.add(sn2);
-            array.add(sn3);
-            array.add(sn4);
-            array.add(sn5);
-        }
-    }
-</code></pre><h3 id="17库存案例分析加入集合"><a href="#17库存案例分析加入集合" class="headerlink" title="17库存案例分析加入集合"></a>17库存案例分析加入集合</h3><pre><code>* A: 库存案例分析加入集合
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">   随机点名器,集合改进 (学生的姓名和年龄)</span></span><br><span class="line"><span class="comment">   现实中有学生这个事物,使用定义类的形式,描述学生事物</span></span><br><span class="line"><span class="comment">   属性: 姓名,年龄</span></span><br><span class="line"><span class="comment">   </span></span><br><span class="line"><span class="comment">   姓名存储了数组, 将容器换成是集合</span></span><br><span class="line"><span class="comment">   String[] s = &#123;"",""&#125;;</span></span><br><span class="line"><span class="comment">   集合中,存储的是学生的姓名吗?  应该存储Student类型</span></span><br><span class="line"><span class="comment">   </span></span><br><span class="line"><span class="comment">   存储学生:</span></span><br><span class="line"><span class="comment">      学生类型,存储到集合中</span></span><br><span class="line"><span class="comment">   总览: 遍历集合</span></span><br><span class="line"><span class="comment">   随机: 随机数,作为索引,到集合中找到元素</span></span><br><span class="line"><span class="comment">   三个功能,共享的数据,集合容器,</span></span><br><span class="line"><span class="comment">   定义三个方法,必须参数传递集合</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Random;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CallName</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">		<span class="comment">//定义集合,存储的是StudentName类型变量</span></span><br><span class="line">		ArrayList &lt;StudentName&gt; array = <span class="keyword">new</span> ArrayList&lt;StudentName&gt;();</span><br><span class="line">		<span class="comment">//调用添加方法</span></span><br><span class="line">		add (array);</span><br><span class="line">		<span class="comment">//调用遍历集合</span></span><br><span class="line">		printArrayList(array);</span><br><span class="line">		</span><br><span class="line">		randomStudentName(array);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	  随机数,当作集合的索引,到集合中找到元素</span></span><br><span class="line"><span class="comment">	*/</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">randomStudentName</span><span class="params">(ArrayList&lt;StudentName&gt; array )</span></span>&#123;</span><br><span class="line">		Random r = <span class="keyword">new</span> Random();</span><br><span class="line">		<span class="keyword">int</span> number = r.nextInt( array.size());</span><br><span class="line">		<span class="comment">//随机数,索引,到集合中get</span></span><br><span class="line">		StudentName s = array.get(number);</span><br><span class="line">		System.out.println( s.name +<span class="string">"  "</span>+s.age);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	    总览学生的信息,遍历集合</span></span><br><span class="line"><span class="comment">	*/</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printArrayList</span><span class="params">(ArrayList&lt;StudentName&gt; array)</span></span>&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; array.size();i++)&#123;</span><br><span class="line">			<span class="comment">//存储集合的时候, 集合.add(sn1)  sn1 是StudentName类型变量</span></span><br><span class="line">			<span class="comment">//获取的时候,集合.get方法,获取出来的是什么, 还是StudentName类型变量</span></span><br><span class="line">			StudentName s = array.get(i);</span><br><span class="line">			System.out.println(s.name+<span class="string">"  "</span>+s.age);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	   定义方法,实现存储学生的姓名和年龄</span></span><br><span class="line"><span class="comment">	   创建StudentName类型变量,存储到集合中</span></span><br><span class="line"><span class="comment">	*/</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">add</span> <span class="params">(ArrayList&lt;StudentName&gt; array)</span></span>&#123;</span><br><span class="line">		<span class="comment">//创建StudentName类型变量</span></span><br><span class="line">		StudentName sn1 = <span class="keyword">new</span> StudentName();</span><br><span class="line">		StudentName sn2 = <span class="keyword">new</span> StudentName();</span><br><span class="line">		StudentName sn3 = <span class="keyword">new</span> StudentName();</span><br><span class="line">		StudentName sn4 = <span class="keyword">new</span> StudentName();</span><br><span class="line">		StudentName sn5 = <span class="keyword">new</span> StudentName();</span><br><span class="line">		</span><br><span class="line">		sn1.name = <span class="string">"张三1"</span>;</span><br><span class="line">		sn1.age = <span class="number">201</span>;</span><br><span class="line">		</span><br><span class="line">		sn2.name = <span class="string">"张三2"</span>;</span><br><span class="line">		sn2.age = <span class="number">202</span>;</span><br><span class="line">		</span><br><span class="line">		sn3.name = <span class="string">"张三3"</span>;</span><br><span class="line">		sn3.age = <span class="number">203</span>;</span><br><span class="line">		</span><br><span class="line">		sn4.name = <span class="string">"张三4"</span>;</span><br><span class="line">		sn4.age = <span class="number">204</span>;</span><br><span class="line">		</span><br><span class="line">		sn5.name = <span class="string">"张三5"</span>;</span><br><span class="line">		sn5.age = <span class="number">205</span>;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//将StudentName变量,存储到集合中</span></span><br><span class="line">		array.add(sn1);</span><br><span class="line">		array.add(sn2);</span><br><span class="line">		array.add(sn3);</span><br><span class="line">		array.add(sn4);</span><br><span class="line">		array.add(sn5);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="17库存案例分析加入集合"><a href="#17库存案例分析加入集合" class="headerlink" title="17库存案例分析加入集合"></a>17库存案例分析加入集合</h3><pre><code>* A: 库存案例分析加入集合
     * a: 参见\day06\day06(面向对象\day06_source\对象内存图.JPG
 </code></pre><h3 id="18库存案例添加商品信息"><a href="#18库存案例添加商品信息" class="headerlink" title="18库存案例添加商品信息"></a>18库存案例添加商品信息</h3><pre><code>* A: 案例代码
-    /*
-       定义,.描述商品的类
-       商品 4个属性
-         商品名字  大小     价格    库存
-          String    double   double  int
-
-        定义类,类名Goods
-        这个类型的变量,存储到集合中
-    */
-    public class Goods{
-        //定义商品名字
-        String brand ;
-        //大小属性
-        double size ;
-        // 价格属性
-        double price ;
-        //库存属性
-        int count ;
-    }
-
-    /*
-        实现库存管理案例:
-          1.存储商品信息
-            存储商品类型变量
-            将商品类型的变量,存储到集合中
-    */
-    //import java.util.ArrayList;
-    import java.util.*;
-    public class Shopp{
-        public static void main(String[] args){
-            //创建ArrayList集合,存储Goods类型
-            ArrayList&lt;Goods&gt; array = new ArrayList&lt;Goods&gt;();
-            //调用添加商品信息的方法
-            addGoods(array);
-        }
-
-        /*
-           定义方法,将商品的信息存储到集合中
-           集合是所有方法的共享数据,参数传递
-        */
-        public static void addGoods (ArrayList&lt;Goods&gt; array){
-            //创建商品类型变量 Goods类型的变量
-            Goods g1 = new Goods();
-            Goods g2 = new Goods();
-            g1.brand = &quot;MacBook&quot;;
-            g1.size = 13.3;
-            g1.price = 9999.99;
-            g1.count = 3;
-
-            g2.brand = &quot;Thinkpad&quot;;
-            g2.size = 15.6;
-            g2.price = 7999.99;
-            g2.count = 1;
-
-            //Goods类型的变量,存储到集合中
-            array.add(g1);
-            array.add(g2);
-        }
-    }
-</code></pre><h3 id="19库存案例查看库存清单"><a href="#19库存案例查看库存清单" class="headerlink" title="19库存案例查看库存清单"></a>19库存案例查看库存清单</h3><pre><code>* A: 案例代码
-    /*
-        实现库存管理案例:
-          1.存储商品信息
-            存储商品类型变量
-            将商品类型的变量,存储到集合中
-
-          2.查看库存清单
-            将集合进行遍历, 获取出集合中存储的Goods类型变量
-            输出每一个Goods类型的属性
-            计算求和: 总库存,总金额
-    */
-    //import java.util.ArrayList;
-    import java.util.*;
-    public class Shopp{
-        public static void main(String[] args){
-            //创建ArrayList集合,存储Goods类型
-            ArrayList&lt;Goods&gt; array = new ArrayList&lt;Goods&gt;();
-            //调用添加商品信息的方法
-            addGoods(array);
-        }
-
-        /*
-           定义方法,查看库存清单,遍历集合
-        */
-        public static void printStore(ArrayList&lt;Goods&gt; array){
-            //输出表头
-            System.out.println(&quot;----------商场库存清单----------&quot;);
-            System.out.println(&quot;品牌型号     尺寸    价格    库存数&quot;);
-            //定义变量,保存总库存数,和总金额
-            int totalCount = 0 ;
-            double totalMoney = 0;
-            //遍历集合
-            for(int i = 0 ; i &lt; array.size(); i++){
-                //get(索引)获取出集合中的元素,存储的是Goods类,获取的也是Goods类型
-                //使用Goods类型变量,接受get方法结果
-                Goods g = array.get(i);
-                System.out.println(g.brand+&quot;   &quot;+g.size+&quot;    &quot;+g.price+&quot;    &quot;+g.count);
-                totalCount = totalCount+g.count;
-                totalMoney = totalMoney + g.count*g.price;
-            }
-            System.out.println(&quot;总库存数: &quot;+totalCount);
-            System.out.println(&quot;商品库存总金额: &quot;+totalMoney);
-        }
-
-        /*
-           定义方法,将商品的信息存储到集合中
-           集合是所有方法的共享数据,参数传递
-        */
-        public static void addGoods (ArrayList&lt;Goods&gt; array){
-            //创建商品类型变量 Goods类型的变量
-            Goods g1 = new Goods();
-            Goods g2 = new Goods();
-            g1.brand = &quot;MacBook&quot;;
-            g1.size = 13.3;
-            g1.price = 9999.99;
-            g1.count = 3;
-
-            g2.brand = &quot;Thinkpad&quot;;
-            g2.size = 15.6;
-            g2.price = 7999.99;
-            g2.count = 1;
-
-            //Goods类型的变量,存储到集合中
-            array.add(g1);
-            array.add(g2);
-        }
-    }
-</code></pre><h3 id="20库存案例修改库存清单及测试代码的实现"><a href="#20库存案例修改库存清单及测试代码的实现" class="headerlink" title="20库存案例修改库存清单及测试代码的实现"></a>20库存案例修改库存清单及测试代码的实现</h3><pre><code>* A: 案例代码
-    /*
-        实现库存管理案例:
-          1.存储商品信息
-            存储商品类型变量
-            将商品类型的变量,存储到集合中
-
-          2.查看库存清单
-            将集合进行遍历, 获取出集合中存储的Goods类型变量
-            输出每一个Goods类型的属性
-            计算求和: 总库存,总金额
-
-         3.修改商品的库存
-            集合遍历 ,获取出集合中存储的Goods类型变量
-            变量调用Goods类的属性count,值进行修改 (键盘输入)
-    */
-    //import java.util.ArrayList;
-    import java.util.*;
-    public class Shopp{
-        public static void main(String[] args){
-            //创建ArrayList集合,存储Goods类型
-            ArrayList&lt;Goods&gt; array = new ArrayList&lt;Goods&gt;();
-            //调用添加商品信息的方法
-            addGoods(array);
-            //进入死循环中
-            while(true){
-                //调用选择功能的方法,获取到用户输入的功能序号
-                int number = chooseFunction();
-                //对序号判断,如果=1 进入查看库存功能  = 2 进入修改库存功能  =3 结束
-                switch(number){
-                    case 1:
-                    //进入查看库存,调用查看库存的方法,传递存储商品信息的集合
-                    printStore(array);
-                    break;
-
-                    case 2:
-                    //进入修改库存功能,调用修改库存的方法,传递集合
-                    update(array);
-                    break;
-
-                    case 3:
-                    return ;
-
-                    default:
-                     System.out.println(&quot;无此功能&quot;);
-                     break;
-                }
-            }
-        }
-        /*
-          方法定义,修改库存
-          键盘的输入,将Goods中的属性值,修改
-        */
-        public static void update(ArrayList&lt;Goods&gt; array){
-            Scanner sc = new Scanner(System.in);
-            //遍历集合,获取集合中的每个元素
-            for(int i = 0 ;  i &lt; array.size(); i++){
-                //集合方法get获取的是集合的元素,元素类型Goods
-                Goods g = array.get(i);
-                System.out.println(&quot;请输入&quot;+g.brand+&quot;的库存数&quot;);
-                //Goods属性,count进行修改
-                g.count = sc.nextInt();
-            }
-        }
-        /*
-           定义方法,实现选择菜单,用户根据功能选择菜单
-        */
-        public static int chooseFunction(){
-            System.out.println(&quot;-------------库存管理------------&quot;);
-            System.out.println(&quot;1.查看库存清单&quot;);
-            System.out.println(&quot;2.修改商品库存数量&quot;);
-            System.out.println(&quot;3.退出&quot;);
-            System.out.println(&quot;请输入要执行的操作序号：&quot;);
-            Scanner sc = new Scanner(System.in);
-            int number = sc.nextInt();
-            return number;
-        }
-
-        /*
-           定义方法,查看库存清单,遍历集合
-        */
-        public static void printStore(ArrayList&lt;Goods&gt; array){
-            //输出表头
-            System.out.println(&quot;----------商场库存清单----------&quot;);
-            System.out.println(&quot;品牌型号     尺寸    价格    库存数&quot;);
-            //定义变量,保存总库存数,和总金额
-            int totalCount = 0 ;
-            double totalMoney = 0;
-            //遍历集合
-            for(int i = 0 ; i &lt; array.size(); i++){
-                //get(索引)获取出集合中的元素,存储的是Goods类,获取的也是Goods类型
-                //使用Goods类型变量,接受get方法结果
-                Goods g = array.get(i);
-                System.out.println(g.brand+&quot;   &quot;+g.size+&quot;    &quot;+g.price+&quot;    &quot;+g.count);
-                totalCount = totalCount+g.count;
-                totalMoney = totalMoney + g.count*g.price;
-            }
-            System.out.println(&quot;总库存数: &quot;+totalCount);
-            System.out.println(&quot;商品库存总金额: &quot;+totalMoney);
-        }
-
-        /*
-           定义方法,将商品的信息存储到集合中
-           集合是所有方法的共享数据,参数传递
-        */
-        public static void addGoods (ArrayList&lt;Goods&gt; array){
-            //创建商品类型变量 Goods类型的变量
-            Goods g1 = new Goods();
-            Goods g2 = new Goods();
-            g1.brand = &quot;MacBook&quot;;
-            g1.size = 13.3;
-            g1.price = 9999.99;
-            g1.count = 3;
-
-            g2.brand = &quot;Thinkpad&quot;;
-            g2.size = 15.6;
-            g2.price = 7999.99;
-            g2.count = 1;
-
-            //Goods类型的变量,存储到集合中
-            array.add(g1);
-            array.add(g2);
-        }
-    }
-</code></pre>
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">   定义,.描述商品的类</span></span><br><span class="line"><span class="comment">   商品 4个属性</span></span><br><span class="line"><span class="comment">     商品名字  大小     价格    库存</span></span><br><span class="line"><span class="comment">	  String    double   double  int</span></span><br><span class="line"><span class="comment">	  </span></span><br><span class="line"><span class="comment">	定义类,类名Goods</span></span><br><span class="line"><span class="comment">	这个类型的变量,存储到集合中</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Goods</span></span>&#123;</span><br><span class="line">	<span class="comment">//定义商品名字</span></span><br><span class="line">	String brand ;</span><br><span class="line">	<span class="comment">//大小属性</span></span><br><span class="line">	<span class="keyword">double</span> size ;</span><br><span class="line">	<span class="comment">// 价格属性</span></span><br><span class="line">	<span class="keyword">double</span> price ;</span><br><span class="line">	<span class="comment">//库存属性</span></span><br><span class="line">	<span class="keyword">int</span> count ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    实现库存管理案例:</span></span><br><span class="line"><span class="comment">	  1.存储商品信息</span></span><br><span class="line"><span class="comment">	    存储商品类型变量</span></span><br><span class="line"><span class="comment">		将商品类型的变量,存储到集合中</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">//import java.util.ArrayList;</span></span><br><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Shopp</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">		<span class="comment">//创建ArrayList集合,存储Goods类型</span></span><br><span class="line">		ArrayList&lt;Goods&gt; array = <span class="keyword">new</span> ArrayList&lt;Goods&gt;();</span><br><span class="line">		<span class="comment">//调用添加商品信息的方法</span></span><br><span class="line">		addGoods(array);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	   定义方法,将商品的信息存储到集合中</span></span><br><span class="line"><span class="comment">	   集合是所有方法的共享数据,参数传递</span></span><br><span class="line"><span class="comment">	*/</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">addGoods</span> <span class="params">(ArrayList&lt;Goods&gt; array)</span></span>&#123;</span><br><span class="line">		<span class="comment">//创建商品类型变量 Goods类型的变量</span></span><br><span class="line">		Goods g1 = <span class="keyword">new</span> Goods();</span><br><span class="line">		Goods g2 = <span class="keyword">new</span> Goods();</span><br><span class="line">		g1.brand = <span class="string">"MacBook"</span>;</span><br><span class="line">		g1.size = <span class="number">13.3</span>;</span><br><span class="line">		g1.price = <span class="number">9999.99</span>;</span><br><span class="line">		g1.count = <span class="number">3</span>;</span><br><span class="line">		</span><br><span class="line">		g2.brand = <span class="string">"Thinkpad"</span>;</span><br><span class="line">		g2.size = <span class="number">15.6</span>;</span><br><span class="line">		g2.price = <span class="number">7999.99</span>;</span><br><span class="line">		g2.count = <span class="number">1</span>;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//Goods类型的变量,存储到集合中</span></span><br><span class="line">		array.add(g1);</span><br><span class="line">		array.add(g2);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="19库存案例查看库存清单"><a href="#19库存案例查看库存清单" class="headerlink" title="19库存案例查看库存清单"></a>19库存案例查看库存清单</h3><pre><code>* A: 案例代码
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    实现库存管理案例:</span></span><br><span class="line"><span class="comment">	  1.存储商品信息</span></span><br><span class="line"><span class="comment">	    存储商品类型变量</span></span><br><span class="line"><span class="comment">		将商品类型的变量,存储到集合中</span></span><br><span class="line"><span class="comment">		</span></span><br><span class="line"><span class="comment">      2.查看库存清单</span></span><br><span class="line"><span class="comment">	    将集合进行遍历, 获取出集合中存储的Goods类型变量</span></span><br><span class="line"><span class="comment">		输出每一个Goods类型的属性</span></span><br><span class="line"><span class="comment">		计算求和: 总库存,总金额</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">//import java.util.ArrayList;</span></span><br><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Shopp</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">		<span class="comment">//创建ArrayList集合,存储Goods类型</span></span><br><span class="line">		ArrayList&lt;Goods&gt; array = <span class="keyword">new</span> ArrayList&lt;Goods&gt;();</span><br><span class="line">		<span class="comment">//调用添加商品信息的方法</span></span><br><span class="line">		addGoods(array);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	   定义方法,查看库存清单,遍历集合</span></span><br><span class="line"><span class="comment">	*/</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printStore</span><span class="params">(ArrayList&lt;Goods&gt; array)</span></span>&#123;</span><br><span class="line">		<span class="comment">//输出表头</span></span><br><span class="line">		System.out.println(<span class="string">"----------商场库存清单----------"</span>);</span><br><span class="line">		System.out.println(<span class="string">"品牌型号     尺寸    价格    库存数"</span>);</span><br><span class="line">		<span class="comment">//定义变量,保存总库存数,和总金额</span></span><br><span class="line">		<span class="keyword">int</span> totalCount = <span class="number">0</span> ;</span><br><span class="line">		<span class="keyword">double</span> totalMoney = <span class="number">0</span>;</span><br><span class="line">		<span class="comment">//遍历集合</span></span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; array.size(); i++)&#123;</span><br><span class="line">			<span class="comment">//get(索引)获取出集合中的元素,存储的是Goods类,获取的也是Goods类型</span></span><br><span class="line">			<span class="comment">//使用Goods类型变量,接受get方法结果</span></span><br><span class="line">			Goods g = array.get(i);</span><br><span class="line">			System.out.println(g.brand+<span class="string">"   "</span>+g.size+<span class="string">"    "</span>+g.price+<span class="string">"    "</span>+g.count);</span><br><span class="line">			totalCount = totalCount+g.count;</span><br><span class="line">			totalMoney = totalMoney + g.count*g.price;</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(<span class="string">"总库存数: "</span>+totalCount);</span><br><span class="line">		System.out.println(<span class="string">"商品库存总金额: "</span>+totalMoney);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	   定义方法,将商品的信息存储到集合中</span></span><br><span class="line"><span class="comment">	   集合是所有方法的共享数据,参数传递</span></span><br><span class="line"><span class="comment">	*/</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">addGoods</span> <span class="params">(ArrayList&lt;Goods&gt; array)</span></span>&#123;</span><br><span class="line">		<span class="comment">//创建商品类型变量 Goods类型的变量</span></span><br><span class="line">		Goods g1 = <span class="keyword">new</span> Goods();</span><br><span class="line">		Goods g2 = <span class="keyword">new</span> Goods();</span><br><span class="line">		g1.brand = <span class="string">"MacBook"</span>;</span><br><span class="line">		g1.size = <span class="number">13.3</span>;</span><br><span class="line">		g1.price = <span class="number">9999.99</span>;</span><br><span class="line">		g1.count = <span class="number">3</span>;</span><br><span class="line">		</span><br><span class="line">		g2.brand = <span class="string">"Thinkpad"</span>;</span><br><span class="line">		g2.size = <span class="number">15.6</span>;</span><br><span class="line">		g2.price = <span class="number">7999.99</span>;</span><br><span class="line">		g2.count = <span class="number">1</span>;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//Goods类型的变量,存储到集合中</span></span><br><span class="line">		array.add(g1);</span><br><span class="line">		array.add(g2);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="20库存案例修改库存清单及测试代码的实现"><a href="#20库存案例修改库存清单及测试代码的实现" class="headerlink" title="20库存案例修改库存清单及测试代码的实现"></a>20库存案例修改库存清单及测试代码的实现</h3><pre><code>* A: 案例代码
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    实现库存管理案例:</span></span><br><span class="line"><span class="comment">	  1.存储商品信息</span></span><br><span class="line"><span class="comment">	    存储商品类型变量</span></span><br><span class="line"><span class="comment">		将商品类型的变量,存储到集合中</span></span><br><span class="line"><span class="comment">		</span></span><br><span class="line"><span class="comment">      2.查看库存清单</span></span><br><span class="line"><span class="comment">	    将集合进行遍历, 获取出集合中存储的Goods类型变量</span></span><br><span class="line"><span class="comment">		输出每一个Goods类型的属性</span></span><br><span class="line"><span class="comment">		计算求和: 总库存,总金额</span></span><br><span class="line"><span class="comment">	</span></span><br><span class="line"><span class="comment">     3.修改商品的库存</span></span><br><span class="line"><span class="comment">	    集合遍历 ,获取出集合中存储的Goods类型变量</span></span><br><span class="line"><span class="comment">		变量调用Goods类的属性count,值进行修改 (键盘输入)</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">//import java.util.ArrayList;</span></span><br><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Shopp</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">		<span class="comment">//创建ArrayList集合,存储Goods类型</span></span><br><span class="line">		ArrayList&lt;Goods&gt; array = <span class="keyword">new</span> ArrayList&lt;Goods&gt;();</span><br><span class="line">		<span class="comment">//调用添加商品信息的方法</span></span><br><span class="line">		addGoods(array);</span><br><span class="line">		<span class="comment">//进入死循环中</span></span><br><span class="line">		<span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</span><br><span class="line">			<span class="comment">//调用选择功能的方法,获取到用户输入的功能序号</span></span><br><span class="line">			<span class="keyword">int</span> number = chooseFunction();</span><br><span class="line">			<span class="comment">//对序号判断,如果=1 进入查看库存功能  = 2 进入修改库存功能  =3 结束</span></span><br><span class="line">			<span class="keyword">switch</span>(number)&#123;</span><br><span class="line">				<span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">				<span class="comment">//进入查看库存,调用查看库存的方法,传递存储商品信息的集合</span></span><br><span class="line">				printStore(array);</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">				</span><br><span class="line">				<span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">				<span class="comment">//进入修改库存功能,调用修改库存的方法,传递集合</span></span><br><span class="line">				update(array);</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">				</span><br><span class="line">				<span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">				<span class="keyword">return</span> ;</span><br><span class="line">				</span><br><span class="line">				<span class="keyword">default</span>:</span><br><span class="line">				 System.out.println(<span class="string">"无此功能"</span>);</span><br><span class="line">				 <span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	  方法定义,修改库存</span></span><br><span class="line"><span class="comment">	  键盘的输入,将Goods中的属性值,修改</span></span><br><span class="line"><span class="comment">	*/</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(ArrayList&lt;Goods&gt; array)</span></span>&#123;</span><br><span class="line">		Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">		<span class="comment">//遍历集合,获取集合中的每个元素</span></span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ;  i &lt; array.size(); i++)&#123;</span><br><span class="line">			<span class="comment">//集合方法get获取的是集合的元素,元素类型Goods</span></span><br><span class="line">			Goods g = array.get(i);</span><br><span class="line">			System.out.println(<span class="string">"请输入"</span>+g.brand+<span class="string">"的库存数"</span>);</span><br><span class="line">			<span class="comment">//Goods属性,count进行修改</span></span><br><span class="line">			g.count = sc.nextInt();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	   定义方法,实现选择菜单,用户根据功能选择菜单</span></span><br><span class="line"><span class="comment">	*/</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">chooseFunction</span><span class="params">()</span></span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"-------------库存管理------------"</span>);</span><br><span class="line">		System.out.println(<span class="string">"1.查看库存清单"</span>);</span><br><span class="line">		System.out.println(<span class="string">"2.修改商品库存数量"</span>);</span><br><span class="line">		System.out.println(<span class="string">"3.退出"</span>);</span><br><span class="line">		System.out.println(<span class="string">"请输入要执行的操作序号："</span>);</span><br><span class="line">		Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">		<span class="keyword">int</span> number = sc.nextInt();</span><br><span class="line">		<span class="keyword">return</span> number;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	   定义方法,查看库存清单,遍历集合</span></span><br><span class="line"><span class="comment">	*/</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printStore</span><span class="params">(ArrayList&lt;Goods&gt; array)</span></span>&#123;</span><br><span class="line">		<span class="comment">//输出表头</span></span><br><span class="line">		System.out.println(<span class="string">"----------商场库存清单----------"</span>);</span><br><span class="line">		System.out.println(<span class="string">"品牌型号     尺寸    价格    库存数"</span>);</span><br><span class="line">		<span class="comment">//定义变量,保存总库存数,和总金额</span></span><br><span class="line">		<span class="keyword">int</span> totalCount = <span class="number">0</span> ;</span><br><span class="line">		<span class="keyword">double</span> totalMoney = <span class="number">0</span>;</span><br><span class="line">		<span class="comment">//遍历集合</span></span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; array.size(); i++)&#123;</span><br><span class="line">			<span class="comment">//get(索引)获取出集合中的元素,存储的是Goods类,获取的也是Goods类型</span></span><br><span class="line">			<span class="comment">//使用Goods类型变量,接受get方法结果</span></span><br><span class="line">			Goods g = array.get(i);</span><br><span class="line">			System.out.println(g.brand+<span class="string">"   "</span>+g.size+<span class="string">"    "</span>+g.price+<span class="string">"    "</span>+g.count);</span><br><span class="line">			totalCount = totalCount+g.count;</span><br><span class="line">			totalMoney = totalMoney + g.count*g.price;</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(<span class="string">"总库存数: "</span>+totalCount);</span><br><span class="line">		System.out.println(<span class="string">"商品库存总金额: "</span>+totalMoney);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	   定义方法,将商品的信息存储到集合中</span></span><br><span class="line"><span class="comment">	   集合是所有方法的共享数据,参数传递</span></span><br><span class="line"><span class="comment">	*/</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">addGoods</span> <span class="params">(ArrayList&lt;Goods&gt; array)</span></span>&#123;</span><br><span class="line">		<span class="comment">//创建商品类型变量 Goods类型的变量</span></span><br><span class="line">		Goods g1 = <span class="keyword">new</span> Goods();</span><br><span class="line">		Goods g2 = <span class="keyword">new</span> Goods();</span><br><span class="line">		g1.brand = <span class="string">"MacBook"</span>;</span><br><span class="line">		g1.size = <span class="number">13.3</span>;</span><br><span class="line">		g1.price = <span class="number">9999.99</span>;</span><br><span class="line">		g1.count = <span class="number">3</span>;</span><br><span class="line">		</span><br><span class="line">		g2.brand = <span class="string">"Thinkpad"</span>;</span><br><span class="line">		g2.size = <span class="number">15.6</span>;</span><br><span class="line">		g2.price = <span class="number">7999.99</span>;</span><br><span class="line">		g2.count = <span class="number">1</span>;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//Goods类型的变量,存储到集合中</span></span><br><span class="line">		array.add(g1);</span><br><span class="line">		array.add(g2);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 

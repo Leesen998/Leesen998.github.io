@@ -95,7 +95,7 @@
   
     
     
-    <link href="https://fonts.cat.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.cat.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
   
 
 
@@ -166,7 +166,7 @@
 <meta property="og:description" content="1、引用类型变量的创建及使用2、流程控制语句之选择语句3、流程控制语句之循环语句4、循环高级">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://res.cloudinary.com/leesen/image/upload/v1540280253/samples/java%20files/photo-1539609413529-1166774c3954.jpg">
-<meta property="og:updated_time" content="2018-10-23T07:39:12.423Z">
+<meta property="og:updated_time" content="2018-11-05T09:31:10.049Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java学习笔记——基础3">
 <meta name="twitter:description" content="1、引用类型变量的创建及使用2、流程控制语句之选择语句3、流程控制语句之循环语句4、循环高级">
@@ -523,13 +523,9 @@
 </li>
 </ul>
 <h3 id="02Scanner类的使用"><a href="#02Scanner类的使用" class="headerlink" title="02Scanner类的使用"></a>02Scanner类的使用</h3><pre><code>* A: Scanner类的使用
-    * a: 导包import java.util.Scanner;
-    * b：创建键盘录入对象 Scanner sc = new Scanner(System.in);
-    * c: 读取键盘录入的一个整数
-        * int enterNumber = sc.nextInt();
-    * d: 读取键盘录入的字符串
-        * String enterString = sc.next();
-* B: 案例代码
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">* a: 导包<span class="keyword">import</span> java.util.Scanner;</span><br><span class="line">* b：创建键盘录入对象 Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">* c: 读取键盘录入的一个整数</span><br><span class="line">	* <span class="keyword">int</span> enterNumber = sc.nextInt();</span><br><span class="line">* d: 读取键盘录入的字符串</span><br><span class="line">	* String enterString = sc.next();</span><br></pre></td></tr></table></figure>
+<pre><code>* B: 案例代码
+
     import java.util.Scanner;
     public class Demo05Scanner{
         public static void main(String[] args) 
@@ -544,325 +540,67 @@
         }
     }
 </code></pre><h3 id="03Random随机数类的使用-1"><a href="#03Random随机数类的使用-1" class="headerlink" title="03Random随机数类的使用_1"></a>03Random随机数类的使用_1</h3><pre><code>* A: Random随机数类的使用_1
-    * a: 功能
-        * 生成随机数需要使用到引用类型随机数Random类
-    * b: 使用方式
-        * import导包：所属包java.util. Random
-        * 创建实例格式：Random  random = new Random ();
-        * 调用方法
-            * nextInt(int maxValue)    产生[0,maxValue)范围的随机数,包含0不包含maxValue
-            * nextDouble()  产生[0,1)范围的随机数
-            如：
-                Random  random = new Random ();
-                int  myNumber = random.nextInt(100);//结果为0-99的一个数
-* B: 案例代码
-    import java.util.Random;
-    public class RandomDemo{
-        public static void main(String[] args){
-           Random ran = new Random();
-           // Random类中的,产生随机数的功能
-           int i = ran.nextInt(100);
-           System.out.println(i);
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">* a: 功能</span><br><span class="line">	* 生成随机数需要使用到引用类型随机数Random类</span><br><span class="line">* b: 使用方式</span><br><span class="line">	* <span class="keyword">import</span>导包：所属包java.util. Random</span><br><span class="line">	* 创建实例格式：Random  random = <span class="keyword">new</span> Random ();</span><br><span class="line">	* 调用方法</span><br><span class="line">		* nextInt(<span class="keyword">int</span> maxValue)	产生[<span class="number">0</span>,maxValue)范围的随机数,包含<span class="number">0</span>不包含maxValue</span><br><span class="line">		* nextDouble()  产生[<span class="number">0</span>,<span class="number">1</span>)范围的随机数</span><br><span class="line">		如：</span><br><span class="line">			Random  random = <span class="keyword">new</span> Random ();</span><br><span class="line">			<span class="keyword">int</span>  myNumber = random.nextInt(<span class="number">100</span>);<span class="comment">//结果为0-99的一个数</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">* B: 案例代码</span><br><span class="line"></span><br><span class="line">	<span class="keyword">import</span> java.util.Random;</span><br><span class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RandomDemo</span></span>&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">		   Random ran = <span class="keyword">new</span> Random();</span><br><span class="line">		   <span class="comment">// Random类中的,产生随机数的功能</span></span><br><span class="line">		   <span class="keyword">int</span> i = ran.nextInt(<span class="number">100</span>);</span><br><span class="line">		   System.out.println(i);</span><br><span class="line">		   </span><br><span class="line">		   <span class="comment">//问题? 产生随机数,范围 1-100之间</span></span><br><span class="line">		   <span class="comment">// nextInt(100) 0-99 + 1</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="04Random随机数类的使用-2"><a href="#04Random随机数类的使用-2" class="headerlink" title="04Random随机数类的使用_2"></a>04Random随机数类的使用_2</h3><pre><code>* A: Random随机数类的使用_2
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">* a: 调用方法</span><br><span class="line">	* nextDouble()  产生[<span class="number">0</span>,<span class="number">1</span>)范围的随机数</span><br><span class="line">	如：</span><br><span class="line">		Random  random = <span class="keyword">new</span> Random ();</span><br><span class="line">		<span class="keyword">int</span>  myNumber = random.nextDouble();<span class="comment">//结果为0.0-1.0之间的数(包括0.0不包括1.0)</span></span><br></pre></td></tr></table></figure>
+<h3 id="05if语句格式第一种"><a href="#05if语句格式第一种" class="headerlink" title="05if语句格式第一种"></a>05if语句格式第一种</h3><pre><code>* A: if语句格式第一种
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">* a: 书写格式</span><br><span class="line">	<span class="keyword">if</span>(比较表达式) &#123;</span><br><span class="line">		语句体;</span><br><span class="line">	&#125;</span><br><span class="line">* b：执行流程：</span><br><span class="line">	* 先计算比较表达式的值，看其返回值是<span class="keyword">true</span>还是<span class="keyword">false</span>。</span><br><span class="line">	* 如果是<span class="keyword">true</span>，就执行语句体；</span><br><span class="line">	* 如果是<span class="keyword">false</span>，就不执行语句体；</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">* B: 案例代码</span><br><span class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IfDemo</span></span>&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">			  <span class="keyword">int</span> i = <span class="number">5</span> ;</span><br><span class="line">			  <span class="comment">//对变量i进行if判断</span></span><br><span class="line">			  <span class="keyword">if</span>(i &gt; <span class="number">5</span>)&#123;</span><br><span class="line">				  System.out.println(<span class="string">"if中的条件是true"</span>);</span><br><span class="line">				  i++;</span><br><span class="line">			  &#125;</span><br><span class="line">			  </span><br><span class="line">			  System.out.println(i);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="06if语句格式第二种"><a href="#06if语句格式第二种" class="headerlink" title="06if语句格式第二种"></a>06if语句格式第二种</h3><pre><code>* A: if语句格式第二种
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">* a: 书写格式</span><br><span class="line">	<span class="keyword">if</span>(比较表达式) &#123;</span><br><span class="line">		语句体<span class="number">1</span>;</span><br><span class="line">	&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">		语句体<span class="number">2</span>;</span><br><span class="line">	&#125;</span><br><span class="line">* b：执行流程：</span><br><span class="line">	* 首先计算比较表达式的值，看其返回值是<span class="keyword">true</span>还是<span class="keyword">false</span>。</span><br><span class="line">	* 如果是<span class="keyword">true</span>，就执行语句体<span class="number">1</span>；</span><br><span class="line">	* 如果是<span class="keyword">false</span>，就执行语句体<span class="number">2</span>；</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">* B: 案例代码</span><br><span class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IfElseDemo</span></span>&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">		     <span class="keyword">int</span> i = <span class="number">16</span> ;</span><br><span class="line">			 <span class="comment">//判断变量,是奇偶数, 除以2,看余数是0还是1</span></span><br><span class="line">			 <span class="keyword">if</span>( i % <span class="number">2</span> == <span class="number">0</span> )&#123;</span><br><span class="line">				 System.out.println(i+<span class="string">" 是偶数"</span>);</span><br><span class="line">			 &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">				 System.out.println(i+<span class="string">" 是奇数"</span>);</span><br><span class="line">			 &#125;</span><br><span class="line">	    &#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="07if语句格式第三种"><a href="#07if语句格式第三种" class="headerlink" title="07if语句格式第三种"></a>07if语句格式第三种</h3><pre><code>* A: if语句格式第三种
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">* a: 书写格式</span><br><span class="line">		<span class="keyword">if</span>(比较表达式<span class="number">1</span>) &#123;</span><br><span class="line">			语句体<span class="number">1</span>;</span><br><span class="line">		&#125;<span class="keyword">else</span> <span class="keyword">if</span>(比较表达式<span class="number">2</span>) &#123;</span><br><span class="line">			语句体<span class="number">2</span>;</span><br><span class="line">		&#125;<span class="keyword">else</span> <span class="keyword">if</span>(比较表达式<span class="number">3</span>) &#123;</span><br><span class="line">			语句体<span class="number">3</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		...</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			语句体n+<span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">* b：执行流程：</span><br><span class="line">	* 首先计算比较表达式<span class="number">1</span>看其返回值是<span class="keyword">true</span>还是<span class="keyword">false</span>，</span><br><span class="line">	* 如果是<span class="keyword">true</span>，就执行语句体<span class="number">1</span>，<span class="keyword">if</span>语句结束。</span><br><span class="line">	* 如果是<span class="keyword">false</span>，接着计算比较表达式<span class="number">2</span>看其返回值是<span class="keyword">true</span>还是<span class="keyword">false</span>，</span><br><span class="line">	</span><br><span class="line">	* 如果是<span class="keyword">true</span>，就执行语句体<span class="number">2</span>，<span class="keyword">if</span>语句结束。</span><br><span class="line">	* 如果是<span class="keyword">false</span>，接着计算比较表达式<span class="number">3</span>看其返回值是<span class="keyword">true</span>还是<span class="keyword">false</span>，</span><br><span class="line">	</span><br><span class="line">	* 如果都是<span class="keyword">false</span>，就执行语句体n+<span class="number">1</span>。</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">* B: 案例代码</span><br><span class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IfElseIfDemo</span></span>&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">			<span class="comment">//成绩判断要求 ,成绩&gt;80  成绩&gt;70  成绩&gt;60  不及格</span></span><br><span class="line">			<span class="comment">//定义变量,保存成绩</span></span><br><span class="line">			<span class="keyword">int</span> grade = <span class="number">75</span>;</span><br><span class="line">			<span class="comment">//使用if else if 语句对成绩判断</span></span><br><span class="line">			<span class="keyword">if</span>( grade &gt; <span class="number">80</span> )&#123;</span><br><span class="line">				System.out.println(grade+<span class="string">" 成绩是优"</span>);</span><br><span class="line">			&#125;<span class="keyword">else</span> <span class="keyword">if</span> ( grade &gt; <span class="number">70</span>)&#123;</span><br><span class="line">				System.out.println(grade+<span class="string">" 成绩是良"</span>);</span><br><span class="line">			&#125;<span class="keyword">else</span> <span class="keyword">if</span> ( grade &gt; <span class="number">60</span>)&#123;</span><br><span class="line">				System.out.println(grade+<span class="string">" 成绩是中"</span>);</span><br><span class="line">			&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">				System.out.println(grade+<span class="string">" 成绩是差"</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		 	</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="08if语句和三元运算符的互换"><a href="#08if语句和三元运算符的互换" class="headerlink" title="08if语句和三元运算符的互换"></a>08if语句和三元运算符的互换</h3><pre><code>* A: 三元运算符
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">* a: 概念</span><br><span class="line">	* 用来完成简单的选择逻辑，即根据条件判断，从两个选择中选择一种执行</span><br><span class="line">* b: 使用格式</span><br><span class="line">	* (条件表达式)？表达式<span class="number">1</span>：表达式<span class="number">2</span>；</span><br><span class="line">* c: 运算规则</span><br><span class="line">	* <span class="number">1</span>: 判断条件表达式，结果为一个布尔值</span><br><span class="line">	* <span class="number">2</span>: <span class="keyword">true</span>，运算结果为表达式<span class="number">1</span></span><br><span class="line">	* <span class="number">3</span>: <span class="keyword">false</span>，运算结果为表达式<span class="number">2</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">* B: 案例代码</span><br><span class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IfElseDemo_1</span></span>&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">			<span class="keyword">int</span> j = <span class="number">6</span>;</span><br><span class="line">			<span class="keyword">int</span> i = <span class="number">15</span>;</span><br><span class="line">			<span class="comment">//使用if语句,判断出最大值</span></span><br><span class="line">			<span class="keyword">if</span>(i&gt;j)&#123;</span><br><span class="line">			<span class="keyword">int</span> j = <span class="number">6</span>;</span><br><span class="line">				System.out.println(i+<span class="string">" 是最大值"</span>);</span><br><span class="line">			&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">				System.out.println(j+<span class="string">" 是最大值"</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			</span><br><span class="line">			<span class="comment">//使用三元运算实现</span></span><br><span class="line">			<span class="keyword">int</span> k = i&gt;j ? i : j;</span><br><span class="line">			System.out.println(k+<span class="string">" 是最大值"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">* C: 使用<span class="keyword">if</span>语句还是三元表达式</span><br><span class="line">	* 判断条件多,使用<span class="keyword">if</span></span><br><span class="line"> 	* 三元,必须有结果的, <span class="keyword">if</span> 可以没有结果的</span><br></pre></td></tr></table></figure>
+<h3 id="09while循环"><a href="#09while循环" class="headerlink" title="09while循环"></a>09while循环</h3><pre><code>* A: while循环结构
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">* a: 使用格式</span><br><span class="line">	初始化表达式；</span><br><span class="line">	<span class="keyword">while</span>(条件)&#123;</span><br><span class="line">		循环体</span><br><span class="line">	&#125;</span><br><span class="line">* b: 执行顺序</span><br><span class="line">	  当条件是<span class="keyword">true</span>,就执行循环体,执行完循环体后</span><br><span class="line">	  程序再次执行<span class="keyword">while</span>中的条件,如果条件还是<span class="keyword">true</span>,继续执行循环体</span><br><span class="line">	  直到条件是<span class="keyword">false</span>的时候,循环就结束</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">* B: 案例代码</span><br><span class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WhileDemo</span></span>&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">			<span class="comment">//输出 1-4之间的整数</span></span><br><span class="line">			<span class="comment">//定义变量,整数类型, 循环的条件</span></span><br><span class="line">			<span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line">			<span class="keyword">while</span>( i &lt; <span class="number">5</span> )&#123;</span><br><span class="line">				System.out.println(i);</span><br><span class="line">				i++;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="10for循环-1"><a href="#10for循环-1" class="headerlink" title="10for循环_1"></a>10for循环_1</h3><pre><code>* A: for循环_1
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">	* a: 使用格式</span><br><span class="line">		 <span class="keyword">for</span>(初始化变量 ; 条件 ; 增量)&#123;</span><br><span class="line">			 循环体;</span><br><span class="line">		 &#125;</span><br><span class="line">	* b: 各模块解释</span><br><span class="line">		初始化变量: 定义变量,作用是用来控制循环的次数</span><br><span class="line">	    条件: 当条件是<span class="keyword">true</span>,执行循环体,条件是<span class="keyword">false</span>,结束循环</span><br><span class="line">	    增量: 变量自增情况 </span><br><span class="line"></span><br><span class="line">* B: 案例代码</span><br><span class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ForDemo</span></span>&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">			<span class="comment">//for循环,输出0-10</span></span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; <span class="number">11</span> ; i++)&#123;</span><br><span class="line">				System.out.println(i);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="11for循环-2"><a href="#11for循环-2" class="headerlink" title="11for循环_2"></a>11for循环_2</h3><pre><code>* A: for循环的执行流程
 
-           //问题? 产生随机数,范围 1-100之间
-           // nextInt(100) 0-99 + 1
-        }
+    for（①1 ; ②2 ; ③3）{
+        ④4
     }
-</code></pre><h3 id="04Random随机数类的使用-2"><a href="#04Random随机数类的使用-2" class="headerlink" title="04Random随机数类的使用_2"></a>04Random随机数类的使用_2</h3><pre><code>* A: Random随机数类的使用_2
-    * a: 调用方法
-        * nextDouble()  产生[0,1)范围的随机数
-        如：
-            Random  random = new Random ();
-            int  myNumber = random.nextDouble();//结果为0.0-1.0之间的数(包括0.0不包括1.0)
-</code></pre><h3 id="05if语句格式第一种"><a href="#05if语句格式第一种" class="headerlink" title="05if语句格式第一种"></a>05if语句格式第一种</h3><pre><code>* A: if语句格式第一种
-    * a: 书写格式
-        if(比较表达式) {
-            语句体;
-        }
-    * b：执行流程：
-        * 先计算比较表达式的值，看其返回值是true还是false。
-        * 如果是true，就执行语句体；
-        * 如果是false，就不执行语句体；
-* B: 案例代码
-    public class IfDemo{
-        public static void main(String[] args){
-              int i = 5 ;
-              //对变量i进行if判断
-              if(i &gt; 5){
-                  System.out.println(&quot;if中的条件是true&quot;);
-                  i++;
-              }
-
-              System.out.println(i);
-        }
-    }
-</code></pre><h3 id="06if语句格式第二种"><a href="#06if语句格式第二种" class="headerlink" title="06if语句格式第二种"></a>06if语句格式第二种</h3><pre><code>* A: if语句格式第二种
-    * a: 书写格式
-        if(比较表达式) {
-            语句体1;
-        }else {
-            语句体2;
-        }
-    * b：执行流程：
-        * 首先计算比较表达式的值，看其返回值是true还是false。
-        * 如果是true，就执行语句体1；
-        * 如果是false，就执行语句体2；
-* B: 案例代码
-    public class IfElseDemo{
-        public static void main(String[] args){
-             int i = 16 ;
-             //判断变量,是奇偶数, 除以2,看余数是0还是1
-             if( i % 2 == 0 ){
-                 System.out.println(i+&quot; 是偶数&quot;);
-             }else{
-                 System.out.println(i+&quot; 是奇数&quot;);
-             }
-        }
-    }
-</code></pre><h3 id="07if语句格式第三种"><a href="#07if语句格式第三种" class="headerlink" title="07if语句格式第三种"></a>07if语句格式第三种</h3><pre><code>* A: if语句格式第三种
-    * a: 书写格式
-            if(比较表达式1) {
-                语句体1;
-            }else if(比较表达式2) {
-                语句体2;
-            }else if(比较表达式3) {
-                语句体3;
-            }
-            ...
-            else {
-                语句体n+1;
-            }
-    * b：执行流程：
-        * 首先计算比较表达式1看其返回值是true还是false，
-        * 如果是true，就执行语句体1，if语句结束。
-        * 如果是false，接着计算比较表达式2看其返回值是true还是false，
-
-        * 如果是true，就执行语句体2，if语句结束。
-        * 如果是false，接着计算比较表达式3看其返回值是true还是false，
-
-        * 如果都是false，就执行语句体n+1。
-* B: 案例代码
-    public class IfElseIfDemo{
-        public static void main(String[] args){
-            //成绩判断要求 ,成绩&gt;80  成绩&gt;70  成绩&gt;60  不及格
-            //定义变量,保存成绩
-            int grade = 75;
-            //使用if else if 语句对成绩判断
-            if( grade &gt; 80 ){
-                System.out.println(grade+&quot; 成绩是优&quot;);
-            }else if ( grade &gt; 70){
-                System.out.println(grade+&quot; 成绩是良&quot;);
-            }else if ( grade &gt; 60){
-                System.out.println(grade+&quot; 成绩是中&quot;);
-            }else{
-                System.out.println(grade+&quot; 成绩是差&quot;);
-            }
-
-        }
-    }
-</code></pre><h3 id="08if语句和三元运算符的互换"><a href="#08if语句和三元运算符的互换" class="headerlink" title="08if语句和三元运算符的互换"></a>08if语句和三元运算符的互换</h3><pre><code>* A: 三元运算符
-    * a: 概念
-        * 用来完成简单的选择逻辑，即根据条件判断，从两个选择中选择一种执行
-    * b: 使用格式
-        * (条件表达式)？表达式1：表达式2；
-    * c: 运算规则
-        * 1: 判断条件表达式，结果为一个布尔值
-        * 2: true，运算结果为表达式1
-        * 3: false，运算结果为表达式2
-* B: 案例代码
-    public class IfElseDemo_1{
-        public static void main(String[] args){
-            int j = 6;
-            int i = 15;
-            //使用if语句,判断出最大值
-            if(i&gt;j){
-            int j = 6;
-                System.out.println(i+&quot; 是最大值&quot;);
-            }else{
-                System.out.println(j+&quot; 是最大值&quot;);
-            }
-
-            //使用三元运算实现
-            int k = i&gt;j ? i : j;
-            System.out.println(k+&quot; 是最大值&quot;);
-        }
-    }
-* C: 使用if语句还是三元表达式
-    * 判断条件多,使用if
-     * 三元,必须有结果的, if 可以没有结果的
-</code></pre><h3 id="09while循环"><a href="#09while循环" class="headerlink" title="09while循环"></a>09while循环</h3><pre><code>* A: while循环结构
-    * a: 使用格式
-        初始化表达式；
-        while(条件){
-            循环体
-        }
-    * b: 执行顺序
-          当条件是true,就执行循环体,执行完循环体后
-          程序再次执行while中的条件,如果条件还是true,继续执行循环体
-          直到条件是false的时候,循环就结束
-* B: 案例代码
-    public class WhileDemo{
-        public static void main(String[] args){
-            //输出 1-4之间的整数
-            //定义变量,整数类型, 循环的条件
-            int i = 1;
-            while( i &lt; 5 ){
-                System.out.println(i);
-                i++;
-            }
-        }
-    }
-</code></pre><h3 id="10for循环-1"><a href="#10for循环-1" class="headerlink" title="10for循环_1"></a>10for循环_1</h3><pre><code>* A: for循环_1
-    * a: 使用格式
-         for(初始化变量 ; 条件 ; 增量){
-             循环体;
-         }
-    * b: 各模块解释
-        初始化变量: 定义变量,作用是用来控制循环的次数
-        条件: 当条件是true,执行循环体,条件是false,结束循环
-        增量: 变量自增情况 
-* B: 案例代码
-    public class ForDemo{
-        public static void main(String[] args){
-            //for循环,输出0-10
-            for(int i = 0 ; i &lt; 11 ; i++){
-                System.out.println(i);
-            }
-        }
-    }
-</code></pre><h3 id="11for循环-2"><a href="#11for循环-2" class="headerlink" title="11for循环_2"></a>11for循环_2</h3><pre><code>* A: for循环的执行流程
-    for（① ; ② ; ③）{
-        ④
-    }
-    第一步，执行①
-    第二步，执行②，如果判断结果为true，执行第三步，如果判断结果为false，执行第五步
-    第三步，执行④
-    第四步，执行③，然后重复执行第二步
+    第一步，执行①1
+    第二步，执行②2，如果判断结果为true，执行第三步，如果判断结果为false，执行第五步
+    第三步，执行④4
+    第四步，执行③3，然后重复执行第二步
     第五步，退出循环
 </code></pre><h3 id="12for循环-3"><a href="#12for循环-3" class="headerlink" title="12for循环_3"></a>12for循环_3</h3><pre><code>* A: 案例
     * a: 利用for循环,计算1+4的结果
 * B: 案例代码
-    public class ForDemo_1{
-        public static void main(String[] args){
-            // 定义变量,记录求和后的数据
-            int sum = 0;
-            // 利用循环,将变量从1变化到4
-            for(int i = 1 ; i &lt;= 4 ; i++){
-                //对变量进行求和
-                sum = sum + i;
-            }
-            System.out.println(sum);
-        }
-    }
-</code></pre><h3 id="13do-while循环"><a href="#13do-while循环" class="headerlink" title="13do_while循环"></a>13do_while循环</h3><pre><code>* A: do_while循环
-    * a: 使用格式
-        do{
-           循环体;
-        }while(条件);
-    * b: 执行顺序
-        先执行一次循环体，然后再判断条件，如果条件为true，继续执行循环体，
-        如果条件为false，循环结束。
-    * c: 特点
-        * 无条件先执行一次
-* B: 案例代码
-    public class DoWhileDemo{
-        public static void main(String[] args){
-            int i = 0; 
-            do{
-                System.out.println(i);
-                i++;
-            }while( i &lt;  5);
-        }
-    }
-</code></pre><h3 id="14死循环"><a href="#14死循环" class="headerlink" title="14死循环"></a>14死循环</h3><pre><code>* A: 死循环概述
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ForDemo_1</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">		<span class="comment">// 定义变量,记录求和后的数据</span></span><br><span class="line">		<span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">		<span class="comment">// 利用循环,将变量从1变化到4</span></span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= <span class="number">4</span> ; i++)&#123;</span><br><span class="line">			<span class="comment">//对变量进行求和</span></span><br><span class="line">			sum = sum + i;</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(sum);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="13do-while循环"><a href="#13do-while循环" class="headerlink" title="13do_while循环"></a>13do_while循环</h3><pre><code>* A: do_while循环
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">* a: 使用格式</span><br><span class="line">	<span class="keyword">do</span>&#123;</span><br><span class="line">	   循环体;</span><br><span class="line">    &#125;<span class="keyword">while</span>(条件);</span><br><span class="line">* b: 执行顺序</span><br><span class="line">	先执行一次循环体，然后再判断条件，如果条件为<span class="keyword">true</span>，继续执行循环体，</span><br><span class="line">	如果条件为<span class="keyword">false</span>，循环结束。</span><br><span class="line">* c: 特点</span><br><span class="line">	* 无条件先执行一次</span><br><span class="line">* B: 案例代码</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DoWhileDemo</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">		<span class="keyword">int</span> i = <span class="number">0</span>; </span><br><span class="line">		<span class="keyword">do</span>&#123;</span><br><span class="line">			System.out.println(i);</span><br><span class="line">			i++;</span><br><span class="line">		&#125;<span class="keyword">while</span>( i &lt;  <span class="number">5</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="14死循环"><a href="#14死循环" class="headerlink" title="14死循环"></a>14死循环</h3><pre><code>* A: 死循环概述
     * 无限循环存在的原因是并不知道循环多少次，而是根据某些条件，来控制循环
+
 * B: 死循环格式
     * while(true){}
     * for(;;){}
 </code></pre><h3 id="15嵌套for循环-1"><a href="#15嵌套for循环-1" class="headerlink" title="15嵌套for循环_1"></a>15嵌套for循环_1</h3><pre><code>* A: 嵌套循环的概述
-    * 嵌套循环是指在一个循环语句的循环体中再定义一个循环语句的语法结构。while、do…while、for循环语句都可以进行嵌套，并且它们之间也可以互相嵌套，如最常见的在for循环中嵌套for循环。
-* B: 嵌套循环的格式
-    for(初始化表达式; 循环条件; 操作表达式) {
-        ………
-        for(初始化表达式; 循环条件; 操作表达式) {
-            执行语句
-            ………
-        }
-        ………
-    }
-* C: 各模块解释
-    * 总的循环次数 =  内循环次数 * 外循环的次数
-    * 内循环,是外循环的循环体
-
-    * 外循环,控制的是行数
-    * 内循环,控制的是每行的个数
-</code></pre><h3 id="16嵌套for循环-2"><a href="#16嵌套for循环-2" class="headerlink" title="16嵌套for循环_2"></a>16嵌套for循环_2</h3><pre><code>* A: 案例
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">* 嵌套循环是指在一个循环语句的循环体中再定义一个循环语句的语法结构。</span><br><span class="line">* <span class="keyword">while</span>、<span class="keyword">do</span>…<span class="keyword">while</span>、<span class="keyword">for</span>循环语句都可以进行嵌套，并且它们之间也可以互相嵌套，</span><br><span class="line">* 如最常见的在<span class="keyword">for</span>循环中嵌套<span class="keyword">for</span>循环。</span><br></pre></td></tr></table></figure>
+<pre><code>* B: 嵌套循环的格式
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(初始化表达式; 循环条件; 操作表达式) &#123;</span><br><span class="line">	………</span><br><span class="line">	<span class="keyword">for</span>(初始化表达式; 循环条件; 操作表达式) &#123;</span><br><span class="line">		执行语句</span><br><span class="line">		………</span><br><span class="line">	&#125;</span><br><span class="line">	………</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>* C: 各模块解释
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">* 总的循环次数 =  内循环次数 * 外循环的次数</span><br><span class="line">* 内循环,是外循环的循环体</span><br><span class="line">   </span><br><span class="line">* 外循环,控制的是行数</span><br><span class="line">* 内循环,控制的是每行的个数</span><br></pre></td></tr></table></figure>
+<h3 id="16嵌套for循环-2"><a href="#16嵌套for循环-2" class="headerlink" title="16嵌套for循环_2"></a>16嵌套for循环_2</h3><pre><code>* A: 案例
     * a: 打印正三角形
 * B: 案例代码
-    public class ForForDemo{
-        public static void main(String[] args){
-            for(int i = 0 ; i &lt; 9 ; i++){
-                for(int j = 0; j &lt; i+1 ;j++){
-                    System.out.print(&quot;* &quot;);
-                }
-                System.out.println();
-            }
-        }
-    }
-</code></pre><h3 id="17break语句"><a href="#17break语句" class="headerlink" title="17break语句"></a>17break语句</h3><pre><code>* A: break语句
-    * a: 作用
-        * 跳出所在的循环体
-    * b: 书写位置
-        * 必须出现在循环或选择结构内
-    * c: 举例
-        for(int i=0; i&lt;10; i++) {
-            if(i&gt;5) {
-            break;
-        }
-            System.out.println(“我爱Java”+i);
-        }
-        //会从0-5输出6次“我爱Java”
-* B: break详细解释
-    * a: 作用
-        * 在loop/switch选择或者循环过程中，我们总是满足布尔表达条件才能执行对应的代码，然而在这些逻辑过程中，
-            可以使用一些关键字直接跳出正在执行的代码，去执行后边或者指定位置的代码，
-            这些关键字一旦出现就可以跳转语句执行顺序。
-    * b: 使用方式
-        * 无法单独使用，必须将break关键字置于switch或循环语句中
-    * c: 运行规律
-        * 不需要判断任何条件，只要遇到break变直接跳出执行后续代码。会完全跳出选择或者循环结构
-        * 只能跳出最近的代码块，不能跨越多级代码块
-
-* C：循环标号
-    * a: 为什么使用循环标号
-        * 当在双层循环或者循环内有switch选择语句时，我们发现，使用break或者continue所作用的对象均是内层语句，无法直接跳出外层循环，这时就需要使用标号语句跳转了.
-    * b: 使用方式
-        * 在外层循环外的某行前边，使用后边跟有冒号”:”的标识符，即定义完毕。
-          使用时当在内层循环使用break或continue时后边紧跟之前定义的标号即可
-    * c: 运行规律
-        * 当外层循环外定义了标号
-        * 内层使用break，终止内外双层循环。
-        * 内层使用continue，终止内层循环，继续外层循环。
-</code></pre><h3 id="18continue语句"><a href="#18continue语句" class="headerlink" title="18continue语句"></a>18continue语句</h3><pre><code>* A: continue语句
-    * a: 作用
-        * 提前结束本次循环，继续进行下次循环
-    * b: 使用方式
-        * 无法单独使用，必须将continue关键字置于循环语句中
-    * c：运行规律
-        * 不需要判断任何条件，只要遇到continue变直接跳出本轮循环进行下次循环
-    * d：案例代码
-        public class ContinueDemo{
-            public static void main(String[] args){
-                for(int i = 0 ; i &lt; 10 ; i++){
-                    if(i%2==0){
-                        continue;
-                    }
-                    System.out.println(i);
-                }
-            }
-        }
-        //会把0-9之间所有的奇数打印到控制台上
-</code></pre><h3 id="19猜数字小游戏"><a href="#19猜数字小游戏" class="headerlink" title="19猜数字小游戏"></a>19猜数字小游戏</h3><pre><code>* A: 猜数字小游戏        
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ForForDemo</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; <span class="number">9</span> ; i++)&#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i+<span class="number">1</span> ;j++)&#123;</span><br><span class="line">				System.out.print(<span class="string">"* "</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			System.out.println();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="17break语句"><a href="#17break语句" class="headerlink" title="17break语句"></a>17break语句</h3><pre><code>* A: break语句
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">* a: 作用</span><br><span class="line">	* 跳出所在的循环体</span><br><span class="line">* b: 书写位置</span><br><span class="line">	* 必须出现在循环或选择结构内</span><br><span class="line">* c: 举例</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">10</span>; i++) &#123;</span><br><span class="line">		<span class="keyword">if</span>(i&gt;<span class="number">5</span>) &#123;</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	&#125;</span><br><span class="line">		System.out.println(“我爱Java”+i);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//会从0-5输出6次“我爱Java”</span></span><br></pre></td></tr></table></figure>
+<pre><code>* B: break详细解释
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">* a: 作用</span><br><span class="line">	* 在loop/<span class="keyword">switch</span>选择或者循环过程中，我们总是满足布尔表达条件才能执行对应的代码，然而在这些逻辑过程中，</span><br><span class="line">		可以使用一些关键字直接跳出正在执行的代码，去执行后边或者指定位置的代码，</span><br><span class="line">		这些关键字一旦出现就可以跳转语句执行顺序。</span><br><span class="line">* b: 使用方式</span><br><span class="line">	* 无法单独使用，必须将<span class="keyword">break</span>关键字置于<span class="keyword">switch</span>或循环语句中</span><br><span class="line">* c: 运行规律</span><br><span class="line">	* 不需要判断任何条件，只要遇到<span class="keyword">break</span>变直接跳出执行后续代码。会完全跳出选择或者循环结构</span><br><span class="line">	* 只能跳出最近的代码块，不能跨越多级代码块</span><br></pre></td></tr></table></figure>
+<pre><code>* C：循环标号
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">* a: 为什么使用循环标号</span><br><span class="line">	* 当在双层循环或者循环内有<span class="keyword">switch</span>选择语句时，我们发现，使用<span class="keyword">break</span>或者<span class="keyword">continue</span>所作用的对象均是内层语句，无法直接跳出外层循环，这时就需要使用标号语句跳转了.</span><br><span class="line">* b: 使用方式</span><br><span class="line">	* 在外层循环外的某行前边，使用后边跟有冒号”:”的标识符，即定义完毕。</span><br><span class="line">	  使用时当在内层循环使用<span class="keyword">break</span>或<span class="keyword">continue</span>时后边紧跟之前定义的标号即可</span><br><span class="line">* c: 运行规律</span><br><span class="line">	* 当外层循环外定义了标号</span><br><span class="line">	* 内层使用<span class="keyword">break</span>，终止内外双层循环。</span><br><span class="line">	* 内层使用<span class="keyword">continue</span>，终止内层循环，继续外层循环。</span><br></pre></td></tr></table></figure>
+<h3 id="18continue语句"><a href="#18continue语句" class="headerlink" title="18continue语句"></a>18continue语句</h3><pre><code>* A: continue语句
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">* a: 作用</span><br><span class="line">	* 提前结束本次循环，继续进行下次循环</span><br><span class="line">* b: 使用方式</span><br><span class="line">	* 无法单独使用，必须将<span class="keyword">continue</span>关键字置于循环语句中</span><br><span class="line">* c：运行规律</span><br><span class="line">	* 不需要判断任何条件，只要遇到<span class="keyword">continue</span>变直接跳出本轮循环进行下次循环</span><br><span class="line">* d：案例代码</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ContinueDemo</span></span>&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; <span class="number">10</span> ; i++)&#123;</span><br><span class="line">				<span class="keyword">if</span>(i%<span class="number">2</span>==<span class="number">0</span>)&#123;</span><br><span class="line">					<span class="keyword">continue</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				System.out.println(i);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//会把0-9之间所有的奇数打印到控制台上</span></span><br></pre></td></tr></table></figure>
+<h3 id="19猜数字小游戏"><a href="#19猜数字小游戏" class="headerlink" title="19猜数字小游戏"></a>19猜数字小游戏</h3><pre><code>* A: 猜数字小游戏        
     * a: 分析
         * 用户给的数可能大于、小于、或等于被猜的数，这样就会出现三种情况，用前面讲的三元运算符可以实现，
             但是得用三元运算符的嵌套，比较麻烦！可以用更简单的方式if条件判断，可以有三个以上的条件
@@ -875,72 +613,8 @@
                 直到数字猜到为止
                 最多只能猜5次，否则提示“sorry，您没有机会了!”
 * B: 案例代码
-    /*
-        猜数字小游戏
-
-        完成猜数字小游戏：
-        1、产生随机数
-        后台预先生成一个随机数1-100，用户键盘录入猜数字
-        2、通过if语句对用户猜的数与随机数进行比较
-        如果猜对了，打印“恭喜您，答对了”
-        如果猜错了
-        猜大了：打印“sorry，您猜大了!”
-        猜小了：打印“sorry，您猜小了!”
-        3、通过for循环完成用户猜数的循环
-        直到数字猜到为止
-        最多只能猜5次，否则提示“sorry，您没有机会了!”
-
-    */
-    import java.util.Random;
-    import java.util.Scanner;
-    //通过*的方式可以一次导入该包下所有的类，但是不建议使用。建议使用哪个导哪个。
-    //import java.util.*;
-    public class GuessNumber{
-        public static void main(String[] args) {
-            //1、产生随机数
-            //后台预先生成一个随机数1-100，用户键盘录入猜数字
-            //创建随机数对象
-            Random random = new Random();
-            //产生一个1-100的随机数
-            int randomNumber = random.nextInt(100)+1;
-            //System.out.println(&quot;我产生的随机数是：&quot;+randomNumber+&quot;你猜猜是多少？&quot;);  作弊专用
-
-            //产生控制台录入的Scanner对象
-            Scanner sc = new Scanner(System.in);
-            //3、通过for循环完成用户猜数的循环
-            //通过for循环完成猜数字逻辑
-            for(int i=1; i&lt;=5; i++){
-                //提示用户输入要猜的数，用变量接收
-                System.out.println();
-                System.out.println(&quot;请您输入一个1-100的数：&quot;);
-                int guessNumber = sc.nextInt();
-
-                //2、通过if语句对用户猜的数与随机数进行比较
-                //如果猜对了
-                if(guessNumber==randomNumber) {
-                    //打印猜对后的提示
-                    System.out.println(&quot;恭喜您，猜对了！&quot;);
-                    //跳出循环，不用再猜了
-                    break;
-                }else {//如果猜错了
-                    //如果猜大了
-                    if(guessNumber&gt;randomNumber) {
-                        System.out.println(&quot;sorry，您猜大了!&quot;);
-                    }else {//如果猜小了
-                        System.out.println(&quot;sorry，您猜小了!&quot;);
-                    }
-                }
-                //如果猜到了最后的第5次仍然没有猜对就跳出循环
-                if(i==5) {
-                    System.out.println(&quot;对不起，点太背，下次再来吧！&quot;);
-                    break;
-                }
-                //每次猜错后，都提示还有多少次机会
-                System.out.println(&quot;请注意，您还有&quot;+(5-i)+&quot;次机会，请慎重作答！&quot;);
-            }
-        }
-    }
-</code></pre><hr>
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	猜数字小游戏</span></span><br><span class="line"><span class="comment">	</span></span><br><span class="line"><span class="comment">	完成猜数字小游戏：</span></span><br><span class="line"><span class="comment">	1、产生随机数</span></span><br><span class="line"><span class="comment">	后台预先生成一个随机数1-100，用户键盘录入猜数字</span></span><br><span class="line"><span class="comment">	2、通过if语句对用户猜的数与随机数进行比较</span></span><br><span class="line"><span class="comment">	如果猜对了，打印“恭喜您，答对了”</span></span><br><span class="line"><span class="comment">	如果猜错了</span></span><br><span class="line"><span class="comment">	猜大了：打印“sorry，您猜大了!”</span></span><br><span class="line"><span class="comment">	猜小了：打印“sorry，您猜小了!”</span></span><br><span class="line"><span class="comment">	3、通过for循环完成用户猜数的循环</span></span><br><span class="line"><span class="comment">	直到数字猜到为止</span></span><br><span class="line"><span class="comment">	最多只能猜5次，否则提示“sorry，您没有机会了!”</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">import</span> java.util.Random;</span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="comment">//通过*的方式可以一次导入该包下所有的类，但是不建议使用。建议使用哪个导哪个。</span></span><br><span class="line"><span class="comment">//import java.util.*;</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GuessNumber</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="comment">//1、产生随机数</span></span><br><span class="line">		<span class="comment">//后台预先生成一个随机数1-100，用户键盘录入猜数字</span></span><br><span class="line">		<span class="comment">//创建随机数对象</span></span><br><span class="line">		Random random = <span class="keyword">new</span> Random();</span><br><span class="line">		<span class="comment">//产生一个1-100的随机数</span></span><br><span class="line">		<span class="keyword">int</span> randomNumber = random.nextInt(<span class="number">100</span>)+<span class="number">1</span>;</span><br><span class="line">		<span class="comment">//System.out.println("我产生的随机数是："+randomNumber+"你猜猜是多少？");  作弊专用</span></span><br><span class="line"></span><br><span class="line">		<span class="comment">//产生控制台录入的Scanner对象</span></span><br><span class="line">		Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">		<span class="comment">//3、通过for循环完成用户猜数的循环</span></span><br><span class="line">		<span class="comment">//通过for循环完成猜数字逻辑</span></span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=<span class="number">5</span>; i++)&#123;</span><br><span class="line">			<span class="comment">//提示用户输入要猜的数，用变量接收</span></span><br><span class="line">			System.out.println();</span><br><span class="line">			System.out.println(<span class="string">"请您输入一个1-100的数："</span>);</span><br><span class="line">			<span class="keyword">int</span> guessNumber = sc.nextInt();</span><br><span class="line">			</span><br><span class="line">			<span class="comment">//2、通过if语句对用户猜的数与随机数进行比较</span></span><br><span class="line">			<span class="comment">//如果猜对了</span></span><br><span class="line">			<span class="keyword">if</span>(guessNumber==randomNumber) &#123;</span><br><span class="line">				<span class="comment">//打印猜对后的提示</span></span><br><span class="line">				System.out.println(<span class="string">"恭喜您，猜对了！"</span>);</span><br><span class="line">				<span class="comment">//跳出循环，不用再猜了</span></span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;<span class="keyword">else</span> &#123;<span class="comment">//如果猜错了</span></span><br><span class="line">				<span class="comment">//如果猜大了</span></span><br><span class="line">				<span class="keyword">if</span>(guessNumber&gt;randomNumber) &#123;</span><br><span class="line">					System.out.println(<span class="string">"sorry，您猜大了!"</span>);</span><br><span class="line">				&#125;<span class="keyword">else</span> &#123;<span class="comment">//如果猜小了</span></span><br><span class="line">					System.out.println(<span class="string">"sorry，您猜小了!"</span>);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">//如果猜到了最后的第5次仍然没有猜对就跳出循环</span></span><br><span class="line">			<span class="keyword">if</span>(i==<span class="number">5</span>) &#123;</span><br><span class="line">				System.out.println(<span class="string">"对不起，点太背，下次再来吧！"</span>);</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">//每次猜错后，都提示还有多少次机会</span></span><br><span class="line">			System.out.println(<span class="string">"请注意，您还有"</span>+(<span class="number">5</span>-i)+<span class="string">"次机会，请慎重作答！"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
       
     </div>
 
