@@ -167,7 +167,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1541640107/samples/test/photo-1538831539254-abe4ffd1a812.jpg">
 <meta property="og:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1541993751/samples/java%20files/%E9%9D%99%E6%80%81%E7%9A%84%E5%86%85%E5%AD%98%E5%9B%BE.jpg">
-<meta property="og:updated_time" content="2018-11-13T03:04:12.921Z">
+<meta property="og:updated_time" content="2018-11-13T03:20:04.275Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java学习笔记——基础11">
 <meta name="twitter:description" content="1、final 关键字2、static 关键字3、匿名对象4、内部类5、包的声明与访问6、访问修饰符7、代码块">
@@ -526,7 +526,7 @@
 </code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"在多态中，无论是【静态成员变量】 还是【非静态成员变量】，【都看父类】"</span></span><br><span class="line">————————————————————————————————————————————————————————————————————————————————————————</span><br><span class="line"><span class="string">" 在多态中，【非静态成员方法】【编译】【看父类】，【运行】【看子类】，【父类没有】则编译失败。"</span></span><br><span class="line">————————————————————————————————————————————————————————————————————————————————————————</span><br><span class="line"><span class="string">" 但多态中的【静态成员方法】,【编译看父类】,【运行仍然看父类】。因为【静态和对象没有关系】，属于【静态绑定】。"</span></span><br><span class="line">————————————————————————————————————————————————————————————————————————————————————————</span><br><span class="line">即：<span class="string">"【只有】【非静态成员方法】 运行看 【子类】,其他看父类"</span></span><br><span class="line">————————————————————————————————————————————————————————————————————————————————————————</span><br><span class="line">* B: 举例</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">		Fu f = <span class="keyword">new</span> Zi();</span><br><span class="line">		f.show();   <span class="comment">//父类的引用和父类的方法绑定,和对象无关,不会在运行时动态的执行子类特有的方法。</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="12定义静态常量"><a href="#12定义静态常量" class="headerlink" title="12定义静态常量"></a>12定义静态常量</h3><pre><code>* A: 静态常量
 </code></pre><pre><code class="java">    开发中，我们想在类中定义一个静态常量，通常使用<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span>修饰的变量来完成定义。
-    此时变量名用全部大写，多个单词使用下划线连接。
+    <span class="string">"此时变量名用【全部大写】，多个单词使用下划线连接。"</span>
 * B: 定义格式：
     <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> 数据类型 变量名 = 值;
 
@@ -538,18 +538,18 @@
         }
     }
 
-    当我们想使用类的静态成员时，不需要创建对象，直接使用类名来访问即可。
+    <span class="string">"当我们想使用类的静态成员时，【不需要创建对象】，【直接使用类名】来访问即可。"</span>
     System.out.println(Company.COMPANY_NAME); <span class="comment">//打印传智播客</span>
     Company.method(); <span class="comment">// 调用一个静态方法</span>
 
 * D: 注意：
-    接口中的每个成员变量都默认使用<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span>修饰。
-    所有接口中的成员变量已是静态常量，由于接口没有构造方法，所以必须显示赋值。可以直接用接口名访问。
-    <span class="class"><span class="keyword">interface</span> <span class="title">Inter</span> </span>{
-        <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> COUNT = <span class="number">100</span>;
-    }
-        访问接口中的静态变量
-    Inter.COUNT
+    <span class="string">"接口中的每个成员变量都默认使用public static final修饰。</span>
+<span class="string">    所有接口中的成员变量已是静态常量，由于接口没有构造方法，所以必须显示赋值。可以直接用接口名访问。</span>
+<span class="string">    interface Inter {</span>
+<span class="string">        public static final int COUNT = 100;</span>
+<span class="string">    }</span>
+<span class="string">        访问接口中的静态变量</span>
+<span class="string">    Inter.COUNT</span>
 </code></pre>
 <h3 id="13匿名对象"><a href="#13匿名对象" class="headerlink" title="13匿名对象"></a>13匿名对象</h3><pre><code>* A:匿名对象的概述
 </code></pre><pre><code class="java">* 匿名对象是指创建对象时，只有创建对象的语句，却没有把对象地址值赋值给某个变量。
