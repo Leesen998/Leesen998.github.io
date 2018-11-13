@@ -167,7 +167,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1541640107/samples/test/photo-1538831539254-abe4ffd1a812.jpg">
 <meta property="og:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1541993751/samples/java%20files/%E9%9D%99%E6%80%81%E7%9A%84%E5%86%85%E5%AD%98%E5%9B%BE.jpg">
-<meta property="og:updated_time" content="2018-11-13T03:45:36.740Z">
+<meta property="og:updated_time" content="2018-11-13T14:40:09.525Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java学习笔记——基础11">
 <meta name="twitter:description" content="1、final 关键字2、static 关键字3、匿名对象4、内部类5、包的声明与访问6、访问修饰符7、代码块">
@@ -563,18 +563,18 @@
 
 创建一个普通对象
 Person p = <span class="keyword">new</span> Person();
-创建一个匿名对象
+<span class="string">"创建一个匿名对象"</span>
 <span class="keyword">new</span> Person();
 
 * C: 匿名对象的特点
-a:创建匿名对象直接使用，没有变量名。
-    <span class="keyword">new</span> Person().eat()  <span class="comment">//eat方法被一个没有名字的Person对象调用了。</span>
+a:<span class="string">"创建匿名对象【直接使用】，【没有变量名】"</span>。
+    <span class="keyword">new</span> Person().eat()  <span class="comment">//"eat方法被一个没有名字的Person对象调用了"。</span>
 
-b:匿名对象在没有指定其引用变量时，只能使用一次。
+b:<span class="string">"【匿名对象】在【没有指定】其【引用变量】时，【只能】【使用一次】，第二次使用则【重新】创建了【新的匿名对象】"</span>。
     <span class="keyword">new</span> Person().eat(); 创建一个匿名对象，调用eat方法
     <span class="keyword">new</span> Person().eat(); 想再次调用eat方法，重新创建了一个匿名对象
 
-c:匿名对象可以作为方法接收的参数、方法返回值使用
+c:<span class="string">"【匿名对象】可以作为【方法接收的参数】、【方法返回值】使用"</span>
     <span class="class"><span class="keyword">class</span> <span class="title">Demo</span> </span>{
         <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Person <span class="title">getPerson</span><span class="params">()</span></span>{
             <span class="comment">//普通方式</span>
@@ -602,9 +602,8 @@ c:匿名对象可以作为方法接收的参数、方法返回值使用
 
 </code></pre>
 <h3 id="14内部类"><a href="#14内部类" class="headerlink" title="14内部类"></a>14内部类</h3><pre><code>* A: 内部类的概述
-
-    将类写在其他类的内部，可以写在其他类的成员位置和局部位置，这时写在其他类内部的类就称为内部类。
-    其他类也称为外部类。
+    &quot; 将类写在其他类的【内部】，可以写在其他类的【成员位置】和【局部位置】，这时写在其他类内部的类就称为【内部类】。
+    其他类也称为外部类 &quot;。
 * B: 什么时候使用内部类
     在描述事物时，若一个事物内部还包含其他可能包含的事物，比如在描述汽车时，汽车中还包含这发动机，
     这时发动机就可以使用内部类来描述。
@@ -613,40 +612,60 @@ c:匿名对象可以作为方法接收的参数、方法返回值使用
         }
     }
 * C: 内部类的分类
-    内部类分为成员内部类与局部内部类。
-    我们定义内部类时，就是一个正常定义类的过程，同样包含各种修饰符、继承与实现关系等。
-    在内部类中可以直接访问外部类的所有成员。
+
+    内部类分为【成员内部类】与【局部内部类】。
+————————————————————————————————————————————————————————————————————————————————————————
+    我们【定义】【内部类】时，就是一个【正常定义类】的过程，
+    【同样】【包含】各种【修饰符】、【继承】与【实现关系】等。
+————————————————————————————————————————————————————————————————————————————————————————
+    在【内部类】中可以【直接】访问【外部类】的【所有成员】。
 </code></pre><h3 id="15成员内部类的调用格式"><a href="#15成员内部类的调用格式" class="headerlink" title="15成员内部类的调用格式"></a>15成员内部类的调用格式</h3><pre><code>* A: 格式
 </code></pre><pre><code class="java">
-    成员内部类，定义在外部类中的成员位置。与类中的成员变量相似，可通过外部类对象进行访问
+<span class="string">"【成员内部类】，定义在【外部类】中的【成员位置】。与类中的成员变量【相似】，可通过【外部类】【对象】进行访问"</span>
 * B: 定义格式
-    <span class="class"><span class="keyword">class</span> 外部类 </span>{ 
-        修饰符 <span class="class"><span class="keyword">class</span> 内部类 </span>{
-            <span class="comment">//其他代码</span>
-        }
+<span class="class"><span class="keyword">class</span> 外部类 </span>{ 
+    修饰符 <span class="class"><span class="keyword">class</span> 内部类 </span>{
+        <span class="comment">//其他代码</span>
     }
+}
 
 * C: 访问方式
-    外部类名.内部类名 变量名 = <span class="keyword">new</span> 外部类名().new 内部类名();
-
+————————————————————————————————————————————————————————————————————————————————————————
+外部类名.内部类名 变量名 = <span class="keyword">new</span> 外部类名().new 内部类名();
+————————————————————————————————————————————————————————————————————————————————————————
+注：外部类调用内部类的成员：
+（<span class="number">1</span>）<span class="string">"【非静态成员内部类】"</span>：
+<span class="string">"——————————————————————————————————————————————————————————"</span>
+外部类名.内部类名 变量名 = <span class="keyword">new</span> 外部类名().new 内部类名();
+<span class="string">"——————————————————————————————————————————————————————————"</span>
+<span class="string">"【非静态内部类】【不能】 定义【 静态方法】"</span>
+<span class="string">"需要在外部类中创建 内部类对象 ==&gt;&gt;&gt;调用方法： 【内部类对象名.成员变量】 OR 【 内部类对象名.成员方法() 】"</span>
+————————————————————————————————————————————————————————————————————————————————————————
+（<span class="number">2</span>）<span class="string">"【静态成员内部类】"</span>：
+<span class="string">"——————————————————————————————————————————————————————————"</span>
+外部类名.内部类名 变量名 = <span class="keyword">new</span> 外部类名.内部类名();
+<span class="string">"——————————————————————————————————————————————————————————"</span>
+<span class="string">"在外部类中 直接 采用【 内部类名.成员 】调用 </span>
+<span class="string">并且：访问方式无需创建对象，利用 【 外部类名.内部类名.内部类静态方法 】访问内部类静态方法"</span>
+————————————————————————————————————————————————————————————————————————————————————————
 * D: 成员内部类代码演示
-    <span class="class"><span class="keyword">class</span> <span class="title">Body</span> </span>{<span class="comment">//外部类，身体</span>
-         <span class="keyword">private</span> <span class="keyword">boolean</span> life= <span class="keyword">true</span>; <span class="comment">//生命状态</span>
-         <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Heart</span> </span>{ <span class="comment">//内部类，心脏</span>
-             <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">jump</span><span class="params">()</span> </span>{
-                 System.out.println(<span class="string">"心脏噗通噗通的跳"</span>)
-                    System.out.println(<span class="string">"生命状态"</span> + life); <span class="comment">//访问外部类成员变量</span>
-            }
+<span class="class"><span class="keyword">class</span> <span class="title">Body</span> </span>{<span class="comment">//外部类，身体</span>
+     <span class="keyword">private</span> <span class="keyword">boolean</span> life= <span class="keyword">true</span>; <span class="comment">//生命状态</span>
+     <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Heart</span> </span>{ <span class="comment">//内部类，心脏</span>
+         <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">jump</span><span class="params">()</span> </span>{
+             System.out.println(<span class="string">"心脏噗通噗通的跳"</span>)
+                System.out.println(<span class="string">"生命状态"</span> + life); <span class="comment">//访问外部类成员变量</span>
         }
     }
+}
 
-    访问内部类
-    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{
-        <span class="comment">//创建内部类对象</span>
-        Body.Heart bh = <span class="keyword">new</span> Body().new Heart();
-        <span class="comment">//调用内部类中的方法</span>
-        bh.jump();
-    }
+访问内部类
+<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{
+    <span class="comment">//创建内部类对象</span>
+    Body.Heart bh = <span class="keyword">new</span> Body().new Heart();
+    <span class="comment">//调用内部类中的方法</span>
+    bh.jump();
+}
 
 
 </code></pre>
