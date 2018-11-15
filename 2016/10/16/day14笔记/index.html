@@ -166,7 +166,7 @@
 <meta property="og:description" content="1、不同修饰符混合使用细节2、辨析何时定义变量为成员变量3、类、抽象类、接口作为方法参数4、类、抽象类、接口作为方法返回值">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1541857446/samples/java%20files/photo-1541086263351-627c0c6999aa.jpg">
-<meta property="og:updated_time" content="2018-11-10T13:48:41.481Z">
+<meta property="og:updated_time" content="2018-11-15T14:12:23.100Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java学习笔记——基础12">
 <meta name="twitter:description" content="1、不同修饰符混合使用细节2、辨析何时定义变量为成员变量3、类、抽象类、接口作为方法参数4、类、抽象类、接口作为方法返回值">
@@ -502,397 +502,38 @@
 <p><img src="https://res.cloudinary.com/dpvywdzxv/image/upload/v1541857446/samples/java%20files/photo-1541086263351-627c0c6999aa.jpg" alt="" style="width:100%"></p>
 <p>1、不同修饰符混合使用细节<br>2、辨析何时定义变量为成员变量<br>3、类、抽象类、接口作为方法参数<br>4、类、抽象类、接口作为方法返回值</p>
 <a id="more"></a>
-<h3 id="不同修饰符使用细节"><a href="#不同修饰符使用细节" class="headerlink" title="不同修饰符使用细节"></a>不同修饰符使用细节</h3><p>A: 常用来修饰类、方法、变量的修饰符如下：</p>
-<pre><code>    public 权限修饰符，公共访问, 类,方法,成员变量
-    protected 权限修饰符，受保护访问, 方法,成员变量
-    默认什么也不写 也是一种权限修饰符，默认访问, 类,方法,成员变量
-    private 权限修饰符，私有访问, 方法,成员变量
-    static 静态修饰符  方法,成员变量
-    final 最终修饰符   类,方法,成员变量,局部变量
-    abstract 抽象修饰符  类 ,方法
-</code></pre><p>B: 不能同时使用的修饰符</p>
-<pre><code>同时，abstract与private不能同时使用；
-同时，abstract与static不能同时使用；
-同时，abstract与final不能同时使用。
-</code></pre><p>    C: 修饰类能够使用的修饰符：</p>
-<pre><code>修饰类只能使用public、默认的、final、abstract关键字
-使用最多的是 public关键字
-
-a:代码案例
-    public class Demo {} //最常用的方式
-    class Demo2{}
-    public final class Demo3{}
-    public abstract class Demo4{}
-</code></pre><p>D:修饰成员变量能够使用的修饰符：</p>
-<pre><code>public : 公共的
-protected : 受保护的
-    : 默认的
-private ：私有的
-final : 最终的
-static : 静态的
-使用最多的是 private
-
-a: 代码案例
-    public int count = 100;
-    protected int count2 = 100;
-    int count3 = 100;
-    private int count4 = 100; //最常用的方式
-    public final int count5 = 100;
-    public static int count6 = 100;
-</code></pre><p>    E:修饰构造方法能够使用的修饰符：</p>
-<pre><code>public : 公共的
-protected : 受保护的
-    : 默认的
-private ：私有的
-使用最多的是 public
-
-a:代码案例
-    public Demo(){} //最常用的方式
-    protected Demo(){}
-    Demo(){}
-    private Demo(){}
-
-    修饰成员方法能够使用的修饰符：
-        public : 公共的
-        protected : 受保护的
-            : 默认的
-        private ：私有的
-        final : 最终的
-        static : 静态的
-        abstract : 抽象的
-        使用最多的是 public
-    public void method1(){}//最常用的方式
-    protected void method2(){}
-    void method3(){}
-    private void method4(){}
-    public final void method5(){}
-    public static void method6(){}//最常用的方式
-    public abstract void method7();//最常用的方式
-</code></pre><h3 id="局部变量和成员变量解析"><a href="#局部变量和成员变量解析" class="headerlink" title="局部变量和成员变量解析"></a>局部变量和成员变量解析</h3><pre><code>* A：程序编译
+<h3 id="不同修饰符使用细节"><a href="#不同修饰符使用细节" class="headerlink" title="不同修饰符使用细节"></a>不同修饰符使用细节</h3><p>A: 常用来修饰类、方法、变量的修饰符如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">	<span class="keyword">public</span> 权限修饰符，公共访问, 类,方法,成员变量</span><br><span class="line">	<span class="keyword">protected</span> 权限修饰符，受保护访问, 方法,成员变量</span><br><span class="line">	默认什么也不写 也是一种权限修饰符，默认访问, 类,方法,成员变量</span><br><span class="line">	<span class="keyword">private</span> 权限修饰符，私有访问, 方法,成员变量</span><br><span class="line">	<span class="keyword">static</span> 静态修饰符  方法,成员变量</span><br><span class="line">	<span class="keyword">final</span> 最终修饰符   类,方法,成员变量,局部变量</span><br><span class="line">	<span class="keyword">abstract</span> 抽象修饰符  类 ,方法</span><br></pre></td></tr></table></figure></p>
+<p>B: 不能同时使用的修饰符<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">同时，<span class="keyword">abstract</span>与<span class="keyword">private</span>不能同时使用；</span><br><span class="line">同时，<span class="keyword">abstract</span>与<span class="keyword">static</span>不能同时使用；</span><br><span class="line">同时，<span class="keyword">abstract</span>与<span class="keyword">final</span>不能同时使用。</span><br></pre></td></tr></table></figure></p>
+<p>    C: 修饰类能够使用的修饰符：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">修饰类只能使用<span class="keyword">public</span>、默认的、<span class="keyword">final</span>、<span class="keyword">abstract</span>关键字</span><br><span class="line">使用最多的是 <span class="keyword">public</span>关键字</span><br><span class="line"></span><br><span class="line">a:代码案例</span><br><span class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo</span> </span>&#123;&#125; <span class="comment">//最常用的方式</span></span><br><span class="line">	<span class="class"><span class="keyword">class</span> <span class="title">Demo2</span></span>&#123;&#125;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo3</span></span>&#123;&#125;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo4</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>D:修饰成员变量能够使用的修饰符：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> : 公共的</span><br><span class="line"><span class="keyword">protected</span> : 受保护的</span><br><span class="line">	: 默认的</span><br><span class="line"><span class="keyword">private</span> ：私有的</span><br><span class="line"><span class="keyword">final</span> : 最终的</span><br><span class="line"><span class="keyword">static</span> : 静态的</span><br><span class="line">使用最多的是 <span class="keyword">private</span></span><br><span class="line"></span><br><span class="line">a: 代码案例</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">int</span> count = <span class="number">100</span>;</span><br><span class="line">	<span class="keyword">protected</span> <span class="keyword">int</span> count2 = <span class="number">100</span>;</span><br><span class="line">	<span class="keyword">int</span> count3 = <span class="number">100</span>;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> count4 = <span class="number">100</span>; <span class="comment">//最常用的方式</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> count5 = <span class="number">100</span>;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> count6 = <span class="number">100</span>;</span><br></pre></td></tr></table></figure></p>
+<p>    E:修饰构造方法能够使用的修饰符：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> : 公共的</span><br><span class="line"><span class="keyword">protected</span> : 受保护的</span><br><span class="line">	: 默认的</span><br><span class="line"><span class="keyword">private</span> ：私有的</span><br><span class="line">使用最多的是 <span class="keyword">public</span></span><br><span class="line"></span><br><span class="line">a:代码案例</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Demo</span><span class="params">()</span></span>&#123;&#125; <span class="comment">//最常用的方式</span></span><br><span class="line">	<span class="function"><span class="keyword">protected</span> <span class="title">Demo</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">	Demo()&#123;&#125;</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="title">Demo</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">	修饰成员方法能够使用的修饰符：</span><br><span class="line">	<span class="keyword">public</span> : 公共的</span><br><span class="line">	<span class="keyword">protected</span> : 受保护的</span><br><span class="line">		: 默认的</span><br><span class="line">	<span class="keyword">private</span> ：私有的</span><br><span class="line">	<span class="keyword">final</span> : 最终的</span><br><span class="line">	<span class="keyword">static</span> : 静态的</span><br><span class="line">	<span class="keyword">abstract</span> : 抽象的</span><br><span class="line">	使用最多的是 <span class="keyword">public</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method1</span><span class="params">()</span></span>&#123;&#125;<span class="comment">//最常用的方式</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">method2</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">method3</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">method4</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">method5</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method6</span><span class="params">()</span></span>&#123;&#125;<span class="comment">//最常用的方式</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">method7</span><span class="params">()</span></span>;<span class="comment">//最常用的方式</span></span><br></pre></td></tr></table></figure>
+<h3 id="局部变量和成员变量解析"><a href="#局部变量和成员变量解析" class="headerlink" title="局部变量和成员变量解析"></a>局部变量和成员变量解析</h3><pre><code>* A：程序编译
 * 
-        数学工具类
-public class MathTool {
-    //求两个数的和的二倍
-    public double sum2times(int number,int number2) {
-        return (number+number2)*2;
-    }
-    //求两个数的积
-    public double area(int number,int number2) {
-        return number*number2;
-    }
-}
-</code></pre><p>    长方形类</p>
-<pre><code>public class CFX {
-    //因为长与宽，在现实事物中属于事物的一部分，所以定义成员变量
-    private int chang;
-    private int kuan;
-
-    public CFX(int chang, int kuan) {
-        this.chang = chang;
-        this.kuan = kuan;
-    }
-
-    //求长与宽的周长
-    public double zhouChang() {
-        return (chang+kuan)*2;
-    }
-    //求长与宽的面积
-    public double mianJi() {
-        return chang*kuan;
-    }
-    public int getChang() {
-        return chang;
-    }
-    public void setChang(int chang) {
-        this.chang = chang;
-    }
-    public int getKuan() {
-        return kuan;
-    }
-    public void setKuan(int kuan) {
-        this.kuan = kuan;
-    }
-}
-</code></pre><h3 id="类作为方法的参数"><a href="#类作为方法的参数" class="headerlink" title="类作为方法的参数"></a>类作为方法的参数</h3><pre><code>* A：    类作为方法参数
-    在编写程序中，会经常碰到调用的方法要接收的是一个类类型的情况，那么这时，要向方法中传入该类的对象。
-
-    如下代码演示：
-        class Person{
-            public void show(){
-                System.out.println(&quot;show方法执行了&quot;);
-            }
-        }
-        //测试类
-        public class Test {
-            public static void main(String[] args) {
-                //创建Person对象
-                Person p = new Person();
-                //调用method方法
-                method(p);
-            }
-
-        //定义一个方法method，用来接收一个Person对象，在方法中调用Person对象的show方法
-        public static void method(Person p){
-            p.show();
-        }
-</code></pre><h3 id="抽象类作为方法参数与返回值"><a href="#抽象类作为方法参数与返回值" class="headerlink" title="抽象类作为方法参数与返回值"></a>抽象类作为方法参数与返回值</h3><pre><code>* A:     抽象类作为方法参数
-    今后开发中，抽象类作为方法参数的情况也很多见。当遇到方法参数为抽象类类型时，要传入一个实现抽象类所有抽象方法的子类对象。如下代码演示：
-    //抽象类
-    abstract class Person{
-        public abstract void show();
-    }
-    class Student extends Person{
-        @Override
-        public void show() {
-            System.out.println(&quot;重写了show方法&quot;);
-        }
-    }
-    //测试类
-    public class Test {
-        public static void main(String[] args) {
-            //通过多态的方式，创建一个Person类型的变量，而这个对象实际是Student
-            Person p = new Student();
-            //调用method方法
-            method(p);
-        }
-
-        //定义一个方法method，用来接收一个Person类型对象，在方法中调用Person对象的show方法
-        public static void method(Person p){//抽象类作为参数
-            //通过p变量调用show方法,这时实际调用的是Student对象中的show方法
-            p.show();    
-    }
-    }
-
-
-* B:    抽象类作为方法返回值
-    抽象类作为方法返回值的情况，也是有的，这时需要返回一个实现抽象类所有抽象方法的子类对象。如下代码演示：
-    //抽象类
-    abstract class Person{
-        public abstract void show();
-    }
-    class Student extends Person{
-        @Override
-        public void show() {
-            System.out.println(&quot;重写了show方法&quot;);
-        }
-    }
-    //测试类
-    public class Test {
-        public static void main(String[] args) {
-            //调用method方法，获取返回的Person对象
-            Person p = method();
-            //通过p变量调用show方法,这时实际调用的是Student对象中的show方法
-            p.show();
-        }
-
-        //定义一个方法method，用来获取一个Person对象，在方法中完成Person对象的创建
-        public static Person method(){
-            Person p = new Student();
-            return p;
-        }
-    }
-</code></pre><h3 id="接口作为方法参数与返回值"><a href="#接口作为方法参数与返回值" class="headerlink" title="接口作为方法参数与返回值"></a>接口作为方法参数与返回值</h3><pre><code>* A:     接口作为方法参数
-    接口作为方法参数的情况是很常见的，经常会碰到。当遇到方法参数为接口类型时，那么该方法要传入一个接口实现类对象。如下代码演示。
-    //接口
-    interface Smoke{
-        public abstract void smoking();
-    }
-    class Student implements Smoke{
-        @Override
-        public void smoking() {
-            System.out.println(&quot;课下吸口烟，赛过活神仙&quot;);
-        }
-    }
-    //测试类
-    public class Test {
-        public static void main(String[] args) {
-            //通过多态的方式，创建一个Smoke类型的变量，而这个对象实际是Student
-            Smoke s = new Student();
-            //调用method方法
-            method(s);
-        }
-
-        //定义一个方法method，用来接收一个Smoke类型对象，在方法中调用Smoke对象的show方法
-        public static void method(Smoke sm){//接口作为参数
-            //通过sm变量调用smoking方法，这时实际调用的是Student对象中的smoking方法
-            sm.smoking();
-        }
-    }
-
-* B:    接口作为方法返回值
-    接口作为方法返回值的情况，在后面的学习中会碰到。当遇到方法返回值是接口类型时，那么该方法需要返回一个接口实现类对象。如下代码演示。
-
-    //接口
-    interface Smoke{
-        public abstract void smoking();
-    }
-    class Student implements Smoke{
-        @Override
-        public void smoking() {
-            System.out.println(&quot;课下吸口烟，赛过活神仙&quot;);
-        }
-    }
-    //测试类
-    public class Test {
-        public static void main(String[] args) {
-            //调用method方法，获取返回的会吸烟的对象
-            Smoke s = method();
-            //通过s变量调用smoking方法,这时实际调用的是Student对象中的smoking方法
-            s.smoking();
-        }
-
-        //定义一个方法method，用来获取一个具备吸烟功能的对象，并在方法中完成吸烟者的创建
-        public static Smoke method(){
-            Smoke sm = new Student();
-            return sm;
-        }
-    }
-</code></pre><h3 id="星级酒店案例"><a href="#星级酒店案例" class="headerlink" title="星级酒店案例"></a>星级酒店案例</h3><pre><code>* A:     根据“某五星级酒店，资金雄厚……都有自己的工作要做。”分析出，该题        目中包含酒店，可以把它封装成类，多名员工）。
-
-        class 员工 {
-             属性：姓名
-        属性：工号
-        方法：工作
-        }
-        class 厨师 extends 员工{}
-        class 服务员 extends 员工{}
-        class 经理 extends 员工 {
-             属性：奖金
-        }
-
-        员工的类型有经理、厨师、服务员，它们有共同的属性（姓名、工号、），经理额外属性（奖金）。
-
-            根据“向酒店中，增加多名员工（其中包含1名经理，1名厨师、2名服务员）”。分析出，要创建一个酒店对象，并添加4名员工到酒店对象的员工集合中。
-        酒店员工集合添加新员工： 经理对象
-        酒店员工集合添加新员工： 厨师对象
-        酒店员工集合添加新员工： 服务员对象
-        酒店员工集合添加新员工： 服务员对象
-
-            根据“获取酒店幸运员工”。分析出，从酒店员工集合随机得到一名员工对象。
-        1. 从酒店员工集合长度范围内，随机产生一个随机数
-        2. 使用该随机数作为集合的索引，返回该索引处对应的员工对象
-
-            根据“酒店开设VIP服务，酒店的厨师与服务员可以提供VIP服务。（厨师做菜加量、服务员给顾客倒酒）”。分析出，这是要增加一个VIP的接口，接口中提供个VIP服务的方法。让厨师与服务员实现该接口。
-        interface VIP服务{
-             抽象方法：服务
-        }
-        class 厨师 extends 员工 implements VIP服务{ 重写服务方法 }
-        class 服务员 extends 员工 implements VIP服务{ 重写服务方法 }
-
-    B:
-        VIP服务
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">	数学工具类</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MathTool</span> </span>&#123;</span><br><span class="line">	<span class="comment">//求两个数的和的二倍</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">sum2times</span><span class="params">(<span class="keyword">int</span> number,<span class="keyword">int</span> number2)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> (number+number2)*<span class="number">2</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//求两个数的积</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">area</span><span class="params">(<span class="keyword">int</span> number,<span class="keyword">int</span> number2)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> number*number2;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">	长方形类</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CFX</span> </span>&#123;</span><br><span class="line">	<span class="comment">//因为长与宽，在现实事物中属于事物的一部分，所以定义成员变量</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> chang;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> kuan;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">CFX</span><span class="params">(<span class="keyword">int</span> chang, <span class="keyword">int</span> kuan)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.chang = chang;</span><br><span class="line">		<span class="keyword">this</span>.kuan = kuan;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//求长与宽的周长</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">zhouChang</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> (chang+kuan)*<span class="number">2</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//求长与宽的面积</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">mianJi</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> chang*kuan;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getChang</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> chang;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setChang</span><span class="params">(<span class="keyword">int</span> chang)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.chang = chang;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getKuan</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> kuan;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setKuan</span><span class="params">(<span class="keyword">int</span> kuan)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.kuan = kuan;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="类作为方法的参数"><a href="#类作为方法的参数" class="headerlink" title="类作为方法的参数"></a>类作为方法的参数</h3><pre><code>* A：    类作为方法参数
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">在编写程序中，会经常碰到调用的方法要接收的是一个类类型的情况，那么这时，要向方法中传入该类的对象。</span><br><span class="line"></span><br><span class="line">如下代码演示：</span><br><span class="line">	<span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span>&#123;</span><br><span class="line">			System.out.println(<span class="string">"show方法执行了"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//测试类</span></span><br><span class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">			<span class="comment">//创建Person对象</span></span><br><span class="line">			Person p = <span class="keyword">new</span> Person();</span><br><span class="line">			<span class="comment">//调用method方法</span></span><br><span class="line">			method(p);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">	<span class="comment">//定义一个方法method，用来接收一个Person对象，在方法中调用Person对象的show方法</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">(Person p)</span></span>&#123;</span><br><span class="line">		p.show();</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="抽象类作为方法参数与返回值"><a href="#抽象类作为方法参数与返回值" class="headerlink" title="抽象类作为方法参数与返回值"></a>抽象类作为方法参数与返回值</h3><pre><code>* A:     抽象类作为方法参数
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">今后开发中，抽象类作为方法参数的情况也很多见。当遇到方法参数为抽象类类型时，要传入一个实现抽象类所有抽象方法的子类对象。如下代码演示：</span><br><span class="line"><span class="comment">//抽象类</span></span><br><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span> <span class="keyword">extends</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"重写了show方法"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//测试类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="comment">//通过多态的方式，创建一个Person类型的变量，而这个对象实际是Student</span></span><br><span class="line">		Person p = <span class="keyword">new</span> Student();</span><br><span class="line">		<span class="comment">//调用method方法</span></span><br><span class="line">		method(p);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//定义一个方法method，用来接收一个Person类型对象，在方法中调用Person对象的show方法</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">(Person p)</span></span>&#123;<span class="comment">//抽象类作为参数</span></span><br><span class="line">		<span class="comment">//通过p变量调用show方法,这时实际调用的是Student对象中的show方法</span></span><br><span class="line">		p.show();	</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">* B:	抽象类作为方法返回值</span><br><span class="line">抽象类作为方法返回值的情况，也是有的，这时需要返回一个实现抽象类所有抽象方法的子类对象。如下代码演示：</span><br><span class="line"><span class="comment">//抽象类</span></span><br><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span> <span class="keyword">extends</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"重写了show方法"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//测试类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="comment">//调用method方法，获取返回的Person对象</span></span><br><span class="line">		Person p = method();</span><br><span class="line">		<span class="comment">//通过p变量调用show方法,这时实际调用的是Student对象中的show方法</span></span><br><span class="line">		p.show();</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//定义一个方法method，用来获取一个Person对象，在方法中完成Person对象的创建</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Person <span class="title">method</span><span class="params">()</span></span>&#123;</span><br><span class="line">		Person p = <span class="keyword">new</span> Student();</span><br><span class="line">		<span class="keyword">return</span> p;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="接口作为方法参数与返回值"><a href="#接口作为方法参数与返回值" class="headerlink" title="接口作为方法参数与返回值"></a>接口作为方法参数与返回值</h3><pre><code>* A:     接口作为方法参数
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">接口作为方法参数的情况是很常见的，经常会碰到。当遇到方法参数为接口类型时，那么该方法要传入一个接口实现类对象。如下代码演示。</span><br><span class="line"><span class="comment">//接口</span></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Smoke</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">smoking</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span> <span class="keyword">implements</span> <span class="title">Smoke</span></span>&#123;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">smoking</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"课下吸口烟，赛过活神仙"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//测试类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="comment">//通过多态的方式，创建一个Smoke类型的变量，而这个对象实际是Student</span></span><br><span class="line">		Smoke s = <span class="keyword">new</span> Student();</span><br><span class="line">		<span class="comment">//调用method方法</span></span><br><span class="line">		method(s);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//定义一个方法method，用来接收一个Smoke类型对象，在方法中调用Smoke对象的show方法</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">(Smoke sm)</span></span>&#123;<span class="comment">//接口作为参数</span></span><br><span class="line">		<span class="comment">//通过sm变量调用smoking方法，这时实际调用的是Student对象中的smoking方法</span></span><br><span class="line">		sm.smoking();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">* B:	接口作为方法返回值</span><br><span class="line">接口作为方法返回值的情况，在后面的学习中会碰到。当遇到方法返回值是接口类型时，那么该方法需要返回一个接口实现类对象。如下代码演示。</span><br><span class="line"></span><br><span class="line"><span class="comment">//接口</span></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Smoke</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">smoking</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span> <span class="keyword">implements</span> <span class="title">Smoke</span></span>&#123;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">smoking</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"课下吸口烟，赛过活神仙"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//测试类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="comment">//调用method方法，获取返回的会吸烟的对象</span></span><br><span class="line">		Smoke s = method();</span><br><span class="line">		<span class="comment">//通过s变量调用smoking方法,这时实际调用的是Student对象中的smoking方法</span></span><br><span class="line">		s.smoking();</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//定义一个方法method，用来获取一个具备吸烟功能的对象，并在方法中完成吸烟者的创建</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Smoke <span class="title">method</span><span class="params">()</span></span>&#123;</span><br><span class="line">		Smoke sm = <span class="keyword">new</span> Student();</span><br><span class="line">		<span class="keyword">return</span> sm;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="星级酒店案例"><a href="#星级酒店案例" class="headerlink" title="星级酒店案例"></a>星级酒店案例</h3><pre><code>* A:     根据“某五星级酒店，资金雄厚……都有自己的工作要做。”分析出，该题        
+    目中包含酒店，可以把它封装成类，多名员工）。
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> 员工 </span>&#123;</span><br><span class="line">     属性：姓名</span><br><span class="line">属性：工号</span><br><span class="line">方法：工作</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> 厨师 <span class="keyword">extends</span> 员工</span>&#123;&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> 服务员 <span class="keyword">extends</span> 员工</span>&#123;&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> 经理 <span class="keyword">extends</span> 员工 </span>&#123;</span><br><span class="line">     属性：奖金</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">员工的类型有经理、厨师、服务员，它们有共同的属性（姓名、工号、），经理额外属性（奖金）。</span><br><span class="line"></span><br><span class="line">	根据“向酒店中，增加多名员工（其中包含<span class="number">1</span>名经理，<span class="number">1</span>名厨师、<span class="number">2</span>名服务员）”。分析出，要创建一个酒店对象，并添加<span class="number">4</span>名员工到酒店对象的员工集合中。</span><br><span class="line">酒店员工集合添加新员工： 经理对象</span><br><span class="line">酒店员工集合添加新员工： 厨师对象</span><br><span class="line">酒店员工集合添加新员工： 服务员对象</span><br><span class="line">酒店员工集合添加新员工： 服务员对象</span><br><span class="line"></span><br><span class="line">	根据“获取酒店幸运员工”。分析出，从酒店员工集合随机得到一名员工对象。</span><br><span class="line"><span class="number">1</span>. 从酒店员工集合长度范围内，随机产生一个随机数</span><br><span class="line"><span class="number">2</span>. 使用该随机数作为集合的索引，返回该索引处对应的员工对象</span><br><span class="line"></span><br><span class="line">	根据“酒店开设VIP服务，酒店的厨师与服务员可以提供VIP服务。（厨师做菜加量、服务员给顾客倒酒）”。分析出，这是要增加一个VIP的接口，接口中提供个VIP服务的方法。让厨师与服务员实现该接口。</span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">VIP</span>服务</span>&#123;</span><br><span class="line">     抽象方法：服务</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> 厨师 <span class="keyword">extends</span> 员工 <span class="keyword">implements</span> <span class="title">VIP</span>服务</span>&#123; 重写服务方法 &#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> 服务员 <span class="keyword">extends</span> 员工 <span class="keyword">implements</span> <span class="title">VIP</span>服务</span>&#123; 重写服务方法 &#125;</span><br></pre></td></tr></table></figure>
+<pre><code>B:
+    VIP服务
 public interface VIP {
-     public abstract void server(); //服务
+ public abstract void server(); //服务
 }
-</code></pre><p>    员工<br>        /*</p>
-<pre><code>     *     员工：
-             姓名 String
-             工号 String
+</code></pre><p>    员工</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* 	员工：</span></span><br><span class="line"><span class="comment">姓名 String</span></span><br><span class="line"><span class="comment">工号 String</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">YuanGong</span> </span>&#123;</span><br><span class="line">	<span class="comment">// 成员变量</span></span><br><span class="line">	<span class="keyword">private</span> String xingMing;</span><br><span class="line">	<span class="keyword">private</span> String gongHao;</span><br><span class="line">	<span class="comment">// 构造方法</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">YuanGong</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">YuanGong</span><span class="params">(String xingMing, String gongHao)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>();</span><br><span class="line">		<span class="keyword">this</span>.xingMing = xingMing;</span><br><span class="line">		<span class="keyword">this</span>.gongHao = gongHao;</span><br><span class="line">	</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 抽象方法</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">work</span><span class="params">()</span></span>;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// getters与setters</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getXingMing</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> xingMing;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setXingMing</span><span class="params">(String xingMing)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.xingMing = xingMing;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getGongHao</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> gongHao;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setGongHao</span><span class="params">(String gongHao)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.gongHao = gongHao;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>    服务员</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* 定义员工的子类 服务员类</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FuWuYuan</span> <span class="keyword">extends</span> <span class="title">YuanGong</span> <span class="keyword">implements</span> <span class="title">VIP</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">FuWuYuan</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">FuWuYuan</span><span class="params">(String xingMing, String gongHao)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>(xingMing, gongHao);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">work</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"亲，全身心为您服务，记得给好评哦"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">server</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"给顾客倒酒"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>    经理</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* 经理在员工的基础上，添加了奖金成员</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JingLi</span> <span class="keyword">extends</span> <span class="title">YuanGong</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">double</span> jiangJin;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">JingLi</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">JingLi</span><span class="params">(String xingMing, String gongHao, <span class="keyword">double</span> jiangJin)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>(xingMing, gongHao);</span><br><span class="line">		<span class="keyword">this</span>.jiangJin = jiangJin;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">getJiangJin</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> jiangJin;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setJiangJin</span><span class="params">(<span class="keyword">double</span> jiangJin)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.jiangJin = jiangJin;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">work</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"哪个员工让顾客不满意，我扣谁钱"</span>);</span><br><span class="line">	&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>    厨师</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* 定义员工的子类 厨师类</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ChuShi</span> <span class="keyword">extends</span> <span class="title">YuanGong</span> <span class="keyword">implements</span> <span class="title">VIP</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">ChuShi</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">ChuShi</span><span class="params">(String xingMing, String gongHao)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>(xingMing, gongHao);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">work</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"我做饭，放心吃吧，包您满意"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">server</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"做菜加量加料"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-     */
-
-public abstract class YuanGong {
-    // 成员变量
-    private String xingMing;
-    private String gongHao;
-    // 构造方法
-    public YuanGong() {
-        super();
-    }
-    public YuanGong(String xingMing, String gongHao) {
-        super();
-        this.xingMing = xingMing;
-        this.gongHao = gongHao;
-
-    }
-    // 抽象方法
-    public abstract void work();
-
-    // getters与setters
-    public String getXingMing() {
-        return xingMing;
-    }
-    public void setXingMing(String xingMing) {
-        this.xingMing = xingMing;
-    }
-    public String getGongHao() {
-        return gongHao;
-    }
-    public void setGongHao(String gongHao) {
-        this.gongHao = gongHao;
-    }
-
-}
-</code></pre><p>    服务员<br>/*</p>
-<ul>
-<li>定义员工的子类 服务员类<br>*/</li>
-</ul>
-<pre><code>public class FuWuYuan extends YuanGong implements VIP {
-    public FuWuYuan() {
-        super();
-    }
-
-    public FuWuYuan(String xingMing, String gongHao) {
-        super(xingMing, gongHao);
-    }
-    @Override
-    public void work() {
-        System.out.println(&quot;亲，全身心为您服务，记得给好评哦&quot;);
-    }
-    @Override
-    public void server() {
-        System.out.println(&quot;给顾客倒酒&quot;);
-    }
-}
-</code></pre><p>    经理<br>/*</p>
-<ul>
-<li>经理在员工的基础上，添加了奖金成员<br>*/</li>
-</ul>
-<pre><code>public class JingLi extends YuanGong {
-    private double jiangJin;
-
-    public JingLi() {
-        super();
-    }
-    public JingLi(String xingMing, String gongHao, double jiangJin) {
-        super(xingMing, gongHao);
-        this.jiangJin = jiangJin;
-    }
-
-    public double getJiangJin() {
-        return jiangJin;
-    }
-    public void setJiangJin(double jiangJin) {
-        this.jiangJin = jiangJin;
-    }
-
-    @Override
-    public void work() {
-        System.out.println(&quot;哪个员工让顾客不满意，我扣谁钱&quot;);
-    };
-}
-</code></pre><p>    厨师<br>/*</p>
-<ul>
-<li>定义员工的子类 厨师类<br>*/</li>
-</ul>
-<pre><code>public class ChuShi extends YuanGong implements VIP{
-    public ChuShi() {
-        super();
-    }
-    public ChuShi(String xingMing, String gongHao) {
-        super(xingMing, gongHao);
-    }
-
-    @Override
-    public void work() {
-        System.out.println(&quot;我做饭，放心吃吧，包您满意&quot;);
-    }
-    @Override
-    public void server() {
-        System.out.println(&quot;做菜加量加料&quot;);
-    }
-}
-</code></pre>
       
     </div>
 
