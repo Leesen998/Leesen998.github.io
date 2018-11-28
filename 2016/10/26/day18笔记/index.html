@@ -157,17 +157,20 @@
 
 
 
-  <meta name="keywords" content="AS">
+  <meta name="description" content="1、集合2、Iterator迭代器3、增强for循环4、泛型">
+<meta name="keywords" content="java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="AS环境配置踩坑经历">
-<meta property="og:url" content="https://leesen998.github.io/2016/10/03/AS环境配置踩坑经历/index.html">
+<meta property="og:title" content="java学习笔记——基础16(集合Collecton,Iterator迭代器,增强for循环,泛型)">
+<meta property="og:url" content="https://leesen998.github.io/2016/10/26/day18笔记/index.html">
 <meta property="og:site_name" content="QJun">
+<meta property="og:description" content="1、集合2、Iterator迭代器3、增强for循环4、泛型">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://res.cloudinary.com/leesen/image/upload/v1540280253/samples/java%20files/photo-1538150096488-cda7e455f3ee.jpg">
-<meta property="og:updated_time" content="2018-10-23T07:41:31.702Z">
+<meta property="og:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1543368660/samples/java%20files/photo-1542697149-cca3623abd0a.jpg">
+<meta property="og:updated_time" content="2018-11-28T01:31:36.668Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="AS环境配置踩坑经历">
-<meta name="twitter:image" content="https://res.cloudinary.com/leesen/image/upload/v1540280253/samples/java%20files/photo-1538150096488-cda7e455f3ee.jpg">
+<meta name="twitter:title" content="java学习笔记——基础16(集合Collecton,Iterator迭代器,增强for循环,泛型)">
+<meta name="twitter:description" content="1、集合2、Iterator迭代器3、增强for循环4、泛型">
+<meta name="twitter:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1543368660/samples/java%20files/photo-1542697149-cca3623abd0a.jpg">
 
 
 
@@ -176,7 +179,7 @@
 
 
 
-  <link rel="canonical" href="https://leesen998.github.io/2016/10/03/AS环境配置踩坑经历/"/>
+  <link rel="canonical" href="https://leesen998.github.io/2016/10/26/day18笔记/"/>
 
 
 
@@ -186,7 +189,7 @@
   };
 </script>
 
-  <title>AS环境配置踩坑经历 | QJun</title>
+  <title>java学习笔记——基础16(集合Collecton,Iterator迭代器,增强for循环,泛型) | QJun</title>
   
 
 
@@ -392,7 +395,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://leesen998.github.io/2016/10/03/AS环境配置踩坑经历/">
+    <link itemprop="mainEntityOfPage" href="https://leesen998.github.io/2016/10/26/day18笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QJun">
@@ -409,7 +412,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">AS环境配置踩坑经历
+          <h1 class="post-title" itemprop="name headline">java学习笔记——基础16(集合Collecton,Iterator迭代器,增强for循环,泛型)
               
             
           </h1>
@@ -434,7 +437,7 @@
                 
               
 
-              <time title="创建时间：2016-10-03 10:41:53" itemprop="dateCreated datePublished" datetime="2016-10-03T10:41:53+08:00">2016-10-03</time>
+              <time title="创建时间：2016-10-26 09:48:29" itemprop="dateCreated datePublished" datetime="2016-10-26T09:48:29+08:00">2016-10-26</time>
             
 
             
@@ -452,7 +455,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/软件安装/" itemprop="url" rel="index"><span itemprop="name">软件安装</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/程序设计/" itemprop="url" rel="index"><span itemprop="name">程序设计</span></a></span>
 
                 
                 
@@ -496,34 +499,462 @@
       
         <p class="description"></p>
 
-<p><img src="https://res.cloudinary.com/leesen/image/upload/v1540280253/samples/java%20files/photo-1538150096488-cda7e455f3ee.jpg" alt="" style="width:100%"></p>
+<p><img src="https://res.cloudinary.com/dpvywdzxv/image/upload/v1543368660/samples/java%20files/photo-1542697149-cca3623abd0a.jpg" alt="" style="width:100%"></p>
+<p>1、集合<br>2、Iterator迭代器<br>3、增强for循环<br>4、泛型</p>
 <a id="more"></a>
-<h2 id="遇到的bug"><a href="#遇到的bug" class="headerlink" title="遇到的bug"></a><font color="#551A8B" size="">遇到的bug</font></h2><pre><code>Unable to resolve dependency for &apos;:app@debug/compileClasspath&apos;
-</code></pre><p>这是由于配置文件的依赖是通过Google下载的，然而该下载被墙了！<br>[解决办法]：</p>
-<h3 id="在整个工程的build-gradle中添加以下框内代码："><a href="#在整个工程的build-gradle中添加以下框内代码：" class="headerlink" title="在整个工程的build.gradle中添加以下框内代码："></a>在整个工程的build.gradle中添加以下框内代码：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">maven &#123;</span><br><span class="line">        url <span class="string">'http://maven.aliyun.com/nexus/content/groups/public/'</span></span><br><span class="line">        &#125;</span><br><span class="line">maven &#123; url <span class="string">'http://repo1.maven.org/maven2'</span> &#125;</span><br></pre></td></tr></table></figure>
-<h3 id="app下的build-gradle配置如下"><a href="#app下的build-gradle配置如下" class="headerlink" title="app下的build.gradle配置如下:"></a>app下的build.gradle配置如下:</h3><p>buildToolsVersion 需要和你的sdk安装目录 ~\sdk\build-tools文件里面已有的版本对应<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    compileSdkVersion 26</span><br><span class="line">    buildToolsVersion <span class="string">'27.0.3'</span></span><br><span class="line">    defaultConfig &#123;</span><br><span class="line">        applicationId <span class="string">"com.example.administrator.myapplication"</span></span><br><span class="line">        minSdkVersion 19</span><br><span class="line">        targetSdkVersion 22</span><br><span class="line">        versionCode 1</span><br><span class="line">        versionName <span class="string">"1.0"</span></span><br><span class="line">        testInstrumentationRunner <span class="string">"android.support.test.runner.AndroidJUnitRunner"</span></span><br><span class="line">    &#125;</span><br><span class="line">    buildTypes &#123;</span><br><span class="line">        release &#123;</span><br><span class="line">            minifyEnabled <span class="literal">false</span></span><br><span class="line">            proguardFiles getDefaultProguardFile(<span class="string">'proguard-android.txt'</span>), <span class="string">'proguard-rules.pro'</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>implementation ‘com.android.support:appcompat-v7:26.+’ 中v7:26.+表示使用的sdk版本<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    implementation fileTree(dir: <span class="string">'libs'</span>, include: [<span class="string">'*.jar'</span>])</span><br><span class="line">    implementation <span class="string">'com.android.support:appcompat-v7:26.+'</span></span><br><span class="line">    implementation <span class="string">'com.android.support.constraint:constraint-layout:1.0.2'</span></span><br><span class="line">    testImplementation <span class="string">'junit:junit:4.12'</span></span><br><span class="line">    androidTestImplementation <span class="string">'com.android.support.test:runner:0.4'</span></span><br><span class="line">    androidTestImplementation <span class="string">'com.android.support.test.espresso:espresso-core:2.2.2'</span></span><br><span class="line">//    androidTestImplementation <span class="string">'com.android.support.test:runner:1.0.1'</span></span><br><span class="line">//    androidTestImplementation <span class="string">'com.android.support.test.espresso:espresso-core:3.0.1'</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="若配置后还没解决问题，依然报错"><a href="#若配置后还没解决问题，依然报错" class="headerlink" title="若配置后还没解决问题，依然报错"></a>若配置后还没解决问题，依然报错</h3><p><font color="#FF00FF" size="">打开 C:/Users/(用户名)/.gradle/gradle.properties</font><br>把http代理的配置注释掉，例如：</p>
-<pre><code>## For more details on how to configure your build environment visit
-# http://www.gradle.org/docs/current/userguide/build_environment.html
-#
-# Specifies the JVM arguments used for the daemon process.
-# The setting is particularly useful for tweaking memory settings.
-# Default value: -Xmx1024m -XX:MaxPermSize=256m
-# org.gradle.jvmargs=-Xmx2048m -XX:MaxPermSize=512m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8
-#
-# When configured, Gradle will run in incubating parallel mode.
-# This option should only be used with decoupled projects. More details, visit
-# http://www.gradle.org/docs/current/userguide/multi_project_builds.html#sec:decoupled_projects
-# org.gradle.parallel=true
-#Sat Sep 29 23:37:12 CST 2018
+<h3 id="01集合使用的回顾"><a href="#01集合使用的回顾" class="headerlink" title="01集合使用的回顾"></a>01集合使用的回顾</h3><pre><code>*A:集合使用的回顾
+  *a.ArrayList集合存储5个int类型元素
+     public static void main(String[] args) {
+          ArrayList&lt;Integer&gt; list = new ArrayList&lt;Integer&gt;();
+       list.add(111);
+       list.add(222);
+       list.add(333);
+       list.add(444);
+       list.add(555);
+       for(int i=0; i&lt;list.size(); i++){
+              System.out.println(list.get(i));
+      }
+     }
 
-#systemProp.http.proxyHost=mirrors.neusoft.edu.cn
-#systemProp.https.proxyPort=80
-#systemProp.https.proxyHost=mirrors.neusoft.edu.cn
-#systemProp.http.proxyPort=80
-</code></pre><p>More info: <a href="https://blog.csdn.net/magicbaby810/article/details/79848425" target="_blank" rel="noopener">参考该问题的csdn博客</a></p>
-<hr>
+ *b.ArrayList集合存储5个Person类型元素
+    public static void main(String[] args) {
+     ArrayList&lt;Person&gt; list = new ArrayList&lt;Person&gt;();
+     list.add(new Person(“小强”));
+     list.add(new Person(“老王”));
+     list.add(new Person(“小虎”));
+     list.add(new Person(“小泽”));
+     list.add(new Person(“小红”));
+     for(int i=0; i&lt;list.size(); i++){
+       Person p = list.get(i);
+             System.out.println(p);
+      }
+    }
+</code></pre><h3 id="02集合的学习目标"><a href="#02集合的学习目标" class="headerlink" title="02集合的学习目标"></a>02集合的学习目标</h3><pre><code>  集合，集合是java中提供的一种容器，可以用来存储多个数据。
+在前面的学习中，我们知道数据多了，可以使用数组存放或者使用ArrayList集合进行存放数据。那么，集合和数组既然都是容器，它们有啥区别呢？
+  数组的长度是固定的。集合的长度是可变的。
+  集合中存储的元素必须是引用类型数据
+</code></pre><h3 id="03集合继承关系图"><a href="#03集合继承关系图" class="headerlink" title="03集合继承关系图"></a>03集合继承关系图</h3><pre><code>A:集合继承关系图
+ a:ArrayList的继承关系:
+ 查看ArrayList类发现它继承了抽象类AbstractList同时实现接口List，而List接口又继承了Collection接口。Collection接口为最顶层集合接口了。
+ 源代码：
+  interface List extends Collection {
+  }
+  public class ArrayList extends AbstractList implements List{
+  }
+
+b:集合继承体系
+ 这说明我们在使用ArrayList类时，该类已经把所有抽象方法进行了重写。那么，实现Collection接口的所有子类都会进行方法重写。
+   Collecton接口常用的子接口有：List接口、Set接口
+   List接口常用的子类有：ArrayList类、LinkedList类
+   Set接口常用的子类有：HashSet类、LinkedHashSet类
+
+                          Collection 接口     
+                               |
+ ----------------------------------------------------------------
+ |                                                              |
+List接口                                                       Set接口
+ |                                                              |
+ ----------------                                             -------------
+ |              |                                             |            |
+ArrayList类    LinkedList类                                 HashSet类     LinkedHashSet类
+</code></pre><h3 id="04集合Collection的方法"><a href="#04集合Collection的方法" class="headerlink" title="04集合Collection的方法"></a>04集合Collection的方法</h3><pre><code>A:集合Collection的方法
+ /*
+  *  Collection接口中的方法
+  *  是集合中所有实现类必须拥有的方法
+  *  使用Collection接口的实现类,程序的演示
+  *  ArrayList implements List
+  *  List extends Collection
+  *  方法的执行,都是实现的重写
+  */
+ public class CollectionDemo {
+  public static void main(String[] args) {
+    function_2();
+  }
+
+
+  /*  Collection接口方法
+   *  Object[] toArray() 集合中的元素,转成一个数组中的元素, 集合转成数组
+   *  返回是一个存储对象的数组, 数组存储的数据类型是Object
+   */
+  private static void function_2() {
+    Collection&lt;String&gt; coll = new ArrayList&lt;String&gt;();
+    coll.add(&quot;abc&quot;);
+    coll.add(&quot;itcast&quot;);
+    coll.add(&quot;itheima&quot;);
+    coll.add(&quot;money&quot;);
+    coll.add(&quot;123&quot;);
+
+    Object[] objs = coll.toArray();
+    for(int i = 0 ; i &lt; objs.length ; i++){
+      System.out.println(objs[i]);
+    }
+  }
+  /*
+   * 学习Java中三种长度表现形式
+   *   数组.length 属性  返回值 int
+   *   字符串.length() 方法,返回值int
+   *   集合.size()方法, 返回值int
+   */
+
+  /*
+   * Collection接口方法
+   * boolean contains(Object o) 判断对象是否存在于集合中,对象存在返回true
+   * 方法参数是Object类型
+   */
+  private static void function_1() {
+    Collection&lt;String&gt; coll = new ArrayList&lt;String&gt;();
+    coll.add(&quot;abc&quot;);
+    coll.add(&quot;itcast&quot;);
+    coll.add(&quot;itheima&quot;);
+    coll.add(&quot;money&quot;);
+    coll.add(&quot;123&quot;);
+
+    boolean b = coll.contains(&quot;itcast&quot;);
+    System.out.println(b);
+  }
+
+
+  /*
+   * Collection接口的方法
+   * void clear() 清空集合中的所有元素
+   * 集合容器本身依然存在
+   */
+  public static void function(){
+    //接口多态的方式调用
+    Collection&lt;String&gt; coll = new ArrayList&lt;String&gt;();
+    coll.add(&quot;abc&quot;);
+    coll.add(&quot;bcd&quot;);
+    System.out.println(coll);
+
+    coll.clear();
+
+    System.out.println(coll);
+
+  }
+ }
+</code></pre><h3 id="05集合Collection的remove方法"><a href="#05集合Collection的remove方法" class="headerlink" title="05集合Collection的remove方法"></a>05集合Collection的remove方法</h3><p>   A:05集合Collection的remove方法<br>    /*</p>
+<pre><code> * Collection接口方法
+ * boolean remove(Object o)移除集合中指定的元素
+ */
+private static void function_3(){
+  Collection&lt;String&gt; coll = new ArrayList&lt;String&gt;();
+  coll.add(&quot;abc&quot;);
+  coll.add(&quot;money&quot;);
+  coll.add(&quot;itcast&quot;);
+  coll.add(&quot;itheima&quot;);
+  coll.add(&quot;money&quot;);
+  coll.add(&quot;123&quot;);  
+  System.out.println(coll);
+
+  boolean b = coll.remove(&quot;money&quot;);
+  System.out.println(b);
+  System.out.println(coll);
+}
+</code></pre><h3 id="06迭代器的概述"><a href="#06迭代器的概述" class="headerlink" title="06迭代器的概述"></a>06迭代器的概述</h3><p>  A:迭代器概述:<br>   a:java中提供了很多个集合，它们在存储元素时，采用的存储方式不同。<br>    我们要取出这些集合中的元素，可通过一种通用的获取方式来完成。</p>
+<p>   b:Collection集合元素的通用获取方式：在取元素之前先要判断集合中有没有元素，<br>  如果有，就把这个元素取出来，继续在判断，如果还有就再取出出来。一直把集合中的所有元素全部取出。这种取出方式专业术语称为迭代。</p>
+<p>   c:每种集合的底层的数据结构不同,例如ArrayList是数组,LinkedList底层是链表,但是无论使用那种集合,我们都会有判断是否有元素<br>     以及取出里面的元素的动作,那么Java为我们提供一个迭代器定义了统一的判断元素和取元素的方法 </p>
+<h3 id="07迭代器的实现原理"><a href="#07迭代器的实现原理" class="headerlink" title="07迭代器的实现原理"></a>07迭代器的实现原理</h3><p>   <em>A:迭代器的实现原理<br>      /</em></p>
+<pre><code>*  集合中的迭代器:
+*    获取集合中元素方式
+*  接口 Iterator : 两个抽象方法
+*     boolean hasNext() 判断集合中还有没有可以被取出的元素,如果有返回true
+*     next() 取出集合中的下一个元素
+*     
+*  Iterator接口,找实现类.
+*    Collection接口定义方法 
+*       Iterator  iterator()
+*    ArrayList 重写方法 iterator(),返回了Iterator接口的实现类的对象
+*    使用ArrayList集合的对象
+*     Iterator it =array.iterator(),运行结果就是Iterator接口的实现类的对象
+*     it是接口的实现类对象,调用方法 hasNext 和 next 集合元素迭代
+*/
+</code></pre><h3 id="08迭代器的代码实现"><a href="#08迭代器的代码实现" class="headerlink" title="08迭代器的代码实现"></a>08迭代器的代码实现</h3><p>   *A:迭代器的代码实现<br>      public class IteratorDemo {<br>        public static void main(String[] args) {<br>          Collection<string> coll = new ArrayList<string>();<br>          coll.add(“abc1”);<br>          coll.add(“abc2”);<br>          coll.add(“abc3”);<br>          coll.add(“abc4”);<br>          //迭代器,对集合ArrayList中的元素进行取出</string></string></p>
+<pre><code>    //调用集合的方法iterator()获取出,Iterator接口的实现类的对象
+    Iterator&lt;String&gt; it = coll.iterator();
+    //接口实现类对象,调用方法hasNext()判断集合中是否有元素
+    //boolean b = it.hasNext();
+    //System.out.println(b);
+    //接口的实现类对象,调用方法next()取出集合中的元素
+    //String s = it.next();
+    //System.out.println(s);
+
+    //迭代是反复内容,使用循环实现,循环的条件,集合中没元素, hasNext()返回了false
+    while(it.hasNext()){
+      String s = it.next();
+      System.out.println(s);
+    }
+
+
+
+  }
+}
+</code></pre><h3 id="09迭代器的执行过程"><a href="#09迭代器的执行过程" class="headerlink" title="09迭代器的执行过程"></a>09迭代器的执行过程</h3><p>   A:迭代器的执行过程<br>     a:迭代器的原理:<br>       while(it.hasNext()) {<br>            System.out.println(it.next());<br>       }</p>
+<pre><code>  //cursor记录的索引值不等于集合的长度返回true,否则返回false
+    public boolean hasNext() {       
+      return cursor != size; //cursor初值为0
+
+    }
+
+   //next()方法作用:
+   //①返回cursor指向的当前元素 
+   //②cursor++
+   public Object next() {            
+            int i = cursor; 
+            cursor = i + 1;  
+            return  elementData[lastRet = i]; 
+
+        }
+b:for循环迭代写法:
+   for (Iterator&lt;String&gt; it2 = coll.iterator(); it2.hasNext();  ) {
+    System.out.println(it2.next());
+  } 
+</code></pre><h3 id="10集合迭代中的转型"><a href="#10集合迭代中的转型" class="headerlink" title="10集合迭代中的转型"></a>10集合迭代中的转型</h3><p>   A:集合迭代中的转型<br>     a:在使用集合时，我们需要注意以下几点：<br>       集合中存储其实都是对象的地址。<br>       集合中可以存储基本数值吗？jdk1.5版本以后可以存储了。<br>         因为出现了基本类型包装类，它提供了自动装箱操作（基本类型对象），这样，集合中的元素就是基本数值的包装类对象。</p>
+<pre><code>b:存储时提升了Object。取出时要使用元素的特有内容，必须向下转型。
+ Collection coll = new ArrayList();
+ coll.add(&quot;abc&quot;);
+ coll.add(&quot;aabbcc&quot;);
+ coll.add(&quot;shitcast&quot;);
+ Iterator it = coll.iterator();
+ while (it.hasNext()) {
+  //由于元素被存放进集合后全部被提升为Object类型
+ //当需要使用子类对象特有方法时，需要向下转型
+  String str = (String) it.next();
+  System.out.println(str.length());
+ }
+ 注意：如果集合中存放的是多个对象，这时进行向下转型会发生类型转换异常。
+
+
+c:Iterator接口也可以使用&lt;&gt;来控制迭代元素的类型的。代码演示如下：
+ Collection&lt;String&gt; coll = new ArrayList&lt;String&gt;();
+ coll.add(&quot;abc&quot;);
+ coll.add(&quot;aabbcc&quot;);
+ coll.add(&quot;shitcast&quot;);
+ Iterator&lt;String&gt; it = coll.iterator();
+ while (it.hasNext()) {
+  String str =  it.next(); 
+ //当使用Iterator&lt;String&gt;控制元素类型后，就不需要强转了。获取到的元素直接就是String类型
+  System.out.println(str.length());
+ }
+</code></pre><h3 id="11增强for循环遍历数组"><a href="#11增强for循环遍历数组" class="headerlink" title="11增强for循环遍历数组"></a>11增强for循环遍历数组</h3><p>   <em>A:增强for循环遍历数组<br>     a:格式:<br>     /</em></p>
+<pre><code> *  JDK1.5新特性,增强for循环
+ *  JDK1.5版本后,出现新的接口 java.lang.Iterable
+ *    Collection开是继承Iterable
+ *    Iterable作用,实现增强for循环
+ *    
+ *    格式:
+ *      for( 数据类型  变量名 : 数组或者集合 ){
+ *         sop(变量);
+ *      }
+ */
+public static void function_1(){
+   //for对于对象数组遍历的时候,能否调用对象的方法呢
+   String[] str = {&quot;abc&quot;,&quot;itcast&quot;,&quot;cn&quot;};
+   for(String s : str){
+     System.out.println(s.length());
+   }
+ }
+
+ /*
+  *  实现for循环,遍历数组
+  *  好处: 代码少了,方便对容器遍历
+  *  弊端: 没有索引,不能操作容器里面的元素
+  */
+ public static void function(){
+   int[] arr = {3,1,9,0};
+   for(int i : arr){
+     System.out.println(i+1);
+   }
+   System.out.println(arr[0]);
+ }
+</code></pre><h3 id="12增强for循环遍历集合"><a href="#12增强for循环遍历集合" class="headerlink" title="12增强for循环遍历集合"></a>12增强for循环遍历集合</h3><pre><code>A:增强for循环遍历集合  
+  /*
+   *  增强for循环遍历集合
+   *  存储自定义Person类型
+   */
+  public static void function_2(){
+    ArrayList&lt;Person&gt; array = new ArrayList&lt;Person&gt;();
+    array.add(new Person(&quot;a&quot;,20));
+    array.add(new Person(&quot;b&quot;,10));
+    for(Person p : array){
+      System.out.println(p);// System.out.println(p.toString());
+    }
+  }
+</code></pre><h3 id="13泛型的引入"><a href="#13泛型的引入" class="headerlink" title="13泛型的引入"></a>13泛型的引入</h3><p>   A:泛型的引入<br>    在前面学习集合时，我们都知道集合中是可以存放任意对象的，<br>    只要把对象存储集合后，那么这时他们都会被提升成Object类型。<br>    当我们在取出每一个对象，并且进行相应的操作，这时必须采用类型转换。比如下面程序：<br>    public class GenericDemo {<br>      public static void main(String[] args) {<br>        List list = new ArrayList();<br>        list.add(“abc”);<br>        list.add(“itcast”);<br>        list.add(5);//由于集合没有做任何限定，任何类型都可以给其中存放<br>                    //相当于:Object obj=new Integer(5);</p>
+<pre><code>    Iterator it = list.iterator();
+    while(it.hasNext()){
+      //需要打印每个字符串的长度,就要把迭代出来的对象转成String类型
+      String str = (String) it.next();//String str=(String)obj;
+                                      //编译时期仅检查语法错误,String是Object的儿子可以向下转型
+                                      //运行时期String str=(String)(new Integer(5))
+                                      //String与Integer没有父子关系所以转换失败
+                                      //程序在运行时发生了问题java.lang.ClassCastException
+      System.out.println(str.length());
+    }
+  }
+}
+</code></pre><h3 id="14泛型的定义和使用"><a href="#14泛型的定义和使用" class="headerlink" title="14泛型的定义和使用"></a>14泛型的定义和使用</h3><p>  A:泛型的定义和使用<br>    /*</p>
+<pre><code> * JDK1.5 出现新的安全机制,保证程序的安全性
+ *   泛型: 指明了集合中存储数据的类型  &lt;数据类型&gt;
+ */
+
+public class GenericDemo {
+  public static void main(String[] args) {
+    function();
+  }
+
+  public static void function(){
+    Collection&lt;String&gt; coll = new ArrayList&lt;String&gt;();
+    coll.add(&quot;abc&quot;);
+    coll.add(&quot;rtyg&quot;);
+    coll.add(&quot;43rt5yhju&quot;);
+//    coll.add(1);
+
+    Iterator&lt;String&gt; it = coll.iterator();
+    while(it.hasNext()){
+      String s = it.next();
+      System.out.println(s.length());
+    }
+  }
+}
+</code></pre><h3 id="15Java中的伪泛型"><a href="#15Java中的伪泛型" class="headerlink" title="15Java中的伪泛型"></a>15Java中的伪泛型</h3><pre><code>A:Java中的伪泛型：
+  泛型只在编译时存在,编译后就被擦除,在编译之前我们就可以限制集合的类型,起到作用
+例如:ArrayList&lt;String&gt; al=new ArrayList&lt;String&gt;();
+编译后:ArrayList al=new ArrayList();
+</code></pre><h3 id="16泛型类"><a href="#16泛型类" class="headerlink" title="16泛型类"></a>16泛型类</h3><p>  A:泛型类:<br>    a:定义格式：<br>      修饰符 class 类名&lt;代表泛型的变量&gt; {  }</p>
+<pre><code>  例如，API中的ArrayList集合：
+  class ArrayList&lt;E&gt;{ 
+       public boolean add(E e){ }
+    public E get(int index){  }
+  }
+
+b:使用格式：
+  创建对象时，确定泛型的类型
+
+  例如，ArrayList&lt;String&gt; list = new ArrayList&lt;String&gt;();
+  此时，变量E的值就是String类型
+  class ArrayList&lt;String&gt;{ 
+    public boolean add(String e){ }
+    public String get(int index){  }
+  }
+
+  例如，ArrayList&lt;Integer&gt; list = new ArrayList&lt;Integer&gt;();
+  此时，变量E的值就是Integer类型
+  class ArrayList&lt;Integer&gt;{ 
+       public boolean add(Integer e){ }
+       public Integer get(int index){  }
+  }
+</code></pre><h3 id="17泛型的方法"><a href="#17泛型的方法" class="headerlink" title="17泛型的方法"></a>17泛型的方法</h3><p>  A:泛型的方法<br>    a:定义格式：修饰符 &lt;代表泛型的变量&gt; 返回值类型 方法名(参数){  }<br>    b:泛型方法的使用:<br>     1:例如，API中的ArrayList集合中的方法：<br>      public <t> T[] toArray(T[] a){  }<br>      //该方法，用来把集合元素存储到指定数据类型的数组中，返回已存储集合元素的数组</t></p>
+<pre><code>  使用格式：调用方法时，确定泛型的类型
+例如:
+      ArrayList&lt;String&gt; list = new ArrayList&lt;String&gt;();
+      String[] arr = new String[100];
+      String[] result = list.toArray(arr);
+   此时，变量T的值就是String类型。变量T，可以与定义集合的泛型不同
+   public &lt;String&gt; String[] toArray(String[] a){  } 
+
+
+  例如:
+      ArrayList&lt;String&gt; list = new ArrayList&lt;String&gt;();
+      Integer[] arr = new Integer[100];
+      Integer [] result = list.toArray(arr);
+
+  此时，变量T的值就是Integer类型。变量T，可以与定义集合的泛型不同
+  public &lt;Integer&gt; Integer[] toArray(Integer[] a){  } 
+</code></pre><h3 id="18泛型的接口"><a href="#18泛型的接口" class="headerlink" title="18泛型的接口"></a>18泛型的接口</h3><p>   A:泛型的接口:<br>     /*</p>
+<pre><code> *  带有泛型的接口
+ *  
+ *  public interface List &lt;E&gt;{
+ *    abstract boolean add(E e);
+ *  }
+ * 
+ *  实现类,先实现接口,不理会泛型
+ *  public class ArrayList&lt;E&gt; implements List&lt;E&gt;{
+ *  }
+ *  调用者 : new ArrayList&lt;String&gt;() 后期创建集合对象的时候,指定数据类型
+ *  
+ *  
+ *  实现类,实现接口的同时,也指定了数据类型
+ *  public class XXX implements List&lt;String&gt;{
+ *  }
+ *  new XXX()
+ */
+public class GenericDemo2 {
+
+}
+</code></pre><h3 id="19泛型的好处"><a href="#19泛型的好处" class="headerlink" title="19泛型的好处"></a>19泛型的好处</h3><p>  A:泛型的好处<br>    a:将运行时期的ClassCastException，转移到了编译时期变成了编译失败。<br>    b:避免了类型强转的麻烦。<br>    演示下列代码：<br>    public class GenericDemo {<br>      public static void main(String[] args) {<br>        List<string> list = new ArrayList<string>();<br>        list.add(“abc”);<br>        list.add(“itcast”);<br>        //list.add(5);//当集合明确类型后，存放类型不一致就会编译报错<br>                     //集合已经明确具体存放的元素类型，那么在使用迭代器的时候，迭代器也同样会知道具体遍历元素类型</string></string></p>
+<pre><code>    Iterator&lt;String&gt; it = list.iterator();
+    while(it.hasNext()){
+       String str = it.next();
+       System.out.println(str.length()); //当使用Iterator&lt;String&gt;      
+                                        //控制元素类型后，就不需要强转了。获取到的元素直接就是String类型
+    }
+  }
+}
+</code></pre><h3 id="20泛型的通配符"><a href="#20泛型的通配符" class="headerlink" title="20泛型的通配符"></a>20泛型的通配符</h3><p>   A:泛型的通配符<br>   /*</p>
+<pre><code>*  泛型的通配符
+*/
+</code></pre><p>   public class GenericDemo {<br>    public static void main(String[] args) {<br>      ArrayList<string> array = new ArrayList<string>();</string></string></p>
+<pre><code>  HashSet&lt;Integer&gt; set = new HashSet&lt;Integer&gt;();
+
+  array.add(&quot;123&quot;);
+  array.add(&quot;456&quot;);
+
+  set.add(789);
+  set.add(890);
+
+  iterator(array);
+  iterator(set);
+}
+/*
+ *  定义方法,可以同时迭代2个集合
+ *  参数: 怎么实现 , 不能写ArrayList,也不能写HashSet
+ *  参数: 或者共同实现的接口
+ *  泛型的通配,匹配所有的数据类型  ?
+ */
+public static void iterator(Collection&lt;?&gt; coll){
+  Iterator&lt;?&gt; it = coll.iterator();
+  while(it.hasNext()){
+    //it.next()获取的对象,什么类型
+    System.out.println(it.next());
+  }
+}
+</code></pre><p>   }</p>
+<h3 id="21泛型的限定"><a href="#21泛型的限定" class="headerlink" title="21泛型的限定"></a>21泛型的限定</h3><p> A:泛型的限定<br>   /*</p>
+<pre><code>*  将的酒店员工,厨师,服务员,经理,分别存储到3个集合中
+*  定义方法,可以同时遍历3集合,遍历三个集合的同时,可以调用工作方法
+*/
+</code></pre><p>   import java.util.ArrayList;<br>   import java.util.Iterator;<br>   public class GenericTest {<br>    public static void main(String[] args) {<br>      //创建3个集合对象<br>      ArrayList<chushi> cs = new ArrayList<chushi>();<br>      ArrayList<fuwuyuan> fwy = new ArrayList<fuwuyuan>();<br>      ArrayList<jingli> jl = new ArrayList<jingli>();</jingli></jingli></fuwuyuan></fuwuyuan></chushi></chushi></p>
+<pre><code>//每个集合存储自己的元素
+cs.add(new ChuShi(&quot;张三&quot;, &quot;后厨001&quot;));
+cs.add(new ChuShi(&quot;李四&quot;, &quot;后厨002&quot;));
+
+fwy.add(new FuWuYuan(&quot;翠花&quot;, &quot;服务部001&quot;));
+fwy.add(new FuWuYuan(&quot;酸菜&quot;, &quot;服务部002&quot;));
+
+jl.add(new JingLi(&quot;小名&quot;, &quot;董事会001&quot;, 123456789.32));
+jl.add(new JingLi(&quot;小强&quot;, &quot;董事会002&quot;, 123456789.33));
+</code></pre><p>   //   ArrayList<string> arrayString = new ArrayList<string>();<br>      iterator(jl);<br>      iterator(fwy);<br>      iterator(cs);</string></string></p>
+<pre><code>}
+/*
+ * 定义方法,可以同时遍历3集合,遍历三个集合的同时,可以调用工作方法 work
+ * ? 通配符,迭代器it.next()方法取出来的是Object类型,怎么调用work方法
+ * 强制转换:  it.next()=Object o ==&gt; Employee
+ * 方法参数: 控制,可以传递Employee对象,也可以传递Employee的子类的对象
+ * 泛型的限定  本案例,父类固定Employee,但是子类可以无限?
+ *   ? extends Employee 限制的是父类, 上限限定, 可以传递Employee,传递他的子类对象
+ *   ? super   Employee 限制的是子类, 下限限定, 可以传递Employee,传递他的父类对象
+ */
+public static void iterator(ArrayList&lt;? extends Employee&gt; array){
+
+   Iterator&lt;? extends Employee&gt; it = array.iterator();
+   while(it.hasNext()){
+     //获取出的next() 数据类型,是什么Employee
+     Employee e = it.next();
+     e.work();
+   }
+}
+</code></pre><p>   }</p>
+
       
     </div>
 
@@ -578,7 +1009,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/AS/" rel="tag"># AS</a>
+            <a href="/tags/java/" rel="tag"># java</a>
           
         </div>
       
@@ -591,8 +1022,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/10/02/java入门/" rel="next" title="java学习笔记——基础1(变量，运算符)">
-                <i class="fa fa-chevron-left"></i> java学习笔记——基础1(变量，运算符)
+              <a href="/2016/10/26/day19笔记/" rel="next" title="java学习笔记——基础17(List接口,Set接口,哈希表)">
+                <i class="fa fa-chevron-left"></i> java学习笔记——基础17(List接口,Set接口,哈希表)
               </a>
             
           </div>
@@ -601,8 +1032,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/10/04/day03笔记/" rel="prev" title="java学习笔记——基础3(引用类型，if，while)">
-                java学习笔记——基础3(引用类型，if，while) <i class="fa fa-chevron-right"></i>
+              <a href="/2017/10/03/hello-world/" rel="prev" title="Hello">
+                Hello <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -816,7 +1247,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#遇到的bug"><span class="nav-number">1.</span> <span class="nav-text">遇到的bug</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#在整个工程的build-gradle中添加以下框内代码："><span class="nav-number">1.1.</span> <span class="nav-text">在整个工程的build.gradle中添加以下框内代码：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#app下的build-gradle配置如下"><span class="nav-number">1.2.</span> <span class="nav-text">app下的build.gradle配置如下:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#若配置后还没解决问题，依然报错"><span class="nav-number">1.3.</span> <span class="nav-text">若配置后还没解决问题，依然报错</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#01集合使用的回顾"><span class="nav-number">1.</span> <span class="nav-text">01集合使用的回顾</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#02集合的学习目标"><span class="nav-number">2.</span> <span class="nav-text">02集合的学习目标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#03集合继承关系图"><span class="nav-number">3.</span> <span class="nav-text">03集合继承关系图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#04集合Collection的方法"><span class="nav-number">4.</span> <span class="nav-text">04集合Collection的方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#05集合Collection的remove方法"><span class="nav-number">5.</span> <span class="nav-text">05集合Collection的remove方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#06迭代器的概述"><span class="nav-number">6.</span> <span class="nav-text">06迭代器的概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#07迭代器的实现原理"><span class="nav-number">7.</span> <span class="nav-text">07迭代器的实现原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#08迭代器的代码实现"><span class="nav-number">8.</span> <span class="nav-text">08迭代器的代码实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#09迭代器的执行过程"><span class="nav-number">9.</span> <span class="nav-text">09迭代器的执行过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10集合迭代中的转型"><span class="nav-number">10.</span> <span class="nav-text">10集合迭代中的转型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11增强for循环遍历数组"><span class="nav-number">11.</span> <span class="nav-text">11增强for循环遍历数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12增强for循环遍历集合"><span class="nav-number">12.</span> <span class="nav-text">12增强for循环遍历集合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13泛型的引入"><span class="nav-number">13.</span> <span class="nav-text">13泛型的引入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14泛型的定义和使用"><span class="nav-number">14.</span> <span class="nav-text">14泛型的定义和使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15Java中的伪泛型"><span class="nav-number">15.</span> <span class="nav-text">15Java中的伪泛型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16泛型类"><span class="nav-number">16.</span> <span class="nav-text">16泛型类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17泛型的方法"><span class="nav-number">17.</span> <span class="nav-text">17泛型的方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#18泛型的接口"><span class="nav-number">18.</span> <span class="nav-text">18泛型的接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#19泛型的好处"><span class="nav-number">19.</span> <span class="nav-text">19泛型的好处</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#20泛型的通配符"><span class="nav-number">20.</span> <span class="nav-text">20泛型的通配符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#21泛型的限定"><span class="nav-number">21.</span> <span class="nav-text">21泛型的限定</span></a></li></ol></div>
             
 
           </div>
@@ -999,7 +1430,7 @@
   
     <script type="text/javascript">
       window.livereOptions = {
-        refer: '2016/10/03/AS环境配置踩坑经历/'
+        refer: '2016/10/26/day18笔记/'
       };
       (function(d, s) {
         var j, e = d.getElementsByTagName(s)[0];
