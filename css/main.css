@@ -2018,7 +2018,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #98ffe2;
+  background: #946786;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3005,7 +3005,7 @@ h6 {
 }
 .highlight .code pre {
   padding-left: 10px;
-  color: #00cd00;
+  color: #68dd00;
 }
 .highlight,
 pre {
@@ -3620,7 +3620,7 @@ strong {
 font-style
 }
 code {
-  color: #00cd00 !important;
+  color: #00bfff !important;
   background: rgba(78,240,233,0.42);
   font-size: 17px;
 }
