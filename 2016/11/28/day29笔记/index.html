@@ -166,7 +166,7 @@
 <meta property="og:description" content="1、JDBC2、DBUtils">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1544254144/samples/java%20files/photo-1542312455-e31bb150371c.jpg">
-<meta property="og:updated_time" content="2018-12-19T12:43:28.807Z">
+<meta property="og:updated_time" content="2018-12-26T03:07:46.891Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java学习笔记——基础27()">
 <meta name="twitter:description" content="1、JDBC2、DBUtils">
@@ -502,8 +502,7 @@
 <p><img src="https://res.cloudinary.com/dpvywdzxv/image/upload/v1544254144/samples/java%20files/photo-1542312455-e31bb150371c.jpg" alt="" style="width:100%"></p>
 <p>1、JDBC<br>2、DBUtils</p>
 <a id="more"></a>    
-<p>###01JDBC概念和数据库驱动程序</p>
-<pre><code>* A: JDBC概念和数据库驱动程序
+<h3 id="01JDBC概念和数据库驱动程序"><a href="#01JDBC概念和数据库驱动程序" class="headerlink" title="01JDBC概念和数据库驱动程序"></a>01JDBC概念和数据库驱动程序</h3><pre><code>* A: JDBC概念和数据库驱动程序
     * a: JDBC概述        
         * JDBC（Java Data Base Connectivity,java数据库连接）是一种用于执行SQL语句的Java API，
             可以为多种关系数据库提供统一访问，它由一组用Java语言编写的类和接口组成。是Java访问数据库的标准规范
@@ -514,15 +513,13 @@
     * b: 总结
         * JDBC是java提供给开发人员的一套操作数据库的接口
         * 数据库驱动就是实现该接口的实现类
-</code></pre><p>###02JDBC原理</p>
-<pre><code>* A: JDBC原理
+</code></pre><h3 id="02JDBC原理"><a href="#02JDBC原理" class="headerlink" title="02JDBC原理"></a>02JDBC原理</h3><pre><code>* A: JDBC原理
     * a: 描述
         * Java提供访问数据库规范称为JDBC，而生产厂商提供规范的实现类称为驱动
         * DBC是接口，驱动是接口的实现，没有驱动将无法完成数据库连接，从而不能操作数据库！
             每个数据库厂商都需要提供自己的驱动，用来连接自己公司的数据库，也就是说驱动一般都由数据库生成厂商提供。
         * 图解见day29_source/JDBC实现原理.JPG
-</code></pre><p>###03准备数据</p>
-<pre><code>* A: 准备数据
+</code></pre><h3 id="03准备数据"><a href="#03准备数据" class="headerlink" title="03准备数据"></a>03准备数据</h3><pre><code>* A: 准备数据
     * a: 创建数据库和表结构
         #创建数据库
         create database mybase;
@@ -544,8 +541,7 @@
         insert into sort(sname,sprice,sdesc) values(&apos;生鲜&apos;,500.99, &apos;生鲜商品&apos;);
         insert into sort(sname,sprice,sdesc) values(&apos;服装&apos;,24000, &apos;换季销售&apos;);
         insert into sort(sname,sprice,sdesc) values(&apos;洗涤&apos;,50, &apos;洗发水促销&apos;);            
-</code></pre><p>###04JDBC的开发步骤</p>
-<pre><code>* A: JDBC的开发步骤
+</code></pre><h3 id="04JDBC的开发步骤"><a href="#04JDBC的开发步骤" class="headerlink" title="04JDBC的开发步骤"></a>04JDBC的开发步骤</h3><pre><code>* A: JDBC的开发步骤
     * a: 步骤介绍
         1.注册驱动
             告知JVM使用的是哪一个数据库的驱动
@@ -558,13 +554,11 @@
             获取到数据库的执行后的结果
         5.处理结果
         6.释放资源  一堆close()
-</code></pre><p>###05导入mysql数据库驱动程序jar包</p>
-<pre><code>* A: 导入mysql数据库驱动程序jar包
+</code></pre><h3 id="05导入mysql数据库驱动程序jar包"><a href="#05导入mysql数据库驱动程序jar包" class="headerlink" title="05导入mysql数据库驱动程序jar包"></a>05导入mysql数据库驱动程序jar包</h3><pre><code>* A: 导入mysql数据库驱动程序jar包
     * a: 步骤
         * 创建lib目录，用于存放当前项目需要的所有jar包
         * 选择jar包，右键执行build path / Add to Build Path
-</code></pre><p>###06注册数据库驱动程序</p>
-<pre><code>* A: 注册数据库驱动程序
+</code></pre><h3 id="06注册数据库驱动程序"><a href="#06注册数据库驱动程序" class="headerlink" title="06注册数据库驱动程序"></a>06注册数据库驱动程序</h3><pre><code>* A: 注册数据库驱动程序
     * a: 案例代码
         public class JDBCDemo {
             public static void main(String[] args)throws ClassNotFoundException,SQLException{
@@ -576,8 +570,7 @@
                 Class.forName(&quot;com.mysql.jdbc.Driver&quot;);                    
             }
         }
-</code></pre><p>###07获取数据库的连接对象</p>
-<pre><code>* A：获取数据库的连接对象
+</code></pre><h3 id="07获取数据库的连接对象"><a href="#07获取数据库的连接对象" class="headerlink" title="07获取数据库的连接对象"></a>07获取数据库的连接对象</h3><pre><code>* A：获取数据库的连接对象
     * a: 案例代码
         public class JDBCDemo {
             public static void main(String[] args)throws ClassNotFoundException,SQLException{
@@ -600,8 +593,7 @@
                 System.out.println(con);                    
             }
         }
-</code></pre><p>###08获取SQL语句的执行对象对象</p>
-<pre><code>* A: 获取SQL语句的执行对象对象
+</code></pre><h3 id="08获取SQL语句的执行对象对象"><a href="#08获取SQL语句的执行对象对象" class="headerlink" title="08获取SQL语句的执行对象对象"></a>08获取SQL语句的执行对象对象</h3><pre><code>* A: 获取SQL语句的执行对象对象
     * a: 案例代码
         public class JDBCDemo {
             public static void main(String[] args)throws ClassNotFoundException,SQLException{
@@ -628,8 +620,7 @@
                 System.out.println(stat);
             }
         }
-</code></pre><p>###09执行insert语句获取结果集</p>
-<pre><code>* A: 执行insert语句获取结果集
+</code></pre><h3 id="09执行insert语句获取结果集"><a href="#09执行insert语句获取结果集" class="headerlink" title="09执行insert语句获取结果集"></a>09执行insert语句获取结果集</h3><pre><code>* A: 执行insert语句获取结果集
     * a: 案例代码
         public class JDBCDemo {
             public static void main(String[] args)throws ClassNotFoundException,SQLException{
@@ -666,8 +657,7 @@
                 con.close();
             }
         }
-</code></pre><p>###10执行select语句获取结果集</p>
-<pre><code>* A: 执行select语句获取结果集
+</code></pre><h3 id="10执行select语句获取结果集"><a href="#10执行select语句获取结果集" class="headerlink" title="10执行select语句获取结果集"></a>10执行select语句获取结果集</h3><pre><code>* A: 执行select语句获取结果集
     * a: 案例代码
         public class JDBCDemo1 {
             public static void main(String[] args) throws Exception{
@@ -699,8 +689,7 @@
                 con.close();
             }
         }
-</code></pre><p>###11SQL注入攻击</p>
-<pre><code>* A: SQL注入攻击
+</code></pre><h3 id="11SQL注入攻击"><a href="#11SQL注入攻击" class="headerlink" title="11SQL注入攻击"></a>11SQL注入攻击</h3><pre><code>* A: SQL注入攻击
     * a: 注入问题
         * 假设有登录案例SQL语句如下:
         * SELECT * FROM 用户表 WHERE NAME = 用户输入的用户名 AND PASSWORD = 用户输的密码;
@@ -727,8 +716,7 @@
         键盘录入：
         1
         1&apos;OR&apos; 1=1
-</code></pre><p>###12SQL注入攻击用户登录案例</p>
-<pre><code>* A: SQL注入攻击用户登录案例
+</code></pre><h3 id="12SQL注入攻击用户登录案例"><a href="#12SQL注入攻击用户登录案例" class="headerlink" title="12SQL注入攻击用户登录案例"></a>12SQL注入攻击用户登录案例</h3><pre><code>* A: SQL注入攻击用户登录案例
     * a: 案例代码
         public class JDBCDemo2 {
             public static void main(String[] args)throws Exception {
@@ -757,8 +745,7 @@
                 con.close();
             }
         }
-</code></pre><p>###13PrepareStatement接口预编译SQL语句</p>
-<pre><code>* A: PrepareStatement接口预编译SQL语句
+</code></pre><h3 id="13PrepareStatement接口预编译SQL语句"><a href="#13PrepareStatement接口预编译SQL语句" class="headerlink" title="13PrepareStatement接口预编译SQL语句"></a>13PrepareStatement接口预编译SQL语句</h3><pre><code>* A: PrepareStatement接口预编译SQL语句
     * a: 预处理对象
         * 使用PreparedStatement预处理对象时，建议每条sql语句所有的实际参数，都使用逗号分隔。
         * String sql = &quot;insert into sort(sid,sname) values(?,?)&quot;;;
@@ -817,8 +804,7 @@
                 con.close();
             }
         }
-</code></pre><p>###14PrepareStatement接口预编译SQL语句执行修改</p>
-<pre><code>* A: PrepareStatement接口预编译SQL语句执行修改
+</code></pre><h3 id="14PrepareStatement接口预编译SQL语句执行修改"><a href="#14PrepareStatement接口预编译SQL语句执行修改" class="headerlink" title="14PrepareStatement接口预编译SQL语句执行修改"></a>14PrepareStatement接口预编译SQL语句执行修改</h3><pre><code>* A: PrepareStatement接口预编译SQL语句执行修改
     * 案例代码
         /*
          *  使用PrepareStatement接口,实现数据表的更新操作
@@ -846,8 +832,7 @@
                 con.close();
             }
         }
-</code></pre><p>###15PrepareStatement接口预编译SQL语句执行查询</p>
-<pre><code>* A: PrepareStatement接口预编译SQL语句执行查询
+</code></pre><h3 id="15PrepareStatement接口预编译SQL语句执行查询"><a href="#15PrepareStatement接口预编译SQL语句执行查询" class="headerlink" title="15PrepareStatement接口预编译SQL语句执行查询"></a>15PrepareStatement接口预编译SQL语句执行查询</h3><pre><code>* A: PrepareStatement接口预编译SQL语句执行查询
     * a: 案例代码
         /*
          *  PrepareStatement接口实现数据表的查询操作
@@ -874,8 +859,7 @@
                 con.close();
             }
         }
-</code></pre><p>###16JDBC的工具类和测试</p>
-<pre><code>* A: JDBC的工具类和测试
+</code></pre><h3 id="16JDBC的工具类和测试"><a href="#16JDBC的工具类和测试" class="headerlink" title="16JDBC的工具类和测试"></a>16JDBC的工具类和测试</h3><pre><code>* A: JDBC的工具类和测试
     * a: 案例代码
         //JDBCUtils工具类代码
         public class JDBCUtils {
@@ -952,8 +936,7 @@
             JDBCUtils.close(con, pst, rs);
         }
     }
-</code></pre><p>###17数据表数据存储对象</p>
-<pre><code>* A: 数据表数据存储对象
+</code></pre><h3 id="17数据表数据存储对象"><a href="#17数据表数据存储对象" class="headerlink" title="17数据表数据存储对象"></a>17数据表数据存储对象</h3><pre><code>* A: 数据表数据存储对象
     * a: 准备工作
         * 导入jar包
         * 拷贝day32定义的工具类JDBCUtils
@@ -1029,8 +1012,7 @@
                 }
             }
         }
-</code></pre><p>###18properties配置文件</p>
-<pre><code>* A: properties配置文件        
+</code></pre><h3 id="18properties配置文件"><a href="#18properties配置文件" class="headerlink" title="18properties配置文件"></a>18properties配置文件</h3><pre><code>* A: properties配置文件        
     * a: 相关介绍
         * 开发中获得连接的4个参数（驱动、URL、用户名、密码）通常都存在配置文件中，方便后期维护，程序如果需要更换数据库，
             只需要修改配置文件即可。
@@ -1040,8 +1022,7 @@
             3.    文件内容：一行一组数据，格式是“key=value”.
                 a)    key命名自定义，如果是多个单词，习惯使用点分隔。例如：jdbc.driver
                 b)    value值不支持中文，如果需要使用非英文字符，将进行unicode转换。
-</code></pre><p>###19properties文件的创建和编写</p>
-<pre><code>* A: properties文件的创建和编写
+</code></pre><h3 id="19properties文件的创建和编写"><a href="#19properties文件的创建和编写" class="headerlink" title="19properties文件的创建和编写"></a>19properties文件的创建和编写</h3><pre><code>* A: properties文件的创建和编写
     * a: properties文件的创建
         * src路径下建立database.properties(其实就是一个文本文件)
     * b: properties文件的编写(内容如下)
@@ -1049,8 +1030,7 @@
         url=jdbc:mysql://localhost:3296/mybase
         username=root
         password=123        
-</code></pre><p>###20加载配置文件</p>
-<pre><code>* A: 加载配置文件
+</code></pre><h3 id="20加载配置文件"><a href="#20加载配置文件" class="headerlink" title="20加载配置文件"></a>20加载配置文件</h3><pre><code>* A: 加载配置文件
     * a: 案例代码        
         /*
          *  加载properties配置文件
@@ -1069,8 +1049,7 @@
                 System.out.println(in);                    
             }
         }
-</code></pre><p>###21通过配置文件连接数据库</p>
-<pre><code>* A: 通过配置文件连接数据库
+</code></pre><h3 id="21通过配置文件连接数据库"><a href="#21通过配置文件连接数据库" class="headerlink" title="21通过配置文件连接数据库"></a>21通过配置文件连接数据库</h3><pre><code>* A: 通过配置文件连接数据库
     * a: 案例代码
         /*
          *  加载properties配置文件
@@ -1097,8 +1076,7 @@
 
             }
         }
-</code></pre><p>###22读取配置文件的工具类</p>
-<pre><code>* A: 读取配置文件的工具类
+</code></pre><h3 id="22读取配置文件的工具类"><a href="#22读取配置文件的工具类" class="headerlink" title="22读取配置文件的工具类"></a>22读取配置文件的工具类</h3><pre><code>* A: 读取配置文件的工具类
     * a: 案例代码
         /*
          *  编写数据库连接的工具类,JDBC工具类
@@ -1138,8 +1116,7 @@
             }
 
         }            
-</code></pre><p>###23测试工具类</p>
-<pre><code>* A: 测试工具类
+</code></pre><h3 id="23测试工具类"><a href="#23测试工具类" class="headerlink" title="23测试工具类"></a>23测试工具类</h3><pre><code>* A: 测试工具类
     * a: 案例代码
         public class TestJDBCUtils {
             public static void main(String[] args) {
@@ -1147,8 +1124,7 @@
                 System.out.println(con);
             }
         }
-</code></pre><p>###24总结</p>
-<pre><code>* 把今天的知识点总结一遍。
+</code></pre><h3 id="24总结"><a href="#24总结" class="headerlink" title="24总结"></a>24总结</h3><pre><code>* 把今天的知识点总结一遍。
 </code></pre>
       
     </div>
@@ -1281,8 +1257,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -1423,6 +1408,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#01JDBC概念和数据库驱动程序"><span class="nav-number">1.</span> <span class="nav-text">01JDBC概念和数据库驱动程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#02JDBC原理"><span class="nav-number">2.</span> <span class="nav-text">02JDBC原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#03准备数据"><span class="nav-number">3.</span> <span class="nav-text">03准备数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#04JDBC的开发步骤"><span class="nav-number">4.</span> <span class="nav-text">04JDBC的开发步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#05导入mysql数据库驱动程序jar包"><span class="nav-number">5.</span> <span class="nav-text">05导入mysql数据库驱动程序jar包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#06注册数据库驱动程序"><span class="nav-number">6.</span> <span class="nav-text">06注册数据库驱动程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#07获取数据库的连接对象"><span class="nav-number">7.</span> <span class="nav-text">07获取数据库的连接对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#08获取SQL语句的执行对象对象"><span class="nav-number">8.</span> <span class="nav-text">08获取SQL语句的执行对象对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#09执行insert语句获取结果集"><span class="nav-number">9.</span> <span class="nav-text">09执行insert语句获取结果集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10执行select语句获取结果集"><span class="nav-number">10.</span> <span class="nav-text">10执行select语句获取结果集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11SQL注入攻击"><span class="nav-number">11.</span> <span class="nav-text">11SQL注入攻击</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12SQL注入攻击用户登录案例"><span class="nav-number">12.</span> <span class="nav-text">12SQL注入攻击用户登录案例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13PrepareStatement接口预编译SQL语句"><span class="nav-number">13.</span> <span class="nav-text">13PrepareStatement接口预编译SQL语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14PrepareStatement接口预编译SQL语句执行修改"><span class="nav-number">14.</span> <span class="nav-text">14PrepareStatement接口预编译SQL语句执行修改</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15PrepareStatement接口预编译SQL语句执行查询"><span class="nav-number">15.</span> <span class="nav-text">15PrepareStatement接口预编译SQL语句执行查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16JDBC的工具类和测试"><span class="nav-number">16.</span> <span class="nav-text">16JDBC的工具类和测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17数据表数据存储对象"><span class="nav-number">17.</span> <span class="nav-text">17数据表数据存储对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#18properties配置文件"><span class="nav-number">18.</span> <span class="nav-text">18properties配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#19properties文件的创建和编写"><span class="nav-number">19.</span> <span class="nav-text">19properties文件的创建和编写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#20加载配置文件"><span class="nav-number">20.</span> <span class="nav-text">20加载配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#21通过配置文件连接数据库"><span class="nav-number">21.</span> <span class="nav-text">21通过配置文件连接数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#22读取配置文件的工具类"><span class="nav-number">22.</span> <span class="nav-text">22读取配置文件的工具类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#23测试工具类"><span class="nav-number">23.</span> <span class="nav-text">23测试工具类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#24总结"><span class="nav-number">24.</span> <span class="nav-text">24总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

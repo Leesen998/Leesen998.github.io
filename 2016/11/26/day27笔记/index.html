@@ -166,7 +166,7 @@
 <meta property="og:description" content="1、多线程安全问题2、等待唤醒机制">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1544254144/samples/java%20files/photo-1542312455-e31bb150371c.jpg">
-<meta property="og:updated_time" content="2018-12-19T12:46:04.383Z">
+<meta property="og:updated_time" content="2018-12-26T03:05:29.835Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java学习笔记——基础25()">
 <meta name="twitter:description" content="1、多线程安全问题2、等待唤醒机制">
@@ -502,8 +502,8 @@
 <p><img src="https://res.cloudinary.com/dpvywdzxv/image/upload/v1544254144/samples/java%20files/photo-1542312455-e31bb150371c.jpg" alt="" style="width:100%"></p>
 <p>1、多线程安全问题<br>2、等待唤醒机制</p>
 <a id="more"></a>    
-<p>###01线程操作共享数据的安全问题<br>  *A:线程操作共享数据的安全问题<br>    如果有多个线程在同时运行，而这些线程可能会同时运行这段代码。<br>    程序每次运行结果和单线程运行的结果是一样的，而且其他的变量的值也和预期的是一样的，就是线程安全的。</p>
-<p>###02售票的案例<br> <em>A:售票的案例<br>     /</em></p>
+<h3 id="01线程操作共享数据的安全问题"><a href="#01线程操作共享数据的安全问题" class="headerlink" title="01线程操作共享数据的安全问题"></a>01线程操作共享数据的安全问题</h3><p>  *A:线程操作共享数据的安全问题<br>    如果有多个线程在同时运行，而这些线程可能会同时运行这段代码。<br>    程序每次运行结果和单线程运行的结果是一样的，而且其他的变量的值也和预期的是一样的，就是线程安全的。</p>
+<h3 id="02售票的案例"><a href="#02售票的案例" class="headerlink" title="02售票的案例"></a>02售票的案例</h3><p> <em>A:售票的案例<br>     /</em></p>
 <pre><code> * 多线程并发访问同一个数据资源
  * 3个线程,对一个票资源,出售
  */
@@ -540,7 +540,7 @@ public class Tickets implements Runnable{
    }
  }
 }
-</code></pre><p>###03线程安全问题引发<br> <em>A:线程安全问题引发<br>    /</em></p>
+</code></pre><h3 id="03线程安全问题引发"><a href="#03线程安全问题引发" class="headerlink" title="03线程安全问题引发"></a>03线程安全问题引发</h3><p> <em>A:线程安全问题引发<br>    /</em></p>
 <pre><code> * 多线程并发访问同一个数据资源
  * 3个线程,对一个票资源,出售
  */
@@ -581,7 +581,7 @@ public class Tickets implements Runnable{
    }
  }
 }
-</code></pre><p>###04同步代码块解决线程安全问题<br>  <em>A:同步代码块解决线程安全问题
+</code></pre><h3 id="04同步代码块解决线程安全问题"><a href="#04同步代码块解决线程安全问题" class="headerlink" title="04同步代码块解决线程安全问题"></a>04同步代码块解决线程安全问题</h3><p>  <em>A:同步代码块解决线程安全问题
       </em>A:售票的案例<br>          /*</p>
 <pre><code> * 多线程并发访问同一个数据资源
  * 3个线程,对一个票资源,出售
@@ -631,10 +631,9 @@ public class Tickets implements Runnable{
    }
  }
 }
-</code></pre><p>###05同步代码块的执行原理<br>   A:同步代码块的执行原理<br>     同步代码块: 在代码块声明上 加上synchronized<br>     synchronized (锁对象) {<br>       可能会产生线程安全问题的代码<br>     }<br>     同步代码块中的锁对象可以是任意的对象；但多个线程时，要使用同一个锁对象才能够保证线程安全。</p>
-<p>=======================第二节课开始============================================= </p>
-<p>###06同步的上厕所原理<br>  *A:同步的上厕所原理<br>    a:不使用同步:线程在执行的过程中会被打扰<br>       线程比喻成人<br>       线程执行代码就是上一个厕所<br>      第一个人正在上厕所,上到一半,被另外一个人拉出来<br>    b:使用同步:<br>       线程比喻成人<br>       线程执行代码就是上一个厕所<br>       锁比喻成厕所门<br>      第一个人上厕所,会锁门<br>      第二个人上厕所,看到门锁上了,等待第一个人上完再去上厕所</p>
-<p>###07同步方法<br>  <em>A:同步方法:<br>  /</em></p>
+</code></pre><h3 id="05同步代码块的执行原理"><a href="#05同步代码块的执行原理" class="headerlink" title="05同步代码块的执行原理"></a>05同步代码块的执行原理</h3><p>   A:同步代码块的执行原理<br>     同步代码块: 在代码块声明上 加上synchronized<br>     synchronized (锁对象) {<br>       可能会产生线程安全问题的代码<br>     }<br>     同步代码块中的锁对象可以是任意的对象；但多个线程时，要使用同一个锁对象才能够保证线程安全。</p>
+<h3 id="06同步的上厕所原理"><a href="#06同步的上厕所原理" class="headerlink" title="06同步的上厕所原理"></a>06同步的上厕所原理</h3><p>  *A:同步的上厕所原理<br>    a:不使用同步:线程在执行的过程中会被打扰<br>       线程比喻成人<br>       线程执行代码就是上一个厕所<br>      第一个人正在上厕所,上到一半,被另外一个人拉出来<br>    b:使用同步:<br>       线程比喻成人<br>       线程执行代码就是上一个厕所<br>       锁比喻成厕所门<br>      第一个人上厕所,会锁门<br>      第二个人上厕所,看到门锁上了,等待第一个人上完再去上厕所</p>
+<h3 id="07同步方法"><a href="#07同步方法" class="headerlink" title="07同步方法"></a>07同步方法</h3><p>  <em>A:同步方法:<br>  /</em></p>
 <ul>
 <li>多线程并发访问同一个数据资源</li>
 <li><p>3个线程,对一个票资源,出售<br>*/<br>public class ThreadDemo {<br>public static void main(String[] args) {<br> //创建Runnable接口实现类对象<br> Tickets t = new Tickets();<br> //创建3个Thread类对象,传递Runnable接口实现类<br> Thread t0 = new Thread(t);<br> Thread t1 = new Thread(t);<br> Thread t2 = new Thread(t);</p>
@@ -662,8 +661,8 @@ public class Tickets implements Runnable{
 </ul>
 </li>
 </ul>
-<p>###08JDK1.5新特性Lock接口<br>   *A:JDK1.5新特性Lock接口<br>        查阅API，查阅Lock接口描述，Lock 实现提供了比使用 synchronized 方法和语句可获得的更广泛的锁定操作。<br>       Lock接口中的常用方法<br>            void lock()<br>            void unlock()<br>      Lock提供了一个更加面对对象的锁，在该锁中提供了更多的操作锁的功能。<br>      我们使用Lock接口,以及其中的lock()方法和unlock()方法替代同步，对电影院卖票案例中Ticket</p>
-<p>###09Lock接口改进售票案例<br>   <em>A:Lock接口改进售票案例<br>      /</em></p>
+<h3 id="08JDK1-5新特性Lock接口"><a href="#08JDK1-5新特性Lock接口" class="headerlink" title="08JDK1.5新特性Lock接口"></a>08JDK1.5新特性Lock接口</h3><p>   *A:JDK1.5新特性Lock接口<br>        查阅API，查阅Lock接口描述，Lock 实现提供了比使用 synchronized 方法和语句可获得的更广泛的锁定操作。<br>       Lock接口中的常用方法<br>            void lock()<br>            void unlock()<br>      Lock提供了一个更加面对对象的锁，在该锁中提供了更多的操作锁的功能。<br>      我们使用Lock接口,以及其中的lock()方法和unlock()方法替代同步，对电影院卖票案例中Ticket</p>
+<h3 id="09Lock接口改进售票案例"><a href="#09Lock接口改进售票案例" class="headerlink" title="09Lock接口改进售票案例"></a>09Lock接口改进售票案例</h3><p>   <em>A:Lock接口改进售票案例<br>      /</em></p>
 <pre><code> * 多线程并发访问同一个数据资源
  * 3个线程,对一个票资源,出售
  */
@@ -715,11 +714,10 @@ public class Tickets implements Runnable{
     }
   }
 }
-</code></pre><p>=======================第三节课开始============================================= </p>
-<p>###10线程的死锁原理<br>   *A:线程的死锁原理<br>     当线程任务中出现了多个同步(多个锁)  时，如果同步中嵌套了其他的同步。这时容易引发一种现象：程序出现无限等待，这种现象我们称为死锁。这种情况能避免就避免掉。<br>        synchronzied(A锁){<br>            synchronized(B锁){</p>
+</code></pre><h3 id="10线程的死锁原理"><a href="#10线程的死锁原理" class="headerlink" title="10线程的死锁原理"></a>10线程的死锁原理</h3><p>   *A:线程的死锁原理<br>     当线程任务中出现了多个同步(多个锁)  时，如果同步中嵌套了其他的同步。这时容易引发一种现象：程序出现无限等待，这种现象我们称为死锁。这种情况能避免就避免掉。<br>        synchronzied(A锁){<br>            synchronized(B锁){</p>
 <pre><code>    }
 }
-</code></pre><p>###11线程的死锁代码实现<br>   *A:线程的死锁代码实现<br>       public class DeadLock implements Runnable{<br>        private int i = 0;<br>        public void run(){<br>          while(true){<br>            if(i%2==0){<br>              //先进入A同步,再进入B同步<br>              synchronized(LockA.locka){<br>                System.out.println(“if…locka”);<br>                synchronized(LockB.lockb){<br>                  System.out.println(“if…lockb”);<br>                }<br>              }<br>            }else{<br>              //先进入B同步,再进入A同步<br>              synchronized(LockB.lockb){<br>                System.out.println(“else…lockb”);<br>                synchronized(LockA.locka){<br>                  System.out.println(“else…locka”);<br>                }<br>              }<br>            }<br>            i++;<br>          }<br>        }<br>       }</p>
+</code></pre><h3 id="11线程的死锁代码实现"><a href="#11线程的死锁代码实现" class="headerlink" title="11线程的死锁代码实现"></a>11线程的死锁代码实现</h3><p>   *A:线程的死锁代码实现<br>       public class DeadLock implements Runnable{<br>        private int i = 0;<br>        public void run(){<br>          while(true){<br>            if(i%2==0){<br>              //先进入A同步,再进入B同步<br>              synchronized(LockA.locka){<br>                System.out.println(“if…locka”);<br>                synchronized(LockB.lockb){<br>                  System.out.println(“if…lockb”);<br>                }<br>              }<br>            }else{<br>              //先进入B同步,再进入A同步<br>              synchronized(LockB.lockb){<br>                System.out.println(“else…lockb”);<br>                synchronized(LockA.locka){<br>                  System.out.println(“else…locka”);<br>                }<br>              }<br>            }<br>            i++;<br>          }<br>        }<br>       }</p>
 <pre><code>public class DeadLockDemo {
   public static void main(String[] args) {
     DeadLock dead = new DeadLock();
@@ -743,8 +741,8 @@ public class LockB {
 
   public static final LockB lockb = new LockB();
 }
-</code></pre><p> ###12线程等待与唤醒案例介绍<br>   *A:线程等待与唤醒案例介绍<br>     等待唤醒机制所涉及到的方法：<br>         wait（） :等待，将正在执行的线程释放其执行资格 和 执行权，并存储到线程池中。<br>         notify（）：唤醒，唤醒线程池中被wait（）的线程，一次唤醒一个，而且是任意的。<br>         notifyAll（）： 唤醒全部：可以将线程池中的所有wait() 线程都唤醒。<br>       其实，所谓唤醒的意思就是让 线程池中的线程具备执行资格。必须注意的是，这些方法都是在 同步中才有效。同时这些方法在使用时必须标明所属锁，这样才可以明确出这些方法操作的到底是哪个锁上的线程。</p>
-<p>###13线程等待与唤醒案例资源类编写<br>  <em>A:线程等待与唤醒案例资源类编写<br>    /</em></p>
+</code></pre><h3 id="12线程等待与唤醒案例介绍"><a href="#12线程等待与唤醒案例介绍" class="headerlink" title="12线程等待与唤醒案例介绍"></a>12线程等待与唤醒案例介绍</h3><p>   *A:线程等待与唤醒案例介绍<br>     等待唤醒机制所涉及到的方法：<br>         wait（） :等待，将正在执行的线程释放其执行资格 和 执行权，并存储到线程池中。<br>         notify（）：唤醒，唤醒线程池中被wait（）的线程，一次唤醒一个，而且是任意的。<br>         notifyAll（）： 唤醒全部：可以将线程池中的所有wait() 线程都唤醒。<br>       其实，所谓唤醒的意思就是让 线程池中的线程具备执行资格。必须注意的是，这些方法都是在 同步中才有效。同时这些方法在使用时必须标明所属锁，这样才可以明确出这些方法操作的到底是哪个锁上的线程。</p>
+<h3 id="13线程等待与唤醒案例资源类编写"><a href="#13线程等待与唤醒案例资源类编写" class="headerlink" title="13线程等待与唤醒案例资源类编写"></a>13线程等待与唤醒案例资源类编写</h3><p>  <em>A:线程等待与唤醒案例资源类编写<br>    /</em></p>
 <pre><code> *  定义资源类,有2个成员变量
  *  name,sex
  *  同时有2个线程,对资源中的变量操作
@@ -755,7 +753,7 @@ public class Resource {
   public String name;
   public String sex;
 }
-</code></pre><p>###14线程等待与唤醒案例输入和输出线程<br>   A:线程等待与唤醒案例输入和输出线程<br>     /*</p>
+</code></pre><h3 id="14线程等待与唤醒案例输入和输出线程"><a href="#14线程等待与唤醒案例输入和输出线程" class="headerlink" title="14线程等待与唤醒案例输入和输出线程"></a>14线程等待与唤醒案例输入和输出线程</h3><p>   A:线程等待与唤醒案例输入和输出线程<br>     /*</p>
 <pre><code>  *  输入的线程,对资源对象Resource中成员变量赋值
   *  一次赋值 张三,男
   *  下一次赋值 lisi,nv
@@ -790,8 +788,7 @@ public class Resource {
        }
      }
  }
-</code></pre><p>=================================第四节课=========================================</p>
-<p>###15线程等待与唤醒案例测试类<br>   A:线程等待与唤醒案例测试类<br>      /*</p>
+</code></pre><h3 id="15线程等待与唤醒案例测试类"><a href="#15线程等待与唤醒案例测试类" class="headerlink" title="15线程等待与唤醒案例测试类"></a>15线程等待与唤醒案例测试类</h3><p>   A:线程等待与唤醒案例测试类<br>      /*</p>
 <pre><code> *  开启输入线程和输出线程,实现赋值和打印值
  */
 public class ThreadDemo{
@@ -809,7 +806,7 @@ public class ThreadDemo{
     tout.start();
   }
 }
-</code></pre><p>###16线程等待与唤醒案例null值解决<br>   A:线程等待与唤醒案例null值解决<br>        /*</p>
+</code></pre><h3 id="16线程等待与唤醒案例null值解决"><a href="#16线程等待与唤醒案例null值解决" class="headerlink" title="16线程等待与唤醒案例null值解决"></a>16线程等待与唤醒案例null值解决</h3><p>   A:线程等待与唤醒案例null值解决<br>        /*</p>
 <pre><code>  *  输入的线程,对资源对象Resource中成员变量赋值
   *  一次赋值 张三,男
   *  下一次赋值 lisi,nv
@@ -869,72 +866,78 @@ public class ThreadDemo{
      tout.start();
    }
  }
-</code></pre><p>###17线程等待与唤醒案例数据安全解决<br>    A:线程等待与唤醒案例数据安全解决<br>            /*</p>
-<pre><code>  *  输入的线程,对资源对象Resource中成员变量赋值
-  *  一次赋值 张三,男
-  *  下一次赋值 lisi,nv
-*/
- public class Input implements Runnable {
-   private Resource r;
-   public Input(Resource r){
-     this.r=r;
-   }
+</code></pre><h3 id="17线程等待与唤醒案例数据安全解决"><a href="#17线程等待与唤醒案例数据安全解决" class="headerlink" title="17线程等待与唤醒案例数据安全解决"></a>17线程等待与唤醒案例数据安全解决</h3><pre><code>A:线程等待与唤醒案例数据安全解决
+        /*
+          *  输入的线程,对资源对象Resource中成员变量赋值
+          *  一次赋值 张三,男
+          *  下一次赋值 lisi,nv
+        */
+         public class Input implements Runnable {
+           private Resource r;
+           public Input(Resource r){
+             this.r=r;
+           }
 
-   public void run() {
-     int i=0;
-     while(true){
-      synchronized(r){
-       if(i%2==0){
-          r.name=&quot;张三&quot;;
-          r.sex=&quot;男&quot;;
-        }else{
-           r.name=&quot;lisi&quot;
-           r.sex=&quot;女&quot;
+           public void run() {
+             int i=0;
+             while(true){
+              synchronized(r){
+               if(i%2==0){
+                  r.name=&quot;张三&quot;;
+                  r.sex=&quot;男&quot;;
+                }else{
+                   r.name=&quot;lisi&quot;
+                   r.sex=&quot;女&quot;
+                 }
+               i++;
+             }
+
+           }
          }
-       i++;
-     }
 
-   }
- }
+         /*
+          *  输出线程,对资源对象Resource中成员变量,输出值
+          */ 
+         public class Output implements Runnable {
+           private Resource r;
+           public Output(Resource r){
+              this.r=r;
+           } 
+           public void run() {
+             while(true){
+                synchronized(r){
+                 System.out.println(r.name+&quot;...&quot;+r.sex); 
+                }
+               }
+             }
+           }
 
- /*
-  *  输出线程,对资源对象Resource中成员变量,输出值
-  */ 
- public class Output implements Runnable {
-   private Resource r;
-   public Output(Resource r){
-      this.r=r;
-   } 
-   public void run() {
-     while(true){
-        synchronized(r){
-         System.out.println(r.name+&quot;...&quot;+r.sex); 
-        }
-       }
-     }
-   }
+         }
+         /*
+          *  开启输入线程和输出线程,实现赋值和打印值
+          */
+         public class ThreadDemo{
+           public static void main(String[] args) {
 
- }
- /*
-  *  开启输入线程和输出线程,实现赋值和打印值
-  */
- public class ThreadDemo{
-   public static void main(String[] args) {
+             Resource r = new Resource();
 
-     Resource r = new Resource();
+             Input in = new Input(r);
+             Output out = new Output(r);
 
-     Input in = new Input(r);
-     Output out = new Output(r);
+             Thread tin = new Thread(in);
+             Thread tout = new Thread(out);
 
-     Thread tin = new Thread(in);
-     Thread tout = new Thread(out);
-
-     tin.start();
-     tout.start();
-   }
- }
-</code></pre><p>###18线程等待与唤醒案例通信的分析<br>    *A:线程等待与唤醒案例通信的分析<br>        输入:赋值后,执行方法wait()永远等待<br>        输出:变量值打印输出,在输出等待之前,唤醒<br>        输入的notify(),自己在wait()永远等待<br>        输入:被唤醒后,重新对变量赋值,赋值后,必须唤醒输出的线程notify(),<br>             自己的wait()</p>
-<p>###19线程等待与唤醒案例的实现<br>   *A 线程等待与唤醒案例的实现</p>
+             tin.start();
+             tout.start();
+           }
+         }
+</code></pre><h3 id="18线程等待与唤醒案例通信的分析"><a href="#18线程等待与唤醒案例通信的分析" class="headerlink" title="18线程等待与唤醒案例通信的分析"></a>18线程等待与唤醒案例通信的分析</h3><pre><code>*A:线程等待与唤醒案例通信的分析
+    输入:赋值后,执行方法wait()永远等待
+    输出:变量值打印输出,在输出等待之前,唤醒
+    输入的notify(),自己在wait()永远等待
+    输入:被唤醒后,重新对变量赋值,赋值后,必须唤醒输出的线程notify(),
+         自己的wait()
+</code></pre><h3 id="19线程等待与唤醒案例的实现"><a href="#19线程等待与唤醒案例的实现" class="headerlink" title="19线程等待与唤醒案例的实现"></a>19线程等待与唤醒案例的实现</h3><p>   *A 线程等待与唤醒案例的实现</p>
 <pre><code>/*
  *  定义资源类,有2个成员变量
  *  name,sex
@@ -1030,7 +1033,7 @@ public class ThreadDemo{
    tout.start();
  }
 }
-</code></pre><p>###20eclipse问题<br>   A:eclipse问题</p>
+</code></pre><h3 id="20eclipse问题"><a href="#20eclipse问题" class="headerlink" title="20eclipse问题"></a>20eclipse问题</h3><p>   A:eclipse问题</p>
 
       
     </div>
@@ -1163,8 +1166,17 @@ public class ThreadDemo{
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -1305,6 +1317,22 @@ public class ThreadDemo{
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#01线程操作共享数据的安全问题"><span class="nav-number">1.</span> <span class="nav-text">01线程操作共享数据的安全问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#02售票的案例"><span class="nav-number">2.</span> <span class="nav-text">02售票的案例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#03线程安全问题引发"><span class="nav-number">3.</span> <span class="nav-text">03线程安全问题引发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#04同步代码块解决线程安全问题"><span class="nav-number">4.</span> <span class="nav-text">04同步代码块解决线程安全问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#05同步代码块的执行原理"><span class="nav-number">5.</span> <span class="nav-text">05同步代码块的执行原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#06同步的上厕所原理"><span class="nav-number">6.</span> <span class="nav-text">06同步的上厕所原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#07同步方法"><span class="nav-number">7.</span> <span class="nav-text">07同步方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#08JDK1-5新特性Lock接口"><span class="nav-number">8.</span> <span class="nav-text">08JDK1.5新特性Lock接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#09Lock接口改进售票案例"><span class="nav-number">9.</span> <span class="nav-text">09Lock接口改进售票案例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10线程的死锁原理"><span class="nav-number">10.</span> <span class="nav-text">10线程的死锁原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11线程的死锁代码实现"><span class="nav-number">11.</span> <span class="nav-text">11线程的死锁代码实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12线程等待与唤醒案例介绍"><span class="nav-number">12.</span> <span class="nav-text">12线程等待与唤醒案例介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13线程等待与唤醒案例资源类编写"><span class="nav-number">13.</span> <span class="nav-text">13线程等待与唤醒案例资源类编写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14线程等待与唤醒案例输入和输出线程"><span class="nav-number">14.</span> <span class="nav-text">14线程等待与唤醒案例输入和输出线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15线程等待与唤醒案例测试类"><span class="nav-number">15.</span> <span class="nav-text">15线程等待与唤醒案例测试类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16线程等待与唤醒案例null值解决"><span class="nav-number">16.</span> <span class="nav-text">16线程等待与唤醒案例null值解决</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17线程等待与唤醒案例数据安全解决"><span class="nav-number">17.</span> <span class="nav-text">17线程等待与唤醒案例数据安全解决</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#18线程等待与唤醒案例通信的分析"><span class="nav-number">18.</span> <span class="nav-text">18线程等待与唤醒案例通信的分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#19线程等待与唤醒案例的实现"><span class="nav-number">19.</span> <span class="nav-text">19线程等待与唤醒案例的实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#20eclipse问题"><span class="nav-number">20.</span> <span class="nav-text">20eclipse问题</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

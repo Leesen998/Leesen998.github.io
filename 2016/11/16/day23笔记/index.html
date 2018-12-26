@@ -166,7 +166,7 @@
 <meta property="og:description" content="1、字节流2、字符流">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1544511684/samples/java%20files/photo-1544119339-7ca107ba27c4.jpg">
-<meta property="og:updated_time" content="2018-12-26T02:27:36.042Z">
+<meta property="og:updated_time" content="2018-12-26T03:02:43.698Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java学习笔记——基础21()">
 <meta name="twitter:description" content="1、字节流2、字符流">
@@ -587,8 +587,7 @@
 
             }
         }
-</code></pre><p>###04字节输出流FileOutputStream写字节数组</p>
-<pre><code>* A: 字节输出流FileOutputStream写字节数组
+</code></pre><h3 id="04字节输出流FileOutputStream写字节数组"><a href="#04字节输出流FileOutputStream写字节数组" class="headerlink" title="04字节输出流FileOutputStream写字节数组"></a>04字节输出流FileOutputStream写字节数组</h3><pre><code>* A: 字节输出流FileOutputStream写字节数组
     * a: 方法介绍
         *  void write(byte[] b)： 将 b.length 个字节从指定的 byte 数组写入此输出流
         *  void write(byte[] b, int off, int len) ：将指定 byte 数组中从偏移量 off 开始的 len 个字节写入此输出流。
@@ -629,8 +628,7 @@
 
             }
         }
-</code></pre><p>###05文件的续写和换行符号</p>
-<pre><code>* A: 文件的续写和换行符号
+</code></pre><h3 id="05文件的续写和换行符号"><a href="#05文件的续写和换行符号" class="headerlink" title="05文件的续写和换行符号"></a>05文件的续写和换行符号</h3><pre><code>* A: 文件的续写和换行符号
     * a: 文件的续写
         *  FileOutputStream构造方法, 的第二个参数中,加入true
     * b: 换行符号
@@ -652,8 +650,7 @@
                     fos.close();
                 }
             }
-</code></pre><p>###06IO中的异常处理</p>
-<pre><code>* A: IO中的异常处理
+</code></pre><h3 id="06IO中的异常处理"><a href="#06IO中的异常处理" class="headerlink" title="06IO中的异常处理"></a>06IO中的异常处理</h3><pre><code>* A: IO中的异常处理
     * a:IO流的异常处理
         * try catch finally
 
@@ -688,8 +685,7 @@
                 }
             }
         }
-</code></pre><p>###07字节输入流InputStream</p>
-<pre><code>* A: 字节输入流InputStream
+</code></pre><h3 id="07字节输入流InputStream"><a href="#07字节输入流InputStream" class="headerlink" title="07字节输入流InputStream"></a>07字节输入流InputStream</h3><pre><code>* A: 字节输入流InputStream
     * a: 方法介绍
         * abstract  int read() ：
             * 从输入流中读取数据的下一个字节。
@@ -713,8 +709,7 @@
         public class InputStreamDemo {
 
         }
-</code></pre><p>###08字节输入流FileInputStream读取字节</p>
-<pre><code>* A: 字节输入流FileInputStream读取字节
+</code></pre><h3 id="08字节输入流FileInputStream读取字节"><a href="#08字节输入流FileInputStream读取字节" class="headerlink" title="08字节输入流FileInputStream读取字节"></a>08字节输入流FileInputStream读取字节</h3><pre><code>* A: 字节输入流FileInputStream读取字节
     * a: 方法介绍
         * abstract  int read() ：
             * 从输入流中读取数据的下一个字节，返回-1表示文件结束
@@ -771,8 +766,7 @@
                 i = fis.read();
                 System.out.println(i);
          */
-</code></pre><p>###09字节输入流FileInputStream读取字节数组</p>
-<pre><code>* A: 字节输入流FileInputStream读取字节数组
+</code></pre><h3 id="09字节输入流FileInputStream读取字节数组"><a href="#09字节输入流FileInputStream读取字节数组" class="headerlink" title="09字节输入流FileInputStream读取字节数组"></a>09字节输入流FileInputStream读取字节数组</h3><pre><code>* A: 字节输入流FileInputStream读取字节数组
     * a: 方法介绍
         * int read(byte[] b)  
             * 从输入流中读取一定数量的字节，并将其存储在缓冲区数组 b 中。
@@ -811,8 +805,7 @@
                 fis.close();
             }
         }
-</code></pre><p>###10字节输入流FileInputStream读取字节数组的实现原理        </p>
-<pre><code>* A：字节输入流FileInputStream读取字节数组的实现原理
+</code></pre><h3 id="10字节输入流FileInputStream读取字节数组的实现原理"><a href="#10字节输入流FileInputStream读取字节数组的实现原理" class="headerlink" title="10字节输入流FileInputStream读取字节数组的实现原理"></a>10字节输入流FileInputStream读取字节数组的实现原理</h3><pre><code>* A：字节输入流FileInputStream读取字节数组的实现原理
     * a: 原理
         * 参见day23_source文件夹中的&quot;读取数组的原理.jpg&quot;
 
@@ -832,11 +825,9 @@
                 fis.close();
             }
         }
-</code></pre><p>###11文件复制原理</p>
-<pre><code>* A: 文件复制原理
+</code></pre><h3 id="11文件复制原理"><a href="#11文件复制原理" class="headerlink" title="11文件复制原理"></a>11文件复制原理</h3><pre><code>* A: 文件复制原理
     * a: 见day23_source/文件复制原理.jpg
-</code></pre><p>###12字节流复制文件读取单个字节</p>
-<pre><code>* A: 字节流复制文件读取单个字节
+</code></pre><h3 id="12字节流复制文件读取单个字节"><a href="#12字节流复制文件读取单个字节" class="headerlink" title="12字节流复制文件读取单个字节"></a>12字节流复制文件读取单个字节</h3><pre><code>* A: 字节流复制文件读取单个字节
     * a: 案例代码
         /*
          *  将数据源 c:\\a.txt
@@ -881,8 +872,7 @@
                 }
             }
         }
-</code></pre><p>###13字节流复制文件读取字节数组</p>
-<pre><code>* A: 字节流复制文件读取字节数组
+</code></pre><h3 id="13字节流复制文件读取字节数组"><a href="#13字节流复制文件读取字节数组" class="headerlink" title="13字节流复制文件读取字节数组"></a>13字节流复制文件读取字节数组</h3><pre><code>* A: 字节流复制文件读取字节数组
     * a: 案例代码
         /*
          *  字节流复制文件
@@ -928,8 +918,7 @@
                 System.out.println(e-s);
             }
         }
-</code></pre><p>###14编码表</p>
-<pre><code>* A: 编码表
+</code></pre><h3 id="14编码表"><a href="#14编码表" class="headerlink" title="14编码表"></a>14编码表</h3><pre><code>* A: 编码表
     * a: 定义：
         * 生活中字符和计算机二进制的对应关系表,就是编码表
     * b: 分类
@@ -946,8 +935,7 @@
             * 对于我们开发而言；常见的编码 GBK  UTF-8  ISO-8859-1
             * 文字---&gt;(数字) ：编码。 “abc”.getBytes()  byte[]
             * (数字)---&gt;文字  : 解码。 byte[] b={97,98,99}  new String(b) 
-</code></pre><p>###15字符输出流写文本FileWriter类</p>
-<pre><code>* A: 字符输出流写文本FileWriter类
+</code></pre><h3 id="15字符输出流写文本FileWriter类"><a href="#15字符输出流写文本FileWriter类" class="headerlink" title="15字符输出流写文本FileWriter类"></a>15字符输出流写文本FileWriter类</h3><pre><code>* A: 字符输出流写文本FileWriter类
     * a: 方法介绍
         *  void write(int c)
             *  写入单个字符
@@ -1004,8 +992,7 @@
                 fw.close();
             }
         }
-</code></pre><p>###16字符输入流读取文本FileReader类</p>
-<pre><code>* A: 字符输入流读取文本FileReader类
+</code></pre><h3 id="16字符输入流读取文本FileReader类"><a href="#16字符输入流读取文本FileReader类" class="headerlink" title="16字符输入流读取文本FileReader类"></a>16字符输入流读取文本FileReader类</h3><pre><code>* A: 字符输入流读取文本FileReader类
     * a: 方法介绍
         *  int read() 
             * 读取单个字符
@@ -1046,14 +1033,12 @@
                 fr.close();
             }
         }
-</code></pre><p>###17flush方法和close方法区别</p>
-<pre><code>* A: flush方法和close方法区别
+</code></pre><h3 id="17flush方法和close方法区别"><a href="#17flush方法和close方法区别" class="headerlink" title="17flush方法和close方法区别"></a>17flush方法和close方法区别</h3><pre><code>* A: flush方法和close方法区别
     *a: flush()方法
         * 用来刷新缓冲区的,刷新后可以再次写出,只有字符流才需要刷新
     *b: close()方法
         * 用来关闭流释放资源的的,如果是带缓冲区的流对象的close()方法,不但会关闭流,还会再关闭流之前刷新缓冲区,关闭后不能再写出 
-</code></pre><p>###18字符流复制文本文件</p>
-<pre><code>* A: 字符流复制文本文件
+</code></pre><h3 id="18字符流复制文本文件"><a href="#18字符流复制文本文件" class="headerlink" title="18字符流复制文本文件"></a>18字符流复制文本文件</h3><pre><code>* A: 字符流复制文本文件
     * a: 案例代码
         /*
          *  字符流复制文本文件,必须文本文件
@@ -1095,8 +1080,7 @@
                 }
             }
         }
-</code></pre><p>###19总结</p>
-<pre><code>* 把今天的知识点总结一遍。
+</code></pre><h3 id="19总结"><a href="#19总结" class="headerlink" title="19总结"></a>19总结</h3><pre><code>* 把今天的知识点总结一遍。
 </code></pre>
       
     </div>
@@ -1165,8 +1149,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/11/16/day22笔记/" rel="next" title="java学习笔记——基础20(IO)">
-                <i class="fa fa-chevron-left"></i> java学习笔记——基础20(IO)
+              <a href="/2016/11/01/day21笔记/" rel="next" title="java学习笔记——基础19(异常、throw、try...catch、finally、Throwable类))">
+                <i class="fa fa-chevron-left"></i> java学习笔记——基础19(异常、throw、try...catch、finally、Throwable类))
               </a>
             
           </div>
@@ -1175,8 +1159,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/11/18/New Document/" rel="prev" title="java基础：编译时和运行时的区别">
-                java基础：编译时和运行时的区别 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/11/16/day22笔记/" rel="prev" title="java学习笔记——基础20(IO)">
+                java学习笔记——基础20(IO) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -1390,7 +1374,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#01输入和输出"><span class="nav-number">1.</span> <span class="nav-text">01输入和输出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#02字节输出流OutputStream"><span class="nav-number">2.</span> <span class="nav-text">02字节输出流OutputStream</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#03字节输出流FileOutputStream写字节"><span class="nav-number">3.</span> <span class="nav-text">03字节输出流FileOutputStream写字节</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#01输入和输出"><span class="nav-number">1.</span> <span class="nav-text">01输入和输出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#02字节输出流OutputStream"><span class="nav-number">2.</span> <span class="nav-text">02字节输出流OutputStream</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#03字节输出流FileOutputStream写字节"><span class="nav-number">3.</span> <span class="nav-text">03字节输出流FileOutputStream写字节</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#04字节输出流FileOutputStream写字节数组"><span class="nav-number">4.</span> <span class="nav-text">04字节输出流FileOutputStream写字节数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#05文件的续写和换行符号"><span class="nav-number">5.</span> <span class="nav-text">05文件的续写和换行符号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#06IO中的异常处理"><span class="nav-number">6.</span> <span class="nav-text">06IO中的异常处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#07字节输入流InputStream"><span class="nav-number">7.</span> <span class="nav-text">07字节输入流InputStream</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#08字节输入流FileInputStream读取字节"><span class="nav-number">8.</span> <span class="nav-text">08字节输入流FileInputStream读取字节</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#09字节输入流FileInputStream读取字节数组"><span class="nav-number">9.</span> <span class="nav-text">09字节输入流FileInputStream读取字节数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10字节输入流FileInputStream读取字节数组的实现原理"><span class="nav-number">10.</span> <span class="nav-text">10字节输入流FileInputStream读取字节数组的实现原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11文件复制原理"><span class="nav-number">11.</span> <span class="nav-text">11文件复制原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12字节流复制文件读取单个字节"><span class="nav-number">12.</span> <span class="nav-text">12字节流复制文件读取单个字节</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13字节流复制文件读取字节数组"><span class="nav-number">13.</span> <span class="nav-text">13字节流复制文件读取字节数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14编码表"><span class="nav-number">14.</span> <span class="nav-text">14编码表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15字符输出流写文本FileWriter类"><span class="nav-number">15.</span> <span class="nav-text">15字符输出流写文本FileWriter类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16字符输入流读取文本FileReader类"><span class="nav-number">16.</span> <span class="nav-text">16字符输入流读取文本FileReader类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17flush方法和close方法区别"><span class="nav-number">17.</span> <span class="nav-text">17flush方法和close方法区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#18字符流复制文本文件"><span class="nav-number">18.</span> <span class="nav-text">18字符流复制文本文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#19总结"><span class="nav-number">19.</span> <span class="nav-text">19总结</span></a></li></ol></div>
             
 
           </div>

@@ -166,7 +166,7 @@
 <meta property="og:description" content="1、Properties集合2、序列化流与反序列化流3、打印流4、commons-IO">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1544511684/samples/java%20files/photo-1544119339-7ca107ba27c4.jpg">
-<meta property="og:updated_time" content="2018-12-19T12:48:03.791Z">
+<meta property="og:updated_time" content="2018-12-26T03:04:15.823Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java学习笔记——基础23()">
 <meta name="twitter:description" content="1、Properties集合2、序列化流与反序列化流3、打印流4、commons-IO">
@@ -502,8 +502,7 @@
 <p><img src="https://res.cloudinary.com/dpvywdzxv/image/upload/v1544511684/samples/java%20files/photo-1544119339-7ca107ba27c4.jpg" alt="" style="width:100%"></p>
 <p>1、Properties集合<br>2、序列化流与反序列化流<br>3、打印流<br>4、commons-IO</p>
 <a id="more"></a>
-<p>###01Properties集合的特点</p>
-<pre><code>* A: Properties集合的特点
+<h3 id="01Properties集合的特点"><a href="#01Properties集合的特点" class="headerlink" title="01Properties集合的特点"></a>01Properties集合的特点</h3><pre><code>* A: Properties集合的特点
     * a: Properties类介绍
         * Properties 类表示了一个持久的属性集。Properties 可保存在流中或从流中加载。属性列表中每个键及其对应值都是一个字符串
     * b: 特点
@@ -516,8 +515,7 @@
         * load(Reader reader) 按简单的面向行的格式从输入字符流中读取属性列表（键和元素对）
         * store(OutputStream outputStream,String commonts) 把集合中的数据，保存到指定的流所对应的文件中，参数commonts代表对描述信息
         * stroe(Writer writer,String comments) 以适合使用 load(Reader) 方法的格式，将此 Properties 表中的属性列表（键和元素对）写入输出字符
-</code></pre><p>###02Properties集合存储键值对</p>
-<pre><code>* A: Properties集合存储键值对        
+</code></pre><h3 id="02Properties集合存储键值对"><a href="#02Properties集合存储键值对" class="headerlink" title="02Properties集合存储键值对"></a>02Properties集合存储键值对</h3><pre><code>* A: Properties集合存储键值对        
     * a: 方法介绍
         *  集合对象Properties类,继承Hashtable,实现Map接口
         *  可以和IO对象结合使用,实现数据的持久存储
@@ -553,8 +551,7 @@
                 }
             }
         }
-</code></pre><p>###03Properties集合的方法load</p>
-<pre><code>* A: Properties集合的方法load
+</code></pre><h3 id="03Properties集合的方法load"><a href="#03Properties集合的方法load" class="headerlink" title="03Properties集合的方法load"></a>03Properties集合的方法load</h3><pre><code>* A: Properties集合的方法load
     * a: 方法介绍
         * Properties集合特有方法 load
         * load(InputStream in)
@@ -583,8 +580,7 @@
                     System.out.println(pro);
                 }                    
             }
-</code></pre><p>###04Properties集合的方法store</p>
-<pre><code>* A: Properties集合的方法store
+</code></pre><h3 id="04Properties集合的方法store"><a href="#04Properties集合的方法store" class="headerlink" title="04Properties集合的方法store"></a>04Properties集合的方法store</h3><pre><code>* A: Properties集合的方法store
     * a: 方法介绍            
         * Properties集合的特有方法store
         * store(OutputStream out)
@@ -612,8 +608,7 @@
                 fw.close();
             }                
         }
-</code></pre><p>###05对象的序列化与反序列化</p>
-<pre><code>* A: 对象的序列化与反序列化
+</code></pre><h3 id="05对象的序列化与反序列化"><a href="#05对象的序列化与反序列化" class="headerlink" title="05对象的序列化与反序列化"></a>05对象的序列化与反序列化</h3><pre><code>* A: 对象的序列化与反序列化
     * a: 基本概念
         * 对象的序列化
             * 对象中的数据，以流的形式，写入到文件中保存过程称为写出对象，对象的序列化
@@ -621,8 +616,7 @@
         * 对象的反序列化
             * 在文件中，以流的形式，将对象读出来，读取对象，对象的反序列化
             * ObjectInputStream 将文件对象读取出来
-</code></pre><p>###06ObjectOutputStream流写对象</p>
-<pre><code>* A: ObjectOutputStream流写对象
+</code></pre><h3 id="06ObjectOutputStream流写对象"><a href="#06ObjectOutputStream流写对象" class="headerlink" title="06ObjectOutputStream流写对象"></a>06ObjectOutputStream流写对象</h3><pre><code>* A: ObjectOutputStream流写对象
     * a: 简单介绍
          *  IO流对象,实现对象Person序列化,和反序列化
          *  ObjectOutputStream 写对象,实现序列化
@@ -679,8 +673,7 @@
                 oos.close();
             }
         }
-</code></pre><p>###07ObjectInputStream流读取对象</p>
-<pre><code>* A: ObjectInputStream流读取对象
+</code></pre><h3 id="07ObjectInputStream流读取对象"><a href="#07ObjectInputStream流读取对象" class="headerlink" title="07ObjectInputStream流读取对象"></a>07ObjectInputStream流读取对象</h3><pre><code>* A: ObjectInputStream流读取对象
     * a: 简单介绍
         * ObjectInputStream
         * 构造方法:ObjectInputStream(InputStream in)
@@ -712,29 +705,24 @@
                 ois.close();
             }                
         }
-</code></pre><p>###08静态不能序列化</p>
-<pre><code>* A: 静态不能序列化
+</code></pre><h3 id="08静态不能序列化"><a href="#08静态不能序列化" class="headerlink" title="08静态不能序列化"></a>08静态不能序列化</h3><pre><code>* A: 静态不能序列化
     * a: 原因
         * 序列化是把对象数据进行持久化存储
         * 静态的东西不属于对象，而属于类
-</code></pre><p>###09transient关键字</p>
-<pre><code>* A: transient关键字
+</code></pre><h3 id="09transient关键字"><a href="#09transient关键字" class="headerlink" title="09transient关键字"></a>09transient关键字</h3><pre><code>* A: transient关键字
     * a: 作用
         * 被transient修饰的属性不会被序列化
         * transient关键字只能修饰成员变量
-</code></pre><p>###10Serializable接口的含义</p>
-<pre><code>* A：Serializable接口的含义
+</code></pre><h3 id="10Serializable接口的含义"><a href="#10Serializable接口的含义" class="headerlink" title="10Serializable接口的含义"></a>10Serializable接口的含义</h3><pre><code>* A：Serializable接口的含义
     * a: 作用
         * 给需要序列化的类上加标记。该标记中没有任何抽象方法
         * 只有实现了 Serializable接口的类的对象才能被序列化
-</code></pre><p>###11序列化中的序列号冲突问题</p>
-<pre><code>* A: 序列化中的序列号冲突问题
+</code></pre><h3 id="11序列化中的序列号冲突问题"><a href="#11序列化中的序列号冲突问题" class="headerlink" title="11序列化中的序列号冲突问题"></a>11序列化中的序列号冲突问题</h3><pre><code>* A: 序列化中的序列号冲突问题
     * a: 问题产生原因
         * 当一个类实现Serializable接口后，创建对象并将对象写入文件，之后更改了源代码(比如：将成员变量的修饰符有private改成public)，
             再次从文件中读取对象时会报异常
         * 见day25_source文件夹下的&quot;序列号的冲突.JPG&quot;文件
-</code></pre><p>###12序列化中自定义的序列号</p>
-<pre><code>* A: 序列化中自定义的序列号
+</code></pre><h3 id="12序列化中自定义的序列号"><a href="#12序列化中自定义的序列号" class="headerlink" title="12序列化中自定义的序列号"></a>12序列化中自定义的序列号</h3><pre><code>* A: 序列化中自定义的序列号
     * a: 定义方式
         * private static final long serialVersionUID = 1478652478456L;
             * 这样每次编译类时生成的serialVersionUID值都是固定的     
@@ -770,8 +758,7 @@
                 return &quot;Person [name=&quot; + name + &quot;, age=&quot; + age + &quot;]&quot;;
             }                
         }
-</code></pre><p>###13打印流和特性</p>
-<pre><code>* A: 打印流和特性
+</code></pre><h3 id="13打印流和特性"><a href="#13打印流和特性" class="headerlink" title="13打印流和特性"></a>13打印流和特性</h3><pre><code>* A: 打印流和特性
     * a: 概述
         * 打印流添加输出数据的功能，使它们能够方便地打印各种数据值表示形式.
         * 打印流根据流的分类：
@@ -790,8 +777,7 @@
             * 接收File类型,接收字符串文件名,接收字节输出流OutputStream
         * PrintWriter构造方法
             * 接收File类型,接收字符串文件名,接收字节输出流OutputStream, 接收字符输出流Writer
-</code></pre><p>###14打印流输出目的是File对象</p>
-<pre><code>* A: 打印流输出目的是File对象
+</code></pre><h3 id="14打印流输出目的是File对象"><a href="#14打印流输出目的是File对象" class="headerlink" title="14打印流输出目的是File对象"></a>14打印流输出目的是File对象</h3><pre><code>* A: 打印流输出目的是File对象
     * a: 案例代码
         public class PrintWriterDemo {
             public static void main(String[] args) throws  IOException {
@@ -812,8 +798,7 @@
                 pw.close();
             }
         }
-</code></pre><p>###15输出语句是char数组</p>
-<pre><code>* A: 输出语句是char数组
+</code></pre><h3 id="15输出语句是char数组"><a href="#15输出语句是char数组" class="headerlink" title="15输出语句是char数组"></a>15输出语句是char数组</h3><pre><code>* A: 输出语句是char数组
     * a: 案例代码
         public class Demo {
             public static void main(String[] args) {
@@ -831,8 +816,7 @@
         * println数组，只有打印字符数组时只有容，其余均打印数组的地址
             * 因为api中定义了打印字符数组的方法，其底层是在遍历数组中的元素
             * 而其他打印数组的方法，都是将数组对象编程Object，其底层再将对象编程String，调用了String s = String.valueOf(x);方法
-</code></pre><p>###16打印流输出目的是String和流对象</p>
-<pre><code>* A: 打印流输出目的是String和流对象
+</code></pre><h3 id="16打印流输出目的是String和流对象"><a href="#16打印流输出目的是String和流对象" class="headerlink" title="16打印流输出目的是String和流对象"></a>16打印流输出目的是String和流对象</h3><pre><code>* A: 打印流输出目的是String和流对象
     * a: 案例代码
         public class PrintWriterDemo {
             public static void main(String[] args) throws  IOException {
@@ -862,8 +846,7 @@
             }    
 
         }
-</code></pre><p>###17打印流开启自动刷新</p>
-<pre><code>* A: 打印流开启自动刷新
+</code></pre><h3 id="17打印流开启自动刷新"><a href="#17打印流开启自动刷新" class="headerlink" title="17打印流开启自动刷新"></a>17打印流开启自动刷新</h3><pre><code>* A: 打印流开启自动刷新
     * 案例代码
         public class PrintWriterDemo {
             public static void main(String[] args) throws  IOException {
@@ -887,8 +870,7 @@
                 pw.close();
             }
         }
-</code></pre><p>###18打印流复制文本文件</p>
-<pre><code>* A: 打印流复制文本文件
+</code></pre><h3 id="18打印流复制文本文件"><a href="#18打印流复制文本文件" class="headerlink" title="18打印流复制文本文件"></a>18打印流复制文本文件</h3><pre><code>* A: 打印流复制文本文件
     * a: 案例代码
         /*
          * 打印流实现文本复制
@@ -907,23 +889,20 @@
                 bfr.close();
             }
         }
-</code></pre><p>###19commons-io工具类介绍</p>
-<pre><code>* A: commons-io工具类介绍
+</code></pre><h3 id="19commons-io工具类介绍"><a href="#19commons-io工具类介绍" class="headerlink" title="19commons-io工具类介绍"></a>19commons-io工具类介绍</h3><pre><code>* A: commons-io工具类介绍
     * a: 工具类介绍
         * 解压缩commons-io-2.4.zip文件
         * commons-io-2.4.jar需要导入到项目中的jar包，里面存放的是class文件
         * commons-io-2.4-sources.jar工具类中原代码
         * docs是帮助文档
-</code></pre><p>###20使用工具类commons_io</p>
-<pre><code>* A: 使用工具类commons_io
+</code></pre><h3 id="20使用工具类commons-io"><a href="#20使用工具类commons-io" class="headerlink" title="20使用工具类commons_io"></a>20使用工具类commons_io</h3><pre><code>* A: 使用工具类commons_io
     * a: 导入jar包
         * 加入classpath的第三方jar包内的class文件才能在项目中使用
         * 创建lib文件夹
         * 将commons-io.jar拷贝到lib文件夹
         * 右键点击commons-io.jar，Build Path→Add to Build Path
     * b: 学会如何看源代码
-</code></pre><p>###21IO工具类FilenameUtils</p>
-<pre><code>* A: IO工具类FilenameUtils
+</code></pre><h3 id="21IO工具类FilenameUtils"><a href="#21IO工具类FilenameUtils" class="headerlink" title="21IO工具类FilenameUtils"></a>21IO工具类FilenameUtils</h3><pre><code>* A: IO工具类FilenameUtils
     * a: 方法介绍
         * getExtension(String path)：获取文件的扩展名；
         * getName()：获取文件名；
@@ -963,8 +942,7 @@
                  System.out.println(name);
              }
         }
-</code></pre><p>###22IO工具类FileUtils</p>
-<pre><code>* A: IO工具类FileUtils
+</code></pre><h3 id="22IO工具类FileUtils"><a href="#22IO工具类FileUtils" class="headerlink" title="22IO工具类FileUtils"></a>22IO工具类FileUtils</h3><pre><code>* A: IO工具类FileUtils
     * a: 方法介绍
         * readFileToString(File file)：读取文件内容，并返回一个String；
         * writeStringToFile(File file，String content)：将内容content写入到file中；
@@ -1012,8 +990,7 @@
                  System.out.println(s);
              }
         }
-</code></pre><p>###23总结</p>
-<pre><code>* 把今天的知识点总结一遍。
+</code></pre><h3 id="23总结"><a href="#23总结" class="headerlink" title="23总结"></a>23总结</h3><pre><code>* 把今天的知识点总结一遍。
 </code></pre>
       
     </div>
@@ -1146,8 +1123,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -1288,6 +1274,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#01Properties集合的特点"><span class="nav-number">1.</span> <span class="nav-text">01Properties集合的特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#02Properties集合存储键值对"><span class="nav-number">2.</span> <span class="nav-text">02Properties集合存储键值对</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#03Properties集合的方法load"><span class="nav-number">3.</span> <span class="nav-text">03Properties集合的方法load</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#04Properties集合的方法store"><span class="nav-number">4.</span> <span class="nav-text">04Properties集合的方法store</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#05对象的序列化与反序列化"><span class="nav-number">5.</span> <span class="nav-text">05对象的序列化与反序列化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#06ObjectOutputStream流写对象"><span class="nav-number">6.</span> <span class="nav-text">06ObjectOutputStream流写对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#07ObjectInputStream流读取对象"><span class="nav-number">7.</span> <span class="nav-text">07ObjectInputStream流读取对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#08静态不能序列化"><span class="nav-number">8.</span> <span class="nav-text">08静态不能序列化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#09transient关键字"><span class="nav-number">9.</span> <span class="nav-text">09transient关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10Serializable接口的含义"><span class="nav-number">10.</span> <span class="nav-text">10Serializable接口的含义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11序列化中的序列号冲突问题"><span class="nav-number">11.</span> <span class="nav-text">11序列化中的序列号冲突问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12序列化中自定义的序列号"><span class="nav-number">12.</span> <span class="nav-text">12序列化中自定义的序列号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13打印流和特性"><span class="nav-number">13.</span> <span class="nav-text">13打印流和特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14打印流输出目的是File对象"><span class="nav-number">14.</span> <span class="nav-text">14打印流输出目的是File对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15输出语句是char数组"><span class="nav-number">15.</span> <span class="nav-text">15输出语句是char数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16打印流输出目的是String和流对象"><span class="nav-number">16.</span> <span class="nav-text">16打印流输出目的是String和流对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17打印流开启自动刷新"><span class="nav-number">17.</span> <span class="nav-text">17打印流开启自动刷新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#18打印流复制文本文件"><span class="nav-number">18.</span> <span class="nav-text">18打印流复制文本文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#19commons-io工具类介绍"><span class="nav-number">19.</span> <span class="nav-text">19commons-io工具类介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#20使用工具类commons-io"><span class="nav-number">20.</span> <span class="nav-text">20使用工具类commons_io</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#21IO工具类FilenameUtils"><span class="nav-number">21.</span> <span class="nav-text">21IO工具类FilenameUtils</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#22IO工具类FileUtils"><span class="nav-number">22.</span> <span class="nav-text">22IO工具类FileUtils</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#23总结"><span class="nav-number">23.</span> <span class="nav-text">23总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

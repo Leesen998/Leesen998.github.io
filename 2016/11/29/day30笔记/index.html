@@ -166,7 +166,7 @@
 <meta property="og:description" content="1、DBUtils2、连接池">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1544254144/samples/java%20files/photo-1542312455-e31bb150371c.jpg">
-<meta property="og:updated_time" content="2018-12-19T12:42:32.803Z">
+<meta property="og:updated_time" content="2018-12-26T03:08:36.632Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java学习笔记——基础28()">
 <meta name="twitter:description" content="1、DBUtils2、连接池">
@@ -502,8 +502,7 @@
 <p><img src="https://res.cloudinary.com/dpvywdzxv/image/upload/v1544254144/samples/java%20files/photo-1542312455-e31bb150371c.jpg" alt="" style="width:100%"></p>
 <p>1、DBUtils<br>2、连接池    </p>
 <a id="more"></a>    
-<p>###01DButils工具类的介绍个三个核心类</p>
-<pre><code>* A: DButils工具类的介绍个三个核心类
+<h3 id="01DButils工具类的介绍个三个核心类"><a href="#01DButils工具类的介绍个三个核心类" class="headerlink" title="01DButils工具类的介绍个三个核心类"></a>01DButils工具类的介绍个三个核心类</h3><pre><code>* A: DButils工具类的介绍个三个核心类
     * a: 概述
         * DBUtils是java编程中的数据库操作实用工具，小巧简单实用。
         * DBUtils封装了对JDBC的操作，简化了JDBC操作，可以少写代码。
@@ -514,19 +513,16 @@
             * query(Connection conn, String sql, ResultSetHandler&lt;T&gt; rsh, Object... params) ，用来完成表数据的查询操作
         * ResultSetHandler接口，用于定义select操作后，怎样封装结果集.
         * DbUtils类，它就是一个工具类,定义了关闭资源与事务处理的方法
-</code></pre><p>###02事务的简单介绍(此知识点简单了解，难度较大，就业班会详细 讲解)</p>
-<pre><code>* A: 事务的简单介绍
+</code></pre><h3 id="02事务的简单介绍-此知识点简单了解，难度较大，就业班会详细-讲解"><a href="#02事务的简单介绍-此知识点简单了解，难度较大，就业班会详细-讲解" class="headerlink" title="02事务的简单介绍(此知识点简单了解，难度较大，就业班会详细 讲解)"></a>02事务的简单介绍(此知识点简单了解，难度较大，就业班会详细 讲解)</h3><pre><code>* A: 事务的简单介绍
     * a: 见day32/day32_source/事务.jgp
-</code></pre><p>###03QueryRunner类的update方法介绍</p>
-<pre><code>* A：QueryRunner类的update方法介绍
+</code></pre><h3 id="03QueryRunner类的update方法介绍"><a href="#03QueryRunner类的update方法介绍" class="headerlink" title="03QueryRunner类的update方法介绍"></a>03QueryRunner类的update方法介绍</h3><pre><code>* A：QueryRunner类的update方法介绍
     * a: 方法介绍
         * update(Connection conn, String sql, Object... params) ，用来完成表数据的增加、删除、更新操作
         *  使用QueryRunner类,实现对数据表的insert delete update
         *  调用QueryRunner类的方法 update (Connection con,String sql,Object...param)
             *  Object...param 可变参数,Object类型,SQL语句会出现?占位符
             *  数据库连接对象,自定义的工具类传递
-</code></pre><p>###04QueryRunner类实现insert添加数据</p>
-<pre><code>* A: QueryRunner类实现insert添加数据
+</code></pre><h3 id="04QueryRunner类实现insert添加数据"><a href="#04QueryRunner类实现insert添加数据" class="headerlink" title="04QueryRunner类实现insert添加数据"></a>04QueryRunner类实现insert添加数据</h3><pre><code>* A: QueryRunner类实现insert添加数据
     * a: 案例代码
         public class QueryRunnerDemo {
             private static Connection con = JDBCUtilsConfig.getConnection();
@@ -548,8 +544,7 @@
                 DbUtils.closeQuietly(con);
             }
         }
-</code></pre><p>###05QueryRunner类实现update修改数据</p>
-<pre><code>* A: QueryRunner类实现update修改数据
+</code></pre><h3 id="05QueryRunner类实现update修改数据"><a href="#05QueryRunner类实现update修改数据" class="headerlink" title="05QueryRunner类实现update修改数据"></a>05QueryRunner类实现update修改数据</h3><pre><code>* A: QueryRunner类实现update修改数据
     * a: 案例代码
         public class QueryRunnerDemo {
             private static Connection con = JDBCUtilsConfig.getConnection();
@@ -572,8 +567,7 @@
                 DbUtils.closeQuietly(con);
             }                
         }
-</code></pre><p>###06QueryRunner类实现delete删除数据</p>
-<pre><code>* A: QueryRunner类实现delete删除数据
+</code></pre><h3 id="06QueryRunner类实现delete删除数据"><a href="#06QueryRunner类实现delete删除数据" class="headerlink" title="06QueryRunner类实现delete删除数据"></a>06QueryRunner类实现delete删除数据</h3><pre><code>* A: QueryRunner类实现delete删除数据
     * a: 案例代码
         public class QueryRunnerDemo {
             private static Connection con = JDBCUtilsConfig.getConnection();
@@ -599,16 +593,14 @@
                 DbUtils.closeQuietly(con);
             }                
         }
-</code></pre><p>###07JavaBean类</p>
-<pre><code>* A: JavaBean类
+</code></pre><h3 id="07JavaBean类"><a href="#07JavaBean类" class="headerlink" title="07JavaBean类"></a>07JavaBean类</h3><pre><code>* A: JavaBean类
     * a: 概念
         * JavaBean就是一个类，在开发中常用封装数据。具有如下特性
             1.    需要实现接口：java.io.Serializable ，通常实现接口这步骤省略了，不会影响程序。
             2.    提供私有字段：private 类型 字段名;
             3.    提供getter/setter方法：
             4.    提供无参构造
-</code></pre><p>###08DBUtils工具类结果集处理的方式</p>
-<pre><code>* A: DBUtils工具类结果集处理的方式
+</code></pre><h3 id="08DBUtils工具类结果集处理的方式"><a href="#08DBUtils工具类结果集处理的方式" class="headerlink" title="08DBUtils工具类结果集处理的方式"></a>08DBUtils工具类结果集处理的方式</h3><pre><code>* A: DBUtils工具类结果集处理的方式
     * a: QueryRunner实现查询操作
         *    query(Connection conn, String sql, ResultSetHandler&lt;T&gt; rsh, Object... params) ，用来完成表数据的查询操作
     * b: ResultSetHandler结果集处理类
@@ -620,8 +612,7 @@
         * ScalarHandler    它是用于单数据。例如select count(*) from 表操作。
         * MapHandler    将结果集第一行封装到Map集合中,Key 列名, Value 该列数据
         * MapListHandler    将结果集第一行封装到Map集合中,Key 列名, Value 该列数据,Map集合存储到List集合
-</code></pre><p>###09QueryRunner类的方法query</p>
-<pre><code>* A: QueryRunner类的方法query
+</code></pre><h3 id="09QueryRunner类的方法query"><a href="#09QueryRunner类的方法query" class="headerlink" title="09QueryRunner类的方法query"></a>09QueryRunner类的方法query</h3><pre><code>* A: QueryRunner类的方法query
     * a: QueryRunner数据查询操作
         * 调用QueryRunner类方法query(Connection con,String sql,ResultSetHandler r, Object..params)
         *  ResultSetHandler r 结果集的处理方式,传递ResultSetHandler接口实现类
@@ -631,8 +622,7 @@
         public class QueryRunnerDemo1 {
             private static Connection con = JDBCUtilsConfig.getConnection();
         }
-</code></pre><p>###10结果集处理ArrayHandler</p>
-<pre><code>* A: 结果集处理ArrayHandler
+</code></pre><h3 id="10结果集处理ArrayHandler"><a href="#10结果集处理ArrayHandler" class="headerlink" title="10结果集处理ArrayHandler"></a>10结果集处理ArrayHandler</h3><pre><code>* A: 结果集处理ArrayHandler
     * 案例代码
         public class QueryRunnerDemo1 {
             private static Connection con = JDBCUtilsConfig.getConnection();
@@ -654,8 +644,7 @@
                 }
             }    
         }
-</code></pre><p>###11结果集处理ArrayListHandler</p>
-<pre><code>* A: 结果集处理ArrayListHandler
+</code></pre><h3 id="11结果集处理ArrayListHandler"><a href="#11结果集处理ArrayListHandler" class="headerlink" title="11结果集处理ArrayListHandler"></a>11结果集处理ArrayListHandler</h3><pre><code>* A: 结果集处理ArrayListHandler
     * a: 案例代码
         public class QueryRunnerDemo1 {
             private static Connection con = JDBCUtilsConfig.getConnection();
@@ -684,8 +673,7 @@
                 }
             }
         }
-</code></pre><p>###12结果集处理BeanHandler</p>
-<pre><code>* A: 结果集处理BeanHandler
+</code></pre><h3 id="12结果集处理BeanHandler"><a href="#12结果集处理BeanHandler" class="headerlink" title="12结果集处理BeanHandler"></a>12结果集处理BeanHandler</h3><pre><code>* A: 结果集处理BeanHandler
     * a: 案例代码
         public class QueryRunnerDemo1 {
             private static Connection con = JDBCUtilsConfig.getConnection();
@@ -706,8 +694,7 @@
                 System.out.println(s);
             }
         }
-</code></pre><p>###13结果集处理BeanListHandler</p>
-<pre><code>* A: 结果集处理BeanListHandler
+</code></pre><h3 id="13结果集处理BeanListHandler"><a href="#13结果集处理BeanListHandler" class="headerlink" title="13结果集处理BeanListHandler"></a>13结果集处理BeanListHandler</h3><pre><code>* A: 结果集处理BeanListHandler
     * a: 案例代码
     public class QueryRunnerDemo1 {
         private static Connection con = JDBCUtilsConfig.getConnection();
@@ -729,8 +716,7 @@
             }
         }
     }
-</code></pre><p>###14结果集处理ColumnListHandler</p>
-<pre><code>* A: 结果集处理ColumnListHandler
+</code></pre><h3 id="14结果集处理ColumnListHandler"><a href="#14结果集处理ColumnListHandler" class="headerlink" title="14结果集处理ColumnListHandler"></a>14结果集处理ColumnListHandler</h3><pre><code>* A: 结果集处理ColumnListHandler
     * a: 案例代码
         public class QueryRunnerDemo1 {
             private static Connection con = JDBCUtilsConfig.getConnection();
@@ -753,8 +739,7 @@
                 }
             }    
         }
-</code></pre><p>###15结果集处理ScalarHandler</p>
-<pre><code>* A: 结果集处理ScalarHandler
+</code></pre><h3 id="15结果集处理ScalarHandler"><a href="#15结果集处理ScalarHandler" class="headerlink" title="15结果集处理ScalarHandler"></a>15结果集处理ScalarHandler</h3><pre><code>* A: 结果集处理ScalarHandler
     * a: 案例代码
         public class QueryRunnerDemo1 {
             private static Connection con = JDBCUtilsConfig.getConnection();
@@ -773,8 +758,7 @@
                 System.out.println(count);
             }
         }
-</code></pre><p>###16结果集处理MapHandler</p>
-<pre><code>* A: 结果集处理MapHandler
+</code></pre><h3 id="16结果集处理MapHandler"><a href="#16结果集处理MapHandler" class="headerlink" title="16结果集处理MapHandler"></a>16结果集处理MapHandler</h3><pre><code>* A: 结果集处理MapHandler
     * a: 案例代码
         public class QueryRunnerDemo1 {
             private static Connection con = JDBCUtilsConfig.getConnection();
@@ -798,8 +782,7 @@
                 }
             }
         }
-</code></pre><p>###17结果集处理MapListHandler</p>
-<pre><code>* A: 结果集处理MapListHandlerr
+</code></pre><h3 id="17结果集处理MapListHandler"><a href="#17结果集处理MapListHandler" class="headerlink" title="17结果集处理MapListHandler"></a>17结果集处理MapListHandler</h3><pre><code>* A: 结果集处理MapListHandlerr
     * a: 案例代码
         public class QueryRunnerDemo1 {
             private static Connection con = JDBCUtilsConfig.getConnection();
@@ -827,15 +810,13 @@
 
             }
         }
-</code></pre><p>###18连接池介绍</p>
-<pre><code>* A: 连接池介绍
+</code></pre><h3 id="18连接池介绍"><a href="#18连接池介绍" class="headerlink" title="18连接池介绍"></a>18连接池介绍</h3><pre><code>* A: 连接池介绍
     * a: 连接池介绍
         * 实际上就是存放连接的池子(容器)
         * 在开发中“获得连接”或“释放资源”是非常消耗系统资源的两个过程
         * 为了解决此类性能问题，通常情况我们采用连接池技术，来共享连接Connection。
         * 这样我们就不需要每次都创建连接、释放连接了，这些操作都交给了连接池            
-</code></pre><p>###19连接池概念规范和DataSource接口</p>
-<pre><code>* A: 连接池概念规范和DataSource接口    
+</code></pre><h3 id="19连接池概念规范和DataSource接口"><a href="#19连接池概念规范和DataSource接口" class="headerlink" title="19连接池概念规范和DataSource接口"></a>19连接池概念规范和DataSource接口</h3><pre><code>* A: 连接池概念规范和DataSource接口    
     * a: 连接池概念规范
         * 用池来管理Connection，这样可以重复使用Connection。
         * 不用自己来创建Connection，而是通过池来获取Connection对象
@@ -845,13 +826,11 @@
         * Java为数据库连接池提供了公共的接口：javax.sql.DataSource
         * 各个厂商需要让自己的连接池实现这个接口。这样应用程序可以方便的切换不同厂商的连接池
         * 常见的连接池：DBCP、C3P0
-</code></pre><p>###20DBCP连接池介绍</p>
-<pre><code>* A: DBCP连接池介绍
+</code></pre><h3 id="20DBCP连接池介绍"><a href="#20DBCP连接池介绍" class="headerlink" title="20DBCP连接池介绍"></a>20DBCP连接池介绍</h3><pre><code>* A: DBCP连接池介绍
     * a: DBCP连接池介绍
         * DBCP也是一个开源的连接池，是Apache Common成员之一，在企业开发中也比较常见，tomcat内置的连接池
     * tomcat服务器简单介绍    
-</code></pre><p>###21导入jar包</p>
-<pre><code>* A: 导入jar包
+</code></pre><h3 id="21导入jar包"><a href="#21导入jar包" class="headerlink" title="21导入jar包"></a>21导入jar包</h3><pre><code>* A: 导入jar包
     * a: jar包介绍    
         * mysql-connector-java-5.1.37-bin.jar：数据库驱动
         * commons-dbutils-1.6.jar：提供QueryRunner类方便进行增删改查操作
@@ -860,8 +839,7 @@
     * b: 导入jar包
         * 在项目根路径下建立文件夹lib
         * 拷贝以上jar包，选定拷贝的jar包/右键/Build Path/Add to Build Path
-</code></pre><p>###22BasicDataSource类的使用</p>
-<pre><code>* A: BasicDataSource类的使用
+</code></pre><h3 id="22BasicDataSource类的使用"><a href="#22BasicDataSource类的使用" class="headerlink" title="22BasicDataSource类的使用"></a>22BasicDataSource类的使用</h3><pre><code>* A: BasicDataSource类的使用
     * a: 案例代码
         /*
          *  连接池jar包中,定义好一个类 BasicDataSource
@@ -889,8 +867,7 @@
                 }
             }
         }
-</code></pre><p>###23BasicDataSource类的常见配置</p>
-<pre><code>* A: BasicDataSource类的常见配置
+</code></pre><h3 id="23BasicDataSource类的常见配置"><a href="#23BasicDataSource类的常见配置" class="headerlink" title="23BasicDataSource类的常见配置"></a>23BasicDataSource类的常见配置</h3><pre><code>* A: BasicDataSource类的常见配置
     * a: 常见配置
         分类    属性            描述
         必须项    
@@ -903,8 +880,7 @@
                 minIdle            最小空闲连接
                 maxIdle         最大空闲连接
                 initialSize        初始化连接
-</code></pre><p>###24实现数据库连接池工具类</p>
-<pre><code>* A: 实现数据库连接池工具类
+</code></pre><h3 id="24实现数据库连接池工具类"><a href="#24实现数据库连接池工具类" class="headerlink" title="24实现数据库连接池工具类"></a>24实现数据库连接池工具类</h3><pre><code>* A: 实现数据库连接池工具类
     * a: 案例代码
         /*
          *  使用DBCP实现数据库的连接池
@@ -940,8 +916,7 @@
                 return datasource;
             }
         }
-</code></pre><p>###25工具类的测试</p>
-<pre><code>* A: 工具类的测试
+</code></pre><h3 id="25工具类的测试"><a href="#25工具类的测试" class="headerlink" title="25工具类的测试"></a>25工具类的测试</h3><pre><code>* A: 工具类的测试
     * a: 案例代码
         /*
          *  测试写好的工具类,
@@ -994,8 +969,7 @@
             }
 
         }
-</code></pre><p>###26总结</p>
-<pre><code>* 把今天的知识点总结一遍。
+</code></pre><h3 id="26总结"><a href="#26总结" class="headerlink" title="26总结"></a>26总结</h3><pre><code>* 把今天的知识点总结一遍。
 </code></pre>
       
     </div>
@@ -1128,8 +1102,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -1270,6 +1253,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#01DButils工具类的介绍个三个核心类"><span class="nav-number">1.</span> <span class="nav-text">01DButils工具类的介绍个三个核心类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#02事务的简单介绍-此知识点简单了解，难度较大，就业班会详细-讲解"><span class="nav-number">2.</span> <span class="nav-text">02事务的简单介绍(此知识点简单了解，难度较大，就业班会详细 讲解)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#03QueryRunner类的update方法介绍"><span class="nav-number">3.</span> <span class="nav-text">03QueryRunner类的update方法介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#04QueryRunner类实现insert添加数据"><span class="nav-number">4.</span> <span class="nav-text">04QueryRunner类实现insert添加数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#05QueryRunner类实现update修改数据"><span class="nav-number">5.</span> <span class="nav-text">05QueryRunner类实现update修改数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#06QueryRunner类实现delete删除数据"><span class="nav-number">6.</span> <span class="nav-text">06QueryRunner类实现delete删除数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#07JavaBean类"><span class="nav-number">7.</span> <span class="nav-text">07JavaBean类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#08DBUtils工具类结果集处理的方式"><span class="nav-number">8.</span> <span class="nav-text">08DBUtils工具类结果集处理的方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#09QueryRunner类的方法query"><span class="nav-number">9.</span> <span class="nav-text">09QueryRunner类的方法query</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10结果集处理ArrayHandler"><span class="nav-number">10.</span> <span class="nav-text">10结果集处理ArrayHandler</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11结果集处理ArrayListHandler"><span class="nav-number">11.</span> <span class="nav-text">11结果集处理ArrayListHandler</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12结果集处理BeanHandler"><span class="nav-number">12.</span> <span class="nav-text">12结果集处理BeanHandler</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13结果集处理BeanListHandler"><span class="nav-number">13.</span> <span class="nav-text">13结果集处理BeanListHandler</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14结果集处理ColumnListHandler"><span class="nav-number">14.</span> <span class="nav-text">14结果集处理ColumnListHandler</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15结果集处理ScalarHandler"><span class="nav-number">15.</span> <span class="nav-text">15结果集处理ScalarHandler</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16结果集处理MapHandler"><span class="nav-number">16.</span> <span class="nav-text">16结果集处理MapHandler</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17结果集处理MapListHandler"><span class="nav-number">17.</span> <span class="nav-text">17结果集处理MapListHandler</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#18连接池介绍"><span class="nav-number">18.</span> <span class="nav-text">18连接池介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#19连接池概念规范和DataSource接口"><span class="nav-number">19.</span> <span class="nav-text">19连接池概念规范和DataSource接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#20DBCP连接池介绍"><span class="nav-number">20.</span> <span class="nav-text">20DBCP连接池介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#21导入jar包"><span class="nav-number">21.</span> <span class="nav-text">21导入jar包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#22BasicDataSource类的使用"><span class="nav-number">22.</span> <span class="nav-text">22BasicDataSource类的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#23BasicDataSource类的常见配置"><span class="nav-number">23.</span> <span class="nav-text">23BasicDataSource类的常见配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#24实现数据库连接池工具类"><span class="nav-number">24.</span> <span class="nav-text">24实现数据库连接池工具类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#25工具类的测试"><span class="nav-number">25.</span> <span class="nav-text">25工具类的测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#26总结"><span class="nav-number">26.</span> <span class="nav-text">26总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

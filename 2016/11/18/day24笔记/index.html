@@ -166,7 +166,7 @@
 <meta property="og:description" content="1、转换流2、缓冲流">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1544511684/samples/java%20files/photo-1544119339-7ca107ba27c4.jpg">
-<meta property="og:updated_time" content="2018-12-19T12:48:29.783Z">
+<meta property="og:updated_time" content="2018-12-26T03:03:23.217Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java学习笔记——基础22()">
 <meta name="twitter:description" content="1、转换流2、缓冲流">
@@ -502,17 +502,14 @@
 <p><img src="https://res.cloudinary.com/dpvywdzxv/image/upload/v1544511684/samples/java%20files/photo-1544119339-7ca107ba27c4.jpg" alt="" style="width:100%"></p>
 <p>1、转换流<br>2、缓冲流</p>
 <a id="more"></a>
-<p>###01转换流概述</p>
-<pre><code>* A: 转换流概述
+<h3 id="01转换流概述"><a href="#01转换流概述" class="headerlink" title="01转换流概述"></a>01转换流概述</h3><pre><code>* A: 转换流概述
     * a: 转换流概述
         * OutputStreamWriter 是字符流通向字节流的桥梁：可使用指定的字符编码表，将要写入流中的字符编码成字节
         * 将字符串按照指定的编码表转成字节，在使用字节流将这些字节写出去
-</code></pre><p>###02转换流_字符转字节的过程</p>
-<pre><code>* A: 转换流_字符转字节的过程
+</code></pre><h3 id="02转换流-字符转字节的过程"><a href="#02转换流-字符转字节的过程" class="headerlink" title="02转换流_字符转字节的过程"></a>02转换流_字符转字节的过程</h3><pre><code>* A: 转换流_字符转字节的过程
     * a.图解
         * 详见day24_source/转换流.JPG图片
-</code></pre><p>###03OutputStreamWriter写文本文件</p>
-<pre><code>* A: OutputStreamWriter写文本文件
+</code></pre><h3 id="03OutputStreamWriter写文本文件"><a href="#03OutputStreamWriter写文本文件" class="headerlink" title="03OutputStreamWriter写文本文件"></a>03OutputStreamWriter写文本文件</h3><pre><code>* A: OutputStreamWriter写文本文件
     * a: OutputStreamWriter
         * java.io.OutputStreamWriter 继承Writer类
         * 就是一个字符输出流，写文本文件
@@ -560,8 +557,7 @@
                     osw.close();
                 }
             }
-</code></pre><p>###04转换流_字节转字符流过程</p>
-<pre><code>* A: 转换流_字节转字符流过程
+</code></pre><h3 id="04转换流-字节转字符流过程"><a href="#04转换流-字节转字符流过程" class="headerlink" title="04转换流_字节转字符流过程"></a>04转换流_字节转字符流过程</h3><pre><code>* A: 转换流_字节转字符流过程
     * a: InputStreamReader            
         * java.io.InputStreamReader 继承 Reader
         * 字符输入流，读取文本文件
@@ -577,8 +573,7 @@
         * InputStreamReader(InputStream in,String charsetName) 传递编码表的名字
     * b: 图解
         * 详见day24_source/转换流.JPG图片
-</code></pre><p>###05InputSteamReader读取文本文件</p>
-<pre><code>* A: InputSteamReader读取文本文件
+</code></pre><h3 id="05InputSteamReader读取文本文件"><a href="#05InputSteamReader读取文本文件" class="headerlink" title="05InputSteamReader读取文本文件"></a>05InputSteamReader读取文本文件</h3><pre><code>* A: InputSteamReader读取文本文件
     * a: 案例代码
         public class InputStreamReaderDemo {
             public static void main(String[] args) throws IOException {
@@ -615,8 +610,7 @@
                 isr.close();
             }
         }
-</code></pre><p>###06转换流子类父类的区别</p>
-<pre><code>* A: 转换流子类父类的区别
+</code></pre><h3 id="06转换流子类父类的区别"><a href="#06转换流子类父类的区别" class="headerlink" title="06转换流子类父类的区别"></a>06转换流子类父类的区别</h3><pre><code>* A: 转换流子类父类的区别
     * a: 继承关系
         OutputStreamWriter:
             |--FileWriter:
@@ -630,13 +624,11 @@
             * InputStreamReader isr = new InputStreamReader(new FileInputStream(&quot;a.txt&quot;));//默认字符集。
             * InputStreamReader isr = new InputStreamReader(new FileInputStream(&quot;a.txt&quot;),&quot;GBK&quot;);//指定GBK字符集。
             * FileReader fr = new FileReader(&quot;a.txt&quot;);
-</code></pre><p>###07缓冲流概述</p>
-<pre><code>* A: 缓冲流概述
+</code></pre><h3 id="07缓冲流概述"><a href="#07缓冲流概述" class="headerlink" title="07缓冲流概述"></a>07缓冲流概述</h3><pre><code>* A: 缓冲流概述
     * a: 概述
         * 可提高IO流的读写速度
         * 分为字节缓冲流与字符缓冲流 
-</code></pre><p>###08字节输出流缓冲流BufferedOutputStream</p>
-<pre><code>* A: 字节输出流缓冲流BufferedOutputStream
+</code></pre><h3 id="08字节输出流缓冲流BufferedOutputStream"><a href="#08字节输出流缓冲流BufferedOutputStream" class="headerlink" title="08字节输出流缓冲流BufferedOutputStream"></a>08字节输出流缓冲流BufferedOutputStream</h3><pre><code>* A: 字节输出流缓冲流BufferedOutputStream
     * a: BufferedOutputStream
         * 字节输出流的缓冲流
         * java.io.BufferedOuputStream 作用: 提高原有输出流的写入效率
@@ -666,8 +658,7 @@
                 bos.close();
             }
         }
-</code></pre><p>###09字节输入流缓冲流BufferedInputStream</p>
-<pre><code>* A: 字节输入流缓冲流BufferedInputStream
+</code></pre><h3 id="09字节输入流缓冲流BufferedInputStream"><a href="#09字节输入流缓冲流BufferedInputStream" class="headerlink" title="09字节输入流缓冲流BufferedInputStream"></a>09字节输入流缓冲流BufferedInputStream</h3><pre><code>* A: 字节输入流缓冲流BufferedInputStream
     * a: BufferedInputStream
         * 字节输入流的缓冲流
         * 继承InputStream,标准的字节输入流
@@ -690,8 +681,7 @@
                 bis.close();
             }
         }
-</code></pre><p>###10四种文件复制方式的效率比较        </p>
-<pre><code>* A：四种文件复制方式的效率比较
+</code></pre><h3 id="10四种文件复制方式的效率比较"><a href="#10四种文件复制方式的效率比较" class="headerlink" title="10四种文件复制方式的效率比较"></a>10四种文件复制方式的效率比较</h3><pre><code>* A：四种文件复制方式的效率比较
     * a: 四中复制方式
         * 字节流读写单个字节                    125250 毫秒
         * 字节流读写字节数组                    193    毫秒  OK
@@ -768,8 +758,7 @@
                 fis.close();
             }
         }
-</code></pre><p>###11字符输出流缓冲流BufferedWriter</p>
-<pre><code>* A: 字符输出流缓冲流BufferedWriter
+</code></pre><h3 id="11字符输出流缓冲流BufferedWriter"><a href="#11字符输出流缓冲流BufferedWriter" class="headerlink" title="11字符输出流缓冲流BufferedWriter"></a>11字符输出流缓冲流BufferedWriter</h3><pre><code>* A: 字符输出流缓冲流BufferedWriter
     * a: BufferedWriter
         * 字符输出流缓冲区流
         * java.io.BufferedWriter 继承 Writer
@@ -808,8 +797,7 @@
 
             }
         }
-</code></pre><p>###12字符输出流缓冲流BufferedWriter特有方法newLine</p>
-<pre><code>* A: 字符输出流缓冲流BufferedWriter特有方法newLine
+</code></pre><h3 id="12字符输出流缓冲流BufferedWriter特有方法newLine"><a href="#12字符输出流缓冲流BufferedWriter特有方法newLine" class="headerlink" title="12字符输出流缓冲流BufferedWriter特有方法newLine"></a>12字符输出流缓冲流BufferedWriter特有方法newLine</h3><pre><code>* A: 字符输出流缓冲流BufferedWriter特有方法newLine
     * a: 方法介绍
         * void  newLine() 写换行
 
@@ -858,13 +846,11 @@
 
             }
         }
-</code></pre><p>###13字符输入流缓冲流BufferedReader</p>
-<pre><code>* A: 字符输入流缓冲流BufferedReader
+</code></pre><h3 id="13字符输入流缓冲流BufferedReader"><a href="#13字符输入流缓冲流BufferedReader" class="headerlink" title="13字符输入流缓冲流BufferedReader"></a>13字符输入流缓冲流BufferedReader</h3><pre><code>* A: 字符输入流缓冲流BufferedReader
     * a: 概述
         * 从字符输入流中读取文本，缓冲各个字符，从而实现字符、数组和行的高效读取
         * public String readLine() 读取一个文本行，包含该行内容的字符串，不包含任何行终止符，如果已到达流末尾，则返回 null
-</code></pre><p>###14字符输入流缓冲流BufferedReader读取文本行</p>
-<pre><code>* A: 字符输入流缓冲流BufferedReader读取文本行
+</code></pre><h3 id="14字符输入流缓冲流BufferedReader读取文本行"><a href="#14字符输入流缓冲流BufferedReader读取文本行" class="headerlink" title="14字符输入流缓冲流BufferedReader读取文本行"></a>14字符输入流缓冲流BufferedReader读取文本行</h3><pre><code>* A: 字符输入流缓冲流BufferedReader读取文本行
     * a: BufferedReader
         * 字符输入流缓冲流
         * java.io.BufferedReader 继承 Reader
@@ -915,8 +901,7 @@
                 line = bfr.readLine();
                 System.out.println(line);
          */
-</code></pre><p>###15字符流缓冲区流复制文本文件</p>
-<pre><code>* A: 字符流缓冲区流复制文本文件
+</code></pre><h3 id="15字符流缓冲区流复制文本文件"><a href="#15字符流缓冲区流复制文本文件" class="headerlink" title="15字符流缓冲区流复制文本文件"></a>15字符流缓冲区流复制文本文件</h3><pre><code>* A: 字符流缓冲区流复制文本文件
     * a: 案例代码
         /*
          *  使用缓冲区流对象,复制文本文件
@@ -939,8 +924,7 @@
                 bfr.close();
             }
         }
-</code></pre><p>###16IO流对象的操作规律</p>
-<pre><code>* A: IO流对象的操作规律
+</code></pre><h3 id="16IO流对象的操作规律"><a href="#16IO流对象的操作规律" class="headerlink" title="16IO流对象的操作规律"></a>16IO流对象的操作规律</h3><pre><code>* A: IO流对象的操作规律
     * a: 明确一：要操作的数据是数据源还是数据目的。
         * 源：InputStream    Reader
         * 目的：OutputStream Writer
@@ -970,8 +954,7 @@
             * 转换吗？转换流。InputStreamReader OutputStreamWriter
             * 高效吗？缓冲区对象。BufferedXXX
             * 已经明确到了具体的体系上。
-</code></pre><p>###17总结</p>
-<pre><code>* 把今天的知识点总结一遍。
+</code></pre><h3 id="17总结"><a href="#17总结" class="headerlink" title="17总结"></a>17总结</h3><pre><code>* 把今天的知识点总结一遍。
 </code></pre>
       
     </div>
@@ -1104,8 +1087,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -1246,6 +1238,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#01转换流概述"><span class="nav-number">1.</span> <span class="nav-text">01转换流概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#02转换流-字符转字节的过程"><span class="nav-number">2.</span> <span class="nav-text">02转换流_字符转字节的过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#03OutputStreamWriter写文本文件"><span class="nav-number">3.</span> <span class="nav-text">03OutputStreamWriter写文本文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#04转换流-字节转字符流过程"><span class="nav-number">4.</span> <span class="nav-text">04转换流_字节转字符流过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#05InputSteamReader读取文本文件"><span class="nav-number">5.</span> <span class="nav-text">05InputSteamReader读取文本文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#06转换流子类父类的区别"><span class="nav-number">6.</span> <span class="nav-text">06转换流子类父类的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#07缓冲流概述"><span class="nav-number">7.</span> <span class="nav-text">07缓冲流概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#08字节输出流缓冲流BufferedOutputStream"><span class="nav-number">8.</span> <span class="nav-text">08字节输出流缓冲流BufferedOutputStream</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#09字节输入流缓冲流BufferedInputStream"><span class="nav-number">9.</span> <span class="nav-text">09字节输入流缓冲流BufferedInputStream</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10四种文件复制方式的效率比较"><span class="nav-number">10.</span> <span class="nav-text">10四种文件复制方式的效率比较</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11字符输出流缓冲流BufferedWriter"><span class="nav-number">11.</span> <span class="nav-text">11字符输出流缓冲流BufferedWriter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12字符输出流缓冲流BufferedWriter特有方法newLine"><span class="nav-number">12.</span> <span class="nav-text">12字符输出流缓冲流BufferedWriter特有方法newLine</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13字符输入流缓冲流BufferedReader"><span class="nav-number">13.</span> <span class="nav-text">13字符输入流缓冲流BufferedReader</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14字符输入流缓冲流BufferedReader读取文本行"><span class="nav-number">14.</span> <span class="nav-text">14字符输入流缓冲流BufferedReader读取文本行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15字符流缓冲区流复制文本文件"><span class="nav-number">15.</span> <span class="nav-text">15字符流缓冲区流复制文本文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16IO流对象的操作规律"><span class="nav-number">16.</span> <span class="nav-text">16IO流对象的操作规律</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17总结"><span class="nav-number">17.</span> <span class="nav-text">17总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
