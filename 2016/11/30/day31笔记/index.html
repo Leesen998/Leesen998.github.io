@@ -1,0 +1,2217 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#fff">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-flash.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="https://fonts.cat.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#fff">
+
+
+  <link rel="manifest" href="/images/manifest.json">
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="1、管家婆项目">
+<meta name="keywords" content="java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java学习笔记——基础29()">
+<meta property="og:url" content="https://leesen998.github.io/2016/11/30/day31笔记/index.html">
+<meta property="og:site_name" content="QJun">
+<meta property="og:description" content="1、管家婆项目">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1544254144/samples/java%20files/photo-1542312455-e31bb150371c.jpg">
+<meta property="og:updated_time" content="2018-12-19T12:40:39.841Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java学习笔记——基础29()">
+<meta name="twitter:description" content="1、管家婆项目">
+<meta name="twitter:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1544254144/samples/java%20files/photo-1542312455-e31bb150371c.jpg">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="QJun" type="application/atom+xml" />
+
+
+
+
+  <link rel="canonical" href="https://leesen998.github.io/2016/11/30/day31笔记/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>java学习笔记——基础29() | QJun</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://leesen998.github.io" class="github-corner" aria-label="View source on GitHub"><svg width="120" height="120" viewBox="0 0 250 250" style="fill:#64CEAA; color:#fff; position: absolute; top: 194; border: 0; left: 0; transform: scale(-1, 1);" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">QJun</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">QJun's Homepage</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://leesen998.github.io/2016/11/30/day31笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QJun">
+      <meta itemprop="description" content="Stay Hungry, Stay Foolish!">
+      <meta itemprop="image" content="/images/10.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QJun">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">java学习笔记——基础29()
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2016-11-30 19:48:29" itemprop="dateCreated datePublished" datetime="2016-11-30T19:48:29+08:00">2016-11-30</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/程序设计/" itemprop="url" rel="index"><span itemprop="name">程序设计</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p class="description"></p>
+
+<p><img src="https://res.cloudinary.com/dpvywdzxv/image/upload/v1544254144/samples/java%20files/photo-1542312455-e31bb150371c.jpg" alt="" style="width:100%"></p>
+<p>1、管家婆项目 </p>
+<a id="more"></a>
+<p>###01项目训练目标</p>
+<pre><code>* A: 项目训练目标
+    * a: 项目目标
+        * 综合运用前面所学习的知识点
+        * 熟练View层、Service层、Dao层之间的方法相互调用操作、
+        * 熟练dbutils操作数据库表完成增删改查
+        * 了解公司项目开发的流程，充分的掌握项目需求分析、设计与功能的代码实现。提高同学们独立分析需求与功能实现的能力。            
+</code></pre><p>###02项目中的功能模块</p>
+<pre><code>* A: 项目中的功能模块    
+    * a: 五大模块
+        * 查询账务
+        * 多条件组合查询账务
+        * 添加账务
+        * 编辑账务
+        * 删除账务
+</code></pre><p>###03技术的选择和相关jar包</p>
+<pre><code>* A: 技术的选择和相关jar包
+    * a: apache的commons组件：
+        * commons-dbutils-1.4.jar：封装并简化了JDBC；
+        * commons-dbcp-1.4.jar：apache commons提供的数据库连接池组件，命名为DBCP；
+    * b: commons.pool-1.3.jar：DBCP连接池依赖该jar包；
+        * mysql-connector-java-5.1.28-bin.jar：MySQL的JDBC驱动包，用JDBC连接MySQL数据库必须使用该JAR包。
+</code></pre><p>###04项目中的工具类</p>
+<pre><code>* A: 项目中的工具类
+    * a: 工具类的介绍    
+        * 每个项目中都会有很多个工具类，不要求每个工具类对能独立写出来，但是要会使用工具类
+        * JDBCUtils：用来创建数据库连接池对象
+</code></pre><p>###05数据表的设计</p>
+<pre><code>* A: 数据表的设计
+    * a: 数据表的设计(详见：day34_source/表关系.JPG)
+        * 表与表之间是有关系的
+        * 主表和从表的关系
+        * 主表中的主键作为从表中的外键
+</code></pre><p>###06创建数据库数据表写入测试数据</p>
+<pre><code>* A: 创建数据库数据表写入测试数据
+    * a: 创建数据库数据表
+        /*
+          创建管家婆的数据库
+          名字 gjp
+        */
+        CREATE DATABASE gjp;
+
+        USE gjp;
+
+        /*
+          创建数据表,表名账务
+          字段,列
+          主键
+          分类名称  可变字符
+          金额  double
+          账户  可变字符 (支付,收入方法)
+          创建日期 date
+          账务描述 可变字符
+        */
+
+        CREATE TABLE gjp_zhangwu(
+           -- 主键
+           zwid INT PRIMARY KEY AUTO_INCREMENT,
+           -- 分类名称   
+           flname VARCHAR(200),
+           -- 金额
+           money DOUBLE,
+           -- 账户
+           zhanghu VARCHAR(100),
+           -- 创建日期
+           createtime DATE,
+           -- 账务描述
+           description  VARCHAR(1000)
+        );
+        SELECT * FROM gjp_zhangwu;
+    * b: 写入数据
+        -- 写入测试的数据
+        INSERT  INTO gjp_zhangwu(zwid,flname,money,zhangHu,createtime,description) VALUES (1,&apos;吃饭支出&apos;,247,&apos;交通银行&apos;,&apos;2016-03-02&apos;,&apos;家庭聚餐&apos;);
+        INSERT  INTO gjp_zhangwu(zwid,flname,money,zhangHu,createtime,description) VALUES (2,&apos;工资收入&apos;,12345,&apos;现金&apos;,&apos;2016-03-15&apos;,&apos;开工资了&apos;);
+        INSERT  INTO gjp_zhangwu(zwid,flname,money,zhangHu,createtime,description) VALUES (3,&apos;服装支出&apos;,1998,&apos;现金&apos;,&apos;2016-04-02&apos;,&apos;买衣服&apos;);
+        INSERT  INTO gjp_zhangwu(zwid,flname,money,zhangHu,createtime,description) VALUES (4,&apos;吃饭支出&apos;,325,&apos;现金&apos;,&apos;2016-06-18&apos;,&apos;朋友聚餐&apos;);
+        INSERT  INTO gjp_zhangwu(zwid,flname,money,zhangHu,createtime,description) VALUES (5,&apos;股票收入&apos;,8000,&apos;工商银行&apos;,&apos;2016-10-28&apos;,&apos;股票大涨&apos;);
+        INSERT  INTO gjp_zhangwu(zwid,flname,money,zhangHu,createtime,description) VALUES (6,&apos;股票收入&apos;,5000,&apos;工商银行&apos;,&apos;2016-10-28&apos;,&apos;股票又大涨&apos;);
+        INSERT  INTO gjp_zhangwu(zwid,flname,money,zhangHu,createtime,description) VALUES (7,&apos;工资收入&apos;,5000,&apos;交通银行&apos;,&apos;2016-10-28&apos;,&apos;又开工资了&apos;);
+        INSERT  INTO gjp_zhangwu(zwid,flname,money,zhangHu,createtime,description) VALUES (8,&apos;礼金支出&apos;,5000,&apos;现金&apos;,&apos;2016-10-28&apos;,&apos;朋友结婚&apos;);
+        INSERT  INTO gjp_zhangwu(zwid,flname,money,zhangHu,createtime,description) VALUES (9,&apos;其他支出&apos;,1560,&apos;现金&apos;,&apos;2016-10-29&apos;,&apos;丢钱了&apos;);
+        INSERT  INTO gjp_zhangwu(zwid,flname,money,zhangHu,createtime,description) VALUES (10,&apos;交通支出&apos;,2300,&apos;交通银行&apos;,&apos;2016-10-29&apos;,&apos;油价还在涨啊&apos;);
+        INSERT  INTO gjp_zhangwu(zwid,flname,money,zhangHu,createtime,description) VALUES (11,&apos;吃饭支出&apos;,1000,&apos;工商银行&apos;,&apos;2016-10-29&apos;,&apos;又吃饭&apos;);
+        INSERT  INTO gjp_zhangwu(zwid,flname,money,zhangHu,createtime,description) VALUES (12,&apos;工资收入&apos;,1000,&apos;现金&apos;,&apos;2016-10-30&apos;,&apos;开资&apos;);
+        INSERT  INTO gjp_zhangwu(zwid,flname,money,zhangHu,createtime,description) VALUES (13,&apos;交通支出&apos;,2000,&apos;现金&apos;,&apos;2016-10-30&apos;,&apos;机票好贵&apos;);
+        INSERT  INTO gjp_zhangwu(zwid,flname,money,zhangHu,createtime,description) VALUES (14,&apos;工资收入&apos;,5000,&apos;现金&apos;,&apos;2016-10-30&apos;,&apos;又开资&apos;);
+</code></pre><p>###07项目中的分层设计</p>
+<pre><code>* A: 项目中的分层设计
+    * a: 各层功能介绍
+        * view层作用: 视图层,即项目中的界面
+        * controller层作用: 控制层, 获取界面上的数据,为界面设置数据; 将要实现的功能交给业务层处理
+        * service层作用: 业务层, 功能的实现, 与controller控制层和数据访问层DAO交互, 将对数据库的操作交给DAO数据访问层来处理
+        * dao层作用: 数据访问层, 用来操作数据库表的数据
+        * db数据库: 这里指MySQL
+        * domain 实体包: 存放JavaBean
+        * tools工具包:存放项目中使用到的工具类
+        * test 测试包: 存放项目功能测试的代码
+</code></pre><p>###08创建项目_分层_导入jar包</p>
+<pre><code>* A: 创建项目_分层_导入jar包
+    * a: 创建工程包
+        * cn.itcast.gjp.app: 存放main方法类；
+        * cn.itcast.gjp.domain: 存放JavaBean；
+        * cn.itcast.gjp.view: 存放界面，及表现层类；
+        * cn.itcast.gjp.service: 存放业务层类；
+        * cn.itcast.gjp.dao: 存放数据访问层类;
+        * cn.itcast.gjp.tools:存放工具类
+    * b: 导入jar包
+        * 在项目根路径下建立文件夹lib
+        * 导入以下jar包
+            * mysql-connector-java-5.1.37-bin.jar：数据库驱动
+            * commons-dbutils-1.6.jar：提供QueryRunner类方便进行增删改查操作
+            * commons-dbcp-1.4.jar：
+            * commons-pool-1.5.6.jar：提供高效的数据库连接池技术                
+        * 拷贝以上jar包，选定拷贝的jar包/右键/Build Path/Add to Build Path
+</code></pre><p>###09创建domain包中的类</p>
+<pre><code>* A: 创建domain包中的类
+    * a: 案例代码
+        public class ZhangWu {
+             private int  zwid;
+
+             private String flname; 
+
+             private double  money; 
+
+             private String zhanghu;
+
+             private String createtime; 
+
+             private String description;
+             //注意生成空参构造、有参构造、set和get方法、toString方法等
+        }
+</code></pre><p>###10创建JDBCUtils工具类</p>
+<pre><code>* A：创建JDBCUtils工具类
+    * a: 案例代码
+        public class JDBCUtils{
+            //创建BasicDataSource对象
+            private static BasicDataSource datasource = new BasicDataSource();
+            //静态代码块,实现必要参数设置
+            static{
+                datasource.setDriverClassName(&quot;com.mysql.jdbc.Driver&quot;);
+                datasource.setUrl(&quot;jdbc:mysql://localhost:3306/gjp&quot;);
+                datasource.setUsername(&quot;root&quot;);
+                datasource.setPassword(&quot;123&quot;);
+                datasource.setMaxActive(10);
+                datasource.setMaxIdle(5);
+                datasource.setMinIdle(2);
+                datasource.setInitialSize(10);
+            }
+            public static DataSource getDataSource(){
+                return datasource;
+            }
+        }
+</code></pre><p>###11创建其他包中的类</p>
+<pre><code>* A: 创建其他包中的类
+    * a: cn.itcast.gjp.dao包中创建ZhangWuDao类
+        /*
+         *  实现对数据表 gjp_zhangwu 数据增删改查操作
+         *  dbuils工具类完成,类成员创建QueryRunner对象,指定数据源
+         */
+        public class ZhangWuDao {
+            private QueryRunner qr = new QueryRunner(JDBCUtils.getDataSource());
+        }
+    * b: cn.itcast.gjp.service包中创建ZhangWuService类
+        /*
+         *  业务层类
+         *  接收上一层,控制层controller的数据
+         *  经过计算,传递给dao层,操作数据库
+         *  调用dao层中的类,类成员位置,创建Dao类的对象
+         */
+        public class ZhangWuService {
+            private ZhangWuDao dao = new ZhangWuDao();
+
+        }
+    * c: cn.itcast.gjp.controller包中建立ZhangWuController类
+        /*
+         *  控制器层
+         *  接收视图层的数据,数据传递给service层
+         *  成员位置,创建service对象
+         */
+        public class ZhangWuController {
+            private ZhangWuService service = new ZhangWuService();                
+        }
+    * d: cn.itcast.gjp.view包中建立MainView类
+        /*
+         *  试图层,用户看到和操作的界面
+         *  数据传递给controller层实现
+         *  成员位置,创建controller对象
+         */
+        public class MainView {
+            private ZhangWuController controller = new ZhangWuController();
+
+        }
+    * e: cn.itcast.gjp.app包中建立MainApp类
+        /*
+         *  主程序类,作用,开启软件程序
+         */
+        public class MainApp {
+            public static void main(String[] args) {
+                new MainView().run();
+            }
+        }
+</code></pre><p>###12实现用户的界面菜单</p>
+<pre><code>* A: 实现用户的界面菜单
+    * a: 案例核心代码
+        * cn.itcast.gjp.view包中建立MainView类中添加run方法
+        /*
+         *  实现界面效果
+         *  接收用户的输入
+         *  根据数据,调用不同的功能方法
+         */
+        public void run(){
+            //创建Scanner类对象,反复键盘输入
+            Scanner sc = new Scanner(System.in);
+            while(true){
+                System.out.println(&quot;---------------管家婆家庭记账软件---------------&quot;);
+                System.out.println(&quot;1.添加账务　2.编辑账务　3.删除账务　4.查询账务　5.退出系统&quot;);
+                System.out.println(&quot;请输入要操作的功能序号[1-5]:&quot;);
+                //接收用户的菜单选择
+                int choose = sc.nextInt();
+                //对选择的菜单判断,调用不同的功能
+                switch(choose){
+                case 1:
+                   // 选择添加账务,调用添加账务的方法
+                    break;
+                case 2:
+                    // 选择的编辑账务,调用编辑账务方法
+                    break;
+                case 3:
+                    // 选择的删除账务,调用删除账务方法
+                    break;
+                case 4:
+                    // 选择的是查询账务,调用查询方法
+                    //selectZhangWu();
+                    break;
+                case 5:
+                    System.exit(0);
+                    break;
+                }
+            }
+        }
+</code></pre><p>###13实现查询的界面菜单</p>
+<pre><code>* A: 实现查询的界面菜单
+    * a: 案例核心代码
+        *  cn.itcast.gjp.view包中建立MainView类中添加selectZhangWu方法、selectAll方法、select方法
+            /*
+             * 定义方法 selectZhangWu()
+             * 显示查询的方式 1 所有查询   2 条件查询
+             * 接收用户的选择
+             */
+             public void selectZhangWu(){
+                 System.out.println(&quot;1. 查询所有    2. 条件查询&quot;);
+                 Scanner sc = new Scanner(System.in);
+                 int selectChooser = sc.nextInt();
+                 //判断根据用户的选择,调用不同的功能
+                 switch(selectChooser){
+                 case 1:
+                     //选择的查询所有,调用查询所有的方法
+                     selectAll();
+                     break;
+                 case 2:
+                     //选的条件查询,调用带有查询条件的方法
+                     select();
+                     break;
+                 }
+             }
+             /*
+              * 定义方法,实现查询所有的账务数据
+              */
+             public void selectAll(){
+
+             }
+
+             /*
+              * 定义方法,实现条件查询账务数据
+              * 提供用户的输入日期,开始日期结束日期
+              * 就2个日期,传递到controller层
+              * 调用controller的方法,传递2个日期参数
+              * 获取到controller查询的结果集,打印出来
+              */
+             public void select(){
+
+             }
+</code></pre><p>###14实现查询所有账务的控制,业务层的实现</p>
+<pre><code>* A: 实现查询所有账务的控制,业务层的实现
+    * a: 案例核心代码
+        * a: cn.itcast.gjp.dao包中创建ZhangWuDao类
+        /*
+         *  实现对数据表 gjp_zhangwu 数据增删改查操作
+         *  dbuils工具类完成,类成员创建QueryRunner对象,指定数据源
+         */
+        public class ZhangWuDao {
+            private QueryRunner qr = new QueryRunner(JDBCUtils.getDataSource());
+            /*
+             * 定义方法,查询数据库,获取所有的账务数据
+             * 方法,由业务层调用
+             * 结果集,将所有的账务数据,存储到Bean对象中,存储到集合中
+             */
+            public List&lt;ZhangWu&gt; selectAll(){                    
+                return null;
+            }
+        }
+        * b: cn.itcast.gjp.service包中创建ZhangWuService类
+            /*
+             *  业务层类
+             *  接收上一层,控制层controller的数据
+             *  经过计算,传递给dao层,操作数据库
+             *  调用dao层中的类,类成员位置,创建Dao类的对象
+             */
+            public class ZhangWuService {
+                private ZhangWuDao dao = new ZhangWuDao();
+                /*
+                 *  定义方法,实现查询所有的账务数据
+                 *  此方法,由控制层调用, 去调用dao层的方法
+                 *  返回存储ZhangWu对象的List集合
+                 */
+                public List&lt;ZhangWu&gt; selectAll(){
+                    return dao.selectAll();
+                }
+            }
+        * c: cn.itcast.gjp.controller包中建立ZhangWuController类
+            /*
+             *  控制器层
+             *  接收视图层的数据,数据传递给service层
+             *  成员位置,创建service对象
+             */
+            public class ZhangWuController {
+                private ZhangWuService service = new ZhangWuService();        
+                /*
+                 * 控制层类定义方法,实现查询所有的账务数据
+                 * 方法由试图层调用,方法调用service层
+                 */
+                public List&lt;ZhangWu&gt; selectAll(){
+                    return service.selectAll();
+                }                    
+            }
+</code></pre><p>###15实现查询所有账务的dao层的实现</p>
+<pre><code>* A: 实现查询所有账务的dao层的实现
+    * a: 案例核心代码
+        * a: cn.itcast.gjp.dao包中创建ZhangWuDao类selectAll方法
+        /*
+         *  实现对数据表 gjp_zhangwu 数据增删改查操作
+         *  dbuils工具类完成,类成员创建QueryRunner对象,指定数据源
+         */
+        public class ZhangWuDao {
+            private QueryRunner qr = new QueryRunner(JDBCUtils.getDataSource());
+            /*
+             * 定义方法,查询数据库,获取所有的账务数据
+             * 方法,由业务层调用
+             * 结果集,将所有的账务数据,存储到Bean对象中,存储到集合中
+             */
+            public List&lt;ZhangWu&gt; selectAll(){
+                try{
+                    //查询账务数据的SQL语句
+                        String sql = &quot;SELECT * FROM gjp_zhangwu&quot;;
+                        //调用qr对象的方法,query方法,结果集BeanListHandler
+                        List&lt;ZhangWu&gt; list = qr.query(sql, new BeanListHandler&lt;&gt;(ZhangWu.class));
+                        return list;
+                    }catch(SQLException ex){
+                        System.out.println(ex);
+                        throw new RuntimeException(&quot;查询所有账务失败&quot;);
+                    }
+            }
+        }
+</code></pre><p>###16实现查询所有账务的view层的实现</p>
+<pre><code>* A: 实现查询所有账务的view层的实现
+    * a: 案例核心代码
+        * cn.itcast.gjp.view包中建立MainView类selectAll方法
+        /*
+          * 定义方法,实现查询所有的账务数据
+          */
+         public void selectAll(){
+             //调用控制层中的方法,查询所有的账务数据
+             List&lt;ZhangWu&gt; list = controller.selectAll();
+            //输出表头
+             System.out.println(&quot;ID\t\t类别\t\t账户\t\t金额\t\t时间\t\t说明&quot;);
+             //遍历集合,结果输出控制台
+             for(ZhangWu zw : list){
+                 System.out.println(zw.getZwid()+&quot;\t\t&quot;+zw.getFlname()+&quot;\t\t&quot;+zw.getZhanghu()+&quot;\t\t&quot;+
+                 zw.getMoney()+&quot;\t\t&quot;+zw.getCreatetime()+&quot;\t&quot;+zw.getDescription());
+             }
+         }
+</code></pre><p>###17实现条件查询账务的菜单实现</p>
+<pre><code>* A: 实现条件查询账务的菜单实现
+    * a: 案例核心代码
+        * cn.itcast.gjp.view包中建立MainView类select方法
+          /*
+          * 定义方法,实现条件查询账务数据
+          * 提供用户的输入日期,开始日期结束日期
+          * 就2个日期,传递到controller层
+          * 调用controller的方法,传递2个日期参数
+          * 获取到controller查询的结果集,打印出来
+          */
+         public void select(){
+             System.out.println(&quot;选择条件查询,输入日期格式XXXX-XX-XX&quot;);
+             Scanner sc = new Scanner(System.in);
+             System.out.print(&quot;请输入开始日期:&quot;);
+             String startDate = sc.nextLine();
+             System.out.print(&quot;请输入结果日期:&quot;);
+             String endDate = sc.nextLine();
+             //调用controller层的方法,传递日期,获取查询结果集
+
+         }
+</code></pre><p>###18实现条件查询账务的控制层,业务层实现</p>
+<pre><code>* A: 实现条件查询账务的控制层,业务层实现
+    * a: 案例核心代码
+        * a: cn.itcast.gjp.dao包中创建ZhangWuDao类
+            /*
+             *  实现对数据表 gjp_zhangwu 数据增删改查操作
+             *  dbuils工具类完成,类成员创建QueryRunner对象,指定数据源
+             */
+            public class ZhangWuDao {
+                private QueryRunner qr = new QueryRunner(JDBCUtils.getDataSource());
+                /*
+                 * 定义方法,查询数据库,带有条件去查询账务表
+                 * 由业务层调用,查询结果集存储到Bean对象,存储到List集合
+                 * 调用者传递2个日期字符串
+                 */
+                public List&lt;ZhangWu&gt; select(String startDate,String endDate){
+                    return null;
+                }
+            }
+        * b: cn.itcast.gjp.service包中创建ZhangWuService类
+            /*
+             *  业务层类
+             *  接收上一层,控制层controller的数据
+             *  经过计算,传递给dao层,操作数据库
+             *  调用dao层中的类,类成员位置,创建Dao类的对象
+             */
+            public class ZhangWuService {
+                private ZhangWuDao dao = new ZhangWuDao();
+                /*
+                 * 定义方法,实现条件查询账务
+                 * 方法由控制层调用,传递2个日期字符串
+                 * 调用dao层的方法,传递2个日期字符串
+                 * 获取到查询结果集
+                 */
+                public List&lt;ZhangWu&gt; select(String startDate,String endDate){
+                    return dao.select(startDate, endDate);
+                }
+            }
+        * c: cn.itcast.gjp.controller包中建立ZhangWuController类
+            /*
+             *  控制器层
+             *  接收视图层的数据,数据传递给service层
+             *  成员位置,创建service对象
+             */
+            public class ZhangWuController {
+                private ZhangWuService service = new ZhangWuService();        
+                /*
+                 * 定义方法,实现条件查询账务
+                 * 方法由试图层调用,传递两个日期的字符串
+                 * 调用service层的方法,传递两个日期字符串,获取结果集
+                 * 结果集返回给试图
+                 */
+                public List&lt;ZhangWu&gt; select(String startDate,String endDate){
+                    return service.select(startDate, endDate);
+                }                    
+            }
+</code></pre><p>###19实现条件查询账务的dao层实现</p>
+<pre><code>* A: 实现条件查询账务的dao层实现
+    * a: 案例核心代码
+        * a: cn.itcast.gjp.dao包中创建ZhangWuDao类select方法
+            /*
+             *  实现对数据表 gjp_zhangwu 数据增删改查操作
+             *  dbuils工具类完成,类成员创建QueryRunner对象,指定数据源
+             */
+            public class ZhangWuDao {
+                private QueryRunner qr = new QueryRunner(JDBCUtils.getDataSource());
+                /*
+                 * 定义方法,查询数据库,带有条件去查询账务表
+                 * 由业务层调用,查询结果集存储到Bean对象,存储到List集合
+                 * 调用者传递2个日期字符串
+                 */
+                public List&lt;ZhangWu&gt; select(String startDate,String endDate){
+                    try{
+                        //拼写条件查询的SQL语句
+                        String sql = &quot;SELECT * FROM gjp_zhangwu WHERE createtime BETWEEN ? AND ?&quot;;
+                        //定义对象数组,存储?占位符
+                        Object[] params = {startDate,endDate};
+                        //调用qr对象的方法query查询数据表,获取结果集
+                        return qr.query(sql, new BeanListHandler&lt;&gt;(ZhangWu.class),params);
+                    }catch(SQLException ex){
+                        System.out.println(ex);
+                        throw new RuntimeException(&quot;条件查询失败&quot;);
+                    }
+                }
+            }
+</code></pre><p>###20实现条件查询账务的view层实现</p>
+<pre><code>* A: 实现条件查询账务的view层实现
+    * a: 案例核心代码
+        * cn.itcast.gjp.view包中建立MainView类selectAll方法优化、抽取print方法、select方法
+        /*
+          * 定义方法,实现查询所有的账务数据
+          */
+         public void selectAll(){
+             //调用控制层中的方法,查询所有的账务数据
+             List&lt;ZhangWu&gt; list = controller.selectAll();
+             if(list.size()!=0)
+                 print(list);
+             else
+                 System.out.println(&quot;没有查询到数据&quot;);
+         }
+
+         /*
+          * 定义方法,实现条件查询账务数据
+          * 提供用户的输入日期,开始日期结束日期
+          * 就2个日期,传递到controller层
+          * 调用controller的方法,传递2个日期参数
+          * 获取到controller查询的结果集,打印出来
+          */
+         public void select(){
+             System.out.println(&quot;选择条件查询,输入日期格式XXXX-XX-XX&quot;);
+             Scanner sc = new Scanner(System.in);
+             System.out.print(&quot;请输入开始日期:&quot;);
+             String startDate = sc.nextLine();
+             System.out.print(&quot;请输入结果日期:&quot;);
+             String endDate = sc.nextLine();
+             //调用controller层的方法,传递日期,获取查询结果集
+             List&lt;ZhangWu&gt; list = controller.select(startDate, endDate);
+             if(list.size()!=0)
+                 print(list);
+             else
+                 System.out.println(&quot;没有查询到数据&quot;);
+         }
+
+         //输出账务数据方法,接收List集合,遍历集合,输出表格
+         private void print(List&lt;ZhangWu&gt; list) {
+                //输出表头
+                 System.out.println(&quot;ID\t\t类别\t\t账户\t\t金额\t\t时间\t\t说明&quot;);
+                 //遍历集合,结果输出控制台
+                 for(ZhangWu zw : list){
+                     System.out.println(zw.getZwid()+&quot;\t\t&quot;+zw.getFlname()+&quot;\t\t&quot;+zw.getZhanghu()+&quot;\t\t&quot;+
+                     zw.getMoney()+&quot;\t\t&quot;+zw.getCreatetime()+&quot;\t&quot;+zw.getDescription());
+                 }
+            }
+</code></pre><p>###21添加账务功能分析</p>
+<pre><code>* A: 添加账务功能分析
+    * a: 编写MainView类中addZhangWu方法
+        * 键盘输入新添加的账务信息
+        * 调用ZhangWuService类中addZhangWu方法，用来指定账务的添加
+        * 添加完毕后，使用输出语句，提示“添加账务成功！”
+    * b: 编写ZhangWuService类中addZhangWu方法
+        * 调用ZhangWuDao类中addZhangWu方法，用来指定账务的添加
+    * c: 编写ZhangWuDao类中addZhangWu方法
+        * 通过QueryRunner对象，调用update方法更新数据库表gjp_zhangwu，完成指定账务添加到数据库表中
+</code></pre><p>###22添加账务功能菜单和输入功能实现</p>
+<pre><code>* A: 添加账务功能菜单和输入功能实现    
+    * a: 案例核心代码
+        * cn.itcast.gjp.view包中建立MainView类addZhangWu方法
+        /*
+         * 定义方法addZhangWu
+         * 添加账务的方法，用户在界面中选择菜单1的时候调用、
+         * 实现思想：
+         *       接收键盘输入，5项输入，调用controller层方法
+         */
+        public void addZhangWu() {
+            System.out.println(&quot;选择的添加账务功能，请输入以下内容&quot;);
+            Scanner sc = new Scanner(System.in);
+            System.out.println(&quot;输入分类名称&quot;);
+            String flname = sc.next();
+            System.out.println(&quot;输入金额&quot;);
+            double money = sc.nextDouble();
+            System.out.println(&quot;输入账户&quot;);
+            String zhanghu = sc.next();
+            System.out.println(&quot;输入日期：格式XXXX-XX-xx&quot;);
+            String createtime = sc.next();
+            System.out.println(&quot;输入具体描述&quot;);
+            String description = sc.next();
+            //将接收到的数据，调用controller层的方法，传递参数，实现数据添加
+
+        }
+</code></pre><p>###23添加账务功能控制层,业务层实现</p>
+<pre><code>* A: 添加账务功能控制层,业务层实现
+    * a: 案例核心代码
+        * cn.itcast.gjp.controller包中的ZhangWuController类addZhangWu方法
+            /*
+             * 定义方法，实现账务添加功能
+             * 由视图层调用，传递参数(传递过来的参数不能是5个数据，传递的是一个ZhangWu类型的对象)
+             * 本方法调用service层的方法，传递ZhangWu对象，获取到添加后的结果集(添加成功影响的行数，int)
+             * 
+             */
+            public void addZhangWu(ZhangWu zw) {
+                service.addZhangWu(zw);
+            }
+        * cn.itcast.gjp.service包中的ZhangWuService类addZhangWu方法
+            /*
+             * 定义方法，实现添加账务
+             * 是由控制层调用，传递ZhangWu对象
+             */
+            public void addZhangWu(ZhangWu zw) {
+                dao.addZhangWu(zw);
+            }
+        * cn.itcast.gjp.dao包中的ZhangWuDao类addZhangWu方法
+            /*
+             * 定义方法，实现添加账务功能
+             * 由业务层调用，传递ZhangWu对象
+             * 将ZhangWu对象中的数据，添加到数据库
+             */
+            public void addZhangWu(ZhangWu zw) {
+
+            }
+</code></pre><p>###24添加账务功能dao层实现</p>
+<pre><code>* A: 添加账务功能dao层实现
+    * a: 案例核心代码    
+        * cn.itcast.gjp.dao包中的ZhangWuDao类的addZhangWu方法
+            public void addZhangWu(ZhangWu zw) {
+                try{
+                     //拼接添加数据的sql
+                    String sql = &quot;INSERT INTO gjp_zhangwu (flname,money,zhanghu,createtime,description) VALUES(?,?,?,?,?)&quot;;
+                    //创建对象数组，处处5个占位符的实际参数
+                    //实际参数来源是传递过来的对象ZhangWu
+                    Object[] params = {zw.getFlname(),zw.getMoney(),zw.getZhanghu(),zw.getCreatetime(),zw.getDescription()};
+                    //调用qr对象中的方法update执行添加
+                    qr.update(sql, params);
+                }catch(SQLException ex) {
+                    System.out.println(ex);
+                    throw new RuntimeException(&quot;账务添加失败&quot;);
+                }
+            }
+</code></pre><p>###25添加账务功能view层实现</p>
+<pre><code>* A: 添加账务功能view层实现
+    * a: 案例核心代码
+        * cn.itcast.gjp.view包中建立MainView类addZhangWu方法
+            public void addZhangWu() {
+                System.out.println(&quot;选择的添加账务功能，请输入以下内容&quot;);
+                Scanner sc = new Scanner(System.in);
+                System.out.println(&quot;输入分类名称&quot;);
+                String flname = sc.next();
+                System.out.println(&quot;输入金额&quot;);
+                double money = sc.nextDouble();
+                System.out.println(&quot;输入账户&quot;);
+                String zhanghu = sc.next();
+                System.out.println(&quot;输入日期：格式XXXX-XX-xx&quot;);
+                String createtime = sc.next();
+                System.out.println(&quot;输入具体描述&quot;);
+                String description = sc.next();
+                //将接收到的数据，调用controller层的方法，传递参数，实现数据添加
+                //将用户输入的所有参数，封装成ZhangWu对象
+                ZhangWu zw = new ZhangWu(0, flname, money, zhanghu, createtime, description);
+                controller.addZhangWu(zw);
+                System.out.println(&quot;恭喜添加账务成功&quot;);
+            }
+</code></pre><p>###26编辑账务功能分析</p>
+<pre><code>* A: 编辑账务功能分析
+    * a: 编写MainView类中editZhangWu方法
+        * 键盘输入要编辑的账务信息ID号
+        * 键盘输入要修改的账务信息内容
+        * 调用ZhangWuService类中editZhangWu方法，用来将指定的账务信息进行更新
+        * 更新完毕后，使用输出语句，提示 “编辑账务成功！”
+    * b: 编写ZhangWuService类中editZhangWu方法
+        * 调用ZhangWuDao类中editZhangWu方法，用来将指定的账务信息进行更新
+    * c: 编写ZhangWuDao类中editZhangWu方法
+        * 通过QueryRunner对象，调用update方法更新数据库表gjp_zhangwu，完成数据库表中指定账务更新操作
+</code></pre><p>###27编辑账务功能功能之前实现查询所有</p>
+<pre><code>* A: 编辑账务功能功能之前实现查询所有
+    * a: 案例核心代码
+        * cn.itcast.gjp.view包中建立MainView类editZhangWu方法
+            public void editZhangWu() {
+                //调用查询所有账务数据的功能，显示出来
+                //看到所有数据，从中选择一项，进行修改
+                selectAll();
+                System.out.println(&quot;选择的是编辑功能，请输入数据&quot;);
+
+
+            }
+</code></pre><p>###28编辑账务功能菜单实现</p>
+<pre><code>* A: 编辑账务功能菜单实现
+    * a: 案例核心代码
+        * cn.itcast.gjp.view包中建立MainView类editZhangWu方法
+            public void editZhangWu() {
+                //调用查询所有账务数据的功能，显示出来
+                //看到所有数据，从中选择一项，进行修改
+                selectAll();
+                System.out.println(&quot;选择的是编辑功能，请输入数据&quot;);
+                Scanner sc = new Scanner(System.in);
+                System.out.print(&quot;请输入ID&quot;);
+                int zwid = sc.nextInt();
+                System.out.println(&quot;输入分类名称&quot;);
+                String flname = sc.next();
+                System.out.println(&quot;输入金额&quot;);
+                double money = sc.nextDouble();
+                System.out.println(&quot;输入账户&quot;);
+                String zhanghu = sc.next();
+                System.out.println(&quot;输入日期：格式XXXX-XX-xx&quot;);
+                String createtime = sc.next();
+                System.out.println(&quot;输入具体描述&quot;);
+                String description = sc.next();
+                //将用户输入的数据，封装到ZhangWu对象中
+                //用户输入的ID，必须封装到到对象中
+                ZhangWu zw = new ZhangWu(zwid, flname, money, zhanghu, createtime, description);
+                //调用controller层中的方法，实现编辑账务
+            }            
+</code></pre><p>###29编辑账务功能控制层,业务层实现</p>
+<pre><code>* A: 编辑账务功能控制层,业务层实现
+    * a: 案例核心代码
+        * cn.itcast.gjp.controller包中的ZhangWuController类editZhangWu方法
+            /*
+             * 定义方法，实现编辑账务功能
+             * 由视图层调用，传递参数，也是ZhangWu对象
+             * 调用service层的方法，也是ZhangWu对象
+             */
+            public void editZhangWu(ZhangWu zw) {
+                service.editZhangWu(zw);
+            }
+        * cn.itcast.gjp.service包中的ZhangWuService类editZhangWu方法
+            /*
+             * 定义方法，实现编辑账务
+             * 由控制层调用，传递ZhangWu对象
+             * 调用dao层的方法，传递ZhangWu对象
+             */
+            public void editZhangWu(ZhangWu zw) {
+                dao.editZhangWu(zw);
+            }
+        * cn.itcast.gjp.dao包中的ZhangWuDao类editZhangWu方法
+            public void editZhangWu(ZhangWu zw) {
+                // TODO Auto-generated method stub
+
+            }
+</code></pre><p>###30编辑账务功能dao层实现</p>
+<pre><code>* A：编辑账务功能dao层实现
+    * a: 案例核心代码
+        * cn.itcast.gjp.dao包中的ZhangWuDao类editZhangWu方法
+            /*
+             * 定义方法，实现编辑功能
+             * 由业务层调用，传递ZhangWu对象
+             * 将对象中的数据，更新到数据表
+             */
+            public void editZhangWu(ZhangWu zw) {
+                try {
+                    //更新数据的SQL
+                    String sql = &quot;UPDATE zhangwu SET flname=?,money=?,zhanghu=?,createtime=?,description=? WHERE zwid=?&quot;;
+                    //定义对象数组，封装所有数据
+                    Object[] params = {zw.getFlname(),zw.getMoney(),zw.getZhanghu(),zw.getCreatetime(),zw.getDescription(),zw.getZwid()};
+                    //调用qr对象方法update执行更新
+                    qr.update(sql, params);
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                    throw new RuntimeException(&quot;编辑账务失败&quot;);
+                }
+
+            }
+</code></pre><p>###31编辑账务功能view层实现</p>
+<pre><code>* A: 编辑账务功能view层实现
+    * a: 案例核心代码
+        * cn.itcast.gjp.view包中建立MainView类editZhangWu方法
+            /*
+             * 定义方法，实现对账务的编辑功能
+             * 实现思想：
+             *     接收用户的输入的信息
+             *  封装成ZhangWu对象
+             *  调用控制层的方法，传递ZhangWu对象，实现编辑
+             * 
+             */
+            public void editZhangWu() {
+                //调用查询所有账务数据的功能，显示出来
+                //看到所有数据，从中选择一项，进行修改
+                selectAll();
+                System.out.println(&quot;选择的是编辑功能，请输入数据&quot;);
+                Scanner sc = new Scanner(System.in);
+                System.out.print(&quot;请输入ID&quot;);
+                int zwid = sc.nextInt();
+                System.out.println(&quot;输入分类名称&quot;);
+                String flname = sc.next();
+                System.out.println(&quot;输入金额&quot;);
+                double money = sc.nextDouble();
+                System.out.println(&quot;输入账户&quot;);
+                String zhanghu = sc.next();
+                System.out.println(&quot;输入日期：格式XXXX-XX-xx&quot;);
+                String createtime = sc.next();
+                System.out.println(&quot;输入具体描述&quot;);
+                String description = sc.next();
+                //将用户输入的数据，封装到ZhangWu对象中
+                //用户输入的ID，必须封装到到对象中
+                ZhangWu zw = new ZhangWu(zwid, flname, money, zhanghu, createtime, description);
+                //调用controller层中的方法，实现编辑账务
+                controller.editZhangWu(zw);
+                System.out.println(&quot;账务编辑成功&quot;);
+            }
+</code></pre><p>###32删除账务功能分析</p>
+<pre><code>* A: 删除账务功能分析
+    * a: 编写MainView类中deleteZhangWu方法
+        * 键盘输入要删除的账务信息ID号
+        * 调用ZhangWuService类中deleteZhangWu方法，用来将指定的账务信息删除
+        * 删除完毕后，使用输出语句，提示 “删除账务成功！”
+    * b: 编写ZhangWuService类中deleteZhangWu方法
+        * 调用ZhangWuDao类中deleteZhangWu方法，用来将指定的账务信息删除
+    * c: 编写ZhangWuDao类中deleteZhangWu方法
+        * 通过QueryRunner对象，调用update方法更新数据库表gjp_zhangwu，完成数据库表中指定账务删除操作
+</code></pre><p>###33删除账务功能菜单实现</p>
+<pre><code>* A: 删除账务功能菜单实现
+    * a: 案例核心代码
+        * cn.itcast.gjp.view包中建立MainView类deleteZhangWu方法
+            /*
+             * 定义方法，实现账务删除
+             * 实现思想：
+             *     接收用户的输入，输入一个主键数据
+             *  调用控制层方法，传递一个主键
+             */
+            public void deleteZhangWu() {
+                //调用查询所有账务数据的功能，显示出来
+                //看到所有数据，从中选择一项，进行修改
+                selectAll();
+                System.out.println(&quot;选择的是删除功能，请输入序号即可&quot;);
+                int zwid = new Scanner(System.in).nextInt();
+                //调用控制层方法，传递主键id即可
+            }
+</code></pre><p>###34删除账务功能控制层,业务层实现</p>
+<pre><code>* A: 删除账务功能控制层,业务层实现
+    * a: 案例核心代码
+        * cn.itcast.gjp.controller包中的ZhangWuController类deleteZhangWu方法
+            /*
+             * 定义方法，实现删除功能
+             * 视图层调用，传递int类型主键
+             * 调用service层方法，传递int主键
+             */
+            public void deleteZhangWu(int zwid) {
+                service.deleteZhangWu(zwid);
+            }
+        * cn.itcast.gjp.service包中的ZhangWuService类deleteZhangWu方法
+            /*
+             * 定义方法，实现删除账务功能
+             * 由控制层调用，传递主键id
+             * 调用dao层方法，传递主键id
+             */
+            public void deleteZhangWu(int zwid) {
+                dao.deleteZhangWu(zwid);
+            }
+        * cn.itcast.gjp.dao包中的ZhangWuDao类deleteZhangWu方法
+            public void deleteZhangWu(int zwid) {
+
+            }
+</code></pre><p>###35删除账务功能dao实现</p>
+<pre><code>* A: 删除账务功能dao实现
+    * a: 案例核心代码
+        * cn.itcast.gjp.dao包中的ZhangWuDao类deleteZhangWu方法
+            /*
+             * 定义方法，实现删除业务
+             * 业务层调用，传递主键id
+             */
+            public void deleteZhangWu(int zwid) {
+                try {
+                    //拼写删除数据SQL
+                    String sql = &quot;DELETE FROM gjp_zhangwu WHERE zwid=?&quot;;
+                    qr.update(sql, zwid);
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                    throw new RuntimeException(&quot;删除账务失败&quot;);
+                }
+            }
+</code></pre><p>###36删除账务功能view层实现</p>
+<pre><code>* A: 删除账务功能view层实现
+    * a: 案例核心代码
+        * cn.itcast.gjp.view包中建立MainView类editZhangWu方法
+            /*
+             * 定义方法，实现账务删除
+             * 实现思想：
+             *     接收用户的输入，输入一个主键数据
+             *  调用控制层方法，传递一个主键
+             */
+            public void deleteZhangWu() {
+                //调用查询所有账务数据的功能，显示出来
+                //看到所有数据，从中选择一项，进行修改
+                selectAll();
+                System.out.println(&quot;选择的是删除功能，请输入序号即可&quot;);
+                int zwid = new Scanner(System.in).nextInt();
+                //调用控制层方法，传递主键id即可
+                controller.deleteZhangWu(zwid);
+                System.out.println(&quot;删除账务成功&quot;);
+</code></pre><p>###37总结</p>
+<pre><code>* 把今天的知识点总结一遍。
+</code></pre>
+      
+    </div>
+
+    
+
+    
+    
+    
+    
+	<div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ff73b3;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+	
+	
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>感谢您的支持，我会继续努力的!</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wexin.JPG" alt="QJun 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/29/day30笔记/" rel="next" title="java学习笔记——基础28()">
+                <i class="fa fa-chevron-left"></i> java学习笔记——基础28()
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/01/day32笔记 /" rel="prev" title="java学习笔记——基础30()">
+                java学习笔记——基础30() <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MDE0MS8xNjY2OA=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/10.jpg"
+                alt="QJun" />
+            
+              <p class="site-author-name" itemprop="name">QJun</p>
+              <p class="site-description motion-element" itemprop="description">Stay Hungry, Stay Foolish!</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">33</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:qjun@hust.edu.cn" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plus.google.com/" target="_blank" title="Google"><i class="fa fa-fw fa-google"></i>Google</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/" target="_blank" title="Twitter"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.facebook.com/" target="_blank" title="FB Page"><i class="fa fa-fw fa-facebook"></i>FB Page</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://leesen998.github.io/about/" title="关于此博客" target="_blank">关于此博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://poetryscience.ink/" title="Huixin" target="_blank">Huixin</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://ultimatehy.github.io/" title="Yong Huang" target="_blank">Yong Huang</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 – <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="heart">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">QJun</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<div class="weixin-box">
+  <div class="weixin-menu">
+    <div class="weixin-hover">
+      <div class="weixin-description">微信扫一扫，订阅本博客</div>
+    </div>
+  </div>
+</div>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="true"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+
+
+  
+    <script type="text/javascript">
+      window.livereOptions = {
+        refer: '2016/11/30/day31笔记/'
+      };
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"tagMode":true,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":100,"height":200,"hOffset":10,"vOffset":10},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/"});</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>;
+  <script>
+  $("body").backstretch("/images/cover.png");
+  </script>
+
+  
+  
+
+  <script type="text/javascript" color="0,0,255" opacity='0.7' zIndex="-1" count="100" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+  
+  
+  <script type="text/javascript" src="/js/src/dytitle.js"></script>
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+
+<!-- 代码块复制功能 -->
+<script type="text/javascript" src="/js/src/clipboard.min.js"></script>  
+<script type="text/javascript" src="/js/src/clipboard-use.js"></script>
+

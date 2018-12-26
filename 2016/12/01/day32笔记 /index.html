@@ -1,0 +1,1895 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#fff">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-flash.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="https://fonts.cat.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#fff">
+
+
+  <link rel="manifest" href="/images/manifest.json">
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="1、网络三要素及传输协议2、实现UDP协议的发送端和接收端3、实现TCP协议的客户端和服务器4、TCP上传文件案例">
+<meta name="keywords" content="java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java学习笔记——基础30()">
+<meta property="og:url" content="https://leesen998.github.io/2016/12/01/day32笔记 /index.html">
+<meta property="og:site_name" content="QJun">
+<meta property="og:description" content="1、网络三要素及传输协议2、实现UDP协议的发送端和接收端3、实现TCP协议的客户端和服务器4、TCP上传文件案例">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1544254144/samples/java%20files/photo-1542312455-e31bb150371c.jpg">
+<meta property="og:updated_time" content="2018-12-19T12:39:40.177Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java学习笔记——基础30()">
+<meta name="twitter:description" content="1、网络三要素及传输协议2、实现UDP协议的发送端和接收端3、实现TCP协议的客户端和服务器4、TCP上传文件案例">
+<meta name="twitter:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1544254144/samples/java%20files/photo-1542312455-e31bb150371c.jpg">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="QJun" type="application/atom+xml" />
+
+
+
+
+  <link rel="canonical" href="https://leesen998.github.io/2016/12/01/day32笔记 /"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>java学习笔记——基础30() | QJun</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://leesen998.github.io" class="github-corner" aria-label="View source on GitHub"><svg width="120" height="120" viewBox="0 0 250 250" style="fill:#64CEAA; color:#fff; position: absolute; top: 194; border: 0; left: 0; transform: scale(-1, 1);" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">QJun</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">QJun's Homepage</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://leesen998.github.io/2016/12/01/day32笔记 /">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QJun">
+      <meta itemprop="description" content="Stay Hungry, Stay Foolish!">
+      <meta itemprop="image" content="/images/10.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QJun">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">java学习笔记——基础30()
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2016-12-01 19:48:29" itemprop="dateCreated datePublished" datetime="2016-12-01T19:48:29+08:00">2016-12-01</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/程序设计/" itemprop="url" rel="index"><span itemprop="name">程序设计</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p class="description"></p>
+
+<p><img src="https://res.cloudinary.com/dpvywdzxv/image/upload/v1544254144/samples/java%20files/photo-1542312455-e31bb150371c.jpg" alt="" style="width:100%"></p>
+<p>1、网络三要素及传输协议<br>2、实现UDP协议的发送端和接收端<br>3、实现TCP协议的客户端和服务器<br>4、TCP上传文件案例</p>
+<a id="more"></a>
+<p>###01网络模型<br>  *A:网络模型<br>     TCP/IP协议中的四层分别是应用层、传输层、网络层和链路层，每层分别负责不同的通信功能，接下来针对这四层进行详细地讲解。<br>       链路层：链路层是用于定义物理传输通道，通常是对某些网络连接设备的驱动协议，例如针对光纤、网线提供的驱动。<br>       网络层：网络层是整个TCP/IP协议的核心，它主要用于将传输的数据进行分组，将分组数据发送到目标计算机或者网络。<br>       传输层：主要使网络程序进行通信，在进行网络通信时，可以采用TCP协议，也可以采用UDP协议。<br>       应用层：主要负责应用程序的协议，例如HTTP协议、FTP协议等。</p>
+<p>###02IP地址<br> *A:IP地址<br>      在TCP/IP协议中，这个标识号就是IP地址，它可以唯一标识一台计算机，<br>      目前，IP地址广泛使用的版本是IPv4，它是由4个字节大小的二进制数来表示，如：00001010000000000000000000000001。<br>      由于二进制形式表示的IP地址非常不便记忆和处理，因此通常会将IP地址写成十进制的形式，<br>      每个字节用一个十进制数字(0-255)表示，数字间用符号“.”分开，如 “192.168.1.100”<br>      127.0.0.1 为本地主机地址(本地回环地址)</p>
+<p>###03端口号<br> *A:端口号<br>    通过IP地址可以连接到指定计算机，但如果想访问目标计算机中的某个应用程序，还需要指定端口号。<br>    在计算机中，不同的应用程序是通过端口号区分的。<br>    端口号是用两个字节（16位的二进制数）表示的，它的取值范围是0~65535，<br>    其中，0~1023之间的端口号用于一些知名的网络服务和应用，用户的普通应用程序需要使用1024以上的端口号，从而避免端口号被另外一个应用或服务所占用</p>
+<p>###04InetAddress类<br>  <em>A:InetAddress类<br>     /</em></p>
+<pre><code> *  表示互联网中的IP地址
+ *    java.net.InetAddress
+ *  静态方法
+ *    static InetAddress  getLocalHost()   LocalHost本地主机
+ *    返回本地主机,返回值InetAddress对象
+ *    
+ *    static InetAddress getByName(String hostName)传递主机名,获取IP地址对象
+ *    
+ *  非静态方法
+ *     String getHoustAddress()获取主机IP地址
+ *     String getHoustName()获取主机名
+ *    
+ */
+public class InetAddressDemo {
+ public static void main(String[] args)throws UnknownHostException {
+   function_1();
+ }
+ /*
+  * static InetAddress getByName(String hostName)传递主机名,获取IP地址对象
+  */
+ public static void function_1()throws UnknownHostException {
+   InetAddress inet = InetAddress.getByName(&quot;www.baidu.com&quot;);
+   System.out.println(inet);
+ }
+
+ /*
+  *  static InetAddress  getLocalHost()   LocalHost本地主机
+  */
+ public static void function() throws UnknownHostException{
+   InetAddress inet = InetAddress.getLocalHost();
+   //输出结果就是主机名,和 IP地址
+   System.out.println(inet.toString());
+
+   String ip = inet.getHostAddress();
+   String name = inet.getHostName();
+   System.out.println(ip+&quot;   &quot;+name);
+
+   /*String host = inet.toString();
+   String[] str = host.split(&quot;/&quot;);
+   for(String s : str){
+     System.out.println(s);
+   }*/
+ }
+}
+</code></pre><p>###05UDP协议<br>   A:UDP协议<br>     a:UDP协议概述:<br>      UDP是无连接通信协议，即在数据传输时，数据的发送端和接收端不建立逻辑连接。<br>      简单来说，当一台计算机向另外一台计算机发送数据时，发送端不会确认接收端是否存在，就会发出数据，同样接收端在收到数据时，也不会向发送端反馈是否收到数据。<br>     b:UDP协议特点:<br>      由于使用UDP协议消耗资源小，通信效率高，所以通常都会用于音频、视频和普通数据的传输例如视频会议都使用UDP协议，<br>      因为这种情况即使偶尔丢失一两个数据包，也不会对接收结果产生太大影响。</p>
+<p>###06TCP协议<br>  *A:TCP协议<br>    TCP协议是面向连接的通信协议，即在传输数据前先在发送端和接收端建立逻辑连接，然后再传输数据，它提供了两台计算机之间可靠无差错的数据传输。<br>    在TCP连接中必须要明确客户端与服务器端，<br>      由客户端向服务端发出连接请求，每次连接的创建都需要经过“三次握手”。<br>      第一次握手，客户端向服务器端发出连接请求，等待服务器确认<br>      第二次握手，服务器端向客户端回送一个响应，通知客户端收到了连接请求<br>      第三次握手，客户端再次向服务器端发送确认信息，确认连接</p>
+<p>========================================第二节课=========================================</p>
+<p>###07数据包和发送对象介绍<br>  *A:数据包和发送对象介绍:<br>    DatagramPacket数据包的作用就如同是“集装箱”，<br>       可以将发送端或者接收端的数据封装起来。然而运输货物只有“集装箱”是不够的，还需要有码头。<br>       在程序中需要实现通信只有DatagramPacket数据包也同样不行，为此JDK中提供的一个DatagramSocket类。<br>       DatagramSocket类的作用就类似于码头，使用这个类的实例对象就可以发送和接收DatagramPacket数据包<br>    DatagramPacket:封装数据<br>    DatagramSocket:发送DatagramPacket</p>
+<p>###08UDP发送端<br>   <em>A:UDP发送端<br>         /</em></p>
+<pre><code> *  实现UDP协议的发送端:
+ *    实现封装数据的类 java.net.DatagramPacket  将你的数据包装
+ *    实现数据传输的类 java.net.DatagramSocket  将数据包发出去
+ *    
+ *  实现步骤:
+ *    1. 创建DatagramPacket对象,封装数据, 接收的地址和端口
+ *    2. 创建DatagramSocket
+ *    3. 调用DatagramSocket类方法send,发送数据包
+ *    4. 关闭资源
+ *    
+ *    DatagramPacket构造方法:
+ *      DatagramPacket(byte[] buf, int length, InetAddress address, int port) 
+ *      
+ *    DatagramSocket构造方法:
+ *      DatagramSocket()空参数
+ *      方法: send(DatagramPacket d)
+ *      
+ */
+public class UDPSend {
+ public static void main(String[] args) throws IOException{
+   //创建数据包对象,封装要发送的数据,接收端IP,端口
+   byte[] date = &quot;你好UDP&quot;.getBytes();
+   //创建InetAddress对象,封装自己的IP地址
+   InetAddress inet = InetAddress.getByName(&quot;127.0.0.1&quot;);
+   DatagramPacket dp = new DatagramPacket(date, date.length, inet,6000);
+   //创建DatagramSocket对象,数据包的发送和接收对象
+   DatagramSocket ds = new DatagramSocket();
+   //调用ds对象的方法send,发送数据包
+   ds.send(dp);
+   //关闭资源
+   ds.close();
+ }
+}
+</code></pre><p>###09UDP接收端<br>   <em>A:UDP接收端<br>       /</em></p>
+<pre><code> *  实现UDP接收端
+ *    实现封装数据包 java.net.DatagramPacket 将数据接收
+ *    实现输出传输     java.net.DatagramSocket 接收数据包
+ *    
+ *  实现步骤:
+ *     1. 创建DatagramSocket对象,绑定端口号
+ *         要和发送端端口号一致
+ *     2. 创建字节数组,接收发来的数据
+ *     3. 创建数据包对象DatagramPacket
+ *     4. 调用DatagramSocket对象方法
+ *        receive(DatagramPacket dp)接收数据,数据放在数据包中
+ *     5. 拆包
+ *          发送的IP地址
+ *            数据包对象DatagramPacket方法getAddress()获取的是发送端的IP地址对象
+ *            返回值是InetAddress对象
+ *          接收到的字节个数
+ *            数据包对象DatagramPacket方法 getLength()
+ *          发送方的端口号
+ *            数据包对象DatagramPacket方法 getPort()发送端口
+ *     6. 关闭资源
+ */
+public class UDPReceive {
+ public static void main(String[] args)throws IOException {
+   //创建数据包传输对象DatagramSocket 绑定端口号
+   DatagramSocket ds = new DatagramSocket(6000);
+   //创建字节数组
+   byte[] data = new byte[1024];
+   //创建数据包对象,传递字节数组
+   DatagramPacket dp = new DatagramPacket(data, data.length);
+   //调用ds对象的方法receive传递数据包
+   ds.receive(dp);
+
+
+ }
+}
+</code></pre><p>###10UDP接收端的拆包<br>   *A:UDP接收端的拆包 </p>
+<pre><code>/*
+ *  实现UDP接收端
+ *    实现封装数据包 java.net.DatagramPacket 将数据接收
+ *    实现输出传输     java.net.DatagramSocket 接收数据包
+ *    
+ *  实现步骤:
+ *     1. 创建DatagramSocket对象,绑定端口号
+ *         要和发送端端口号一致
+ *     2. 创建字节数组,接收发来的数据
+ *     3. 创建数据包对象DatagramPacket
+ *     4. 调用DatagramSocket对象方法
+ *        receive(DatagramPacket dp)接收数据,数据放在数据包中
+ *     5. 拆包
+ *          发送的IP地址
+ *            数据包对象DatagramPacket方法getAddress()获取的是发送端的IP地址对象
+ *            返回值是InetAddress对象
+ *          接收到的字节个数
+ *            数据包对象DatagramPacket方法 getLength()
+ *          发送方的端口号
+ *            数据包对象DatagramPacket方法 getPort()发送端口
+ *     6. 关闭资源
+ */
+public class UDPReceive {
+  public static void main(String[] args)throws IOException {
+    //创建数据包传输对象DatagramSocket 绑定端口号
+    DatagramSocket ds = new DatagramSocket(6000);
+    //创建字节数组
+    byte[] data = new byte[1024];
+    //创建数据包对象,传递字节数组
+    DatagramPacket dp = new DatagramPacket(data, data.length);
+    //调用ds对象的方法receive传递数据包
+    ds.receive(dp);
+
+    //获取发送端的IP地址对象
+    String ip=dp.getAddress().getHostAddress();
+
+    //获取发送的端口号
+    int port = dp.getPort();
+
+    //获取接收到的字节个数
+    int length = dp.getLength();
+    System.out.println(new String(data,0,length)+&quot;...&quot;+ip+&quot;:&quot;+port);
+    ds.close();
+  }
+}
+</code></pre><p>###11键盘输入的聊天<br>   <em>A:键盘输入的聊天
+    </em>a:发送端:<br>      /*</p>
+<pre><code> * 实现UDP发送,键盘输入的形式
+ * 输入完毕,发送给接收端      
+ */
+public class UDPSend {
+  public static void main(String[] args) throws IOException{
+    Scanner sc = new Scanner(System.in);
+    DatagramSocket ds = new DatagramSocket();
+    InetAddress inet = InetAddress.getByName(&quot;127.0.0.1&quot;);
+    while(true){
+    String message = sc.nextLine();
+    /*if(&quot;886&quot;.equals(message)){
+      break;
+    }*/
+    byte[] date = message.getBytes();
+    DatagramPacket dp = new DatagramPacket(date, date.length, inet,6000);
+    ds.send(dp);
+    }
+  //  ds.close();
+  }
+}
+
+
+
+ /*
+  *  实现UDP接收端
+  *  永不停歇的接收端
+  */
+ public class UDPReceive {
+  public static void main(String[] args)throws IOException {
+    //创建数据包传输对象DatagramSocket 绑定端口号
+    DatagramSocket ds = new DatagramSocket(6000);
+    //创建字节数组
+    byte[] data = new byte[1024];
+    //创建数据包对象,传递字节数组
+    while(true){
+    DatagramPacket dp = new DatagramPacket(data, data.length);
+    //调用ds对象的方法receive传递数据包
+    ds.receive(dp);
+
+    //获取发送端的IP地址对象
+    String ip=dp.getAddress().getHostAddress();
+
+    //获取发送的端口号
+    int port = dp.getPort();
+
+    //获取接收到的字节个数
+    int length = dp.getLength();
+    System.out.println(new String(data,0,length)+&quot;...&quot;+ip+&quot;:&quot;+port);
+    }
+    //ds.close();
+  }
+ }
+</code></pre><p>=======================第三节课======================================</p>
+<p>###12TCP的客户端和服务器<br>   *A:TCP的客户端和服务器<br>      TCP通信同UDP通信一样，都能实现两台计算机之间的通信，通信的两端都需要创建socket对象。<br>      区别在于，UDP中只有发送端和接收端，不区分客户端与服务器端，计算机之间可以任意地发送数据。<br>      而TCP通信是严格区分客户端与服务器端的，在通信时，必须先由客户端去连接服务器端才能实现通信，<br>      服务器端不可以主动连接客户端，并且服务器端程序需要事先启动，等待客户端的连接。<br>      在JDK中提供了两个类用于实现TCP程序，一个是ServerSocket类，用于表示服务器端，一个是Socket类，用于表示客户端。<br>      通信时，首先创建代表服务器端的ServerSocket对象，该对象相当于开启一个服务，并等待客户端的连接，然后创建代表客户端的Socket对象向服务器端发出连接请求，服务器端响应请求，两者建立连接开始通信。</p>
+<p>###13TCP的客户端程序<br>  <em>A:TCP的客户端程序<br>   /</em></p>
+<pre><code>*  实现TCP客户端,连接到服务器
+*  和服务器实现数据交换
+*  实现TCP客户端程序的类 java.net.Socket
+*  
+*  构造方法:
+*      Socket(String host, int port)  传递服务器IP和端口号
+*      注意:构造方法只要运行,就会和服务器进行连接,连接失败,抛出异常
+*      
+*    OutputStream  getOutputStream() 返回套接字的输出流
+*      作用: 将数据输出,输出到服务器
+*      
+*    InputStream getInputStream() 返回套接字的输入流
+*      作用: 从服务器端读取数据
+*      
+*    客户端服务器数据交换,必须使用套接字对象Socket中的获取的IO流,自己new流,不行
+*/
+</code></pre><p>   public class TCPClient {<br>    public static void main(String[] args)throws IOException {<br>      //创建Socket对象,连接服务器<br>      Socket socket = new Socket(“127.0.0.1”, 8888);<br>      //通过客户端的套接字对象Socket方法,获取字节输出流,将数据写向服务器<br>      OutputStream out = socket.getOutputStream();<br>      out.write(“服务器OK”.getBytes());</p>
+<pre><code>  socket.close();
+}
+</code></pre><p>   }</p>
+<p>###14TCP的服务器程序accept方法<br>   A:TCP的服务器程序accept方法<br>     /*</p>
+<pre><code> *  实现TCP服务器程序
+ *  表示服务器程序的类 java.net.ServerSocket
+ *  构造方法:
+ *    ServerSocket(int port) 传递端口号
+ *  
+ *  很重要的事情: 必须要获得客户端的套接字对象Socket
+ *    Socket  accept()
+ */
+public class TCPServer {
+ public static void main(String[] args) throws IOException{
+   ServerSocket server = new ServerSocket(8888);
+   //调用服务器套接字对象中的方法accept() 获取客户端套接字对象
+   Socket socket = server.accept();
+   //通过客户端套接字对象,socket获取字节输入流,读取的是客户端发送来的数据
+   InputStream in = socket.getInputStream();
+   byte[] data = new byte[1024];
+   int len = in.read(data);
+   System.out.println(new String(data,0,len));
+
+
+   socket.close();
+   server.close();
+ }
+}
+</code></pre><p>###15TCP的服务器程序读取客户端数据<br>   A:TCP的服务器程序读取客户端数据</p>
+<pre><code>/*
+ *  实现TCP客户端,连接到服务器
+ *  和服务器实现数据交换
+ *  实现TCP客户端程序的类 java.net.Socket
+ *  
+ *  构造方法:
+ *      Socket(String host, int port)  传递服务器IP和端口号
+ *      注意:构造方法只要运行,就会和服务器进行连接,连接失败,抛出异常
+ *      
+ *    OutputStream  getOutputStream() 返回套接字的输出流
+ *      作用: 将数据输出,输出到服务器
+ *      
+ *    InputStream getInputStream() 返回套接字的输入流
+ *      作用: 从服务器端读取数据
+ *      
+ *    客户端服务器数据交换,必须使用套接字对象Socket中的获取的IO流,自己new流,不行
+ */
+public class TCPClient {
+  public static void main(String[] args)throws IOException {
+    //创建Socket对象,连接服务器
+    Socket socket = new Socket(&quot;127.0.0.1&quot;, 8888);
+    //通过客户端的套接字对象Socket方法,获取字节输出流,将数据写向服务器
+    OutputStream out = socket.getOutputStream();
+    out.write(&quot;服务器OK&quot;.getBytes());
+    socket.close();
+  }
+}
+/*
+ *  实现TCP服务器程序
+ *  表示服务器程序的类 java.net.ServerSocket
+ *  构造方法:
+ *    ServerSocket(int port) 传递端口号
+ *  
+ *  很重要的事情: 必须要获得客户端的套接字对象Socket
+ *    Socket  accept()
+ */
+public class TCPServer {
+  public static void main(String[] args) throws IOException{
+    ServerSocket server = new ServerSocket(8888);
+    //调用服务器套接字对象中的方法accept() 获取客户端套接字对象
+    Socket socket = server.accept();
+    //通过客户端套接字对象,socket获取字节输入流,读取的是客户端发送来的数据
+    InputStream in = socket.getInputStream();
+    byte[] data = new byte[1024];
+    int len = in.read(data);
+    System.out.println(new String(data,0,len));
+
+  }
+}
+</code></pre><p>###16TCP的服务器和客户端的数据交换<br>   A:TCP的服务器和客户端的数据交换<br>      /*</p>
+<pre><code> *  实现TCP客户端,连接到服务器
+ *  和服务器实现数据交换
+ *  实现TCP客户端程序的类 java.net.Socket
+ *  
+ *  构造方法:
+ *      Socket(String host, int port)  传递服务器IP和端口号
+ *      注意:构造方法只要运行,就会和服务器进行连接,连接失败,抛出异常
+ *      
+ *    OutputStream  getOutputStream() 返回套接字的输出流
+ *      作用: 将数据输出,输出到服务器
+ *      
+ *    InputStream getInputStream() 返回套接字的输入流
+ *      作用: 从服务器端读取数据
+ *      
+ *    客户端服务器数据交换,必须使用套接字对象Socket中的获取的IO流,自己new流,不行
+ */
+public class TCPClient {
+  public static void main(String[] args)throws IOException {
+    //创建Socket对象,连接服务器
+    Socket socket = new Socket(&quot;127.0.0.1&quot;, 8888);
+    //通过客户端的套接字对象Socket方法,获取字节输出流,将数据写向服务器
+    OutputStream out = socket.getOutputStream();
+    out.write(&quot;服务器OK&quot;.getBytes());
+
+    //读取服务器发回的数据,使用socket套接字对象中的字节输入流
+    InputStream in = socket.getInputStream();
+    byte[] data = new byte[1024];
+    int len = in.read(data);
+    System.out.println(new String(data,0,len));
+
+    socket.close();
+  }
+}
+/*
+ *  实现TCP服务器程序
+ *  表示服务器程序的类 java.net.ServerSocket
+ *  构造方法:
+ *    ServerSocket(int port) 传递端口号
+ *  
+ *  很重要的事情: 必须要获得客户端的套接字对象Socket
+ *    Socket  accept()
+ */
+public class TCPServer {
+  public static void main(String[] args) throws IOException{
+    ServerSocket server = new ServerSocket(8888);
+    //调用服务器套接字对象中的方法accept() 获取客户端套接字对象
+    Socket socket = server.accept();
+    //通过客户端套接字对象,socket获取字节输入流,读取的是客户端发送来的数据
+    InputStream in = socket.getInputStream();
+    byte[] data = new byte[1024];
+    int len = in.read(data);
+    System.out.println(new String(data,0,len));
+
+    //服务器向客户端回数据,字节输出流,通过客户端套接字对象获取字节输出流
+    OutputStream out = socket.getOutputStream();
+    out.write(&quot;收到,谢谢&quot;.getBytes());
+
+    socket.close();
+    server.close();
+  }
+}
+</code></pre><p>###17TCP的中的流对象<br>    *A:TCP的中的流对象<br>        参见图解TCP中的流对象.jpg  </p>
+<p>======================================第四节课=================================================</p>
+<p>###18TCP图片上传案例分析<br>    *A:图片上传案例分析<br>         参见图解TCP上传图片案例.jpg  </p>
+<p>###19TCP上传客户端<br>   <em>A TCP上传客户端<br>   /</em></p>
+<pre><code>*  实现TCP图片上传客户端
+*  实现步骤:
+*    1. Socket套接字连接服务器
+*    2. 通过Socket获取字节输出流,写图片
+*    3. 使用自己的流对象,读取图片数据源
+*         FileInputStream
+*    4. 读取图片,使用字节输出流,将图片写到服务器
+*       采用字节数组进行缓冲
+*    5. 通过Socket套接字获取字节输入流
+*       读取服务器发回来的上传成功
+*    6. 关闭资源
+*/
+</code></pre><p>   public class TCPClient {<br>    public static void main(String[] args) throws IOException{<br>      Socket socket = new Socket(“127.0.0.1”, 8000);<br>      //获取字节输出流,图片写到服务器<br>      OutputStream out = socket.getOutputStream();<br>      //创建字节输入流,读取本机上的数据源图片<br>      FileInputStream fis = new FileInputStream(“c:\t.jpg”);<br>      //开始读写字节数组<br>      int len = 0 ;<br>      byte[] bytes = new byte[1024];<br>      while((len = fis.read(bytes))!=-1){<br>        out.write(bytes, 0, len);<br>      }<br>      //给服务器写终止序列<br>      //socket.shutdownOutput();</p>
+<pre><code>  //获取字节输入流,读取服务器的上传成功
+  InputStream in = socket.getInputStream();
+
+  len = in.read(bytes);
+  System.out.println(new String(bytes,0,len));
+
+  fis.close();
+  socket.close();
+}
+</code></pre><p>   }</p>
+<p>###20TCP上传服务器<br>   A:TCP上传服务器<br>   /*</p>
+<pre><code>*  TCP图片上传服务器
+*   1. ServerSocket套接字对象,监听端口8000
+*   2. 方法accept()获取客户端的连接对象
+*   3. 客户端连接对象获取字节输入流,读取客户端发送图片
+*   4. 创建File对象,绑定上传文件夹
+*       判断文件夹存在, 不存,在创建文件夹
+*   5. 创建字节输出流,数据目的File对象所在文件夹
+*   6. 字节流读取图片,字节流将图片写入到目的文件夹中
+*   7. 将上传成功会写客户端
+*   8. 关闭资源
+*       
+*/
+</code></pre><p>   public class TCPServer {<br>    public static void main(String[] args) throws IOException{<br>      ServerSocket server = new ServerSocket(8000);<br>      Socket socket = server.accept();<br>      //通过客户端连接对象,获取字节输入流,读取客户端图片<br>      InputStream in = socket.getInputStream();<br>      //将目的文件夹封装到File对象<br>      File upload = new File(“d:\upload”);<br>      if(!upload.exists())<br>        upload.mkdirs();</p>
+<pre><code>  //创建字节输出流,将图片写入到目的文件夹中                         
+  FileOutputStream fos = new FileOutputStream(upload+&quot;t.jpg&quot;);
+  //读写字节数组
+  byte[] bytes = new byte[1024];
+  int len = 0 ;
+  while((len = in.read(bytes))!=-1){
+    fos.write(bytes, 0, len);
+  }
+  //通过客户端连接对象获取字节输出流
+  //上传成功写回客户端
+  socket.getOutputStream().write(&quot;上传成功&quot;.getBytes());
+
+  fos.close();
+  socket.close();
+  server.close();
+}
+</code></pre><p>   }</p>
+<p>###21TCP图片上传问题解决<br>/*</p>
+<ul>
+<li>实现TCP图片上传客户端</li>
+<li>实现步骤:</li>
+<li><ol>
+<li>Socket套接字连接服务器</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>通过Socket获取字节输出流,写图片</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>使用自己的流对象,读取图片数据源</li>
+</ol>
+</li>
+<li>FileInputStream</li>
+<li><ol start="4">
+<li>读取图片,使用字节输出流,将图片写到服务器</li>
+</ol>
+</li>
+<li>采用字节数组进行缓冲</li>
+<li><ol start="5">
+<li>通过Socket套接字获取字节输入流</li>
+</ol>
+</li>
+<li>读取服务器发回来的上传成功</li>
+<li><ol start="6">
+<li>关闭资源<br>*/<br>public class TCPClient {<br>public static void main(String[] args) throws IOException{<br>Socket socket = new Socket(“127.0.0.1”, 8000);<br>//获取字节输出流,图片写到服务器<br>OutputStream out = socket.getOutputStream();<br>//创建字节输入流,读取本机上的数据源图片<br>FileInputStream fis = new FileInputStream(“c:\t.jpg”);<br>//开始读写字节数组<br>int len = 0 ;<br>byte[] bytes = new byte[1024];<br>while((len = fis.read(bytes))!=-1){<br>out.write(bytes, 0, len);<br>}<br>//给服务器写终止序列<br>socket.shutdownOutput();//想服务端写入一个结束标志</li>
+</ol>
+<p>//获取字节输入流,读取服务器的上传成功<br>InputStream in = socket.getInputStream();</p>
+<p>len = in.read(bytes);<br>System.out.println(new String(bytes,0,len));</p>
+<p>fis.close();<br>socket.close();<br>}<br>}</p>
+</li>
+</ul>
+<p>###TCP上传文件名<br>  <em>A:TCP上传文件名<br>   /</em></p>
+<pre><code>*  TCP图片上传服务器
+*   1. ServerSocket套接字对象,监听端口8000
+*   2. 方法accept()获取客户端的连接对象
+*   3. 客户端连接对象获取字节输入流,读取客户端发送图片
+*   4. 创建File对象,绑定上传文件夹
+*       判断文件夹存在, 不存,在创建文件夹
+*   5. 创建字节输出流,数据目的File对象所在文件夹
+*   6. 字节流读取图片,字节流将图片写入到目的文件夹中
+*   7. 将上传成功会写客户端
+*   8. 关闭资源
+*       
+*/
+</code></pre><p>   public class TCPServer {<br>    public static void main(String[] args) throws IOException{<br>      ServerSocket server = new ServerSocket(8000);<br>      Socket socket = server.accept();<br>      //通过客户端连接对象,获取字节输入流,读取客户端图片<br>      InputStream in = socket.getInputStream();<br>      //将目的文件夹封装到File对象<br>      File upload = new File(“d:\upload”);<br>      if(!upload.exists())<br>        upload.mkdirs();</p>
+<pre><code>  //防止文件同名被覆盖,从新定义文件名字
+  //规则:  域名+毫秒值+6位随机数
+  String filename=&quot;itcast&quot;+System.currentTimeMillis()+new Random().nextInt(999999)+&quot;.jpg&quot;;
+  //创建字节输出流,将图片写入到目的文件夹中                         
+  FileOutputStream fos = new FileOutputStream(upload+File.separator+filename);
+  //读写字节数组
+  byte[] bytes = new byte[1024];
+  int len = 0 ;
+  while((len = in.read(bytes))!=-1){
+    fos.write(bytes, 0, len);
+  }
+  //通过客户端连接对象获取字节输出流
+  //上传成功写回客户端
+  socket.getOutputStream().write(&quot;上传成功&quot;.getBytes());
+
+  fos.close();
+  socket.close();
+  server.close();
+}
+</code></pre><p>   }</p>
+<p>###多线程上传案例<br>*A:多线程上传案例<br>  public class TCPThreadServer {<br>    public static void main(String[] args) throws IOException {<br>      ServerSocket server = new ServerSocket(8000);<br>      while (true) {<br>        // 获取到一个客户端,必须开启新线程,为这个客户端服务<br>        Socket socket = server.accept();<br>        new Thread(new Upload(socket)).start();<br>      }<br>    }<br>  }</p>
+<p>  public class Upload implements Runnable {</p>
+<pre><code>private Socket socket;
+
+public Upload(Socket socket) {
+  this.socket = socket;
+}
+
+public void run() {
+  try {
+    // 通过客户端连接对象,获取字节输入流,读取客户端图片
+    InputStream in = socket.getInputStream();
+    // 将目的文件夹封装到File对象
+    File upload = new File(&quot;d:\\upload&quot;);
+    if (!upload.exists())
+      upload.mkdirs();
+
+    // 防止文件同名被覆盖,从新定义文件名字
+    // 规则: 域名+毫秒值+6位随机数
+    String filename = &quot;itcast&quot; + System.currentTimeMillis() + new Random().nextInt(999999) + &quot;.jpg&quot;;
+    // 创建字节输出流,将图片写入到目的文件夹中
+    FileOutputStream fos = new FileOutputStream(upload + File.separator + filename);
+    // 读写字节数组
+    byte[] bytes = new byte[1024];
+    int len = 0;
+    while ((len = in.read(bytes)) != -1) {
+      fos.write(bytes, 0, len);
+    }
+    // 通过客户端连接对象获取字节输出流
+    // 上传成功写回客户端
+    socket.getOutputStream().write(&quot;上传成功&quot;.getBytes());
+
+    fos.close();
+    socket.close();
+  } catch (Exception ex) {
+
+  }
+}
+</code></pre><p>  }</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+    
+	<div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ff73b3;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+	
+	
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>感谢您的支持，我会继续努力的!</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wexin.JPG" alt="QJun 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/30/day31笔记/" rel="next" title="java学习笔记——基础29()">
+                <i class="fa fa-chevron-left"></i> java学习笔记——基础29()
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/01/day33笔记/" rel="prev" title="java学习笔记——基础31()">
+                java学习笔记——基础31() <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MDE0MS8xNjY2OA=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/10.jpg"
+                alt="QJun" />
+            
+              <p class="site-author-name" itemprop="name">QJun</p>
+              <p class="site-description motion-element" itemprop="description">Stay Hungry, Stay Foolish!</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">33</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:qjun@hust.edu.cn" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plus.google.com/" target="_blank" title="Google"><i class="fa fa-fw fa-google"></i>Google</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/" target="_blank" title="Twitter"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.facebook.com/" target="_blank" title="FB Page"><i class="fa fa-fw fa-facebook"></i>FB Page</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://leesen998.github.io/about/" title="关于此博客" target="_blank">关于此博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://poetryscience.ink/" title="Huixin" target="_blank">Huixin</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://ultimatehy.github.io/" title="Yong Huang" target="_blank">Yong Huang</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 – <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="heart">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">QJun</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<div class="weixin-box">
+  <div class="weixin-menu">
+    <div class="weixin-hover">
+      <div class="weixin-description">微信扫一扫，订阅本博客</div>
+    </div>
+  </div>
+</div>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="true"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+
+
+  
+    <script type="text/javascript">
+      window.livereOptions = {
+        refer: '2016/12/01/day32笔记 /'
+      };
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"tagMode":true,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":100,"height":200,"hOffset":10,"vOffset":10},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/"});</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>;
+  <script>
+  $("body").backstretch("/images/cover.png");
+  </script>
+
+  
+  
+
+  <script type="text/javascript" color="0,0,255" opacity='0.7' zIndex="-1" count="100" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+  
+  
+  <script type="text/javascript" src="/js/src/dytitle.js"></script>
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+
+<!-- 代码块复制功能 -->
+<script type="text/javascript" src="/js/src/clipboard.min.js"></script>  
+<script type="text/javascript" src="/js/src/clipboard-use.js"></script>
+

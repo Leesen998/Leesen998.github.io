@@ -1,0 +1,1994 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#fff">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-flash.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="https://fonts.cat.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#fff">
+
+
+  <link rel="manifest" href="/images/manifest.json">
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="1、JDBC2、DBUtils">
+<meta name="keywords" content="java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java学习笔记——基础27()">
+<meta property="og:url" content="https://leesen998.github.io/2016/11/28/day29笔记/index.html">
+<meta property="og:site_name" content="QJun">
+<meta property="og:description" content="1、JDBC2、DBUtils">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1544254144/samples/java%20files/photo-1542312455-e31bb150371c.jpg">
+<meta property="og:updated_time" content="2018-12-19T12:43:28.807Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java学习笔记——基础27()">
+<meta name="twitter:description" content="1、JDBC2、DBUtils">
+<meta name="twitter:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1544254144/samples/java%20files/photo-1542312455-e31bb150371c.jpg">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="QJun" type="application/atom+xml" />
+
+
+
+
+  <link rel="canonical" href="https://leesen998.github.io/2016/11/28/day29笔记/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>java学习笔记——基础27() | QJun</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://leesen998.github.io" class="github-corner" aria-label="View source on GitHub"><svg width="120" height="120" viewBox="0 0 250 250" style="fill:#64CEAA; color:#fff; position: absolute; top: 194; border: 0; left: 0; transform: scale(-1, 1);" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">QJun</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">QJun's Homepage</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://leesen998.github.io/2016/11/28/day29笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QJun">
+      <meta itemprop="description" content="Stay Hungry, Stay Foolish!">
+      <meta itemprop="image" content="/images/10.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QJun">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">java学习笔记——基础27()
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2016-11-28 19:48:29" itemprop="dateCreated datePublished" datetime="2016-11-28T19:48:29+08:00">2016-11-28</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/程序设计/" itemprop="url" rel="index"><span itemprop="name">程序设计</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p class="description"></p>
+
+<p><img src="https://res.cloudinary.com/dpvywdzxv/image/upload/v1544254144/samples/java%20files/photo-1542312455-e31bb150371c.jpg" alt="" style="width:100%"></p>
+<p>1、JDBC<br>2、DBUtils</p>
+<a id="more"></a>    
+<p>###01JDBC概念和数据库驱动程序</p>
+<pre><code>* A: JDBC概念和数据库驱动程序
+    * a: JDBC概述        
+        * JDBC（Java Data Base Connectivity,java数据库连接）是一种用于执行SQL语句的Java API，
+            可以为多种关系数据库提供统一访问，它由一组用Java语言编写的类和接口组成。是Java访问数据库的标准规范
+        * JDBC提供了一种基准,据此可以构建更高级的工具和接口，使数据库开发人员能够编写数据库应用程序。
+        * JDBC需要连接驱动，驱动是两个设备要进行通信，满足一定通信数据格式，数据格式由设备提供商规定，
+            设备提供商为设备提供驱动软件，通过软件可以与该设备进行通信。
+        * 我们使用的是mysql的驱动mysql-connector-java-5.1.39-bin.jar
+    * b: 总结
+        * JDBC是java提供给开发人员的一套操作数据库的接口
+        * 数据库驱动就是实现该接口的实现类
+</code></pre><p>###02JDBC原理</p>
+<pre><code>* A: JDBC原理
+    * a: 描述
+        * Java提供访问数据库规范称为JDBC，而生产厂商提供规范的实现类称为驱动
+        * DBC是接口，驱动是接口的实现，没有驱动将无法完成数据库连接，从而不能操作数据库！
+            每个数据库厂商都需要提供自己的驱动，用来连接自己公司的数据库，也就是说驱动一般都由数据库生成厂商提供。
+        * 图解见day29_source/JDBC实现原理.JPG
+</code></pre><p>###03准备数据</p>
+<pre><code>* A: 准备数据
+    * a: 创建数据库和表结构
+        #创建数据库
+        create database mybase;
+        #使用数据库
+        use mybase;
+        ###创建分类表
+        create table sort(
+          sid int PRIMARY KEY AUTO_INCREMENT,
+          sname varchar(100),
+          sprice DOUBLE,
+          sdesc VARCHAR(500)
+        );
+
+    * b: 向表中插入数据
+        #初始化数据
+        insert into sort(sname,sprice,sdesc) values(&apos;家电&apos;,2000, &apos;优惠的促销&apos;);
+        insert into sort(sname,sprice,sdesc) values(&apos;家具&apos;,8900, &apos;家具价格上调,原材料涨价&apos;);
+        insert into sort(sname,sprice,sdesc) values(&apos;儿童玩具&apos;,290, &apos;赚家长的钱&apos;);
+        insert into sort(sname,sprice,sdesc) values(&apos;生鲜&apos;,500.99, &apos;生鲜商品&apos;);
+        insert into sort(sname,sprice,sdesc) values(&apos;服装&apos;,24000, &apos;换季销售&apos;);
+        insert into sort(sname,sprice,sdesc) values(&apos;洗涤&apos;,50, &apos;洗发水促销&apos;);            
+</code></pre><p>###04JDBC的开发步骤</p>
+<pre><code>* A: JDBC的开发步骤
+    * a: 步骤介绍
+        1.注册驱动
+            告知JVM使用的是哪一个数据库的驱动
+        2.获得连接
+            使用JDBC中的类,完成对MySQL数据库的连接
+        3.获得语句执行平台
+            通过连接对象获取对SQL语句的执行者对象
+        4.执行sql语句
+            使用执行者对象,向数据库执行SQL语句
+            获取到数据库的执行后的结果
+        5.处理结果
+        6.释放资源  一堆close()
+</code></pre><p>###05导入mysql数据库驱动程序jar包</p>
+<pre><code>* A: 导入mysql数据库驱动程序jar包
+    * a: 步骤
+        * 创建lib目录，用于存放当前项目需要的所有jar包
+        * 选择jar包，右键执行build path / Add to Build Path
+</code></pre><p>###06注册数据库驱动程序</p>
+<pre><code>* A: 注册数据库驱动程序
+    * a: 案例代码
+        public class JDBCDemo {
+            public static void main(String[] args)throws ClassNotFoundException,SQLException{
+                //1.注册驱动 反射技术,将驱动类加入到内容
+                // 使用java.sql.DriverManager类静态方法 registerDriver(Driver driver)
+                // Diver是一个接口,参数传递,MySQL驱动程序中的实现类
+                //DriverManager.registerDriver(new Driver());
+                //驱动类源代码,注册2次驱动程序
+                Class.forName(&quot;com.mysql.jdbc.Driver&quot;);                    
+            }
+        }
+</code></pre><p>###07获取数据库的连接对象</p>
+<pre><code>* A：获取数据库的连接对象
+    * a: 案例代码
+        public class JDBCDemo {
+            public static void main(String[] args)throws ClassNotFoundException,SQLException{
+                //1.注册驱动 反射技术,将驱动类加入到内容
+                // 使用java.sql.DriverManager类静态方法 registerDriver(Driver driver)
+                // Diver是一个接口,参数传递,MySQL驱动程序中的实现类
+                //DriverManager.registerDriver(new Driver());
+                //驱动类源代码,注册2次驱动程序
+                Class.forName(&quot;com.mysql.jdbc.Driver&quot;);
+
+                //2.获得数据库连接  DriverManager类中静态方法
+                //static Connection getConnection(String url, String user, String password)  
+                //返回值是Connection接口的实现类,在mysql驱动程序
+                //url: 数据库地址  jdbc:mysql://连接主机IP:端口号//数据库名字
+                String url = &quot;jdbc:mysql://localhost:3296/mybase&quot;;
+                //用户名和密码用自己的
+                String username=&quot;root&quot;;
+                String password=&quot;123&quot;;
+                Connection con = DriverManager.getConnection(url, username, password);
+                System.out.println(con);                    
+            }
+        }
+</code></pre><p>###08获取SQL语句的执行对象对象</p>
+<pre><code>* A: 获取SQL语句的执行对象对象
+    * a: 案例代码
+        public class JDBCDemo {
+            public static void main(String[] args)throws ClassNotFoundException,SQLException{
+                //1.注册驱动 反射技术,将驱动类加入到内容
+                // 使用java.sql.DriverManager类静态方法 registerDriver(Driver driver)
+                // Diver是一个接口,参数传递,MySQL驱动程序中的实现类
+                //DriverManager.registerDriver(new Driver());
+                //驱动类源代码,注册2次驱动程序
+                Class.forName(&quot;com.mysql.jdbc.Driver&quot;);
+
+                //2.获得数据库连接  DriverManager类中静态方法
+                //static Connection getConnection(String url, String user, String password)  
+                //返回值是Connection接口的实现类,在mysql驱动程序
+                //url: 数据库地址  jdbc:mysql://连接主机IP:端口号//数据库名字
+                String url = &quot;jdbc:mysql://localhost:3296/mybase&quot;;
+                String username=&quot;root&quot;;
+                String password=&quot;123&quot;;
+                Connection con = DriverManager.getConnection(url, username, password);
+
+                //3.获得语句执行平台, 通过数据库连接对象,获取到SQL语句的执行者对象
+                // con对象调用方法   Statement createStatement() 获取Statement对象,将SQL语句发送到数据库
+                // 返回值是 Statement接口的实现类对象,,在mysql驱动程序
+                Statement stat = con.createStatement();
+                System.out.println(stat);
+            }
+        }
+</code></pre><p>###09执行insert语句获取结果集</p>
+<pre><code>* A: 执行insert语句获取结果集
+    * a: 案例代码
+        public class JDBCDemo {
+            public static void main(String[] args)throws ClassNotFoundException,SQLException{
+                //1.注册驱动 反射技术,将驱动类加入到内容
+                // 使用java.sql.DriverManager类静态方法 registerDriver(Driver driver)
+                // Diver是一个接口,参数传递,MySQL驱动程序中的实现类
+                //DriverManager.registerDriver(new Driver());
+                //驱动类源代码,注册2次驱动程序
+                Class.forName(&quot;com.mysql.jdbc.Driver&quot;);
+
+                //2.获得数据库连接  DriverManager类中静态方法
+                //static Connection getConnection(String url, String user, String password)  
+                //返回值是Connection接口的实现类,在mysql驱动程序
+                //url: 数据库地址  jdbc:mysql://连接主机IP:端口号//数据库名字
+                String url = &quot;jdbc:mysql://localhost:3296/mybase&quot;;
+                String username=&quot;root&quot;;
+                String password=&quot;123&quot;;
+                Connection con = DriverManager.getConnection(url, username, password);
+
+                //3.获得语句执行平台, 通过数据库连接对象,获取到SQL语句的执行者对象
+                // con对象调用方法   Statement createStatement() 获取Statement对象,将SQL语句发送到数据库
+                // 返回值是 Statement接口的实现类对象,,在mysql驱动程序
+                Statement stat = con.createStatement();
+                //    4.执行sql语句
+                // 通过执行者对象调用方法执行SQL语句,获取结果
+                // int executeUpdate(String sql)  执行数据库中的SQL语句, insert delete update
+                // 返回值int,操作成功数据表多少行
+                int row = stat.executeUpdate
+                        (&quot;INSERT INTO sort(sname,sprice,sdesc) VALUES(&apos;汽车用品&apos;,50000,&apos;疯狂涨价&apos;)&quot;);
+                System.out.println(row);
+
+                //6.释放资源  一堆close()
+                stat.close();
+                con.close();
+            }
+        }
+</code></pre><p>###10执行select语句获取结果集</p>
+<pre><code>* A: 执行select语句获取结果集
+    * a: 案例代码
+        public class JDBCDemo1 {
+            public static void main(String[] args) throws Exception{
+                //1. 注册驱动
+                Class.forName(&quot;com.mysql.jdbc.Driver&quot;);
+                //2. 获取连接对象
+                String url = &quot;jdbc:mysql://localhost:3296/mybase&quot;;
+                String username=&quot;root&quot;;
+                String password=&quot;123&quot;;
+                Connection con = DriverManager.getConnection(url, username, password);
+                //3 .获取执行SQL 语句对象
+                Statement stat = con.createStatement();
+                // 拼写查询的SQL
+                String sql = &quot;SELECT * FROM sort&quot;;
+                //4. 调用执行者对象方法,执行SQL语句获取结果集
+                // ResultSet executeQuery(String sql)  执行SQL语句中的select查询
+                // 返回值ResultSet接口的实现类对象,实现类在mysql驱动中
+                ResultSet rs = stat.executeQuery(sql);
+                //5 .处理结果集
+                // ResultSet接口方法 boolean next() 返回true,有结果集,返回false没有结果集
+                while(rs.next()){
+                    //获取每列数据,使用是ResultSet接口的方法 getXX方法参数中,建议写String列名
+                    System.out.println(rs.getInt(&quot;sid&quot;)+&quot;   &quot;+rs.getString(&quot;sname&quot;)+
+                            &quot;   &quot;+rs.getDouble(&quot;sprice&quot;)+&quot;   &quot;+rs.getString(&quot;sdesc&quot;));
+                }
+
+                rs.close();
+                stat.close();
+                con.close();
+            }
+        }
+</code></pre><p>###11SQL注入攻击</p>
+<pre><code>* A: SQL注入攻击
+    * a: 注入问题
+        * 假设有登录案例SQL语句如下:
+        * SELECT * FROM 用户表 WHERE NAME = 用户输入的用户名 AND PASSWORD = 用户输的密码;
+        * 此时，当用户输入正确的账号与密码后，查询到了信息则让用户登录。
+            但是当用户输入的账号为XXX 密码为：XXX’  OR ‘a’=’a时，则真正执行的代码变为：
+            * SELECT * FROM 用户表 WHERE NAME = ‘XXX’ AND PASSWORD =’ XXX’  OR ’a’=’a’;
+        * 此时，上述查询语句时永远可以查询出结果的。那么用户就直接登录成功了，显然我们不希望看到这样的结果，这便是SQL注入问题。
+    * b: 案例演示
+        CREATE TABLE users(
+             id INT PRIMARY KEY AUTO_INCREMENT,
+             username VARCHAR(100),
+             PASSWORD VARCHAR(100)
+        );
+
+        INSERT INTO users (username,PASSWORD) VALUES (&apos;a&apos;,&apos;1&apos;),(&apos;b&apos;,&apos;2&apos;);
+
+        SELECT * FROM users;
+
+        -- 登录查询
+        SELECT * FROM users WHERE username=&apos;dsfsdfd&apos; AND PASSWORD=&apos;wrethiyu&apos;1 
+        OR 1=1
+
+        SELECT * FROM users WHERE username=&apos;a&apos; AND PASSWORD=&apos;1&apos;OR&apos;1=1&apos;
+        键盘录入：
+        1
+        1&apos;OR&apos; 1=1
+</code></pre><p>###12SQL注入攻击用户登录案例</p>
+<pre><code>* A: SQL注入攻击用户登录案例
+    * a: 案例代码
+        public class JDBCDemo2 {
+            public static void main(String[] args)throws Exception {
+                Class.forName(&quot;com.mysql.jdbc.Driver&quot;);
+                String url = &quot;jdbc:mysql://localhost:3296/mybase&quot;;
+                String username = &quot;root&quot;;
+                String password = &quot;123&quot;;
+                Connection con = DriverManager.getConnection(url, username, password);
+                Statement stat = con.createStatement();
+
+                Scanner sc = new Scanner(System.in);
+                String user = sc.nextLine();
+                String pass = sc.nextLine();
+
+                //执行SQL语句,数据表,查询用户名和密码,如果存在,登录成功,不存在登录失败
+        //        String sql = &quot;SELECT * FROM users WHERE username=&apos;dsfsdfd&apos; AND PASSWORD=&apos;wrethiyu&apos; OR 1=1&quot;;
+                String sql = &quot;SELECT * FROM users WHERE username=&apos;&quot;+user+&quot;&apos; AND PASSWORD=&apos;&quot;+pass+&quot;&apos;&quot;;
+                System.out.println(sql);
+                ResultSet rs = stat.executeQuery(sql);
+                while(rs.next()){
+                    System.out.println(rs.getString(&quot;username&quot;)+&quot;   &quot;+rs.getString(&quot;password&quot;));
+                }
+
+                rs.close();
+                stat.close();
+                con.close();
+            }
+        }
+</code></pre><p>###13PrepareStatement接口预编译SQL语句</p>
+<pre><code>* A: PrepareStatement接口预编译SQL语句
+    * a: 预处理对象
+        * 使用PreparedStatement预处理对象时，建议每条sql语句所有的实际参数，都使用逗号分隔。
+        * String sql = &quot;insert into sort(sid,sname) values(?,?)&quot;;;
+        * PreparedStatement预处理对象代码：
+        * PreparedStatement psmt = conn.prepareStatement(sql)
+
+    * b: 执行SQL语句的方法介绍
+        * int executeUpdate(); --执行insert update delete语句.
+        * ResultSet executeQuery(); --执行select语句.
+        * boolean execute(); --执行select返回true 执行其他的语句返回false.
+    * c: 设置实际参数
+        * void setXxx(int index, Xxx xx) 将指定参数设置为给定Java的xx值。在将此值发送到数据库时，驱动程序将它转换成一个 SQL Xxx类型值。
+        * 例如：
+            * setString(2, &quot;家用电器&quot;) 把SQL语句中第2个位置的占位符？ 替换成实际参数 &quot;家用电器&quot;
+    * d: 案例代码
+        /*
+         *  Java程序实现用户登录,用户名和密码,数据库检查
+         *  防止注入攻击
+         *  Statement接口实现类,作用执行SQL语句,返回结果集
+         *  有一个子接口PreparedStatement  (SQL预编译存储,多次高效的执行SQL) 
+         *  PreparedStatement的实现类数据库的驱动中,如何获取接口的实现类
+         *  
+         *  是Connection数据库连接对象的方法
+         *  PreparedStatement prepareStatement(String sql) 
+
+         */
+        public class JDBCDemo3 {
+            public static void main(String[] args)throws Exception {
+                Class.forName(&quot;com.mysql.jdbc.Driver&quot;);
+                String url = &quot;jdbc:mysql://localhost:3296/mybase&quot;;
+                String username = &quot;root&quot;;
+                String password = &quot;123&quot;;
+                Connection con = DriverManager.getConnection(url, username, password);
+                Scanner sc = new Scanner(System.in);
+                String user = sc.nextLine();
+                String pass = sc.nextLine();
+
+                //执行SQL语句,数据表,查询用户名和密码,如果存在,登录成功,不存在登录失败
+                String sql = &quot;SELECT * FROM users WHERE username=? AND PASSWORD=?&quot;;
+                //调用Connection接口的方法prepareStatement,获取PrepareStatement接口的实现类
+                //方法中参数,SQL语句中的参数全部采用问号占位符
+                PreparedStatement pst =  con.prepareStatement(sql);
+                System.out.println(pst);
+                //调用pst对象set方法,设置问号占位符上的参数
+                pst.setObject(1, user);
+                pst.setObject(2, pass);
+
+                //调用方法,执行SQL,获取结果集
+                ResultSet rs = pst.executeQuery();
+                while(rs.next()){
+                    System.out.println(rs.getString(&quot;username&quot;)+&quot;   &quot;+rs.getString(&quot;password&quot;));
+                }
+
+                rs.close();
+                pst.close();
+                con.close();
+            }
+        }
+</code></pre><p>###14PrepareStatement接口预编译SQL语句执行修改</p>
+<pre><code>* A: PrepareStatement接口预编译SQL语句执行修改
+    * 案例代码
+        /*
+         *  使用PrepareStatement接口,实现数据表的更新操作
+         */
+        public class JDBCDemo {
+            public static void main(String[] args) throws Exception{
+                Class.forName(&quot;com.mysql.jdbc.Driver&quot;);
+                String url = &quot;jdbc:mysql://localhost:3296/mybase&quot;;
+                String username=&quot;root&quot;;
+                String password=&quot;123&quot;;
+                Connection con = DriverManager.getConnection(url, username, password);    
+
+                //拼写修改的SQL语句,参数采用?占位
+                String sql = &quot;UPDATE sort SET sname=?,sprice=? WHERE sid=?&quot;;
+                //调用数据库连接对象con的方法prepareStatement获取SQL语句的预编译对象
+                PreparedStatement pst = con.prepareStatement(sql);
+                //调用pst的方法setXXX设置?占位
+                pst.setObject(1, &quot;汽车美容&quot;);
+                pst.setObject(2, 49988);
+                pst.setObject(3, 7);
+                //调用pst方法执行SQL语句
+                pst.executeUpdate();
+
+                pst.close();
+                con.close();
+            }
+        }
+</code></pre><p>###15PrepareStatement接口预编译SQL语句执行查询</p>
+<pre><code>* A: PrepareStatement接口预编译SQL语句执行查询
+    * a: 案例代码
+        /*
+         *  PrepareStatement接口实现数据表的查询操作
+         */
+        public class JDBCDemo1 {
+            public static void main(String[] args) throws Exception{
+                Class.forName(&quot;com.mysql.jdbc.Driver&quot;);
+                String url = &quot;jdbc:mysql://localhost:3296/mybase&quot;;
+                String username=&quot;root&quot;;
+                String password=&quot;123&quot;;
+                Connection con = DriverManager.getConnection(url, username, password);    
+
+                String sql = &quot;SELECT * FROM sort&quot;;
+
+                PreparedStatement pst = con.prepareStatement(sql);
+
+                //调用pst对象的方法,执行查询语句,Select
+                ResultSet rs=pst.executeQuery();
+                while(rs.next()){
+                    System.out.println(rs.getString(&quot;sid&quot;)+&quot;  &quot;+rs.getString(&quot;sname&quot;)+&quot;  &quot;+rs.getString(&quot;sprice&quot;)+&quot;  &quot;+rs.getString(&quot;sdesc&quot;));
+                }
+                rs.close();
+                pst.close();
+                con.close();
+            }
+        }
+</code></pre><p>###16JDBC的工具类和测试</p>
+<pre><code>* A: JDBC的工具类和测试
+    * a: 案例代码
+        //JDBCUtils工具类代码
+        public class JDBCUtils {
+            private JDBCUtils(){}
+            private static Connection con ;
+
+            static{
+                try{
+                    Class.forName(&quot;com.mysql.jdbc.Driver&quot;);
+                    String url = &quot;jdbc:mysql://localhost:3296/mybase&quot;;
+                    String username=&quot;root&quot;;
+                    String password=&quot;123&quot;;
+                    con = DriverManager.getConnection(url, username, password);
+                }catch(Exception ex){
+                    throw new RuntimeException(ex+&quot;数据库连接失败&quot;);
+                }
+            }
+
+            /*
+             * 定义静态方法,返回数据库的连接对象
+             */
+            public static Connection getConnection(){
+                return con;
+            }
+
+
+            public static void close(Connection con,Statement stat){
+
+                 if(stat!=null){
+                     try{
+                         stat.close();
+                     }catch(SQLException ex){}
+                 }
+
+                 if(con!=null){
+                     try{
+                         con.close();
+                     }catch(SQLException ex){}
+                 }
+
+            }
+
+
+            public static void close(Connection con,Statement stat , ResultSet rs){
+                 if(rs!=null){
+                     try{
+                         rs.close();
+                     }catch(SQLException ex){}
+                 }
+
+                 if(stat!=null){
+                     try{
+                         stat.close();
+                     }catch(SQLException ex){}
+                 }
+
+                 if(con!=null){
+                     try{
+                         con.close();
+                     }catch(SQLException ex){}
+                 }
+
+            }
+        }
+    //测试JDBCUtils工具类的代码
+    public class TestJDBCUtils {
+        public static void main(String[] args)throws Exception {
+            Connection con = JDBCUtils.getConnection();
+            PreparedStatement pst = con.prepareStatement(&quot;SELECT sname FROM sort&quot;);
+            ResultSet rs = pst.executeQuery();
+            while(rs.next()){
+                System.out.println(rs.getString(&quot;sname&quot;));
+            }
+            JDBCUtils.close(con, pst, rs);
+        }
+    }
+</code></pre><p>###17数据表数据存储对象</p>
+<pre><code>* A: 数据表数据存储对象
+    * a: 准备工作
+        * 导入jar包
+        * 拷贝day32定义的工具类JDBCUtils
+
+    * b: 案例代码
+        //定义实体类Sort
+        public class Sort {
+            private int sid;
+            private String sname;
+            private double sprice;
+            private String sdesc;
+            public Sort(int sid, String sname, double sprice, String sdesc) {
+                this.sid = sid;
+                this.sname = sname;
+                this.sprice = sprice;
+                this.sdesc = sdesc;
+            }
+            public Sort(){}
+            public int getSid() {
+                return sid;
+            }
+            public void setSid(int sid) {
+                this.sid = sid;
+            }
+            public String getSname() {
+                return sname;
+            }
+            public void setSname(String sname) {
+                this.sname = sname;
+            }
+            public double getSprice() {
+                return sprice;
+            }
+            public void setSprice(double sprice) {
+                this.sprice = sprice;
+            }
+            public String getSdesc() {
+                return sdesc;
+            }
+            public void setSdesc(String sdesc) {
+                this.sdesc = sdesc;
+            }
+            @Override
+            public String toString() {
+                return &quot;Sort [sid=&quot; + sid + &quot;, sname=&quot; + sname + &quot;, sprice=&quot; + sprice + &quot;, sdesc=&quot; + sdesc + &quot;]&quot;;
+            }                
+        }
+
+        /*
+         *  JDBC读取数据表sort,每行数据封装到Sort类的对象中
+         *  很多个Sort类对象,存储到List集合中
+         */
+        public class JDBCDemo {
+            public static void main(String[] args) throws Exception{
+                //使用JDBC工具类,直接获取数据库连接对象
+                Connection con = JDBCUtils.getConnection();
+                //连接获取数据库SQL语句执行者对象
+                PreparedStatement pst = con.prepareStatement(&quot;SELECT * FROM sort&quot;);
+                //调用查询方法,获取结果集
+                ResultSet rs = pst.executeQuery();
+                //创建集合对象
+                List&lt;Sort&gt; list = new ArrayList&lt;Sort&gt;();
+                while(rs.next()){
+                    //获取到每个列数据,封装到Sort对象中
+                    Sort s = new Sort(rs.getInt(&quot;sid&quot;),rs.getString(&quot;sname&quot;),rs.getDouble(&quot;sprice&quot;),rs.getString(&quot;sdesc&quot;));
+                    //封装的Sort对象,存储到集合中
+                    list.add(s);
+                }
+                JDBCUtils.close(con, pst, rs);
+                //遍历List集合
+                for(Sort s : list){
+                    System.out.println(s);
+                }
+            }
+        }
+</code></pre><p>###18properties配置文件</p>
+<pre><code>* A: properties配置文件        
+    * a: 相关介绍
+        * 开发中获得连接的4个参数（驱动、URL、用户名、密码）通常都存在配置文件中，方便后期维护，程序如果需要更换数据库，
+            只需要修改配置文件即可。
+        * 通常情况下，我们习惯使用properties文件，此文件我们将做如下要求：
+            1.    文件位置：任意，建议src下
+            2.    文件名称：任意，扩展名为properties
+            3.    文件内容：一行一组数据，格式是“key=value”.
+                a)    key命名自定义，如果是多个单词，习惯使用点分隔。例如：jdbc.driver
+                b)    value值不支持中文，如果需要使用非英文字符，将进行unicode转换。
+</code></pre><p>###19properties文件的创建和编写</p>
+<pre><code>* A: properties文件的创建和编写
+    * a: properties文件的创建
+        * src路径下建立database.properties(其实就是一个文本文件)
+    * b: properties文件的编写(内容如下)
+        driverClass=com.mysql.jdbc.Driver
+        url=jdbc:mysql://localhost:3296/mybase
+        username=root
+        password=123        
+</code></pre><p>###20加载配置文件</p>
+<pre><code>* A: 加载配置文件
+    * a: 案例代码        
+        /*
+         *  加载properties配置文件
+         *  IO读取文件,键值对存储到集合
+         *  从集合中以键值对方式获取数据库的连接信息,完成数据库的连接
+         */
+        public class PropertiesDemo {
+            public static void main(String[] args) throws Exception{
+                FileInputStream fis = new FileInputStream(&quot;database.properties&quot;);
+                System.out.println(fis);
+                //使用类的加载器
+                InputStream in = PropertiesDemo.class.getClassLoader().getResourceAsStream(&quot;database.properties&quot;);
+                System.out.println(in);
+                Properties pro = new Properties();
+                pro.load(in);
+                System.out.println(in);                    
+            }
+        }
+</code></pre><p>###21通过配置文件连接数据库</p>
+<pre><code>* A: 通过配置文件连接数据库
+    * a: 案例代码
+        /*
+         *  加载properties配置文件
+         *  IO读取文件,键值对存储到集合
+         *  从集合中以键值对方式获取数据库的连接信息,完成数据库的连接
+         */
+        public class PropertiesDemo {
+            public static void main(String[] args) throws Exception{
+                FileInputStream fis = new FileInputStream(&quot;database.properties&quot;);
+                System.out.println(fis);
+                //使用类的加载器
+                InputStream in = PropertiesDemo.class.getClassLoader().getResourceAsStream(&quot;database.properties&quot;);
+                System.out.println(in);
+                Properties pro = new Properties();
+                pro.load(in);
+                //获取集合中的键值对
+                String driverClass=pro.getProperty(&quot;driverClass&quot;);
+                String url = pro.getProperty(&quot;url&quot;);
+                String username = pro.getProperty(&quot;username&quot;);
+                String password = pro.getProperty(&quot;password&quot;);
+                Class.forName(driverClass);
+                Connection con = DriverManager.getConnection(url, username, password);
+                System.out.println(con);
+
+            }
+        }
+</code></pre><p>###22读取配置文件的工具类</p>
+<pre><code>* A: 读取配置文件的工具类
+    * a: 案例代码
+        /*
+         *  编写数据库连接的工具类,JDBC工具类
+         *  获取连接对象采用读取配置文件方式
+         *  读取文件获取连接,执行一次,static{}
+         */
+        public class JDBCUtilsConfig {
+            private static Connection con ;
+            private static String driverClass;
+            private static String url;
+            private static String username;
+            private static String password;
+
+            static{
+                try{
+                    readConfig();
+                    Class.forName(driverClass);
+                    con = DriverManager.getConnection(url, username, password);
+                }catch(Exception ex){
+                    throw new RuntimeException(&quot;数据库连接失败&quot;);
+                }
+            }
+
+            private static void readConfig()throws Exception{
+                InputStream in = JDBCUtilsConfig.class.getClassLoader().getResourceAsStream(&quot;database.properties&quot;);
+                 Properties pro = new Properties();
+                 pro.load(in);
+                 driverClass=pro.getProperty(&quot;driverClass&quot;);
+                 url = pro.getProperty(&quot;url&quot;);
+                 username = pro.getProperty(&quot;username&quot;);
+                 password = pro.getProperty(&quot;password&quot;);
+            }
+
+
+            public static Connection getConnection(){
+                return con;
+            }
+
+        }            
+</code></pre><p>###23测试工具类</p>
+<pre><code>* A: 测试工具类
+    * a: 案例代码
+        public class TestJDBCUtils {
+            public static void main(String[] args) {
+                Connection con = JDBCUtilsConfig.getConnection();
+                System.out.println(con);
+            }
+        }
+</code></pre><p>###24总结</p>
+<pre><code>* 把今天的知识点总结一遍。
+</code></pre>
+      
+    </div>
+
+    
+
+    
+    
+    
+    
+	<div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ff73b3;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+	
+	
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>感谢您的支持，我会继续努力的!</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wexin.JPG" alt="QJun 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/27/day28笔记/" rel="next" title="java学习笔记——基础26()">
+                <i class="fa fa-chevron-left"></i> java学习笔记——基础26()
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/29/day30笔记/" rel="prev" title="java学习笔记——基础28()">
+                java学习笔记——基础28() <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MDE0MS8xNjY2OA=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/10.jpg"
+                alt="QJun" />
+            
+              <p class="site-author-name" itemprop="name">QJun</p>
+              <p class="site-description motion-element" itemprop="description">Stay Hungry, Stay Foolish!</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">33</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:qjun@hust.edu.cn" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plus.google.com/" target="_blank" title="Google"><i class="fa fa-fw fa-google"></i>Google</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/" target="_blank" title="Twitter"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.facebook.com/" target="_blank" title="FB Page"><i class="fa fa-fw fa-facebook"></i>FB Page</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://leesen998.github.io/about/" title="关于此博客" target="_blank">关于此博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://poetryscience.ink/" title="Huixin" target="_blank">Huixin</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://ultimatehy.github.io/" title="Yong Huang" target="_blank">Yong Huang</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 – <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="heart">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">QJun</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<div class="weixin-box">
+  <div class="weixin-menu">
+    <div class="weixin-hover">
+      <div class="weixin-description">微信扫一扫，订阅本博客</div>
+    </div>
+  </div>
+</div>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="true"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+
+
+  
+    <script type="text/javascript">
+      window.livereOptions = {
+        refer: '2016/11/28/day29笔记/'
+      };
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"tagMode":true,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":100,"height":200,"hOffset":10,"vOffset":10},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/"});</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>;
+  <script>
+  $("body").backstretch("/images/cover.png");
+  </script>
+
+  
+  
+
+  <script type="text/javascript" color="0,0,255" opacity='0.7' zIndex="-1" count="100" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+  
+  
+  <script type="text/javascript" src="/js/src/dytitle.js"></script>
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+
+<!-- 代码块复制功能 -->
+<script type="text/javascript" src="/js/src/clipboard.min.js"></script>  
+<script type="text/javascript" src="/js/src/clipboard-use.js"></script>
+

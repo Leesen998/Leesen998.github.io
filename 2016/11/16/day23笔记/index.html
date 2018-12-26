@@ -1,0 +1,1945 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#fff">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-flash.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="https://fonts.cat.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#fff">
+
+
+  <link rel="manifest" href="/images/manifest.json">
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="1、字节流2、字符流">
+<meta name="keywords" content="java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java学习笔记——基础21()">
+<meta property="og:url" content="https://leesen998.github.io/2016/11/16/day23笔记/index.html">
+<meta property="og:site_name" content="QJun">
+<meta property="og:description" content="1、字节流2、字符流">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1544511684/samples/java%20files/photo-1544119339-7ca107ba27c4.jpg">
+<meta property="og:updated_time" content="2018-12-19T12:49:29.022Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java学习笔记——基础21()">
+<meta name="twitter:description" content="1、字节流2、字符流">
+<meta name="twitter:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1544511684/samples/java%20files/photo-1544119339-7ca107ba27c4.jpg">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="QJun" type="application/atom+xml" />
+
+
+
+
+  <link rel="canonical" href="https://leesen998.github.io/2016/11/16/day23笔记/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>java学习笔记——基础21() | QJun</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://leesen998.github.io" class="github-corner" aria-label="View source on GitHub"><svg width="120" height="120" viewBox="0 0 250 250" style="fill:#64CEAA; color:#fff; position: absolute; top: 194; border: 0; left: 0; transform: scale(-1, 1);" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">QJun</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">QJun's Homepage</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://leesen998.github.io/2016/11/16/day23笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QJun">
+      <meta itemprop="description" content="Stay Hungry, Stay Foolish!">
+      <meta itemprop="image" content="/images/10.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QJun">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">java学习笔记——基础21()
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2016-11-16 19:48:29" itemprop="dateCreated datePublished" datetime="2016-11-16T19:48:29+08:00">2016-11-16</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/程序设计/" itemprop="url" rel="index"><span itemprop="name">程序设计</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p class="description"></p>
+
+<p><img src="https://res.cloudinary.com/dpvywdzxv/image/upload/v1544511684/samples/java%20files/photo-1544119339-7ca107ba27c4.jpg" alt="" style="width:100%"></p>
+<p>1、字节流<br>2、字符流</p>
+<a id="more"></a>
+<p>###01输入和输出</p>
+<pre><code>* A:输入和输出
+    * a: 参照物
+        * 到底是输入还是输出，都是以Java程序为参照
+    * b: Output
+        * 把内存中的数据存储到持久化设备上这个动作称为输出（写）Output操作
+        * 程序到文件称为输出
+    * c: Input
+        * 把持久设备上的数据读取到内存中的这个动作称为输入（读）Input操作
+        * 文件到程序称为输入
+    * d: IO操作
+        * 把上面的这种输入和输出动作称为IO操作
+</code></pre><p>###02字节输出流OutputStream</p>
+<pre><code>* A: 字节输出流OutputStream
+    * a.概念
+        * IO流用来处理设备之间的数据传输
+        * Java对数据的操作是通过流的方式
+        * Java用于操作流的类都在IO包中
+        * 流按流向分为两种：输入流，输出流。
+        * 流按操作类型分为两种：
+            * 字节流 : 字节流可以操作任何数据,因为在计算机中任何数据都是以字节的形式存储的
+            * 字符流 : 字符流只能操作纯字符数据，比较方便。
+    * b.IO流常用父类
+        * 字节流的抽象父类：
+            * InputStream 
+            * OutputStream
+        * 字符流的抽象父类：
+            * Reader 
+            * Writer        
+    * c.IO程序书写
+        * 使用前，导入IO包中的类
+        * 使用时，进行IO异常处理
+        * 使用后，释放资源
+    * d: 方法介绍
+        *  void close(): 关闭此输出流并释放与此流有关的所有系统资源。
+        *  void write(byte[] b)： 将 b.length 个字节从指定的 byte 数组写入此输出流
+        *  void write(byte[] b, int off, int len) ：将指定 byte 数组中从偏移量 off 开始的 len 个字节写入此输出流。
+        * abstract  void write(int b) ： 将指定的字节写入此输出流。
+</code></pre><p>###03字节输出流FileOutputStream写字节</p>
+<pre><code>* A: 字节输出流FileOutputStream写字节
+    * a: FileOutputStream
+        * 写入数据文件,学习父类方法,使用子类对象
+    * b: FileOutputStream构造方法
+        * 作用：绑定输出的输出目的
+        * FileOutputStream(File file) 
+            * 创建一个向指定 File 对象表示的文件中写入数据的文件输出流。
+        * FileOutputStream(File file, boolean append) 
+            * 创建一个向指定 File 对象表示的文件中写入数据的文件输出流，以追加的方式写入。
+        * FileOutputStream(String name) 
+            * 创建一个向具有指定名称的文件中写入数据的输出文件流。
+        * FileOutputStream(String name, boolean append) 
+            * 创建一个向具有指定 name 的文件中写入数据的输出文件流，以追加的方式写入。
+    * c: 流对象使用步骤
+        *  1. 创建流子类的对象,绑定数据目的
+        *  2. 调用流对象的方法write写
+        *  3. close释放资源
+    * d: 注意事项
+        * 流对象的构造方法,可以创建文件,如果文件存在,直接覆盖
+
+    * e: 案例代码
+
+        /*
+         *   FileOutputStream
+         *   写入数据文件,学习父类方法,使用子类对象
+         *   
+         *   子类中的构造方法: 作用:绑定输出的输出目的
+         *     参数:
+         *       File    封装文件
+         *       String  字符串的文件名
+         *   
+         *   流对象使用步骤
+         *     1. 创建流子类的对象,绑定数据目的
+         *     2. 调用流对象的方法write写
+         *     3. close释放资源
+         *     
+         *    流对象的构造方法,可以创建文件,如果文件存在,直接覆盖
+         */
+        public class FileOutputStreamDemo {
+            public static void main(String[] args)throws IOException {
+                FileOutputStream fos = new FileOutputStream(&quot;c:\\a.txt&quot;);
+                //流对象的方法write写数据
+                //写1个字节
+                fos.write(97);
+                //关闭资源
+                fos.close();
+
+            }
+        }
+</code></pre><p>###04字节输出流FileOutputStream写字节数组</p>
+<pre><code>* A: 字节输出流FileOutputStream写字节数组
+    * a: 方法介绍
+        *  void write(byte[] b)： 将 b.length 个字节从指定的 byte 数组写入此输出流
+        *  void write(byte[] b, int off, int len) ：将指定 byte 数组中从偏移量 off 开始的 len 个字节写入此输出流。
+    * b: 案例代码
+        /*
+         *   FileOutputStream
+         *   写入数据文件,学习父类方法,使用子类对象
+         *   
+         *   子类中的构造方法: 作用:绑定输出的输出目的
+         *     参数:
+         *       File    封装文件
+         *       String  字符串的文件名
+         *   
+         *   流对象使用步骤
+         *     1. 创建流子类的对象,绑定数据目的
+         *     2. 调用流对象的方法write写
+         *     3. close释放资源
+         *     
+         *    流对象的构造方法,可以创建文件,如果文件存在,直接覆盖
+         */
+        public class FileOutputStreamDemo {
+            public static void main(String[] args)throws IOException {
+                FileOutputStream fos = new FileOutputStream(&quot;c:\\a.txt&quot;);
+                //流对象的方法write写数据
+                //写字节数组
+                byte[] bytes = {65,66,67,68};
+                fos.write(bytes);
+
+                //写字节数组的一部分,开始索引,写几个
+                fos.write(bytes, 1, 2);
+
+                //写入字节数组的简便方式
+                //写字符串
+                fos.write(&quot;hello&quot;.getBytes());
+
+                //关闭资源
+                fos.close();
+
+            }
+        }
+</code></pre><p>###05文件的续写和换行符号</p>
+<pre><code>* A: 文件的续写和换行符号
+    * a: 文件的续写
+        *  FileOutputStream构造方法, 的第二个参数中,加入true
+    * b: 换行符号
+        * 在文件中,写入换行,符号换行  \r\n
+        * \r\n 可以写在上一行的末尾, 也可以写在下一行的开头
+    * c: 案例代码
+            /*
+             *  FileOutputStream 文件的续写和换行问题
+             *  续写: FileOutputStream构造方法, 的第二个参数中,加入true
+             *  在文件中,写入换行,符号换行  \r\n
+             *  \r\n 可以写在上一行的末尾, 也可以写在下一行的开头
+             */
+            public class FileOutputStreamDemo1 {
+                public static void main(String[] args)throws IOException {
+                    File file = new File(&quot;c:\\b.txt&quot;);
+                    FileOutputStream fos = new FileOutputStream(file,true);
+                    fos.write(&quot;hello\r\n&quot;.getBytes());
+                    fos.write(&quot;world&quot;.getBytes());
+                    fos.close();
+                }
+            }
+</code></pre><p>###06IO中的异常处理</p>
+<pre><code>* A: IO中的异常处理
+    * a:IO流的异常处理
+        * try catch finally
+
+    * b: 细节
+        * 1. 保证流对象变量,作用域足够
+        * 2. catch里面,怎么处理异常
+            * 输出异常的信息,目的看到哪里出现了问题
+            * 停下程序,从新尝试
+        * 3. 如果流对象建立失败了,需要关闭资源吗
+            * new 对象的时候,失败了,没有占用系统资源
+            * 释放资源的时候,对流对象判断null
+            * 变量不是null,对象建立成功,需要关闭资源
+
+    * c: 案例代码
+        public class FileOutputStreamDemo3 {
+            public static void main(String[] args) {
+                //try 外面声明变量,try 里面建立对象
+                FileOutputStream fos = null;
+                try{
+                    fos = new FileOutputStream(&quot;s:\\a.txt&quot;);
+                    fos.write(100);
+                }catch(IOException ex){
+                    System.out.println(ex);
+                    throw new RuntimeException(&quot;文件写入失败,重试&quot;);
+                }finally{
+                    try{
+                        if(fos!=null)
+                          fos.close();
+                    }catch(IOException ex){
+                        throw new RuntimeException(&quot;关闭资源失败&quot;);
+                    }
+                }
+            }
+        }
+</code></pre><p>###07字节输入流InputStream</p>
+<pre><code>* A: 字节输入流InputStream
+    * a: 方法介绍
+        * abstract  int read() ：
+            * 从输入流中读取数据的下一个字节。
+        * int read(byte[] b)  
+            * 从输入流中读取一定数量的字节，并将其存储在缓冲区数组 b 中。
+        * int read(byte[] b, int off, int len) 
+            * 将输入流中最多 len 个数据字节读入 byte 数组。
+        * void close() 
+            * 关闭此输入流并释放与该流关联的所有系统资源。
+
+
+    * b: 案例代码
+        /*
+         *   字节输入流
+         *     java.io.InputStream 所有字节输入流的超类
+         *   作用: 读取任意文件,每次只读取1个字节
+         *   读取的方法  read
+         *     int  read() 读取1个字节
+         *     int  read(byte[] b) 读取一定量的字节,存储到数组中
+         */
+        public class InputStreamDemo {
+
+        }
+</code></pre><p>###08字节输入流FileInputStream读取字节</p>
+<pre><code>* A: 字节输入流FileInputStream读取字节
+    * a: 方法介绍
+        * abstract  int read() ：
+            * 从输入流中读取数据的下一个字节，返回-1表示文件结束
+        * int read(byte[] b)  
+            * 从输入流中读取一定数量的字节，并将其存储在缓冲区数组 b 中。
+            * 读入缓冲区的字节总数，如果因为已经到达文件末尾而没有更多的数据，则返回 -1。
+        * int read(byte[] b, int off, int len) 
+            * 将输入流中最多 len 个数据字节读入 byte 数组。
+        * void close() 
+            * 关闭此输入流并释放与该流关联的所有系统资源。
+    * b: 案例代码
+        /*
+         *  FileInputStream读取文件
+         *  
+         *  构造方法: 为这个流对象绑定数据源
+         *  
+         *    参数: 
+         *      File 类型对象
+         *      String 对象
+         *   输入流读取文件的步骤
+         *     1. 创建字节输入流的子类对象
+         *     2. 调用读取方法read读取
+         *     3. 关闭资源
+         *     
+         *     read()方法,
+         *       read()执行一次,就会自动读取下一个字节
+         *       返回值,返回的是读取到的字节, 读取到结尾返回-1
+         */
+        public class FileInputStreamDemo {
+            public static void main(String[] args) throws IOException{
+                FileInputStream fis = new FileInputStream(&quot;c:\\a.txt&quot;);
+                //读取一个字节,调用方法read 返回int
+                //使用循环方式,读取文件,  循环结束的条件  read()方法返回-1
+                int len = 0;//接受read方法的返回值
+
+                while( (len = fis.read()) != -1){
+                    System.out.print((char)len);
+                }
+                //关闭资源
+                fis.close();
+            }
+        }
+
+        /*
+         * int i = fis.read();
+                System.out.println(i);
+
+                i = fis.read();
+                System.out.println(i);
+
+                i = fis.read();
+                System.out.println(i);
+
+                i = fis.read();
+                System.out.println(i);
+         */
+</code></pre><p>###09字节输入流FileInputStream读取字节数组</p>
+<pre><code>* A: 字节输入流FileInputStream读取字节数组
+    * a: 方法介绍
+        * int read(byte[] b)  
+            * 从输入流中读取一定数量的字节，并将其存储在缓冲区数组 b 中。
+            * 读入缓冲区的字节总数，如果因为已经到达文件末尾而没有更多的数据，则返回 -1。
+        * int read(byte[] b, int off, int len) 
+            * 将输入流中最多 len 个数据字节读入 byte 数组。
+    * b: 案例代码
+        /*
+         *  FileInputStream读取文件
+         *   读取方法  int read(byte[] b) 读取字节数组
+         *   数组作用: 缓冲的作用, 提高效率
+         *   read返回的int,表示什么含义 读取到多少个有效的字节数
+         */
+        public class FileInputStreamDemo1 {
+            public static void main(String[] args) throws IOException {
+                FileInputStream fis = new FileInputStream(&quot;c:\\a.txt&quot;);
+                // 创建字节数组
+                byte[] b = new byte[2];
+
+                int len = fis.read(b);
+                System.out.println(new String(b));// ab
+                System.out.println(len);// 2
+
+                len = fis.read(b);
+                System.out.println(new String(b));// cd
+                System.out.println(len);// 2
+
+                len = fis.read(b);
+                System.out.println(new String(b));// ed
+                System.out.println(len);// 1
+
+                len = fis.read(b);
+                System.out.println(new String(b));// ed
+                System.out.println(len);// -1
+
+                fis.close();
+            }
+        }
+</code></pre><p>###10字节输入流FileInputStream读取字节数组的实现原理        </p>
+<pre><code>* A：字节输入流FileInputStream读取字节数组的实现原理
+    * a: 原理
+        * 参见day23_source文件夹中的&quot;读取数组的原理.jpg&quot;
+
+
+    * b: 案例代码
+
+        public class FileInputStreamDemo1 {
+            public static void main(String[] args) throws IOException {
+                FileInputStream fis = new FileInputStream(&quot;c:\\a.txt&quot;);
+                //创建字节数组
+                byte[] b = new byte[1024];
+
+                int len = 0 ;
+                while( (len = fis.read(b)) !=-1){
+                    System.out.print(new String(b,0,len));
+                }
+                fis.close();
+            }
+        }
+</code></pre><p>###11文件复制原理</p>
+<pre><code>* A: 文件复制原理
+    * a: 见day23_source/文件复制原理.jpg
+</code></pre><p>###12字节流复制文件读取单个字节</p>
+<pre><code>* A: 字节流复制文件读取单个字节
+    * a: 案例代码
+        /*
+         *  将数据源 c:\\a.txt
+         *  复制到 d:\\a.txt  数据目的
+         *  字节输入流,绑定数据源
+         *  字节输出流,绑定数据目的
+         *  
+         *  输入,读取1个字节
+         *  输出,写1个字节
+         */
+        public class Copy {
+            public static void main(String[] args) {
+                //定义两个流的对象变量
+                FileInputStream fis = null;
+                FileOutputStream fos = null;
+                try{
+                    //建立两个流的对象,绑定数据源和数据目的
+                    fis = new FileInputStream(&quot;c:\\t.zip&quot;);
+                    fos = new FileOutputStream(&quot;d:\\t.zip&quot;);
+                    //字节输入流,读取1个字节,输出流写1个字节
+                    int len = 0 ;
+                    while((len = fis.read())!=-1){
+                        fos.write(len);
+                    }
+                }catch(IOException ex){
+                    System.out.println(ex);
+                    throw new RuntimeException(&quot;文件复制失败&quot;);
+                }finally{
+                    try{
+                        if(fos!=null)
+                            fos.close();
+                    }catch(IOException ex){
+                        throw new RuntimeException(&quot;释放资源失败&quot;);
+                    }finally{
+                        try{
+                            if(fis!=null)
+                                fis.close();
+                        }catch(IOException ex){
+                            throw new RuntimeException(&quot;释放资源失败&quot;);
+                        }
+                    }
+                }
+            }
+        }
+</code></pre><p>###13字节流复制文件读取字节数组</p>
+<pre><code>* A: 字节流复制文件读取字节数组
+    * a: 案例代码
+        /*
+         *  字节流复制文件
+         *   采用数组缓冲提高效率
+         *   字节数组
+         *   FileInputStream 读取字节数组
+         *   FileOutputStream 写字节数组
+         */
+        public class Copy_1 {
+            public static void main(String[] args) {
+                long s = System.currentTimeMillis();
+                FileInputStream fis = null;
+                FileOutputStream fos = null;
+                try{
+                    fis = new FileInputStream(&quot;c:\\t.zip&quot;);
+                    fos = new FileOutputStream(&quot;d:\\t.zip&quot;);
+                    //定义字节数组,缓冲
+                    byte[] bytes = new byte[1024*10];
+                    //读取数组,写入数组
+                    int len = 0 ; 
+                    while((len = fis.read(bytes))!=-1){
+                        fos.write(bytes, 0, len);
+                    }
+                }catch(IOException ex){
+                    System.out.println(ex);
+                    throw new RuntimeException(&quot;文件复制失败&quot;);
+                }finally{
+                    try{
+                        if(fos!=null)
+                            fos.close();
+                    }catch(IOException ex){
+                        throw new RuntimeException(&quot;释放资源失败&quot;);
+                    }finally{
+                        try{
+                            if(fis!=null)
+                                fis.close();
+                        }catch(IOException ex){
+                            throw new RuntimeException(&quot;释放资源失败&quot;);
+                        }
+                    }
+                }
+                long e = System.currentTimeMillis();
+                System.out.println(e-s);
+            }
+        }
+</code></pre><p>###14编码表</p>
+<pre><code>* A: 编码表
+    * a: 定义：
+        * 生活中字符和计算机二进制的对应关系表,就是编码表
+    * b: 分类
+        * 1、ascii： 一个字节中的7位就可以表示。对应的字节都是正数。0-xxxxxxx
+        * 2、iso-8859-1:拉丁码表 latin，用了一个字节用的8位。1-xxxxxxx  负数。
+        * 3、GB2312:简体中文码表。包含6000-7000中文和符号。用两个字节表示。两个字节第一个字节是负数,第二个字节可能是正数
+            * GBK:目前最常用的中文码表，2万的中文和符号。用两个字节表示，其中的一部分文字，第一个字节开头是1，第二字节开头是0
+            * GB18030：最新的中文码表，目前还没有正式使用。
+        * 4、unicode：国际标准码表:无论是什么文字，都用两个字节存储。
+            * Java中的char类型用的就是这个码表。char c = &apos;a&apos;;占两个字节。
+            * Java中的字符串是按照系统默认码表来解析的。简体中文版 字符串默认的码表是GBK。
+        * 5、UTF-8:基于unicode，一个字节就可以存储数据，不要用两个字节存储，而且这个码表更加的标准化，在每一个字节头加入了编码信息(后期到api中查找)。
+        * 6、能识别中文的码表：GBK、UTF-8；正因为识别中文码表不唯一，涉及到了编码解码问题。
+            * 对于我们开发而言；常见的编码 GBK  UTF-8  ISO-8859-1
+            * 文字---&gt;(数字) ：编码。 “abc”.getBytes()  byte[]
+            * (数字)---&gt;文字  : 解码。 byte[] b={97,98,99}  new String(b) 
+</code></pre><p>###15字符输出流写文本FileWriter类</p>
+<pre><code>* A: 字符输出流写文本FileWriter类
+    * a: 方法介绍
+        *  void write(int c)
+            *  写入单个字符
+        * void write(String str)  
+            * 写入字符串
+        * void write(String str, int off, int len) 
+            * 写入字符串的某一部分
+        * void write(char[] cbuf)  
+            * 写入字符数组
+        * abstract  void write(char[] cbuf, int off, int len)  
+            *  写入字符数组的某一部分
+    * b: 案例代码
+        /*
+         *   字符输出流
+         *     java.io.Writer 所有字符输出流的超类
+         *   写文件,写文本文件
+         *   
+         *   写的方法 write
+         *     write(int c) 写1个字符
+         *     write(char[] c)写字符数组
+         *     write(char[] c,int,int)字符数组一部分,开始索引,写几个
+         *     write(String s) 写入字符串
+         *     
+         *   Writer类的子类对象 FileWriter
+         *   
+         *   构造方法:  写入的数据目的
+         *     File 类型对象
+         *     String 文件名
+         *     
+         *   字符输出流写数据的时候,必须要运行一个功能,刷新功能
+         *   flush()
+         */
+        public class WriterDemo {
+            public static void main(String[] args) throws IOException{
+                FileWriter fw = new FileWriter(&quot;c:\\1.txt&quot;);
+
+                //写1个字符
+                fw.write(100);
+                fw.flush();
+
+                //写1个字符数组
+                char[] c = {&apos;a&apos;,&apos;b&apos;,&apos;c&apos;,&apos;d&apos;,&apos;e&apos;};
+                fw.write(c);
+                fw.flush();
+
+                //写字符数组一部分
+                fw.write(c, 2, 2);
+                fw.flush();
+
+                //写如字符串
+                fw.write(&quot;hello&quot;);
+                fw.flush();
+
+                fw.close();
+            }
+        }
+</code></pre><p>###16字符输入流读取文本FileReader类</p>
+<pre><code>* A: 字符输入流读取文本FileReader类
+    * a: 方法介绍
+        *  int read() 
+            * 读取单个字符
+        * int read(char[] cbuf) 
+            * 将字符读入数组
+        * abstract  int read(char[] cbuf, int off, int len)  
+            * 将字符读入数组的某一部分。
+    * b: 案例代码
+        /*
+         *  字符输入流读取文本文件,所有字符输入流的超类
+         *    java.io.Reader
+         *  专门读取文本文件
+         *  
+         *  读取的方法 : read()
+         *   int read() 读取1个字符
+         *   int read(char[] c) 读取字符数组
+         *   
+         *   Reader类是抽象类,找到子类对象 FileReader
+         *   
+         *   构造方法: 绑定数据源
+         *     参数:
+         *        File  类型对象
+         *        String文件名
+         */
+        public class ReaderDemo {
+            public static void main(String[] args) throws IOException{
+                FileReader fr = new FileReader(&quot;c:\\1.txt&quot;);
+                /*int len = 0 ;
+                while((len = fr.read())!=-1){
+                    System.out.print((char)len);
+                }*/
+                char[] ch = new char[1024];
+                int len = 0 ;
+                while((len = fr.read(ch))!=-1){
+                    System.out.print(new String(ch,0,len));
+                }
+
+                fr.close();
+            }
+        }
+</code></pre><p>###17flush方法和close方法区别</p>
+<pre><code>* A: flush方法和close方法区别
+    *a: flush()方法
+        * 用来刷新缓冲区的,刷新后可以再次写出,只有字符流才需要刷新
+    *b: close()方法
+        * 用来关闭流释放资源的的,如果是带缓冲区的流对象的close()方法,不但会关闭流,还会再关闭流之前刷新缓冲区,关闭后不能再写出 
+</code></pre><p>###18字符流复制文本文件</p>
+<pre><code>* A: 字符流复制文本文件
+    * a: 案例代码
+        /*
+         *  字符流复制文本文件,必须文本文件
+         *  字符流查询本机默认的编码表,简体中文GBK
+         *  FileReader读取数据源
+         *  FileWriter写入到数据目的
+         */
+        public class Copy_2 {
+            public static void main(String[] args) {
+                FileReader fr = null;
+                FileWriter fw = null;
+                try{
+                    fr = new FileReader(&quot;c:\\1.txt&quot;);
+                    fw = new FileWriter(&quot;d:\\1.txt&quot;);
+                    char[] cbuf = new char[1024];
+                    int len = 0 ;
+                    while(( len = fr.read(cbuf))!=-1){
+                        fw.write(cbuf, 0, len);
+                        fw.flush();
+                    }
+
+                }catch(IOException ex){
+                    System.out.println(ex);
+                    throw new RuntimeException(&quot;复制失败&quot;);
+                }finally{
+                    try{
+                        if(fw!=null)
+                            fw.close();
+                    }catch(IOException ex){
+                        throw new RuntimeException(&quot;释放资源失败&quot;);
+                    }finally{
+                        try{
+                            if(fr!=null)
+                                fr.close();
+                        }catch(IOException ex){
+                            throw new RuntimeException(&quot;释放资源失败&quot;);
+                        }
+                    }
+                }
+            }
+        }
+</code></pre><p>###19总结</p>
+<pre><code>* 把今天的知识点总结一遍。
+</code></pre>
+      
+    </div>
+
+    
+
+    
+    
+    
+    
+	<div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ff73b3;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+	
+	
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>感谢您的支持，我会继续努力的!</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wexin.JPG" alt="QJun 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/01/day21笔记/" rel="next" title="java学习笔记——基础19(异常、throw、try...catch、finally、Throwable类))">
+                <i class="fa fa-chevron-left"></i> java学习笔记——基础19(异常、throw、try...catch、finally、Throwable类))
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/16/day22笔记/" rel="prev" title="java学习笔记——基础20(IO)">
+                java学习笔记——基础20(IO) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MDE0MS8xNjY2OA=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/10.jpg"
+                alt="QJun" />
+            
+              <p class="site-author-name" itemprop="name">QJun</p>
+              <p class="site-description motion-element" itemprop="description">Stay Hungry, Stay Foolish!</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">33</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:qjun@hust.edu.cn" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plus.google.com/" target="_blank" title="Google"><i class="fa fa-fw fa-google"></i>Google</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/" target="_blank" title="Twitter"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.facebook.com/" target="_blank" title="FB Page"><i class="fa fa-fw fa-facebook"></i>FB Page</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://leesen998.github.io/about/" title="关于此博客" target="_blank">关于此博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://poetryscience.ink/" title="Huixin" target="_blank">Huixin</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://ultimatehy.github.io/" title="Yong Huang" target="_blank">Yong Huang</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 – <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="heart">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">QJun</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<div class="weixin-box">
+  <div class="weixin-menu">
+    <div class="weixin-hover">
+      <div class="weixin-description">微信扫一扫，订阅本博客</div>
+    </div>
+  </div>
+</div>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="true"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+
+
+  
+    <script type="text/javascript">
+      window.livereOptions = {
+        refer: '2016/11/16/day23笔记/'
+      };
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"tagMode":true,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":100,"height":200,"hOffset":10,"vOffset":10},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/"});</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>;
+  <script>
+  $("body").backstretch("/images/cover.png");
+  </script>
+
+  
+  
+
+  <script type="text/javascript" color="0,0,255" opacity='0.7' zIndex="-1" count="100" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+  
+  
+  <script type="text/javascript" src="/js/src/dytitle.js"></script>
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+
+<!-- 代码块复制功能 -->
+<script type="text/javascript" src="/js/src/clipboard.min.js"></script>  
+<script type="text/javascript" src="/js/src/clipboard-use.js"></script>
+

@@ -1,0 +1,1859 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#fff">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-flash.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="https://fonts.cat.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#fff">
+
+
+  <link rel="manifest" href="/images/manifest.json">
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="1、Properties集合2、序列化流与反序列化流3、打印流4、commons-IO">
+<meta name="keywords" content="java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java学习笔记——基础23()">
+<meta property="og:url" content="https://leesen998.github.io/2016/11/19/day25笔记/index.html">
+<meta property="og:site_name" content="QJun">
+<meta property="og:description" content="1、Properties集合2、序列化流与反序列化流3、打印流4、commons-IO">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1544511684/samples/java%20files/photo-1544119339-7ca107ba27c4.jpg">
+<meta property="og:updated_time" content="2018-12-19T12:48:03.791Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java学习笔记——基础23()">
+<meta name="twitter:description" content="1、Properties集合2、序列化流与反序列化流3、打印流4、commons-IO">
+<meta name="twitter:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1544511684/samples/java%20files/photo-1544119339-7ca107ba27c4.jpg">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="QJun" type="application/atom+xml" />
+
+
+
+
+  <link rel="canonical" href="https://leesen998.github.io/2016/11/19/day25笔记/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>java学习笔记——基础23() | QJun</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://leesen998.github.io" class="github-corner" aria-label="View source on GitHub"><svg width="120" height="120" viewBox="0 0 250 250" style="fill:#64CEAA; color:#fff; position: absolute; top: 194; border: 0; left: 0; transform: scale(-1, 1);" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">QJun</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">QJun's Homepage</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://leesen998.github.io/2016/11/19/day25笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QJun">
+      <meta itemprop="description" content="Stay Hungry, Stay Foolish!">
+      <meta itemprop="image" content="/images/10.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QJun">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">java学习笔记——基础23()
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2016-11-19 19:48:29" itemprop="dateCreated datePublished" datetime="2016-11-19T19:48:29+08:00">2016-11-19</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/程序设计/" itemprop="url" rel="index"><span itemprop="name">程序设计</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p class="description"></p>
+
+<p><img src="https://res.cloudinary.com/dpvywdzxv/image/upload/v1544511684/samples/java%20files/photo-1544119339-7ca107ba27c4.jpg" alt="" style="width:100%"></p>
+<p>1、Properties集合<br>2、序列化流与反序列化流<br>3、打印流<br>4、commons-IO</p>
+<a id="more"></a>
+<p>###01Properties集合的特点</p>
+<pre><code>* A: Properties集合的特点
+    * a: Properties类介绍
+        * Properties 类表示了一个持久的属性集。Properties 可保存在流中或从流中加载。属性列表中每个键及其对应值都是一个字符串
+    * b: 特点
+        * Hashtable的子类，map集合中的方法都可以用。
+        * 该集合没有泛型。键值都是字符串。
+        * 它是一个可以持久化的属性集。键值可以存储到集合中，也可以存储到持久化的设备(硬盘、U盘、光盘)上。键值的来源也可以是持久化的设备。
+        * 有和流技术相结合的方法。
+    * c: 方法介绍
+        * load(InputStream inputStream)  把指定流所对应的文件中的数据，读取出来，保存到Propertie集合中
+        * load(Reader reader) 按简单的面向行的格式从输入字符流中读取属性列表（键和元素对）
+        * store(OutputStream outputStream,String commonts) 把集合中的数据，保存到指定的流所对应的文件中，参数commonts代表对描述信息
+        * stroe(Writer writer,String comments) 以适合使用 load(Reader) 方法的格式，将此 Properties 表中的属性列表（键和元素对）写入输出字符
+</code></pre><p>###02Properties集合存储键值对</p>
+<pre><code>* A: Properties集合存储键值对        
+    * a: 方法介绍
+        *  集合对象Properties类,继承Hashtable,实现Map接口
+        *  可以和IO对象结合使用,实现数据的持久存储
+        * 使用Properties集合,存储键值对
+        * setProperty等同与Map接口中的put
+        * setProperty(String key, String value)
+        * 通过键获取值, getProperty(String key)
+    * b: 案例代码
+        public class PropertiesDemo {
+            public static void main(String[] args)throws IOException {
+                function_2();
+            }
+            /*
+             * 使用Properties集合,存储键值对
+             * setProperty等同与Map接口中的put
+             * setProperty(String key, String value)
+             * 通过键获取值, getProperty(String key)
+             */
+            public static void function(){
+                Properties pro = new Properties();
+                pro.setProperty(&quot;a&quot;, &quot;1&quot;);
+                pro.setProperty(&quot;b&quot;, &quot;2&quot;);
+                pro.setProperty(&quot;c&quot;, &quot;3&quot;);
+                System.out.println(pro);
+
+                String value = pro.getProperty(&quot;c&quot;);
+                System.out.println(value);
+
+                //方法stringPropertyNames,将集合中的键存储到Set集合,类似于Map接口的方法keySet
+                Set&lt;String&gt; set = pro.stringPropertyNames();
+                for(String key : set){
+                    System.out.println(key+&quot;...&quot;+pro.getProperty(key));
+                }
+            }
+        }
+</code></pre><p>###03Properties集合的方法load</p>
+<pre><code>* A: Properties集合的方法load
+    * a: 方法介绍
+        * Properties集合特有方法 load
+        * load(InputStream in)
+        * load(Reader r)
+        * 传递任意的字节或者字符输入流
+        * 流对象读取文件中的键值对,保存到集合
+
+    * b: 案例代码        
+            public class PropertiesDemo {
+                public static void main(String[] args)throws IOException {
+                    function_1();
+                }                                    
+                /*
+                 * Properties集合特有方法 load
+                 * load(InputStream in)
+                 * load(Reader r)
+                 * 传递任意的字节或者字符输入流
+                 * 流对象读取文件中的键值对,保存到集合
+                 */
+                public static void function_1()throws IOException{
+                    Properties pro = new Properties();
+                    FileReader fr = new FileReader(&quot;c:\\pro.properties&quot;);
+                    //调用集合的方法load,传递字符输入流
+                    pro.load(fr);
+                    fr.close();
+                    System.out.println(pro);
+                }                    
+            }
+</code></pre><p>###04Properties集合的方法store</p>
+<pre><code>* A: Properties集合的方法store
+    * a: 方法介绍            
+        * Properties集合的特有方法store
+        * store(OutputStream out)
+        * store(Writer w)
+        * 接收所有的字节或者字符的输出流,将集合中的键值对,写回文件中保存
+    * b: 案例代码
+        public class PropertiesDemo {
+            public static void main(String[] args)throws IOException {
+                function_2();
+            }
+            /*
+             * Properties集合的特有方法store
+             * store(OutputStream out)
+             * store(Writer w)
+             * 接收所有的字节或者字符的输出流,将集合中的键值对,写回文件中保存
+             */
+            public static void function_2()throws IOException{
+                Properties pro = new Properties();
+                pro.setProperty(&quot;name&quot;, &quot;zhangsan&quot;);
+                pro.setProperty(&quot;age&quot;, &quot;31&quot;);
+                pro.setProperty(&quot;email&quot;, &quot;123456789@163.com&quot;);
+                FileWriter fw = new FileWriter(&quot;c:\\pro.properties&quot;);
+                //键值对,存回文件,使用集合的方法store传递字符输出流
+                pro.store(fw, &quot;&quot;);
+                fw.close();
+            }                
+        }
+</code></pre><p>###05对象的序列化与反序列化</p>
+<pre><code>* A: 对象的序列化与反序列化
+    * a: 基本概念
+        * 对象的序列化
+            * 对象中的数据，以流的形式，写入到文件中保存过程称为写出对象，对象的序列化
+            * ObjectOutputStream将对象写道文件中，实现序列化
+        * 对象的反序列化
+            * 在文件中，以流的形式，将对象读出来，读取对象，对象的反序列化
+            * ObjectInputStream 将文件对象读取出来
+</code></pre><p>###06ObjectOutputStream流写对象</p>
+<pre><code>* A: ObjectOutputStream流写对象
+    * a: 简单介绍
+         *  IO流对象,实现对象Person序列化,和反序列化
+         *  ObjectOutputStream 写对象,实现序列化
+         *  ObjectInputStream 读取对象,实现反序列化
+
+    * b: 案例代码
+        public class Person implements Serializable{
+            public String name;
+            public int age;
+            public Person(String name, int age) {
+                super();
+                this.name = name;
+                this.age = age;
+            }
+            public Person(){}
+
+            public String getName() {
+                return name;
+            }
+            public void setName(String name) {
+                this.name = name;
+            }
+            public int getAge() {
+                return age;
+            }
+            public void setAge(int age) {
+                this.age = age;
+            }
+            @Override
+            public String toString() {
+                return &quot;Person [name=&quot; + name + &quot;, age=&quot; + age + &quot;]&quot;;
+            }                
+        }
+
+        public class ObjectStreamDemo {
+            public static void main(String[] args)throws IOException, ClassNotFoundException {
+        //        writeObject();
+                readObject();
+            }
+            /*
+             * ObjectOutputStream
+             * 构造方法: ObjectOutputStream(OutputSteam out)
+             * 传递任意的字节输出流
+             * void writeObject(Object obj)写出对象的方法
+             */
+            public static void writeObject() throws IOException{
+                //创建字节输出流,封装文件
+                FileOutputStream fos = new FileOutputStream(&quot;c:\\person.txt&quot;);
+                //创建写出对象的序列化流的对象,构造方法传递字节输出流
+                ObjectOutputStream oos = new ObjectOutputStream(fos);
+                Person p = new Person(&quot;lisi&quot;,25);
+                //调用序列化流的方法writeObject,写出对象
+                oos.writeObject(p);
+                oos.close();
+            }
+        }
+</code></pre><p>###07ObjectInputStream流读取对象</p>
+<pre><code>* A: ObjectInputStream流读取对象
+    * a: 简单介绍
+        * ObjectInputStream
+        * 构造方法:ObjectInputStream(InputStream in)
+        * 传递任意的字节输入流,输入流封装文件,必须是序列化的文件
+        * Object readObject()  读取对象
+    * b: 案例代码
+        /*
+         *  IO流对象,实现对象Person序列化,和反序列化
+         *  ObjectOutputStream 写对象,实现序列化
+         *  ObjectInputStream 读取对象,实现反序列化
+         */
+        public class ObjectStreamDemo {
+            public static void main(String[] args)throws IOException, ClassNotFoundException {
+                readObject();
+            }
+            /*
+             * ObjectInputStream
+             * 构造方法:ObjectInputStream(InputStream in)
+             * 传递任意的字节输入流,输入流封装文件,必须是序列化的文件
+             * Object readObject()  读取对象
+             */
+            public static void readObject() throws IOException, ClassNotFoundException{
+                FileInputStream fis = new FileInputStream(&quot;c:\\person.txt&quot;);
+                //创建反序列化流,构造方法中,传递字节输入流
+                ObjectInputStream ois = new ObjectInputStream(fis);
+                //调用反序列化流的方法 readObject()读取对象
+                Object obj =ois.readObject();
+                System.out.println(obj);
+                ois.close();
+            }                
+        }
+</code></pre><p>###08静态不能序列化</p>
+<pre><code>* A: 静态不能序列化
+    * a: 原因
+        * 序列化是把对象数据进行持久化存储
+        * 静态的东西不属于对象，而属于类
+</code></pre><p>###09transient关键字</p>
+<pre><code>* A: transient关键字
+    * a: 作用
+        * 被transient修饰的属性不会被序列化
+        * transient关键字只能修饰成员变量
+</code></pre><p>###10Serializable接口的含义</p>
+<pre><code>* A：Serializable接口的含义
+    * a: 作用
+        * 给需要序列化的类上加标记。该标记中没有任何抽象方法
+        * 只有实现了 Serializable接口的类的对象才能被序列化
+</code></pre><p>###11序列化中的序列号冲突问题</p>
+<pre><code>* A: 序列化中的序列号冲突问题
+    * a: 问题产生原因
+        * 当一个类实现Serializable接口后，创建对象并将对象写入文件，之后更改了源代码(比如：将成员变量的修饰符有private改成public)，
+            再次从文件中读取对象时会报异常
+        * 见day25_source文件夹下的&quot;序列号的冲突.JPG&quot;文件
+</code></pre><p>###12序列化中自定义的序列号</p>
+<pre><code>* A: 序列化中自定义的序列号
+    * a: 定义方式
+        * private static final long serialVersionUID = 1478652478456L;
+            * 这样每次编译类时生成的serialVersionUID值都是固定的     
+
+    * b: 案例代码
+        public class Person implements Serializable{
+            public String name;
+            public /*transient阻止成员变量序列化*/ int age;
+            //类,自定义了序列号,编译器不会计算序列号
+            private static final long serialVersionUID = 1478652478456L;
+
+            public Person(String name, int age) {
+                super();
+                this.name = name;
+                this.age = age;
+            }
+            public Person(){}
+
+            public String getName() {
+                return name;
+            }
+            public void setName(String name) {
+                this.name = name;
+            }
+            public int getAge() {
+                return age;
+            }
+            public void setAge(int age) {
+                this.age = age;
+            }
+            @Override
+            public String toString() {
+                return &quot;Person [name=&quot; + name + &quot;, age=&quot; + age + &quot;]&quot;;
+            }                
+        }
+</code></pre><p>###13打印流和特性</p>
+<pre><code>* A: 打印流和特性
+    * a: 概述
+        * 打印流添加输出数据的功能，使它们能够方便地打印各种数据值表示形式.
+        * 打印流根据流的分类：
+            * 字节打印流    PrintStream
+            * 字符打印流    PrintWriter
+        * 方法：
+            * void print(String str): 输出任意类型的数据，
+            * void println(String str): 输出任意类型的数据，自动写入换行操作
+    * b: 特点            
+        * 此流不负责数据源,只负责数据目的
+        * 为其他输出流,添加功能
+        * 永远不会抛出IOException，但是可能抛出别的异常  
+        * 两个打印流的方法,完全一致
+        * 构造方法,就是打印流的输出目的端
+        * PrintStream构造方法
+            * 接收File类型,接收字符串文件名,接收字节输出流OutputStream
+        * PrintWriter构造方法
+            * 接收File类型,接收字符串文件名,接收字节输出流OutputStream, 接收字符输出流Writer
+</code></pre><p>###14打印流输出目的是File对象</p>
+<pre><code>* A: 打印流输出目的是File对象
+    * a: 案例代码
+        public class PrintWriterDemo {
+            public static void main(String[] args) throws  IOException {
+                function_3();
+
+            }
+
+            /*
+             * 打印流,向File对象的数据目的写入数据
+             * 方法print println  原样输出
+             * write方法走码表
+             */
+            public static void function() throws FileNotFoundException{
+                File file = new File(&quot;c:\\1.txt&quot;);
+                PrintWriter pw = new PrintWriter(file);
+                pw.println(true);
+                pw.write(100);
+                pw.close();
+            }
+        }
+</code></pre><p>###15输出语句是char数组</p>
+<pre><code>* A: 输出语句是char数组
+    * a: 案例代码
+        public class Demo {
+            public static void main(String[] args) {
+                int[] arr = {1};
+                System.out.println(arr);
+
+                char[] ch = {&apos;a&apos;,&apos;b&apos;};
+                System.out.println(ch);
+
+                byte[] b = {};
+                System.out.println(b);
+            }
+        }
+    * b: 结果分析
+        * println数组，只有打印字符数组时只有容，其余均打印数组的地址
+            * 因为api中定义了打印字符数组的方法，其底层是在遍历数组中的元素
+            * 而其他打印数组的方法，都是将数组对象编程Object，其底层再将对象编程String，调用了String s = String.valueOf(x);方法
+</code></pre><p>###16打印流输出目的是String和流对象</p>
+<pre><code>* A: 打印流输出目的是String和流对象
+    * a: 案例代码
+        public class PrintWriterDemo {
+            public static void main(String[] args) throws  IOException {
+                function_2();
+
+            }
+
+            /*
+             * 打印流,输出目的,是流对象
+             * 可以是字节输出流,可以是字符的输出流
+             * OutputStream  Writer
+             */
+            public static void function_2() throws IOException{
+            //    FileOutputStream fos = new FileOutputStream(&quot;c:\\3.txt&quot;);
+                FileWriter fw = new FileWriter(&quot;c:\\4.txt&quot;);
+                PrintWriter pw = new PrintWriter(fw);
+                pw.println(&quot;打印流&quot;);
+                pw.close();
+            }
+            /*
+             * 打印流,输出目的,String文件名
+             */
+            public static void function_1() throws FileNotFoundException{
+                PrintWriter pw = new PrintWriter(&quot;c:\\2.txt&quot;);
+                pw.println(3.5);
+                pw.close();
+            }    
+
+        }
+</code></pre><p>###17打印流开启自动刷新</p>
+<pre><code>* A: 打印流开启自动刷新
+    * 案例代码
+        public class PrintWriterDemo {
+            public static void main(String[] args) throws  IOException {
+                function_3();
+
+            }
+            /* 
+             * 打印流,可以开启自动刷新功能
+             * 满足2个条件:
+             *   1. 输出的数据目的必须是流对象
+             *       OutputStream  Writer
+             *   2. 必须调用println,printf,format三个方法中的一个,启用自动刷新
+             */
+            public static void function_3()throws  IOException{
+                //File f = new File(&quot;XXX.txt&quot;);
+                FileOutputStream fos = new FileOutputStream(&quot;c:\\5.txt&quot;);
+                PrintWriter pw = new PrintWriter(fos,true);
+                pw.println(&quot;i&quot;);
+                pw.println(&quot;love&quot;);
+                pw.println(&quot;java&quot;);
+                pw.close();
+            }
+        }
+</code></pre><p>###18打印流复制文本文件</p>
+<pre><code>* A: 打印流复制文本文件
+    * a: 案例代码
+        /*
+         * 打印流实现文本复制
+         *   读取数据源  BufferedReader+File 读取文本行
+         *   写入数据目的 PrintWriter+println 自动刷新
+         */
+        public class PrintWriterDemo1 {
+            public static void main(String[] args) throws IOException{
+                BufferedReader bfr = new BufferedReader(new FileReader(&quot;c:\\a.txt&quot;));
+                PrintWriter pw = new PrintWriter(new FileWriter(&quot;d:\\a.txt&quot;),true);
+                String line = null;
+                while((line = bfr.readLine())!=null){
+                    pw.println(line);
+                }
+                pw.close();
+                bfr.close();
+            }
+        }
+</code></pre><p>###19commons-io工具类介绍</p>
+<pre><code>* A: commons-io工具类介绍
+    * a: 工具类介绍
+        * 解压缩commons-io-2.4.zip文件
+        * commons-io-2.4.jar需要导入到项目中的jar包，里面存放的是class文件
+        * commons-io-2.4-sources.jar工具类中原代码
+        * docs是帮助文档
+</code></pre><p>###20使用工具类commons_io</p>
+<pre><code>* A: 使用工具类commons_io
+    * a: 导入jar包
+        * 加入classpath的第三方jar包内的class文件才能在项目中使用
+        * 创建lib文件夹
+        * 将commons-io.jar拷贝到lib文件夹
+        * 右键点击commons-io.jar，Build Path→Add to Build Path
+    * b: 学会如何看源代码
+</code></pre><p>###21IO工具类FilenameUtils</p>
+<pre><code>* A: IO工具类FilenameUtils
+    * a: 方法介绍
+        * getExtension(String path)：获取文件的扩展名；
+        * getName()：获取文件名；
+        * isExtension(String fileName,String ext)：判断fileName是否是ext后缀名；
+    * b: 案例代码
+        public class Commons_IODemo {
+            public static void main(String[] args) {
+                function_2();
+            }
+            /*
+             * FilenameUtils类的方法
+             * static boolean isExtension(String filename,String extension)
+             * 判断文件名的后缀是不是extension
+             */
+            public static void function_2(){
+                boolean b = FilenameUtils.isExtension(&quot;Demo.java&quot;, &quot;java&quot;);
+                System.out.println(b);
+            }
+
+            /*
+             * FilenameUtils类的方法
+             * static String getName(String filename)
+             * 获取文件名
+             */
+            public static void function_1(){
+                String name = FilenameUtils.getName(&quot;c:\\windows\\&quot;);
+                System.out.println(name);
+            }
+
+            /*
+             * FilenameUtils类的方法
+             * static String getExtension(String filename)
+             * 获取文件名的扩展名
+             */
+             public static void function(){
+                 String name = FilenameUtils.getExtension(&quot;c:\\windows&quot;);
+                 System.out.println(name);
+             }
+        }
+</code></pre><p>###22IO工具类FileUtils</p>
+<pre><code>* A: IO工具类FileUtils
+    * a: 方法介绍
+        * readFileToString(File file)：读取文件内容，并返回一个String；
+        * writeStringToFile(File file，String content)：将内容content写入到file中；
+        * copyDirectoryToDirectory(File srcDir,File destDir);文件夹复制
+        * copyFile(File srcFile,File destFile);文件复制
+
+    * b: 案例代码
+        public class Commons_IODemo1 {
+            public static void main(String[] args)throws IOException {
+                function_3();
+            }
+            /*
+             * FileUtils工具类方法
+             * static void copyDirectoryToDirectory(File src,File desc)
+             * 复制文件夹
+             */
+            public static void function_3() throws IOException{
+                FileUtils.copyDirectoryToDirectory(new File(&quot;d:\\demo&quot;), new File(&quot;c:\\&quot;));
+            }
+
+            /*
+             * FileUtils工具类的方法
+             * static void copyFile(File src,File desc)
+             * 复制文件
+             */
+            public static void function_2() throws IOException{
+                FileUtils.copyFile(new File(&quot;c:\\k.jpg&quot;),new File(&quot;d:\\k.jpg&quot;));
+            }
+
+            /*
+             * FileUtils工具类的方法
+             * static void writeStringToFile(File src,String date)
+             * 将字符串直接写到文件中
+             */
+            public static void function_1() throws IOException{
+                FileUtils.writeStringToFile(new File(&quot;c:\\b.txt&quot;),&quot;我爱Java编程&quot;);
+            }
+
+            /*
+             * FileUtils工具类的方法
+             * static String readFileToString(File src)读取文本,返回字符串
+             */
+             public static void function() throws IOException{
+                 String s = FileUtils.readFileToString(new File(&quot;c:\\a.txt&quot;));
+                 System.out.println(s);
+             }
+        }
+</code></pre><p>###23总结</p>
+<pre><code>* 把今天的知识点总结一遍。
+</code></pre>
+      
+    </div>
+
+    
+
+    
+    
+    
+    
+	<div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ff73b3;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+	
+	
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>感谢您的支持，我会继续努力的!</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wexin.JPG" alt="QJun 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/18/day24笔记/" rel="next" title="java学习笔记——基础22()">
+                <i class="fa fa-chevron-left"></i> java学习笔记——基础22()
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/20/day26笔记/" rel="prev" title="java学习笔记——基础24(多线程、线程池)">
+                java学习笔记——基础24(多线程、线程池) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MDE0MS8xNjY2OA=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/10.jpg"
+                alt="QJun" />
+            
+              <p class="site-author-name" itemprop="name">QJun</p>
+              <p class="site-description motion-element" itemprop="description">Stay Hungry, Stay Foolish!</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">33</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:qjun@hust.edu.cn" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plus.google.com/" target="_blank" title="Google"><i class="fa fa-fw fa-google"></i>Google</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/" target="_blank" title="Twitter"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.facebook.com/" target="_blank" title="FB Page"><i class="fa fa-fw fa-facebook"></i>FB Page</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://leesen998.github.io/about/" title="关于此博客" target="_blank">关于此博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://poetryscience.ink/" title="Huixin" target="_blank">Huixin</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://ultimatehy.github.io/" title="Yong Huang" target="_blank">Yong Huang</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 – <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="heart">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">QJun</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<div class="weixin-box">
+  <div class="weixin-menu">
+    <div class="weixin-hover">
+      <div class="weixin-description">微信扫一扫，订阅本博客</div>
+    </div>
+  </div>
+</div>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="true"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+
+
+  
+    <script type="text/javascript">
+      window.livereOptions = {
+        refer: '2016/11/19/day25笔记/'
+      };
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"tagMode":true,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":100,"height":200,"hOffset":10,"vOffset":10},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/"});</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>;
+  <script>
+  $("body").backstretch("/images/cover.png");
+  </script>
+
+  
+  
+
+  <script type="text/javascript" color="0,0,255" opacity='0.7' zIndex="-1" count="100" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+  
+  
+  <script type="text/javascript" src="/js/src/dytitle.js"></script>
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+
+<!-- 代码块复制功能 -->
+<script type="text/javascript" src="/js/src/clipboard.min.js"></script>  
+<script type="text/javascript" src="/js/src/clipboard-use.js"></script>
+
