@@ -160,15 +160,17 @@
   <meta name="description" content="1、转换流2、缓冲流">
 <meta name="keywords" content="java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="java学习笔记——基础22()">
+<meta property="og:title" content="java学习笔记——基础22(转换流,缓冲流)">
 <meta property="og:url" content="https://leesen998.github.io/2016/11/18/day24笔记/index.html">
 <meta property="og:site_name" content="QJun">
 <meta property="og:description" content="1、转换流2、缓冲流">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1547281634/samples/java%20files/photo-1544807375-1768e388cb98.jpg">
-<meta property="og:updated_time" content="2019-01-12T08:28:39.281Z">
+<meta property="og:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1547607307/samples/java%20files/%E8%BD%AC%E6%8D%A2%E6%B5%81.jpg">
+<meta property="og:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1547607307/samples/java%20files/%E8%BD%AC%E6%8D%A2%E6%B5%81.jpg">
+<meta property="og:updated_time" content="2019-01-16T09:06:23.318Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="java学习笔记——基础22()">
+<meta name="twitter:title" content="java学习笔记——基础22(转换流,缓冲流)">
 <meta name="twitter:description" content="1、转换流2、缓冲流">
 <meta name="twitter:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1547281634/samples/java%20files/photo-1544807375-1768e388cb98.jpg">
 
@@ -189,7 +191,7 @@
   };
 </script>
 
-  <title>java学习笔记——基础22() | QJun</title>
+  <title>java学习笔记——基础22(转换流,缓冲流) | QJun</title>
   
 
 
@@ -412,7 +414,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">java学习笔记——基础22()
+          <h1 class="post-title" itemprop="name headline">java学习笔记——基础22(转换流,缓冲流)
               
             
           </h1>
@@ -502,460 +504,63 @@
 <p><img src="https://res.cloudinary.com/dpvywdzxv/image/upload/v1547281634/samples/java%20files/photo-1544807375-1768e388cb98.jpg" alt="" style="width:100%"></p>
 <p>1、转换流<br>2、缓冲流</p>
 <a id="more"></a>
-<h3 id="01转换流概述"><a href="#01转换流概述" class="headerlink" title="01转换流概述"></a>01转换流概述</h3><pre><code>* A: 转换流概述
-    * a: 转换流概述
-        * OutputStreamWriter 是字符流通向字节流的桥梁：可使用指定的字符编码表，将要写入流中的字符编码成字节
-        * 将字符串按照指定的编码表转成字节，在使用字节流将这些字节写出去
-</code></pre><h3 id="02转换流-字符转字节的过程"><a href="#02转换流-字符转字节的过程" class="headerlink" title="02转换流_字符转字节的过程"></a>02转换流_字符转字节的过程</h3><pre><code>* A: 转换流_字符转字节的过程
-    * a.图解
-        * 详见day24_source/转换流.JPG图片
-</code></pre><h3 id="03OutputStreamWriter写文本文件"><a href="#03OutputStreamWriter写文本文件" class="headerlink" title="03OutputStreamWriter写文本文件"></a>03OutputStreamWriter写文本文件</h3><pre><code>* A: OutputStreamWriter写文本文件
-    * a: OutputStreamWriter
-        * java.io.OutputStreamWriter 继承Writer类
-        * 就是一个字符输出流，写文本文件
-        * write()字符，字符数组，字符串    
-        * 字符通向字节的桥梁，将字符流转字节流
-        * OutputStreamWriter 使用方式
-            * 构造方法：
-                * OutputStreamWriter(OuputStream out)接收所有的字节输出流
-                * 字节输出流：  FileOutputStream       
-                * OutputStreamWriter(OutputStream out, String charsetName)
-                * String charsetName 传递编码表名字 GBK  UTF-8 
-        * OutputStreamWriter 有个子类，  FileWriter
-    * b: 案例代码
+<h3 id="01转换流概述"><a href="#01转换流概述" class="headerlink" title="01转换流概述"></a>01转换流概述</h3><ul>
+<li>A: 转换流概述</li>
+<li>a: 转换流概述</li>
+<li>FileReader、FileWriter是在<strong>默认字符编码和默认字节缓冲区大小</strong>的情况下进行的，对于需要编码转换的情况不太方便。</li>
+<li>OutputStreamWriter 是<strong>字符流</strong>通向<strong>字节流</strong>的<strong>桥梁</strong>：可使用<strong>指定的字符编码表</strong>，将要写入流中的字符编码成字节</li>
+<li>将字符串按照<strong>指定的编码表</strong>转成字节，再使用<strong>字节流</strong>将这些字节写出去</li>
+</ul>
+<h3 id="02转换流-字符转字节的过程-OutputStreamWriter"><a href="#02转换流-字符转字节的过程-OutputStreamWriter" class="headerlink" title="02转换流_字符转字节的过程 OutputStreamWriter"></a>02转换流_字符转字节的过程 OutputStreamWriter</h3><ul>
+<li>A: 转换流_字符转字节的过程</li>
+<li>OutputStreamWriter 是<strong>字符流</strong>通向<strong>字节流</strong>的桥梁：可使用指定的字符编码表，将要写入流中的字符编码成字节。它的作用的就是，将字符串按照指定的编码表转成字节，在使用字节流将这些字节写出去。<br><img src="https://res.cloudinary.com/dpvywdzxv/image/upload/v1547607307/samples/java%20files/%E8%BD%AC%E6%8D%A2%E6%B5%81.jpg" alt=""></li>
+</ul>
+<h3 id="03OutputStreamWriter写文本文件"><a href="#03OutputStreamWriter写文本文件" class="headerlink" title="03OutputStreamWriter写文本文件"></a>03OutputStreamWriter写文本文件</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">* A: OutputStreamWriter写文本文件</span><br><span class="line">* a: OutputStreamWriter</span><br><span class="line">	* java.io.OutputStreamWriter 继承Writer类</span><br><span class="line">	* 就是一个字符输出流，写文本文件</span><br><span class="line">	* write()字符，字符数组，字符串    </span><br><span class="line">	* 字符通向字节的桥梁，将字符流转字节流</span><br><span class="line">	* OutputStreamWriter 使用方式</span><br><span class="line">	*                                                                                     <span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	* 构造方法：</span></span><br><span class="line"><span class="function">		* <span class="title">OutputStreamWriter</span><span class="params">(OuputStream out)</span>接收所有的字节输出流</span></span><br><span class="line"><span class="function">		* 字节输出流：  FileOutputStream       </span></span><br><span class="line"><span class="function">		* <span class="title">OutputStreamWriter</span><span class="params">(OutputStream out, String charsetName)</span></span></span><br><span class="line"><span class="function">		* String charsetName 传递编码表名字 GBK  UTF-8 </span></span><br><span class="line"><span class="function">	* OutputStreamWriter 有个子类，  FileWriter</span></span><br><span class="line"><span class="function">* b: 案例代码</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> class OutputStreamWriterDemo </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span><span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line"><span class="comment">//		writeGBK();</span></span><br><span class="line">		writeUTF();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * 转换流对象OutputStreamWriter写文本</span></span><br><span class="line"><span class="comment">	 * 采用UTF-8编码表写入</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">writeUTF</span><span class="params">()</span><span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line">		<span class="comment">//创建字节输出流，绑定文件</span></span><br><span class="line">		FileOutputStream fos = <span class="keyword">new</span> FileOutputStream(<span class="string">"c:\\utf.txt"</span>);</span><br><span class="line">		<span class="comment">//创建转换流对象，构造方法保证字节输出流，并指定编码表是UTF-8</span></span><br><span class="line">		OutputStreamWriter osw = <span class="keyword">new</span> OutputStreamWriter(fos,<span class="string">"UTF-8"</span>);</span><br><span class="line">		osw.write(<span class="string">"你好"</span>);</span><br><span class="line">		osw.close();</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * 转换流对象 OutputStreamWriter写文本</span></span><br><span class="line"><span class="comment">	 * 文本采用GBK的形式写入</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">writeGBK</span><span class="params">()</span><span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line">		<span class="comment">//创建字节输出流，绑定数据文件</span></span><br><span class="line">		FileOutputStream fos = <span class="keyword">new</span> FileOutputStream(<span class="string">"c:\\gbk.txt"</span>);</span><br><span class="line">		<span class="comment">//创建转换流对象，构造方法，绑定字节输出流，使用GBK编码表</span></span><br><span class="line">		OutputStreamWriter osw = <span class="keyword">new</span> OutputStreamWriter(fos);</span><br><span class="line">		<span class="comment">//转换流写数据</span></span><br><span class="line">		osw.write(<span class="string">"你好"</span>);</span><br><span class="line">		</span><br><span class="line">		osw.close();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="04转换流-字节转字符流过程-InputSteamReader"><a href="#04转换流-字节转字符流过程-InputSteamReader" class="headerlink" title="04转换流_字节转字符流过程 InputSteamReader"></a>04转换流_字节转字符流过程 InputSteamReader</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">* A: 转换流_字节转字符流过程</span><br><span class="line">* a: InputStreamReader			</span><br><span class="line">	* java.io.InputStreamReader 继承 Reader</span><br><span class="line">	* 字符输入流，读取文本文件</span><br><span class="line">	* 字节流向字符的敲了，将字节流转字符流</span><br><span class="line">	* 读取的方法:</span><br><span class="line">		* read() 读取<span class="number">1</span>个字符，读取字符数组</span><br><span class="line">	* 技巧                                                                                     <span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span></span><br><span class="line"><span class="function">		* OuputStreamWriter写了文件</span></span><br><span class="line"><span class="function">		* InputStreamReader读取文件</span></span><br><span class="line"><span class="function">	* <span class="title">OutputStreamWriter</span><span class="params">(OutputStream out)</span>所有字节输出流</span></span><br><span class="line"><span class="function">	* <span class="title">InputStreamReader</span><span class="params">(InputStream in)</span> 接收所有的字节输入流</span></span><br><span class="line"><span class="function">	* 可以传递的字节输入流： FileInputStream</span></span><br><span class="line"><span class="function">	* <span class="title">InputStreamReader</span><span class="params">(InputStream in,String charsetName)</span> 传递编码表的名字</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>b: 图解<br><img src="https://res.cloudinary.com/dpvywdzxv/image/upload/v1547607307/samples/java%20files/%E8%BD%AC%E6%8D%A2%E6%B5%81.jpg" alt=""></li>
+</ul>
+<h3 id="05InputSteamReader读取文本文件"><a href="#05InputSteamReader读取文本文件" class="headerlink" title="05InputSteamReader读取文本文件"></a>05InputSteamReader读取文本文件</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">* A: InputSteamReader读取文本文件</span><br><span class="line">* a: 案例代码</span><br><span class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InputStreamReaderDemo</span> </span>&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">	<span class="comment">//		readGBK();</span></span><br><span class="line">			readUTF();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">/*</span></span><br><span class="line"><span class="comment">		 *  转换流,InputSteamReader读取文本</span></span><br><span class="line"><span class="comment">		 *  采用UTF-8编码表,读取文件utf</span></span><br><span class="line"><span class="comment">		 */</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">readUTF</span><span class="params">()</span><span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line">			<span class="comment">//创建自己输入流,传递文本文件</span></span><br><span class="line">			FileInputStream fis = <span class="keyword">new</span> FileInputStream(<span class="string">"c:\\utf.txt"</span>);</span><br><span class="line">			<span class="comment">//创建转换流对象,构造方法中,包装字节输入流,同时写编码表名</span></span><br><span class="line">			InputStreamReader isr = <span class="keyword">new</span> InputStreamReader(fis,<span class="string">"UTF-8"</span>);</span><br><span class="line">			<span class="keyword">char</span>[] ch = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="number">1024</span>];</span><br><span class="line">			<span class="keyword">int</span> len = isr.read(ch);</span><br><span class="line">			System.out.println(<span class="keyword">new</span> String(ch,<span class="number">0</span>,len));</span><br><span class="line">			isr.close();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">/*</span></span><br><span class="line"><span class="comment">		 *  转换流,InputSteamReader读取文本</span></span><br><span class="line"><span class="comment">		 *  采用系统默认编码表,读取GBK文件</span></span><br><span class="line"><span class="comment">		 */</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">readGBK</span><span class="params">()</span><span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line">			<span class="comment">//创建自己输入流,传递文本文件</span></span><br><span class="line">			FileInputStream fis = <span class="keyword">new</span> FileInputStream(<span class="string">"c:\\gbk.txt"</span>);</span><br><span class="line">			<span class="comment">//创建转换流对象,构造方法,包装字节输入流</span></span><br><span class="line">			InputStreamReader isr = <span class="keyword">new</span> InputStreamReader(fis);</span><br><span class="line">			<span class="keyword">char</span>[] ch = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="number">1024</span>];</span><br><span class="line">			<span class="keyword">int</span> len = isr.read(ch);</span><br><span class="line">			System.out.println(<span class="keyword">new</span> String(ch,<span class="number">0</span>,len));</span><br><span class="line">			</span><br><span class="line">			isr.close();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="06转换流子类父类的区别"><a href="#06转换流子类父类的区别" class="headerlink" title="06转换流子类父类的区别"></a>06转换流子类父类的区别</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">* A: 转换流子类父类的区别</span><br><span class="line">* a: 继承关系</span><br><span class="line">	OutputStreamWriter:</span><br><span class="line">		|--FileWriter:</span><br><span class="line">	InputStreamReader:</span><br><span class="line">		|--FileReader;</span><br><span class="line">* b: 区别</span><br><span class="line">* OutputStreamWriter和InputStreamReader是<span class="string">"字符和字节"</span>的桥梁：也可以称之为<span class="string">"字符转换流"</span>。</span><br><span class="line">* <span class="string">"字符转换流原理：字节流+编码表"</span>。</span><br><span class="line">* FileWriter和FileReader：作为子类，仅作为操作字符文件的便捷类存在。</span><br><span class="line">	<span class="string">"当操作的字符文件，使用的是默认编码表时可以不用父类"</span>，而直接用子类就完成操作了，简化了代码。</span><br><span class="line">* 以下三句话功能相同</span><br><span class="line">	* InputStreamReader isr = <span class="keyword">new</span> InputStreamReader(<span class="keyword">new</span> FileInputStream(<span class="string">"a.txt"</span>));<span class="comment">//默认字符集。</span></span><br><span class="line">	* InputStreamReader isr = <span class="keyword">new</span> InputStreamReader(<span class="keyword">new</span> FileInputStream(<span class="string">"a.txt"</span>),<span class="string">"GBK"</span>);<span class="comment">//指定GBK字符集。</span></span><br><span class="line">	* FileReader fr = <span class="keyword">new</span> FileReader(<span class="string">"a.txt"</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="07缓冲流概述"><a href="#07缓冲流概述" class="headerlink" title="07缓冲流概述"></a>07缓冲流概述</h3><ul>
+<li>A: 缓冲流概述</li>
+<li>a: <em>概述</em><ul>
+<li>可提高IO流的读写速度</li>
+<li>分为<strong>字节缓冲流</strong>与<strong>字符缓冲流 </strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="08字节输出流缓冲流BufferedOutputStream"><a href="#08字节输出流缓冲流BufferedOutputStream" class="headerlink" title="08字节输出流缓冲流BufferedOutputStream"></a>08字节输出流缓冲流BufferedOutputStream</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">* A: 字节输出流缓冲流BufferedOutputStream</span><br><span class="line">* a: BufferedOutputStream</span><br><span class="line">	* 字节输出流的缓冲流                                                                                     <span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	* java.io.BufferedOuputStream 作用: 提高原有输出流的写入效率</span></span><br><span class="line"><span class="function">	* BufferedOuputStream 继承 OutputStream</span></span><br><span class="line"><span class="function">	* 方法,写入 write 字节,字节数组			 </span></span><br><span class="line"><span class="function">	* 构造方法:</span></span><br><span class="line"><span class="function">		* <span class="title">BufferedOuputStream</span><span class="params">(OuputStream out)</span></span></span><br><span class="line"><span class="function">		* 可以传递任意的字节输出流, 传递的是哪个字节流,就对哪个字节流提高效率  </span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">* b: 案例代码</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> class BufferedOutputStreamDemo </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span><span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		<span class="comment">//创建字节输出流,绑定文件</span></span><br><span class="line">		<span class="comment">//FileOutputStream fos = new FileOutputStream("c:\\buffer.txt");</span></span><br><span class="line">		<span class="comment">//创建字节输出流缓冲流的对象,构造方法中,传递字节输出流</span></span><br><span class="line">		BufferedOutputStream bos = <span class="keyword">new</span></span><br><span class="line">		BufferedOutputStream(<span class="keyword">new</span> FileOutputStream(<span class="string">"c:\\buffer.txt"</span>));</span><br><span class="line">		</span><br><span class="line">		bos.write(<span class="number">55</span>);</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">byte</span>[] bytes = <span class="string">"HelloWorld"</span>.getBytes();</span><br><span class="line">		</span><br><span class="line">		bos.write(bytes);</span><br><span class="line">		</span><br><span class="line">		bos.write(bytes, <span class="number">3</span>, <span class="number">2</span>);</span><br><span class="line">		</span><br><span class="line">		bos.close();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="09字节输入流缓冲流BufferedInputStream"><a href="#09字节输入流缓冲流BufferedInputStream" class="headerlink" title="09字节输入流缓冲流BufferedInputStream"></a>09字节输入流缓冲流BufferedInputStream</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">* A: 字节输入流缓冲流BufferedInputStream</span><br><span class="line">* a: BufferedInputStream</span><br><span class="line">	* 字节输入流的缓冲流                                                                                     <span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	* 继承InputStream,标准的字节输入流</span></span><br><span class="line"><span class="function">	* 读取方法  <span class="title">read</span><span class="params">()</span> 单个字节,字节数组			  </span></span><br><span class="line"><span class="function">	* 构造方法:</span></span><br><span class="line"><span class="function">		* <span class="title">BufferedInputStream</span><span class="params">(InputStream in)</span></span></span><br><span class="line"><span class="function">		* 可以传递任意的字节输入流,传递是谁,就提高谁的效率</span></span><br><span class="line"><span class="function">		* 可以传递的字节输入流 FileInputStream</span></span><br><span class="line"><span class="function">* b: 案例代码</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> class BufferedInputStreamDemo </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line">		<span class="comment">//创建字节输入流的缓冲流对象,构造方法中包装字节输入流,包装文件</span></span><br><span class="line">		BufferedInputStream bis = <span class="keyword">new</span> </span><br><span class="line">				BufferedInputStream(<span class="keyword">new</span> FileInputStream(<span class="string">"c:\\buffer.txt"</span>));</span><br><span class="line">		<span class="keyword">byte</span>[] bytes = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">10</span>];</span><br><span class="line">		<span class="keyword">int</span> len = <span class="number">0</span> ;</span><br><span class="line">		<span class="keyword">while</span>((len = bis.read(bytes))!=-<span class="number">1</span>)&#123;</span><br><span class="line">			System.out.print(<span class="keyword">new</span> String(bytes,<span class="number">0</span>,len));</span><br><span class="line">		&#125;</span><br><span class="line">		bis.close();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="10四种文件复制方式的效率比较"><a href="#10四种文件复制方式的效率比较" class="headerlink" title="10四种文件复制方式的效率比较"></a>10四种文件复制方式的效率比较</h3><ul>
+<li>A：四种文件复制方式的效率比较</li>
+<li><p>a: 四中复制方式</p>
+<ul>
+<li>字节流读写单个字节                    125250 毫秒</li>
+<li><strong>字节流读写字节数组</strong>                    193    毫秒  OK</li>
+<li>字节流缓冲区流读写单个字节            1210   毫秒</li>
+<li><strong>字节流缓冲区流读写字节数组</strong>            73     毫秒  OK        </li>
+</ul>
+</li>
+<li><p>b: 案例代码</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Copy</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span><span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		<span class="keyword">long</span> s = System.currentTimeMillis();</span><br><span class="line">		copy_4(<span class="keyword">new</span> File(<span class="string">"c:\\q.exe"</span>), <span class="keyword">new</span> File(<span class="string">"d:\\q.exe"</span>));</span><br><span class="line">		<span class="keyword">long</span> e = System.currentTimeMillis();</span><br><span class="line">		System.out.println(e-s);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="string">"/*</span></span><br><span class="line"><span class="string">	 * 方法,实现文件复制</span></span><br><span class="line"><span class="string">	 *  4. 字节流缓冲区流读写字节数组</span></span><br><span class="line"><span class="string">	 */"</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">copy_4</span><span class="params">(File src,File desc)</span><span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line">		BufferedInputStream bis = <span class="keyword">new</span> BufferedInputStream(<span class="keyword">new</span> FileInputStream(src));</span><br><span class="line">		BufferedOutputStream bos = <span class="keyword">new</span> BufferedOutputStream(<span class="keyword">new</span> FileOutputStream(desc));</span><br><span class="line">		<span class="keyword">int</span> len = <span class="number">0</span> ;</span><br><span class="line">		<span class="keyword">byte</span>[] bytes = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">		<span class="keyword">while</span>((len = bis.read(bytes))!=-<span class="number">1</span>)&#123;</span><br><span class="line">			bos.write(bytes,<span class="number">0</span>,len);</span><br><span class="line">		&#125;</span><br><span class="line">		bos.close();</span><br><span class="line">		bis.close();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * 方法,实现文件复制</span></span><br><span class="line"><span class="comment">	 *  3. 字节流缓冲区流读写单个字节</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">copy_3</span><span class="params">(File src,File desc)</span><span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line">		BufferedInputStream bis = <span class="keyword">new</span> BufferedInputStream(<span class="keyword">new</span> FileInputStream(src));</span><br><span class="line">		BufferedOutputStream bos = <span class="keyword">new</span> BufferedOutputStream(<span class="keyword">new</span> FileOutputStream(desc));</span><br><span class="line">		<span class="keyword">int</span> len = <span class="number">0</span> ;</span><br><span class="line">		<span class="keyword">while</span>((len = bis.read())!=-<span class="number">1</span>)&#123;</span><br><span class="line">			bos.write(len);</span><br><span class="line">		&#125;</span><br><span class="line">		bos.close();</span><br><span class="line">		bis.close();</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * 方法,实现文件复制</span></span><br><span class="line"><span class="comment">	 *  2. 字节流读写字节数组</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">copy_2</span><span class="params">(File src,File desc)</span><span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line">		FileInputStream fis = <span class="keyword">new</span> FileInputStream(src);</span><br><span class="line">		FileOutputStream fos = <span class="keyword">new</span> FileOutputStream(desc);</span><br><span class="line">		<span class="keyword">int</span> len = <span class="number">0</span> ;</span><br><span class="line">		<span class="keyword">byte</span>[] bytes = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">		<span class="keyword">while</span>((len = fis.read(bytes))!=-<span class="number">1</span>)&#123;</span><br><span class="line">			fos.write(bytes,<span class="number">0</span>,len);</span><br><span class="line">		&#125;</span><br><span class="line">		fos.close();</span><br><span class="line">		fis.close();</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * 方法,实现文件复制</span></span><br><span class="line"><span class="comment">	 *  1. 字节流读写单个字节</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">copy_1</span><span class="params">(File src,File desc)</span><span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line">		FileInputStream fis = <span class="keyword">new</span> FileInputStream(src);</span><br><span class="line">		FileOutputStream fos = <span class="keyword">new</span> FileOutputStream(desc);</span><br><span class="line">		<span class="keyword">int</span> len = <span class="number">0</span> ;</span><br><span class="line">		<span class="keyword">while</span>((len = fis.read())!=-<span class="number">1</span>)&#123;</span><br><span class="line">			fos.write(len);</span><br><span class="line">		&#125;</span><br><span class="line">		fos.close();</span><br><span class="line">		fis.close();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="11字符输出流缓冲流BufferedWriter"><a href="#11字符输出流缓冲流BufferedWriter" class="headerlink" title="11字符输出流缓冲流BufferedWriter"></a>11字符输出流缓冲流BufferedWriter</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">* A: 字符输出流缓冲流BufferedWriter</span><br><span class="line">* a: BufferedWriter</span><br><span class="line">	* 字符输出流缓冲区流</span><br><span class="line">	* java.io.BufferedWriter 继承 Writer</span><br><span class="line">	* 写入方法 write () 单个字符,字符数组,字符串</span><br><span class="line"></span><br><span class="line">	* 构造方法:</span><br><span class="line">		* BufferedWriter(Writer w)传递任意字符输出流</span><br><span class="line">		* 传递谁,就高效谁</span><br><span class="line">		* 能传递的字符输出流 FileWriter, OutputStreamWriter</span><br><span class="line">* b: 案例代码</span><br><span class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BufferedWrierDemo</span> </span>&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line">			<span class="comment">//创建字符输出流,封装文件</span></span><br><span class="line">			FileWriter fw = <span class="keyword">new</span> FileWriter(<span class="string">"c:\\buffer.txt"</span>);</span><br><span class="line">			BufferedWriter bfw = <span class="keyword">new</span> BufferedWriter(fw);</span><br><span class="line">			</span><br><span class="line">			bfw.write(<span class="number">100</span>);</span><br><span class="line">			bfw.flush();</span><br><span class="line">			bfw.write(<span class="string">"你好"</span>.toCharArray());</span><br><span class="line">			bfw.flush();</span><br><span class="line">			</span><br><span class="line">			</span><br><span class="line">			bfw.write(<span class="string">"你好"</span>);</span><br><span class="line">			</span><br><span class="line">			bfw.flush();</span><br><span class="line">			</span><br><span class="line">			</span><br><span class="line">			bfw.write(<span class="string">"我好好"</span>);</span><br><span class="line">			</span><br><span class="line">			bfw.flush();</span><br><span class="line"></span><br><span class="line">			bfw.write(<span class="string">"大家都好"</span>);</span><br><span class="line">			bfw.flush();</span><br><span class="line">			</span><br><span class="line">			bfw.close();</span><br><span class="line">			</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="12字符输出流缓冲流BufferedWriter特有方法newLine"><a href="#12字符输出流缓冲流BufferedWriter特有方法newLine" class="headerlink" title="12字符输出流缓冲流BufferedWriter特有方法newLine"></a>12字符输出流缓冲流BufferedWriter特有方法newLine</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">* A: 字符输出流缓冲流BufferedWriter特有方法newLine</span><br><span class="line">* a: 方法介绍</span><br><span class="line">	* <span class="function"><span class="keyword">void</span>  <span class="title">newLine</span><span class="params">()</span> 写换行</span></span><br><span class="line"><span class="function">		</span></span><br><span class="line"><span class="function">	* <span class="title">newLine</span><span class="params">()</span>文本中换行, \r\n也是文本换行</span></span><br><span class="line"><span class="function">	* 方法具有平台无关性</span></span><br><span class="line"><span class="function">	* Windows  \r\n</span></span><br><span class="line"><span class="function">	* Linux    \n</span></span><br><span class="line"><span class="function">		 </span></span><br><span class="line"><span class="function">	* <span class="title">newLine</span><span class="params">()</span>运行结果,和操作系统是相互关系</span></span><br><span class="line"><span class="function">	* JVM: 安装的是Windows版本,<span class="title">newLine</span><span class="params">()</span>写的就是\r\n</span></span><br><span class="line"><span class="function">	* 安装的是Linux版本,<span class="title">newLine</span><span class="params">()</span>写的就是\n</span></span><br><span class="line"><span class="function">	<span class="comment">/*</span></span></span><br><span class="line"><span class="function"><span class="comment">	 *  将数据源 c:\\a.txt</span></span></span><br><span class="line"><span class="function"><span class="comment">	 *  复制到 d:\\a.txt  数据目的</span></span></span><br><span class="line"><span class="function"><span class="comment">	 *  字节输入流,绑定数据源</span></span></span><br><span class="line"><span class="function"><span class="comment">	 *  字节输出流,绑定数据目的</span></span></span><br><span class="line"><span class="function"><span class="comment">	 *  </span></span></span><br><span class="line"><span class="function"><span class="comment">	 *  输入,读取1个字节</span></span></span><br><span class="line"><span class="function"><span class="comment">	 *  输出,写1个字节</span></span></span><br><span class="line"><span class="function"><span class="comment">	 */</span></span></span><br><span class="line"><span class="function">* b: 案例代码</span></span><br><span class="line"><span class="function">	<span class="keyword">public</span> class BufferedWrierDemo </span>&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line">			<span class="comment">//创建字符输出流,封装文件</span></span><br><span class="line">			FileWriter fw = <span class="keyword">new</span> FileWriter(<span class="string">"c:\\buffer.txt"</span>);</span><br><span class="line">			BufferedWriter bfw = <span class="keyword">new</span> BufferedWriter(fw);</span><br><span class="line">			</span><br><span class="line">			bfw.write(<span class="number">100</span>);</span><br><span class="line">			bfw.flush();</span><br><span class="line">			bfw.write(<span class="string">"你好"</span>.toCharArray());</span><br><span class="line">			bfw.flush();</span><br><span class="line">			</span><br><span class="line">			bfw.write(<span class="string">"你好"</span>);</span><br><span class="line">			bfw.newLine();</span><br><span class="line">			bfw.flush();</span><br><span class="line">			</span><br><span class="line">			</span><br><span class="line">			bfw.write(<span class="string">"我好好"</span>);</span><br><span class="line">			bfw.newLine();</span><br><span class="line">			bfw.flush();</span><br><span class="line"></span><br><span class="line">			bfw.write(<span class="string">"大家都好"</span>);</span><br><span class="line">			bfw.flush();</span><br><span class="line">			</span><br><span class="line">			bfw.close();</span><br><span class="line">			</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="13字符输入流缓冲流BufferedReader"><a href="#13字符输入流缓冲流BufferedReader" class="headerlink" title="13字符输入流缓冲流BufferedReader"></a>13字符输入流缓冲流BufferedReader</h3><ul>
+<li>A: 字符输入流缓冲流BufferedReader</li>
+<li>a: 概述<ul>
+<li>从字符输入流中读取文本，缓冲各个字符，从而实现字符、数组和行的高效读取</li>
+<li>public String readLine() 读取一个文本行，包含该行内容的字符串，不包含任何行终止符，如果已到达流末尾，则返回 null</li>
+</ul>
+</li>
+</ul>
+<h3 id="14字符输入流缓冲流BufferedReader读取文本行"><a href="#14字符输入流缓冲流BufferedReader读取文本行" class="headerlink" title="14字符输入流缓冲流BufferedReader读取文本行"></a>14字符输入流缓冲流BufferedReader读取文本行</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">* A: 字符输入流缓冲流BufferedReader读取文本行</span><br><span class="line">* a: BufferedReader</span><br><span class="line">	* 字符输入流缓冲流</span><br><span class="line">	* java.io.BufferedReader 继承 Reader</span><br><span class="line">	* 读取功能 read() 单个字符,字符数组</span><br><span class="line">	* 构造方法:</span><br><span class="line">		* BufferedReader(Reader r)</span><br><span class="line">		* 可以任意的字符输入流</span><br><span class="line">		   FileReader  InputStreamReader       </span><br><span class="line">	* BufferedReader自己的功能</span><br><span class="line">		* <span class="function">String <span class="title">readLine</span><span class="params">()</span> 读取文本行 \r\n   </span></span><br><span class="line"><span class="function">			* 方法读取到流末尾,返回<span class="keyword">null</span></span></span><br><span class="line"><span class="function">* b: 小特点</span></span><br><span class="line"><span class="function">	 * 获取内容的方法一般都有返回值</span></span><br><span class="line"><span class="function">	 * <span class="keyword">int</span> 没有返回的都是负数</span></span><br><span class="line"><span class="function">	 * 引用类型 找不到返回<span class="keyword">null</span></span></span><br><span class="line"><span class="function">	 * <span class="keyword">boolean</span> 找不到返回<span class="keyword">false</span></span></span><br><span class="line"><span class="function">	</span></span><br><span class="line"><span class="function">* c: 案例代码</span></span><br><span class="line"><span class="function">	<span class="keyword">public</span> class BufferedReaderDemo </span>&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">			<span class="keyword">int</span> lineNumber = <span class="number">0</span>;</span><br><span class="line">			<span class="comment">//创建字符输入流缓冲流对象,构造方法传递字符输入流,包装数据源文件</span></span><br><span class="line">			BufferedReader bfr = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> FileReader(<span class="string">"c:\\a.txt"</span>));</span><br><span class="line">			<span class="comment">//调用缓冲流的方法 readLine()读取文本行</span></span><br><span class="line">			<span class="comment">//循环读取文本行, 结束条件 readLine()返回null</span></span><br><span class="line">			String line = <span class="keyword">null</span>;</span><br><span class="line">			<span class="keyword">while</span>((line = bfr.readLine())!=<span class="keyword">null</span>)&#123;</span><br><span class="line">				lineNumber++;</span><br><span class="line">				System.out.println(lineNumber+<span class="string">"  "</span>+line);</span><br><span class="line">			&#125;</span><br><span class="line">			bfr.close();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * String line = bfr.readLine();</span></span><br><span class="line"><span class="comment">			System.out.println(line);</span></span><br><span class="line"><span class="comment">			</span></span><br><span class="line"><span class="comment">			line = bfr.readLine();</span></span><br><span class="line"><span class="comment">			System.out.println(line);</span></span><br><span class="line"><span class="comment">			</span></span><br><span class="line"><span class="comment">			line = bfr.readLine();</span></span><br><span class="line"><span class="comment">			System.out.println(line);</span></span><br><span class="line"><span class="comment">			</span></span><br><span class="line"><span class="comment">			line = bfr.readLine();</span></span><br><span class="line"><span class="comment">			System.out.println(line);</span></span><br><span class="line"><span class="comment">			</span></span><br><span class="line"><span class="comment">			line = bfr.readLine();</span></span><br><span class="line"><span class="comment">			System.out.println(line);</span></span><br><span class="line"><span class="comment">	 */</span></span><br></pre></td></tr></table></figure>
+<h3 id="15字符流缓冲区流复制文本文件"><a href="#15字符流缓冲区流复制文本文件" class="headerlink" title="15字符流缓冲区流复制文本文件"></a>15字符流缓冲区流复制文本文件</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">* A: 字符流缓冲区流复制文本文件</span><br><span class="line">* a: 案例代码</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 *  使用缓冲区流对象,复制文本文件</span></span><br><span class="line"><span class="comment">	 *  数据源  BufferedReader+FileReader 读取</span></span><br><span class="line"><span class="comment">	 *  数据目的 BufferedWriter+FileWriter 写入</span></span><br><span class="line"><span class="comment">	 *  读取文本行, 读一行,写一行,写换行</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Copy_1</span> </span>&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line">			BufferedReader bfr = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> FileReader(<span class="string">"c:\\w.log"</span>));	</span><br><span class="line">			BufferedWriter bfw = <span class="keyword">new</span> BufferedWriter(<span class="keyword">new</span> FileWriter(<span class="string">"d:\\w.log"</span>));</span><br><span class="line">			<span class="comment">//读取文本行, 读一行,写一行,写换行</span></span><br><span class="line">			String line = <span class="keyword">null</span>;</span><br><span class="line">			<span class="keyword">while</span>((line = bfr.readLine())!=<span class="keyword">null</span>)&#123;</span><br><span class="line">				bfw.write(line);</span><br><span class="line">				bfw.newLine();</span><br><span class="line">				bfw.flush();</span><br><span class="line">			&#125;</span><br><span class="line">			bfw.close();</span><br><span class="line">			bfr.close();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="16IO流对象的操作规律"><a href="#16IO流对象的操作规律" class="headerlink" title="16IO流对象的操作规律"></a>16IO流对象的操作规律</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">* A: IO流对象的操作规律</span><br><span class="line">* a: 明确一：要操作的数据是数据源还是数据目的。</span><br><span class="line">	* 源：InputStream    Reader</span><br><span class="line">	* 目的：OutputStream Writer</span><br><span class="line">	* 先根据需求明确要读，还是要写。</span><br><span class="line"></span><br><span class="line">* b: 明确二：要操作的数据是字节还是文本呢？</span><br><span class="line">	* 源：</span><br><span class="line">		* 字节：InputStream</span><br><span class="line">		* 文本：Reader</span><br><span class="line">	* 目的：</span><br><span class="line">		* 字节：OutputStream</span><br><span class="line">		* 文本：Writer</span><br><span class="line">* c: 明确三：明确数据所在的具体设备。</span><br><span class="line">	* 源设备：</span><br><span class="line">		* 硬盘：文件  File开头。</span><br><span class="line">		* 内存：数组，字符串。</span><br><span class="line">		* 键盘：System.in;</span><br><span class="line">		* 网络：Socket</span><br><span class="line">	* 目的设备：</span><br><span class="line">		* 硬盘：文件  File开头。</span><br><span class="line">		* 内存：数组，字符串。</span><br><span class="line">		* 屏幕：System.out</span><br><span class="line">		* 网络：Socket</span><br><span class="line">		* 完全可以明确具体要使用哪个流对象。</span><br><span class="line">* d: 明确四：是否需要额外功能呢？</span><br><span class="line">	* 额外功能：</span><br><span class="line">		* 转换吗？转换流。InputStreamReader OutputStreamWriter</span><br><span class="line">		* 高效吗？缓冲区对象。BufferedXXX</span><br><span class="line">		* 已经明确到了具体的体系上。</span><br></pre></td></tr></table></figure>
+<h3 id="17总结"><a href="#17总结" class="headerlink" title="17总结"></a>17总结</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">InputStream</span><br><span class="line">       FileInputStream</span><br><span class="line">       BufferedInputStream</span><br><span class="line"> </span><br><span class="line">OuputStream </span><br><span class="line">   FileOutputStream</span><br><span class="line">   BufferedOuputStream</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Writer</span><br><span class="line">  OutputStreamWriter</span><br><span class="line">     FileWriter</span><br><span class="line">      BufferedWriter</span><br><span class="line"></span><br><span class="line">Reader</span><br><span class="line">  InputStreamReader</span><br><span class="line">     FileReader</span><br><span class="line"> BufferedReader</span><br><span class="line">                                                                                               <span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span></span><br><span class="line"><span class="function">字节流</span></span><br><span class="line"><span class="function">	字节输入流 InputStream</span></span><br><span class="line"><span class="function">		<span class="title">FileInputStream</span><span class="params">()</span> 操作文件的字节输入流</span></span><br><span class="line"><span class="function">		<span class="title">BufferedInputStream</span><span class="params">()</span> 高效的字节输入流</span></span><br><span class="line"><span class="function">	字节输出流 OutputStream</span></span><br><span class="line"><span class="function">		<span class="title">FileOutputStream</span><span class="params">()</span> 操作文件的字节输出流</span></span><br><span class="line"><span class="function">		<span class="title">BufferedOutputStream</span><span class="params">()</span> 高效的字节输出流</span></span><br><span class="line"><span class="function">字符流</span></span><br><span class="line"><span class="function">	字符输入流 Reader</span></span><br><span class="line"><span class="function">		<span class="title">FileReader</span><span class="params">()</span> 操作文件的字符输入流</span></span><br><span class="line"><span class="function">		<span class="title">BufferedReader</span><span class="params">()</span> 高效的字符输入流</span></span><br><span class="line"><span class="function">		<span class="title">InputStreamReader</span><span class="params">()</span> 输入操作的转换流<span class="params">(把字节流封装成字符流)</span></span></span><br><span class="line"><span class="function">	字符输出流 Writer</span></span><br><span class="line"><span class="function">		<span class="title">FileWriter</span><span class="params">()</span> 操作文件的字符输出流</span></span><br><span class="line"><span class="function">		<span class="title">BufferedWriter</span><span class="params">()</span> 高效的字符输出流</span></span><br><span class="line"><span class="function">		<span class="title">OutputStreamWriter</span><span class="params">()</span> 输出操作的转换流<span class="params">(把字节流封装成字符流)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">方法：</span></span><br><span class="line"><span class="function">	读数据方法：</span></span><br><span class="line"><span class="function">	<span class="title">read</span><span class="params">()</span> 一次读一个字节或字符的方法</span></span><br><span class="line"><span class="function">	<span class="title">read</span><span class="params">(<span class="keyword">byte</span>[]  <span class="keyword">char</span>[])</span> 一次读一个数组数据的方法</span></span><br><span class="line"><span class="function">	<span class="title">readLine</span><span class="params">()</span> 一次读一行字符串的方法<span class="params">(BufferedReader类特有方法)</span></span></span><br><span class="line"><span class="function">	<span class="title">readObject</span><span class="params">()</span> 从流中读取对象<span class="params">(ObjectInputStream特有方法)</span></span></span><br><span class="line"><span class="function">写数据方法：</span></span><br><span class="line"><span class="function">	<span class="title">write</span><span class="params">(<span class="keyword">int</span>)</span> 一次写一个字节或字符到文件中</span></span><br><span class="line"><span class="function">	<span class="title">write</span><span class="params">(<span class="keyword">byte</span>[] <span class="keyword">char</span>[])</span> 一次写一个数组数据到文件中</span></span><br><span class="line"><span class="function">	<span class="title">write</span><span class="params">(String)</span> 一次写一个字符串内容到文件中</span></span><br><span class="line"><span class="function">	<span class="title">writeObject</span><span class="params">(Object )</span> 写对象到流中<span class="params">(ObjectOutputStream类特有方法)</span></span></span><br><span class="line"><span class="function">	<span class="title">newLine</span><span class="params">()</span> 写一个换行符号<span class="params">(BufferedWriter类特有方法)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">向文件中写入数据的过程</span></span><br><span class="line"><span class="function">	1，创建输出流对象</span></span><br><span class="line"><span class="function">	2，写数据到文件</span></span><br><span class="line"><span class="function">	3，关闭输出流</span></span><br><span class="line"><span class="function">		从文件中读数据的过程</span></span><br><span class="line"><span class="function">	1，	创建输入流对象</span></span><br><span class="line"><span class="function">	2，	从文件中读数据</span></span><br><span class="line"><span class="function">	3，	关闭输入流</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">	文件复制的过程</span></span><br><span class="line"><span class="function">	1，	创建输入流（数据源）</span></span><br><span class="line"><span class="function">	2，	创建输出流（目的地）</span></span><br><span class="line"><span class="function">	3，	从输入流中读数据</span></span><br><span class="line"><span class="function">	4，	通过输出流，把数据写入目的地</span></span><br><span class="line"><span class="function">	5，	关闭流</span></span><br></pre></td></tr></table></figure>
 
-            public class OutputStreamWriterDemo {
-                public static void main(String[] args)throws IOException {
-            //        writeGBK();
-                    writeUTF();
-                }
-                /*
-                 * 转换流对象OutputStreamWriter写文本
-                 * 采用UTF-8编码表写入
-                 */
-                public static void writeUTF()throws IOException{
-                    //创建字节输出流，绑定文件
-                    FileOutputStream fos = new FileOutputStream(&quot;c:\\utf.txt&quot;);
-                    //创建转换流对象，构造方法保证字节输出流，并指定编码表是UTF-8
-                    OutputStreamWriter osw = new OutputStreamWriter(fos,&quot;UTF-8&quot;);
-                    osw.write(&quot;你好&quot;);
-                    osw.close();
-                }
-
-                /*
-                 * 转换流对象 OutputStreamWriter写文本
-                 * 文本采用GBK的形式写入
-                 */
-                public static void writeGBK()throws IOException{
-                    //创建字节输出流，绑定数据文件
-                    FileOutputStream fos = new FileOutputStream(&quot;c:\\gbk.txt&quot;);
-                    //创建转换流对象，构造方法，绑定字节输出流，使用GBK编码表
-                    OutputStreamWriter osw = new OutputStreamWriter(fos);
-                    //转换流写数据
-                    osw.write(&quot;你好&quot;);
-
-                    osw.close();
-                }
-            }
-</code></pre><h3 id="04转换流-字节转字符流过程"><a href="#04转换流-字节转字符流过程" class="headerlink" title="04转换流_字节转字符流过程"></a>04转换流_字节转字符流过程</h3><pre><code>* A: 转换流_字节转字符流过程
-    * a: InputStreamReader            
-        * java.io.InputStreamReader 继承 Reader
-        * 字符输入流，读取文本文件
-        * 字节流向字符的敲了，将字节流转字符流
-        * 读取的方法:
-            * read() 读取1个字符，读取字符数组
-        * 技巧
-            * OuputStreamWriter写了文件
-            * InputStreamReader读取文件
-        * OutputStreamWriter(OutputStream out)所有字节输出流
-        * InputStreamReader(InputStream in) 接收所有的字节输入流
-        * 可以传递的字节输入流： FileInputStream
-        * InputStreamReader(InputStream in,String charsetName) 传递编码表的名字
-    * b: 图解
-        * 详见day24_source/转换流.JPG图片
-</code></pre><h3 id="05InputSteamReader读取文本文件"><a href="#05InputSteamReader读取文本文件" class="headerlink" title="05InputSteamReader读取文本文件"></a>05InputSteamReader读取文本文件</h3><pre><code>* A: InputSteamReader读取文本文件
-    * a: 案例代码
-        public class InputStreamReaderDemo {
-            public static void main(String[] args) throws IOException {
-        //        readGBK();
-                readUTF();
-            }
-            /*
-             *  转换流,InputSteamReader读取文本
-             *  采用UTF-8编码表,读取文件utf
-             */
-            public static void readUTF()throws IOException{
-                //创建自己输入流,传递文本文件
-                FileInputStream fis = new FileInputStream(&quot;c:\\utf.txt&quot;);
-                //创建转换流对象,构造方法中,包装字节输入流,同时写编码表名
-                InputStreamReader isr = new InputStreamReader(fis,&quot;UTF-8&quot;);
-                char[] ch = new char[1024];
-                int len = isr.read(ch);
-                System.out.println(new String(ch,0,len));
-                isr.close();
-            }
-            /*
-             *  转换流,InputSteamReader读取文本
-             *  采用系统默认编码表,读取GBK文件
-             */
-            public static void readGBK()throws IOException{
-                //创建自己输入流,传递文本文件
-                FileInputStream fis = new FileInputStream(&quot;c:\\gbk.txt&quot;);
-                //创建转换流对象,构造方法,包装字节输入流
-                InputStreamReader isr = new InputStreamReader(fis);
-                char[] ch = new char[1024];
-                int len = isr.read(ch);
-                System.out.println(new String(ch,0,len));
-
-                isr.close();
-            }
-        }
-</code></pre><h3 id="06转换流子类父类的区别"><a href="#06转换流子类父类的区别" class="headerlink" title="06转换流子类父类的区别"></a>06转换流子类父类的区别</h3><pre><code>* A: 转换流子类父类的区别
-    * a: 继承关系
-        OutputStreamWriter:
-            |--FileWriter:
-        InputStreamReader:
-            |--FileReader;
-    * b: 区别
-        * OutputStreamWriter和InputStreamReader是字符和字节的桥梁：也可以称之为字符转换流。字符转换流原理：字节流+编码表。
-        * FileWriter和FileReader：作为子类，仅作为操作字符文件的便捷类存在。
-            当操作的字符文件，使用的是默认编码表时可以不用父类，而直接用子类就完成操作了，简化了代码。
-        * 以下三句话功能相同
-            * InputStreamReader isr = new InputStreamReader(new FileInputStream(&quot;a.txt&quot;));//默认字符集。
-            * InputStreamReader isr = new InputStreamReader(new FileInputStream(&quot;a.txt&quot;),&quot;GBK&quot;);//指定GBK字符集。
-            * FileReader fr = new FileReader(&quot;a.txt&quot;);
-</code></pre><h3 id="07缓冲流概述"><a href="#07缓冲流概述" class="headerlink" title="07缓冲流概述"></a>07缓冲流概述</h3><pre><code>* A: 缓冲流概述
-    * a: 概述
-        * 可提高IO流的读写速度
-        * 分为字节缓冲流与字符缓冲流 
-</code></pre><h3 id="08字节输出流缓冲流BufferedOutputStream"><a href="#08字节输出流缓冲流BufferedOutputStream" class="headerlink" title="08字节输出流缓冲流BufferedOutputStream"></a>08字节输出流缓冲流BufferedOutputStream</h3><pre><code>* A: 字节输出流缓冲流BufferedOutputStream
-    * a: BufferedOutputStream
-        * 字节输出流的缓冲流
-        * java.io.BufferedOuputStream 作用: 提高原有输出流的写入效率
-        * BufferedOuputStream 继承 OutputStream
-        * 方法,写入 write 字节,字节数组             
-        * 构造方法:
-            * BufferedOuputStream(OuputStream out)
-            * 可以传递任意的字节输出流, 传递的是哪个字节流,就对哪个字节流提高效率  
-
-    * b: 案例代码
-        public class BufferedOutputStreamDemo {
-            public static void main(String[] args)throws IOException {
-                //创建字节输出流,绑定文件
-                //FileOutputStream fos = new FileOutputStream(&quot;c:\\buffer.txt&quot;);
-                //创建字节输出流缓冲流的对象,构造方法中,传递字节输出流
-                BufferedOutputStream bos = new
-                        BufferedOutputStream(new FileOutputStream(&quot;c:\\buffer.txt&quot;));
-
-                bos.write(55);
-
-                byte[] bytes = &quot;HelloWorld&quot;.getBytes();
-
-                bos.write(bytes);
-
-                bos.write(bytes, 3, 2);
-
-                bos.close();
-            }
-        }
-</code></pre><h3 id="09字节输入流缓冲流BufferedInputStream"><a href="#09字节输入流缓冲流BufferedInputStream" class="headerlink" title="09字节输入流缓冲流BufferedInputStream"></a>09字节输入流缓冲流BufferedInputStream</h3><pre><code>* A: 字节输入流缓冲流BufferedInputStream
-    * a: BufferedInputStream
-        * 字节输入流的缓冲流
-        * 继承InputStream,标准的字节输入流
-        * 读取方法  read() 单个字节,字节数组              
-        * 构造方法:
-            * BufferedInputStream(InputStream in)
-            * 可以传递任意的字节输入流,传递是谁,就提高谁的效率
-            * 可以传递的字节输入流 FileInputStream
-    * b: 案例代码
-        public class BufferedInputStreamDemo {
-            public static void main(String[] args) throws IOException{
-                //创建字节输入流的缓冲流对象,构造方法中包装字节输入流,包装文件
-                BufferedInputStream bis = new 
-                        BufferedInputStream(new FileInputStream(&quot;c:\\buffer.txt&quot;));
-                byte[] bytes = new byte[10];
-                int len = 0 ;
-                while((len = bis.read(bytes))!=-1){
-                    System.out.print(new String(bytes,0,len));
-                }
-                bis.close();
-            }
-        }
-</code></pre><h3 id="10四种文件复制方式的效率比较"><a href="#10四种文件复制方式的效率比较" class="headerlink" title="10四种文件复制方式的效率比较"></a>10四种文件复制方式的效率比较</h3><pre><code>* A：四种文件复制方式的效率比较
-    * a: 四中复制方式
-        * 字节流读写单个字节                    125250 毫秒
-        * 字节流读写字节数组                    193    毫秒  OK
-        * 字节流缓冲区流读写单个字节            1210   毫秒
-        * 字节流缓冲区流读写字节数组            73     毫秒  OK        
-
-    * b: 案例代码
-
-        public class Copy {
-            public static void main(String[] args)throws IOException {
-                long s = System.currentTimeMillis();
-                copy_4(new File(&quot;c:\\q.exe&quot;), new File(&quot;d:\\q.exe&quot;));
-                long e = System.currentTimeMillis();
-                System.out.println(e-s);
-            }
-            /*
-             * 方法,实现文件复制
-             *  4. 字节流缓冲区流读写字节数组
-             */
-            public static void copy_4(File src,File desc)throws IOException{
-                BufferedInputStream bis = new BufferedInputStream(new FileInputStream(src));
-                BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(desc));
-                int len = 0 ;
-                byte[] bytes = new byte[1024];
-                while((len = bis.read(bytes))!=-1){
-                    bos.write(bytes,0,len);
-                }
-                bos.close();
-                bis.close();
-            }
-            /*
-             * 方法,实现文件复制
-             *  3. 字节流缓冲区流读写单个字节
-             */
-            public static void copy_3(File src,File desc)throws IOException{
-                BufferedInputStream bis = new BufferedInputStream(new FileInputStream(src));
-                BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(desc));
-                int len = 0 ;
-                while((len = bis.read())!=-1){
-                    bos.write(len);
-                }
-                bos.close();
-                bis.close();
-            }
-
-            /*
-             * 方法,实现文件复制
-             *  2. 字节流读写字节数组
-             */
-            public static void copy_2(File src,File desc)throws IOException{
-                FileInputStream fis = new FileInputStream(src);
-                FileOutputStream fos = new FileOutputStream(desc);
-                int len = 0 ;
-                byte[] bytes = new byte[1024];
-                while((len = fis.read(bytes))!=-1){
-                    fos.write(bytes,0,len);
-                }
-                fos.close();
-                fis.close();
-            }
-
-            /*
-             * 方法,实现文件复制
-             *  1. 字节流读写单个字节
-             */
-            public static void copy_1(File src,File desc)throws IOException{
-                FileInputStream fis = new FileInputStream(src);
-                FileOutputStream fos = new FileOutputStream(desc);
-                int len = 0 ;
-                while((len = fis.read())!=-1){
-                    fos.write(len);
-                }
-                fos.close();
-                fis.close();
-            }
-        }
-</code></pre><h3 id="11字符输出流缓冲流BufferedWriter"><a href="#11字符输出流缓冲流BufferedWriter" class="headerlink" title="11字符输出流缓冲流BufferedWriter"></a>11字符输出流缓冲流BufferedWriter</h3><pre><code>* A: 字符输出流缓冲流BufferedWriter
-    * a: BufferedWriter
-        * 字符输出流缓冲区流
-        * java.io.BufferedWriter 继承 Writer
-        * 写入方法 write () 单个字符,字符数组,字符串
-
-        * 构造方法:
-            * BufferedWriter(Writer w)传递任意字符输出流
-            * 传递谁,就高效谁
-            * 能传递的字符输出流 FileWriter, OutputStreamWriter
-    * b: 案例代码
-        public class BufferedWrierDemo {
-            public static void main(String[] args) throws IOException{
-                //创建字符输出流,封装文件
-                FileWriter fw = new FileWriter(&quot;c:\\buffer.txt&quot;);
-                BufferedWriter bfw = new BufferedWriter(fw);
-
-                bfw.write(100);
-                bfw.flush();
-                bfw.write(&quot;你好&quot;.toCharArray());
-                bfw.flush();
-
-
-                bfw.write(&quot;你好&quot;);
-
-                bfw.flush();
-
-
-                bfw.write(&quot;我好好&quot;);
-
-                bfw.flush();
-
-                bfw.write(&quot;大家都好&quot;);
-                bfw.flush();
-
-                bfw.close();
-
-            }
-        }
-</code></pre><h3 id="12字符输出流缓冲流BufferedWriter特有方法newLine"><a href="#12字符输出流缓冲流BufferedWriter特有方法newLine" class="headerlink" title="12字符输出流缓冲流BufferedWriter特有方法newLine"></a>12字符输出流缓冲流BufferedWriter特有方法newLine</h3><pre><code>* A: 字符输出流缓冲流BufferedWriter特有方法newLine
-    * a: 方法介绍
-        * void  newLine() 写换行
-
-        * newLine()文本中换行, \r\n也是文本换行
-        * 方法具有平台无关性
-        * Windows  \r\n
-        * Linux    \n
-
-        * newLine()运行结果,和操作系统是相互关系
-        * JVM: 安装的是Windows版本,newLine()写的就是\r\n
-        * 安装的是Linux版本,newLine()写的就是\n
-        /*
-         *  将数据源 c:\\a.txt
-         *  复制到 d:\\a.txt  数据目的
-         *  字节输入流,绑定数据源
-         *  字节输出流,绑定数据目的
-         *  
-         *  输入,读取1个字节
-         *  输出,写1个字节
-         */
-    * b: 案例代码
-        public class BufferedWrierDemo {
-            public static void main(String[] args) throws IOException{
-                //创建字符输出流,封装文件
-                FileWriter fw = new FileWriter(&quot;c:\\buffer.txt&quot;);
-                BufferedWriter bfw = new BufferedWriter(fw);
-
-                bfw.write(100);
-                bfw.flush();
-                bfw.write(&quot;你好&quot;.toCharArray());
-                bfw.flush();
-
-                bfw.write(&quot;你好&quot;);
-                bfw.newLine();
-                bfw.flush();
-
-
-                bfw.write(&quot;我好好&quot;);
-                bfw.newLine();
-                bfw.flush();
-
-                bfw.write(&quot;大家都好&quot;);
-                bfw.flush();
-
-                bfw.close();
-
-            }
-        }
-</code></pre><h3 id="13字符输入流缓冲流BufferedReader"><a href="#13字符输入流缓冲流BufferedReader" class="headerlink" title="13字符输入流缓冲流BufferedReader"></a>13字符输入流缓冲流BufferedReader</h3><pre><code>* A: 字符输入流缓冲流BufferedReader
-    * a: 概述
-        * 从字符输入流中读取文本，缓冲各个字符，从而实现字符、数组和行的高效读取
-        * public String readLine() 读取一个文本行，包含该行内容的字符串，不包含任何行终止符，如果已到达流末尾，则返回 null
-</code></pre><h3 id="14字符输入流缓冲流BufferedReader读取文本行"><a href="#14字符输入流缓冲流BufferedReader读取文本行" class="headerlink" title="14字符输入流缓冲流BufferedReader读取文本行"></a>14字符输入流缓冲流BufferedReader读取文本行</h3><pre><code>* A: 字符输入流缓冲流BufferedReader读取文本行
-    * a: BufferedReader
-        * 字符输入流缓冲流
-        * java.io.BufferedReader 继承 Reader
-        * 读取功能 read() 单个字符,字符数组
-        * 构造方法:
-            * BufferedReader(Reader r)
-            * 可以任意的字符输入流
-               FileReader  InputStreamReader       
-        * BufferedReader自己的功能
-            * String readLine() 读取文本行 \r\n   
-                * 方法读取到流末尾,返回null
-    * b: 小特点
-         * 获取内容的方法一般都有返回值
-         * int 没有返回的都是负数
-         * 引用类型 找不到返回null
-         * boolean 找不到返回false
-
-    * c: 案例代码
-        public class BufferedReaderDemo {
-            public static void main(String[] args) throws IOException {
-                int lineNumber = 0;
-                //创建字符输入流缓冲流对象,构造方法传递字符输入流,包装数据源文件
-                BufferedReader bfr = new BufferedReader(new FileReader(&quot;c:\\a.txt&quot;));
-                //调用缓冲流的方法 readLine()读取文本行
-                //循环读取文本行, 结束条件 readLine()返回null
-                String line = null;
-                while((line = bfr.readLine())!=null){
-                    lineNumber++;
-                    System.out.println(lineNumber+&quot;  &quot;+line);
-                }
-                bfr.close();
-            }
-        }
-
-        /*
-         * String line = bfr.readLine();
-                System.out.println(line);
-
-                line = bfr.readLine();
-                System.out.println(line);
-
-                line = bfr.readLine();
-                System.out.println(line);
-
-                line = bfr.readLine();
-                System.out.println(line);
-
-                line = bfr.readLine();
-                System.out.println(line);
-         */
-</code></pre><h3 id="15字符流缓冲区流复制文本文件"><a href="#15字符流缓冲区流复制文本文件" class="headerlink" title="15字符流缓冲区流复制文本文件"></a>15字符流缓冲区流复制文本文件</h3><pre><code>* A: 字符流缓冲区流复制文本文件
-    * a: 案例代码
-        /*
-         *  使用缓冲区流对象,复制文本文件
-         *  数据源  BufferedReader+FileReader 读取
-         *  数据目的 BufferedWriter+FileWriter 写入
-         *  读取文本行, 读一行,写一行,写换行
-         */
-        public class Copy_1 {
-            public static void main(String[] args) throws IOException{
-                BufferedReader bfr = new BufferedReader(new FileReader(&quot;c:\\w.log&quot;));    
-                BufferedWriter bfw = new BufferedWriter(new FileWriter(&quot;d:\\w.log&quot;));
-                //读取文本行, 读一行,写一行,写换行
-                String line = null;
-                while((line = bfr.readLine())!=null){
-                    bfw.write(line);
-                    bfw.newLine();
-                    bfw.flush();
-                }
-                bfw.close();
-                bfr.close();
-            }
-        }
-</code></pre><h3 id="16IO流对象的操作规律"><a href="#16IO流对象的操作规律" class="headerlink" title="16IO流对象的操作规律"></a>16IO流对象的操作规律</h3><pre><code>* A: IO流对象的操作规律
-    * a: 明确一：要操作的数据是数据源还是数据目的。
-        * 源：InputStream    Reader
-        * 目的：OutputStream Writer
-        * 先根据需求明确要读，还是要写。
-
-    * b: 明确二：要操作的数据是字节还是文本呢？
-        * 源：
-            * 字节：InputStream
-            * 文本：Reader
-        * 目的：
-            * 字节：OutputStream
-            * 文本：Writer
-    * c: 明确三：明确数据所在的具体设备。
-        * 源设备：
-            * 硬盘：文件  File开头。
-            * 内存：数组，字符串。
-            * 键盘：System.in;
-            * 网络：Socket
-        * 目的设备：
-            * 硬盘：文件  File开头。
-            * 内存：数组，字符串。
-            * 屏幕：System.out
-            * 网络：Socket
-            * 完全可以明确具体要使用哪个流对象。
-    * d: 明确四：是否需要额外功能呢？
-        * 额外功能：
-            * 转换吗？转换流。InputStreamReader OutputStreamWriter
-            * 高效吗？缓冲区对象。BufferedXXX
-            * 已经明确到了具体的体系上。
-</code></pre><h3 id="17总结"><a href="#17总结" class="headerlink" title="17总结"></a>17总结</h3><pre><code>* 把今天的知识点总结一遍。
-</code></pre>
       
     </div>
 
@@ -1033,8 +638,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/11/19/day25笔记/" rel="prev" title="java学习笔记——基础23()">
-                java学习笔记——基础23() <i class="fa fa-chevron-right"></i>
+              <a href="/2016/11/19/day25笔记/" rel="prev" title="java学习笔记——基础23(Properties集合,序列化流与反序列化流,打印流)">
+                java学习笔记——基础23(Properties集合,序列化流与反序列化流,打印流) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -1252,7 +857,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#01转换流概述"><span class="nav-number">1.</span> <span class="nav-text">01转换流概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#02转换流-字符转字节的过程"><span class="nav-number">2.</span> <span class="nav-text">02转换流_字符转字节的过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#03OutputStreamWriter写文本文件"><span class="nav-number">3.</span> <span class="nav-text">03OutputStreamWriter写文本文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#04转换流-字节转字符流过程"><span class="nav-number">4.</span> <span class="nav-text">04转换流_字节转字符流过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#05InputSteamReader读取文本文件"><span class="nav-number">5.</span> <span class="nav-text">05InputSteamReader读取文本文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#06转换流子类父类的区别"><span class="nav-number">6.</span> <span class="nav-text">06转换流子类父类的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#07缓冲流概述"><span class="nav-number">7.</span> <span class="nav-text">07缓冲流概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#08字节输出流缓冲流BufferedOutputStream"><span class="nav-number">8.</span> <span class="nav-text">08字节输出流缓冲流BufferedOutputStream</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#09字节输入流缓冲流BufferedInputStream"><span class="nav-number">9.</span> <span class="nav-text">09字节输入流缓冲流BufferedInputStream</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10四种文件复制方式的效率比较"><span class="nav-number">10.</span> <span class="nav-text">10四种文件复制方式的效率比较</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11字符输出流缓冲流BufferedWriter"><span class="nav-number">11.</span> <span class="nav-text">11字符输出流缓冲流BufferedWriter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12字符输出流缓冲流BufferedWriter特有方法newLine"><span class="nav-number">12.</span> <span class="nav-text">12字符输出流缓冲流BufferedWriter特有方法newLine</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13字符输入流缓冲流BufferedReader"><span class="nav-number">13.</span> <span class="nav-text">13字符输入流缓冲流BufferedReader</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14字符输入流缓冲流BufferedReader读取文本行"><span class="nav-number">14.</span> <span class="nav-text">14字符输入流缓冲流BufferedReader读取文本行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15字符流缓冲区流复制文本文件"><span class="nav-number">15.</span> <span class="nav-text">15字符流缓冲区流复制文本文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16IO流对象的操作规律"><span class="nav-number">16.</span> <span class="nav-text">16IO流对象的操作规律</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17总结"><span class="nav-number">17.</span> <span class="nav-text">17总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#01转换流概述"><span class="nav-number">1.</span> <span class="nav-text">01转换流概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#02转换流-字符转字节的过程-OutputStreamWriter"><span class="nav-number">2.</span> <span class="nav-text">02转换流_字符转字节的过程 OutputStreamWriter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#03OutputStreamWriter写文本文件"><span class="nav-number">3.</span> <span class="nav-text">03OutputStreamWriter写文本文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#04转换流-字节转字符流过程-InputSteamReader"><span class="nav-number">4.</span> <span class="nav-text">04转换流_字节转字符流过程 InputSteamReader</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#05InputSteamReader读取文本文件"><span class="nav-number">5.</span> <span class="nav-text">05InputSteamReader读取文本文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#06转换流子类父类的区别"><span class="nav-number">6.</span> <span class="nav-text">06转换流子类父类的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#07缓冲流概述"><span class="nav-number">7.</span> <span class="nav-text">07缓冲流概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#08字节输出流缓冲流BufferedOutputStream"><span class="nav-number">8.</span> <span class="nav-text">08字节输出流缓冲流BufferedOutputStream</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#09字节输入流缓冲流BufferedInputStream"><span class="nav-number">9.</span> <span class="nav-text">09字节输入流缓冲流BufferedInputStream</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10四种文件复制方式的效率比较"><span class="nav-number">10.</span> <span class="nav-text">10四种文件复制方式的效率比较</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11字符输出流缓冲流BufferedWriter"><span class="nav-number">11.</span> <span class="nav-text">11字符输出流缓冲流BufferedWriter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12字符输出流缓冲流BufferedWriter特有方法newLine"><span class="nav-number">12.</span> <span class="nav-text">12字符输出流缓冲流BufferedWriter特有方法newLine</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13字符输入流缓冲流BufferedReader"><span class="nav-number">13.</span> <span class="nav-text">13字符输入流缓冲流BufferedReader</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14字符输入流缓冲流BufferedReader读取文本行"><span class="nav-number">14.</span> <span class="nav-text">14字符输入流缓冲流BufferedReader读取文本行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15字符流缓冲区流复制文本文件"><span class="nav-number">15.</span> <span class="nav-text">15字符流缓冲区流复制文本文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16IO流对象的操作规律"><span class="nav-number">16.</span> <span class="nav-text">16IO流对象的操作规律</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17总结"><span class="nav-number">17.</span> <span class="nav-text">17总结</span></a></li></ol></div>
             
 
           </div>
