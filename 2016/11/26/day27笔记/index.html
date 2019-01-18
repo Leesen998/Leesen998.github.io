@@ -160,15 +160,19 @@
   <meta name="description" content="1、多线程安全问题2、等待唤醒机制">
 <meta name="keywords" content="java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="java学习笔记——基础25()">
+<meta property="og:title" content="java学习笔记——基础25(多线程安全问题(同步、死锁)、等待唤醒机制)">
 <meta property="og:url" content="https://leesen998.github.io/2016/11/26/day27笔记/index.html">
 <meta property="og:site_name" content="QJun">
 <meta property="og:description" content="1、多线程安全问题2、等待唤醒机制">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1547297637/samples/java%20files/photo-1545913719-d41fc6091697.jpg">
-<meta property="og:updated_time" content="2019-01-12T12:55:54.114Z">
+<meta property="og:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1547729324/samples/java%20files/%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98%E7%9A%84%E4%BA%A7%E7%94%9F.jpg">
+<meta property="og:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1547729324/samples/java%20files/%E5%90%8C%E6%AD%A5%E4%BB%A3%E7%A0%81%E5%9D%97%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86%E5%9B%BE.jpg">
+<meta property="og:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1547733286/samples/java%20files/010hg.png">
+<meta property="og:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1547729324/samples/java%20files/%E7%BA%BF%E7%A8%8B%E6%AD%BB%E9%94%81%E7%9A%84%E5%8E%9F%E7%90%86.jpg">
+<meta property="og:updated_time" content="2019-01-17T14:32:13.509Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="java学习笔记——基础25()">
+<meta name="twitter:title" content="java学习笔记——基础25(多线程安全问题(同步、死锁)、等待唤醒机制)">
 <meta name="twitter:description" content="1、多线程安全问题2、等待唤醒机制">
 <meta name="twitter:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1547297637/samples/java%20files/photo-1545913719-d41fc6091697.jpg">
 
@@ -189,7 +193,7 @@
   };
 </script>
 
-  <title>java学习笔记——基础25() | QJun</title>
+  <title>java学习笔记——基础25(多线程安全问题(同步、死锁)、等待唤醒机制) | QJun</title>
   
 
 
@@ -412,7 +416,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">java学习笔记——基础25()
+          <h1 class="post-title" itemprop="name headline">java学习笔记——基础25(多线程安全问题(同步、死锁)、等待唤醒机制)
               
             
           </h1>
@@ -502,538 +506,38 @@
 <p><img src="https://res.cloudinary.com/dpvywdzxv/image/upload/v1547297637/samples/java%20files/photo-1545913719-d41fc6091697.jpg" alt="" style="width:100%"></p>
 <p>1、多线程安全问题<br>2、等待唤醒机制</p>
 <a id="more"></a>    
-<h3 id="01线程操作共享数据的安全问题"><a href="#01线程操作共享数据的安全问题" class="headerlink" title="01线程操作共享数据的安全问题"></a>01线程操作共享数据的安全问题</h3><p>  *A:线程操作共享数据的安全问题<br>    如果有多个线程在同时运行，而这些线程可能会同时运行这段代码。<br>    程序每次运行结果和单线程运行的结果是一样的，而且其他的变量的值也和预期的是一样的，就是线程安全的。</p>
-<h3 id="02售票的案例"><a href="#02售票的案例" class="headerlink" title="02售票的案例"></a>02售票的案例</h3><p> <em>A:售票的案例<br>     /</em></p>
-<pre><code> * 多线程并发访问同一个数据资源
- * 3个线程,对一个票资源,出售
- */
-public class ThreadDemo {
- public static void main(String[] args) {
-   //创建Runnable接口实现类对象
-   Tickets t = new Tickets();
-   //创建3个Thread类对象,传递Runnable接口实现类
-   Thread t0 = new Thread(t);
-   Thread t1 = new Thread(t);
-   Thread t2 = new Thread(t);
-
-   t0.start();
-   t1.start();
-   t2.start();
-
- }
-}
-
-public class Tickets implements Runnable{
-
- //定义出售的票源
- private int ticket = 100;
- private Object obj = new Object();
-
- public void run(){
-   while(true){
-
-       if( ticket &gt; 0){
-
-         System.out.println(Thread.currentThread().getName()+&quot; 出售第 &quot;+ticket--);
-       }
-
-   }
- }
-}
-</code></pre><h3 id="03线程安全问题引发"><a href="#03线程安全问题引发" class="headerlink" title="03线程安全问题引发"></a>03线程安全问题引发</h3><p> <em>A:线程安全问题引发<br>    /</em></p>
-<pre><code> * 多线程并发访问同一个数据资源
- * 3个线程,对一个票资源,出售
- */
-public class ThreadDemo {
- public static void main(String[] args) {
-   //创建Runnable接口实现类对象
-   Tickets t = new Tickets();
-   //创建3个Thread类对象,传递Runnable接口实现类
-   Thread t0 = new Thread(t);
-   Thread t1 = new Thread(t);
-   Thread t2 = new Thread(t);
-
-   t0.start();
-   t1.start();
-   t2.start();
-
- }
-}
-/*
- *  通过线程休眠,出现安全问题
- */
-public class Tickets implements Runnable{
-
- //定义出售的票源
- private int ticket = 100;
- private Object obj = new Object();
-
- public void run(){
-   while(true){
-
-     //对票数判断,大于0,可以出售,变量--操作
-       if( ticket &gt; 0){
-         try{
-            Thread.sleep(10); //加了休眠让其他线程有执行机会
-         }catch(Exception ex){}
-         System.out.println(Thread.currentThread().getName()+&quot; 出售第 &quot;+ticket--);
-       }
-   }
- }
-}
-</code></pre><h3 id="04同步代码块解决线程安全问题"><a href="#04同步代码块解决线程安全问题" class="headerlink" title="04同步代码块解决线程安全问题"></a>04同步代码块解决线程安全问题</h3><p>  <em>A:同步代码块解决线程安全问题
-      </em>A:售票的案例<br>          /*</p>
-<pre><code> * 多线程并发访问同一个数据资源
- * 3个线程,对一个票资源,出售
- */
-public class ThreadDemo {
- public static void main(String[] args) {
-   //创建Runnable接口实现类对象
-   Tickets t = new Tickets();
-   //创建3个Thread类对象,传递Runnable接口实现类
-   Thread t0 = new Thread(t);
-   Thread t1 = new Thread(t);
-   Thread t2 = new Thread(t);
-
-   t0.start();
-   t1.start();
-   t2.start();
-
- }
-}
-/*
- *  通过线程休眠,出现安全问题
- *  解决安全问题,Java程序,提供技术,同步技术
- *  公式:
- *    synchronized(任意对象){
- *      线程要操作的共享数据
- *    }
- *    同步代码块
- */
-public class Tickets implements Runnable{
-
- //定义出售的票源
- private int ticket = 100;
- private Object obj = new Object();
-
- public void run(){
-   while(true){
-     //线程共享数据,保证安全,加入同步代码块
-     synchronized(obj){
-     //对票数判断,大于0,可以出售,变量--操作
-       if( ticket &gt; 0){
-         try{
-            Thread.sleep(10);
-         }catch(Exception ex){}
-         System.out.println(Thread.currentThread().getName()+&quot; 出售第 &quot;+ticket--);
-       }
-     }
-   }
- }
-}
-</code></pre><h3 id="05同步代码块的执行原理"><a href="#05同步代码块的执行原理" class="headerlink" title="05同步代码块的执行原理"></a>05同步代码块的执行原理</h3><p>   A:同步代码块的执行原理<br>     同步代码块: 在代码块声明上 加上synchronized<br>     synchronized (锁对象) {<br>       可能会产生线程安全问题的代码<br>     }<br>     同步代码块中的锁对象可以是任意的对象；但多个线程时，要使用同一个锁对象才能够保证线程安全。</p>
-<h3 id="06同步的上厕所原理"><a href="#06同步的上厕所原理" class="headerlink" title="06同步的上厕所原理"></a>06同步的上厕所原理</h3><p>  *A:同步的上厕所原理<br>    a:不使用同步:线程在执行的过程中会被打扰<br>       线程比喻成人<br>       线程执行代码就是上一个厕所<br>      第一个人正在上厕所,上到一半,被另外一个人拉出来<br>    b:使用同步:<br>       线程比喻成人<br>       线程执行代码就是上一个厕所<br>       锁比喻成厕所门<br>      第一个人上厕所,会锁门<br>      第二个人上厕所,看到门锁上了,等待第一个人上完再去上厕所</p>
-<h3 id="07同步方法"><a href="#07同步方法" class="headerlink" title="07同步方法"></a>07同步方法</h3><p>  <em>A:同步方法:<br>  /</em></p>
-<ul>
-<li>多线程并发访问同一个数据资源</li>
-<li><p>3个线程,对一个票资源,出售<br>*/<br>public class ThreadDemo {<br>public static void main(String[] args) {<br> //创建Runnable接口实现类对象<br> Tickets t = new Tickets();<br> //创建3个Thread类对象,传递Runnable接口实现类<br> Thread t0 = new Thread(t);<br> Thread t1 = new Thread(t);<br> Thread t2 = new Thread(t);</p>
-<p> t0.start();<br> t1.start();<br> t2.start();</p>
-<p>}<br>}</p>
-<p><em>A:同步方法<br>/</em></p>
-<ul>
-<li>采用同步方法形式,解决线程的安全问题</li>
-<li>好处: 代码简洁</li>
-<li>将线程共享数据,和同步,抽取到一个方法中</li>
-<li>在方法的声明上,加入同步关键字</li>
-<li></li>
-<li>问题:</li>
-<li>同步方法有锁吗,肯定有,同步方法中的对象锁,是本类对象引用 this</li>
-<li>如果方法是静态的呢,同步有锁吗,绝对不是this</li>
-<li>锁是本类自己.class 属性</li>
-<li><p>静态方法,同步锁,是本类类名.class属性<br>*/<br>public class Tickets implements Runnable{</p>
-<p>//定义出售的票源<br>private  int ticket = 100;</p>
-<p>public void run(){<br>while(true){<br>payTicket();<br>}<br>}</p>
-<p>public  synchronized void payTicket(){<br>if( ticket &gt; 0){<br> try{</p>
-<pre><code>Thread.sleep(10);
-</code></pre><p> }catch(Exception ex){}<br> System.out.println(Thread.currentThread().getName()+” 出售第 “+ticket–);<br>}</p>
-<p>}<br>}</p>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="08JDK1-5新特性Lock接口"><a href="#08JDK1-5新特性Lock接口" class="headerlink" title="08JDK1.5新特性Lock接口"></a>08JDK1.5新特性Lock接口</h3><p>   *A:JDK1.5新特性Lock接口<br>        查阅API，查阅Lock接口描述，Lock 实现提供了比使用 synchronized 方法和语句可获得的更广泛的锁定操作。<br>       Lock接口中的常用方法<br>            void lock()<br>            void unlock()<br>      Lock提供了一个更加面对对象的锁，在该锁中提供了更多的操作锁的功能。<br>      我们使用Lock接口,以及其中的lock()方法和unlock()方法替代同步，对电影院卖票案例中Ticket</p>
-<h3 id="09Lock接口改进售票案例"><a href="#09Lock接口改进售票案例" class="headerlink" title="09Lock接口改进售票案例"></a>09Lock接口改进售票案例</h3><p>   <em>A:Lock接口改进售票案例<br>      /</em></p>
-<pre><code> * 多线程并发访问同一个数据资源
- * 3个线程,对一个票资源,出售
- */
-public class ThreadDemo {
-  public static void main(String[] args) {
-    //创建Runnable接口实现类对象
-    Tickets t = new Tickets();
-    //创建3个Thread类对象,传递Runnable接口实现类
-    Thread t0 = new Thread(t);
-    Thread t1 = new Thread(t);
-    Thread t2 = new Thread(t);
-
-    t0.start();
-    t1.start();
-    t2.start();
-
-  }
-}
-/*
- *  使用JDK1.5 的接口Lock,替换同步代码块,实现线程的安全性
- *  Lock接口方法:
- *     lock() 获取锁
- *     unlock()释放锁
- *  实现类ReentrantLock
- */
-public class Tickets implements Runnable{
-
-  //定义出售的票源
-  private int ticket = 100;
-  //在类的成员位置,创建Lock接口的实现类对象
-  private Lock lock = new ReentrantLock();
-
-  public void run(){
-    while(true){
-      //调用Lock接口方法lock获取锁
-        lock.lock();
-      //对票数判断,大于0,可以出售,变量--操作
-        if( ticket &gt; 0){
-          try{
-             Thread.sleep(10);
-             System.out.println(Thread.currentThread().getName()+&quot; 出售第 &quot;+ticket--);
-          }catch(Exception ex){
-
-          }finally{
-            //释放锁,调用Lock接口方法unlock
-            lock.unlock();
-          }
-        }
-    }
-  }
-}
-</code></pre><h3 id="10线程的死锁原理"><a href="#10线程的死锁原理" class="headerlink" title="10线程的死锁原理"></a>10线程的死锁原理</h3><p>   *A:线程的死锁原理<br>     当线程任务中出现了多个同步(多个锁)  时，如果同步中嵌套了其他的同步。这时容易引发一种现象：程序出现无限等待，这种现象我们称为死锁。这种情况能避免就避免掉。<br>        synchronzied(A锁){<br>            synchronized(B锁){</p>
-<pre><code>    }
-}
-</code></pre><h3 id="11线程的死锁代码实现"><a href="#11线程的死锁代码实现" class="headerlink" title="11线程的死锁代码实现"></a>11线程的死锁代码实现</h3><p>   *A:线程的死锁代码实现<br>       public class DeadLock implements Runnable{<br>        private int i = 0;<br>        public void run(){<br>          while(true){<br>            if(i%2==0){<br>              //先进入A同步,再进入B同步<br>              synchronized(LockA.locka){<br>                System.out.println(“if…locka”);<br>                synchronized(LockB.lockb){<br>                  System.out.println(“if…lockb”);<br>                }<br>              }<br>            }else{<br>              //先进入B同步,再进入A同步<br>              synchronized(LockB.lockb){<br>                System.out.println(“else…lockb”);<br>                synchronized(LockA.locka){<br>                  System.out.println(“else…locka”);<br>                }<br>              }<br>            }<br>            i++;<br>          }<br>        }<br>       }</p>
-<pre><code>public class DeadLockDemo {
-  public static void main(String[] args) {
-    DeadLock dead = new DeadLock();
-    Thread t0 = new Thread(dead);
-    Thread t1 = new Thread(dead);
-    t0.start();
-    t1.start();
-  }
-}
-
-
-public class LockA {
-  private LockA(){}
-
-  public  static final LockA locka = new LockA();
-}
-
-
-public class LockB {
-  private LockB(){}
-
-  public static final LockB lockb = new LockB();
-}
-</code></pre><h3 id="12线程等待与唤醒案例介绍"><a href="#12线程等待与唤醒案例介绍" class="headerlink" title="12线程等待与唤醒案例介绍"></a>12线程等待与唤醒案例介绍</h3><p>   *A:线程等待与唤醒案例介绍<br>     等待唤醒机制所涉及到的方法：<br>         wait（） :等待，将正在执行的线程释放其执行资格 和 执行权，并存储到线程池中。<br>         notify（）：唤醒，唤醒线程池中被wait（）的线程，一次唤醒一个，而且是任意的。<br>         notifyAll（）： 唤醒全部：可以将线程池中的所有wait() 线程都唤醒。<br>       其实，所谓唤醒的意思就是让 线程池中的线程具备执行资格。必须注意的是，这些方法都是在 同步中才有效。同时这些方法在使用时必须标明所属锁，这样才可以明确出这些方法操作的到底是哪个锁上的线程。</p>
-<h3 id="13线程等待与唤醒案例资源类编写"><a href="#13线程等待与唤醒案例资源类编写" class="headerlink" title="13线程等待与唤醒案例资源类编写"></a>13线程等待与唤醒案例资源类编写</h3><p>  <em>A:线程等待与唤醒案例资源类编写<br>    /</em></p>
-<pre><code> *  定义资源类,有2个成员变量
- *  name,sex
- *  同时有2个线程,对资源中的变量操作
- *  1个对name,age赋值
- *  2个对name,age做变量的输出打印
- */
-public class Resource {
-  public String name;
-  public String sex;
-}
-</code></pre><h3 id="14线程等待与唤醒案例输入和输出线程"><a href="#14线程等待与唤醒案例输入和输出线程" class="headerlink" title="14线程等待与唤醒案例输入和输出线程"></a>14线程等待与唤醒案例输入和输出线程</h3><p>   A:线程等待与唤醒案例输入和输出线程<br>     /*</p>
-<pre><code>  *  输入的线程,对资源对象Resource中成员变量赋值
-  *  一次赋值 张三,男
-  *  下一次赋值 lisi,nv
-*/
- public class Input implements Runnable {
-   private Resource r=new Resource();
-
-   public void run() {
-     int i=0;
-     while(true){
-       if(i%2==0){
-          r.name=&quot;张三&quot;;
-          r.sex=&quot;男&quot;;
-        }else{
-           r.name=&quot;lisi&quot;;
-           r.sex=&quot;女&quot;;
-         }
-       i++;
-     }
-   }
- }
-
- /*
-  *  输出线程,对资源对象Resource中成员变量,输出值
-  */
- public class Output implements Runnable {
-   private Resource r=new Resource() ;
-
-   public void run() {
-     while(true){
-        System.out.println(r.name+&quot;...&quot;+r.sex); 
-       }
-     }
- }
-</code></pre><h3 id="15线程等待与唤醒案例测试类"><a href="#15线程等待与唤醒案例测试类" class="headerlink" title="15线程等待与唤醒案例测试类"></a>15线程等待与唤醒案例测试类</h3><p>   A:线程等待与唤醒案例测试类<br>      /*</p>
-<pre><code> *  开启输入线程和输出线程,实现赋值和打印值
- */
-public class ThreadDemo{
-  public static void main(String[] args) {
-
-    Resource r = new Resource();
-
-    Input in = new Input();
-    Output out = new Output();
-
-    Thread tin = new Thread(in);
-    Thread tout = new Thread(out);
-
-    tin.start();
-    tout.start();
-  }
-}
-</code></pre><h3 id="16线程等待与唤醒案例null值解决"><a href="#16线程等待与唤醒案例null值解决" class="headerlink" title="16线程等待与唤醒案例null值解决"></a>16线程等待与唤醒案例null值解决</h3><p>   A:线程等待与唤醒案例null值解决<br>        /*</p>
-<pre><code>  *  输入的线程,对资源对象Resource中成员变量赋值
-  *  一次赋值 张三,男
-  *  下一次赋值 lisi,nv
-*/
- public class Input implements Runnable {
-   private Resource r;
-   public Input(Resource r){
-     this.r=r;
-   }
-
-   public void run() {
-     int i=0;
-     while(true){
-       if(i%2==0){
-          r.name=&quot;张三&quot;;
-          r.sex=&quot;男&quot;;
-        }else{
-           r.name=&quot;lisi&quot;
-           r.sex=&quot;女&quot;
-         }
-       i++;
-     }
-   }
- }
-
- /*
-  *  输出线程,对资源对象Resource中成员变量,输出值
-  */ 
- public class Output implements Runnable {
-   private Resource r;
-   public Output(Resource r){
-      this.r=r;
-   } 
-   public void run() {
-     while(true){
-        System.out.println(r.name+&quot;...&quot;+r.sex); 
-       }
-     }
-   }
-
- }
- /*
-  *  开启输入线程和输出线程,实现赋值和打印值
-  */
- public class ThreadDemo{
-   public static void main(String[] args) {
-
-     Resource r = new Resource();
-
-     Input in = new Input(r);
-     Output out = new Output(r);
-
-     Thread tin = new Thread(in);
-     Thread tout = new Thread(out);
-
-     tin.start();
-     tout.start();
-   }
- }
-</code></pre><h3 id="17线程等待与唤醒案例数据安全解决"><a href="#17线程等待与唤醒案例数据安全解决" class="headerlink" title="17线程等待与唤醒案例数据安全解决"></a>17线程等待与唤醒案例数据安全解决</h3><pre><code>A:线程等待与唤醒案例数据安全解决
-        /*
-          *  输入的线程,对资源对象Resource中成员变量赋值
-          *  一次赋值 张三,男
-          *  下一次赋值 lisi,nv
-        */
-         public class Input implements Runnable {
-           private Resource r;
-           public Input(Resource r){
-             this.r=r;
-           }
-
-           public void run() {
-             int i=0;
-             while(true){
-              synchronized(r){
-               if(i%2==0){
-                  r.name=&quot;张三&quot;;
-                  r.sex=&quot;男&quot;;
-                }else{
-                   r.name=&quot;lisi&quot;
-                   r.sex=&quot;女&quot;
-                 }
-               i++;
-             }
-
-           }
-         }
-
-         /*
-          *  输出线程,对资源对象Resource中成员变量,输出值
-          */ 
-         public class Output implements Runnable {
-           private Resource r;
-           public Output(Resource r){
-              this.r=r;
-           } 
-           public void run() {
-             while(true){
-                synchronized(r){
-                 System.out.println(r.name+&quot;...&quot;+r.sex); 
-                }
-               }
-             }
-           }
-
-         }
-         /*
-          *  开启输入线程和输出线程,实现赋值和打印值
-          */
-         public class ThreadDemo{
-           public static void main(String[] args) {
-
-             Resource r = new Resource();
-
-             Input in = new Input(r);
-             Output out = new Output(r);
-
-             Thread tin = new Thread(in);
-             Thread tout = new Thread(out);
-
-             tin.start();
-             tout.start();
-           }
-         }
-</code></pre><h3 id="18线程等待与唤醒案例通信的分析"><a href="#18线程等待与唤醒案例通信的分析" class="headerlink" title="18线程等待与唤醒案例通信的分析"></a>18线程等待与唤醒案例通信的分析</h3><pre><code>*A:线程等待与唤醒案例通信的分析
-    输入:赋值后,执行方法wait()永远等待
-    输出:变量值打印输出,在输出等待之前,唤醒
-    输入的notify(),自己在wait()永远等待
-    输入:被唤醒后,重新对变量赋值,赋值后,必须唤醒输出的线程notify(),
-         自己的wait()
-</code></pre><h3 id="19线程等待与唤醒案例的实现"><a href="#19线程等待与唤醒案例的实现" class="headerlink" title="19线程等待与唤醒案例的实现"></a>19线程等待与唤醒案例的实现</h3><p>   *A 线程等待与唤醒案例的实现</p>
-<pre><code>/*
- *  定义资源类,有2个成员变量
- *  name,sex
- *  同时有2个线程,对资源中的变量操作
- *  1个对name,age赋值
- *  2个对name,age做变量的输出打印
- */
-public class Resource {
- public String name;
- public String sex;
- public boolean flag = false;
-}
-
-/*
- *  输入的线程,对资源对象Resource中成员变量赋值
- *  一次赋值 张三,男
- *  下一次赋值 lisi,nv
- */
-public class Input implements Runnable {
- private Resource r ;
-
- public Input(Resource r){
-   this.r = r;
- }
-
- public void run() {
-   int i = 0 ;
-   while(true){
-     synchronized(r){
-       //标记是true,等待
-         if(r.flag){
-           try{r.wait();}catch(Exception ex){}
-         }
-
-       if(i%2==0){
-         r.name = &quot;张三&quot;;
-         r.sex = &quot;男&quot;;
-       }else{
-         r.name = &quot;lisi&quot;;
-         r.sex = &quot;nv&quot;;
-       }
-       //将对方线程唤醒,标记改为true
-       r.flag = true;
-       r.notify();
-     }
-     i++;
-   }
- }
-
-}
-
-/*
- *  输出线程,对资源对象Resource中成员变量,输出值
- */
-public class Output implements Runnable {
- private Resource r ;
-
- public Output(Resource r){
-   this.r = r;
- }
- public void run() {
-   while(true){
-     synchronized(r){  
-       //判断标记,是false,等待
-     if(!r.flag){
-       try{r.wait();}catch(Exception ex){}
-       }
-     System.out.println(r.name+&quot;..&quot;+r.sex);
-     //标记改成false,唤醒对方线程
-     r.flag = false;
-     r.notify();
-     }
-   }
- }
-
-}
-
-/*
- *  开启输入线程和输出线程,实现赋值和打印值
- */
-public class ThreadDemo{
- public static void main(String[] args) {
-
-   Resource r = new Resource();
-
-   Input in = new Input(r);
-   Output out = new Output(r);
-
-   Thread tin = new Thread(in);
-   Thread tout = new Thread(out);
-
-   tin.start();
-   tout.start();
- }
-}
-</code></pre><h3 id="20eclipse问题"><a href="#20eclipse问题" class="headerlink" title="20eclipse问题"></a>20eclipse问题</h3><p>   A:eclipse问题</p>
+<h3 id="01线程操作共享数据的安全问题"><a href="#01线程操作共享数据的安全问题" class="headerlink" title="01线程操作共享数据的安全问题"></a>01线程操作共享数据的安全问题</h3><p>*A:线程操作共享数据的安全问题<br>如果有多个线程在同时运行，而这些线程可能会同时运行这段代码。<br>程序每次运行结果和单线程运行的结果是一样的，而且其他的变量的值也和预期的是一样的，就是线程安全的。</p>
+<h3 id="02售票的案例"><a href="#02售票的案例" class="headerlink" title="02售票的案例"></a>02售票的案例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">*A:售票的案例</span><br><span class="line"> <span class="comment">/*</span></span><br><span class="line"><span class="comment">  * 多线程并发访问同一个数据资源</span></span><br><span class="line"><span class="comment">  * 3个线程,对一个票资源,出售</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadDemo</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//创建Runnable接口实现类对象</span></span><br><span class="line">    Tickets t = <span class="keyword">new</span> Tickets();</span><br><span class="line">    <span class="comment">//创建3个Thread类对象,传递Runnable接口实现类</span></span><br><span class="line">    Thread t0 = <span class="keyword">new</span> Thread(t);</span><br><span class="line">    Thread t1 = <span class="keyword">new</span> Thread(t);</span><br><span class="line">    Thread t2 = <span class="keyword">new</span> Thread(t);</span><br><span class="line">    </span><br><span class="line">    t0.start();</span><br><span class="line">    t1.start();</span><br><span class="line">    t2.start();</span><br><span class="line">    </span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Tickets</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">//定义出售的票源</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> ticket = <span class="number">100</span>;</span><br><span class="line">  <span class="keyword">private</span> Object obj = <span class="keyword">new</span> Object();</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</span><br><span class="line">   </span><br><span class="line">        <span class="keyword">if</span>( ticket &gt; <span class="number">0</span>)&#123;</span><br><span class="line">		<span class="comment">//模拟产生安全问题</span></span><br><span class="line">          <span class="keyword">try</span> &#123;</span><br><span class="line">                Thread.sleep(<span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">           <span class="keyword">catch</span> (Exception ex)&#123;</span><br><span class="line">                 ex.printStackTrace();</span><br><span class="line">           &#125;</span><br><span class="line">          System.out.println(Thread.currentThread().getName()+<span class="string">" 出售第 "</span>+ticket--);</span><br><span class="line">        &#125;</span><br><span class="line">      </span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="03线程安全问题引发"><a href="#03线程安全问题引发" class="headerlink" title="03线程安全问题引发"></a>03线程安全问题引发</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">*A:线程安全问题引发</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 多线程并发访问同一个数据资源</span></span><br><span class="line"><span class="comment"> * 3个线程,对一个票资源,出售</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadDemo</span> </span>&#123;</span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">   <span class="comment">//创建Runnable接口实现类对象</span></span><br><span class="line">   Tickets t = <span class="keyword">new</span> Tickets();</span><br><span class="line">   <span class="comment">//创建3个Thread类对象,传递Runnable接口实现类</span></span><br><span class="line">   Thread t0 = <span class="keyword">new</span> Thread(t);</span><br><span class="line">   Thread t1 = <span class="keyword">new</span> Thread(t);</span><br><span class="line">   Thread t2 = <span class="keyword">new</span> Thread(t);</span><br><span class="line">   </span><br><span class="line">   t0.start();</span><br><span class="line">   t1.start();</span><br><span class="line">   t2.start();</span><br><span class="line">   </span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *  通过线程休眠,出现安全问题</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Tickets</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</span><br><span class="line"> </span><br><span class="line"> <span class="comment">//定义出售的票源</span></span><br><span class="line"> <span class="keyword">private</span> <span class="keyword">int</span> ticket = <span class="number">100</span>;</span><br><span class="line"> <span class="keyword">private</span> Object obj = <span class="keyword">new</span> Object();</span><br><span class="line"> </span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line">   <span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</span><br><span class="line"></span><br><span class="line">     <span class="comment">//对票数判断,大于0,可以出售,变量--操作</span></span><br><span class="line">       <span class="keyword">if</span>( ticket &gt; <span class="number">0</span>)&#123;</span><br><span class="line">         <span class="keyword">try</span>&#123;</span><br><span class="line">            Thread.sleep(<span class="number">10</span>); <span class="comment">//加了休眠让其他线程有执行机会</span></span><br><span class="line">         &#125;<span class="keyword">catch</span>(Exception ex)&#123;&#125;</span><br><span class="line">         System.out.println(Thread.currentThread().getName()+<span class="string">" 出售第 "</span>+ticket--);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://res.cloudinary.com/dpvywdzxv/image/upload/v1547729324/samples/java%20files/%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98%E7%9A%84%E4%BA%A7%E7%94%9F.jpg" alt=""></p>
+<h3 id="04同步代码块解决线程安全问题"><a href="#04同步代码块解决线程安全问题" class="headerlink" title="04同步代码块解决线程安全问题"></a>04同步代码块解决线程安全问题</h3><p>线程同步的方式有两种：<br>    方式1：<strong>同步代码块</strong><br>    方式2：<strong>同步方法</strong></p>
+<p><strong>同步代码块中的锁对象可以是任意的对象；但多个线程时，要使用同一个锁对象才能够保证线程安全。</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">*A:同步代码块解决线程安全问题</span><br><span class="line">  *A:售票的案例</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">   * 多线程并发访问同一个数据资源</span></span><br><span class="line"><span class="comment">   * 3个线程,对一个票资源,出售</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadDemo</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">     <span class="comment">//创建Runnable接口实现类对象</span></span><br><span class="line">     Tickets t = <span class="keyword">new</span> Tickets();</span><br><span class="line">     <span class="comment">//创建3个Thread类对象,传递Runnable接口实现类</span></span><br><span class="line">     Thread t0 = <span class="keyword">new</span> Thread(t);</span><br><span class="line">     Thread t1 = <span class="keyword">new</span> Thread(t);</span><br><span class="line">     Thread t2 = <span class="keyword">new</span> Thread(t);</span><br><span class="line">     </span><br><span class="line">     t0.start();</span><br><span class="line">     t1.start();</span><br><span class="line">     t2.start();</span><br><span class="line">     </span><br><span class="line">   &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="string">"/*</span></span><br><span class="line"><span class="string">   *  通过线程休眠,出现安全问题</span></span><br><span class="line"><span class="string">   *  解决安全问题,Java程序,提供技术,同步技术</span></span><br><span class="line"><span class="string">   *  公式:</span></span><br><span class="line"><span class="string">   *    synchronized(任意对象)&#123;</span></span><br><span class="line"><span class="string">   *      线程要操作的共享数据</span></span><br><span class="line"><span class="string">   *    &#125;</span></span><br><span class="line"><span class="string">   *    同步代码块</span></span><br><span class="line"><span class="string">   */"</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Tickets</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</span><br><span class="line">   </span><br><span class="line">   <span class="comment">//定义出售的票源</span></span><br><span class="line">   <span class="keyword">private</span> <span class="keyword">int</span> ticket = <span class="number">100</span>;</span><br><span class="line">   <span class="keyword">private</span> Object obj = <span class="keyword">new</span> Object();</span><br><span class="line">   </span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line">     <span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</span><br><span class="line">       <span class="comment">//线程共享数据,保证安全,加入同步代码块</span></span><br><span class="line">       <span class="keyword">synchronized</span>(obj)&#123;</span><br><span class="line">       <span class="comment">//对票数判断,大于0,可以出售,变量--操作</span></span><br><span class="line">         <span class="keyword">if</span>( ticket &gt; <span class="number">0</span>)&#123;</span><br><span class="line">           <span class="keyword">try</span>&#123;</span><br><span class="line">              Thread.sleep(<span class="number">10</span>);</span><br><span class="line">           &#125;<span class="keyword">catch</span>(Exception ex)&#123;&#125;</span><br><span class="line">           System.out.println(Thread.currentThread().getName()+<span class="string">" 出售第 "</span>+ticket--);</span><br><span class="line">         &#125;</span><br><span class="line">       &#125;</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="05同步代码块的执行原理"><a href="#05同步代码块的执行原理" class="headerlink" title="05同步代码块的执行原理"></a>05同步代码块的执行原理</h3><p>A:同步代码块的执行原理<br>同步代码块: 在代码块声明上 加上synchronized<br><strong>synchronized (锁对象) {<br>可能会产生线程安全问题的代码<br>}</strong></p>
+<p><strong>同步代码块中的锁对象可以是任意的对象；但多个线程时，要使用同一个锁对象才能够保证线程安全。</strong></p>
+<p><img src="https://res.cloudinary.com/dpvywdzxv/image/upload/v1547729324/samples/java%20files/%E5%90%8C%E6%AD%A5%E4%BB%A3%E7%A0%81%E5%9D%97%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86%E5%9B%BE.jpg" alt=""></p>
+<h3 id="06同步的上厕所原理"><a href="#06同步的上厕所原理" class="headerlink" title="06同步的上厕所原理"></a>06同步的上厕所原理</h3><p>*A:同步的上厕所原理<br>a:不使用同步:线程在执行的过程中会被打扰<br>线程比喻成人<br>线程执行代码就是上一个厕所<br>第一个人正在上厕所,上到一半,被另外一个人拉出来<br>b:使用同步:<br>线程比喻成人<br>线程执行代码就是上一个厕所<br>锁比喻成厕所门<br>第一个人上厕所,会锁门<br>第二个人上厕所,看到门锁上了,等待第一个人上完再去上厕所<br><img src="https://res.cloudinary.com/dpvywdzxv/image/upload/v1547733286/samples/java%20files/010hg.png" alt=""></p>
+<h3 id="07同步方法"><a href="#07同步方法" class="headerlink" title="07同步方法"></a>07同步方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">*A:同步方法:</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* 多线程并发访问同一个数据资源</span></span><br><span class="line"><span class="comment">* 3个线程,对一个票资源,出售</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadDemo</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">	  <span class="comment">//创建Runnable接口实现类对象</span></span><br><span class="line">	  Tickets t = <span class="keyword">new</span> Tickets();</span><br><span class="line">	  <span class="comment">//创建3个Thread类对象,传递Runnable接口实现类</span></span><br><span class="line">	  Thread t0 = <span class="keyword">new</span> Thread(t);</span><br><span class="line">	  Thread t1 = <span class="keyword">new</span> Thread(t);</span><br><span class="line">	  Thread t2 = <span class="keyword">new</span> Thread(t);</span><br><span class="line">	  </span><br><span class="line">	  t0.start();</span><br><span class="line">	  t1.start();</span><br><span class="line">	  t2.start();</span><br><span class="line">	  </span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">*A:同步方法</span><br><span class="line"> <span class="string">"/*</span></span><br><span class="line"><span class="string">  *  采用同步方法形式,解决线程的安全问题</span></span><br><span class="line"><span class="string">  *  好处: 代码简洁</span></span><br><span class="line"><span class="string">  *  将线程共享数据,和同步,抽取到一个方法中</span></span><br><span class="line"><span class="string">  *  在方法的声明上,加入同步关键字</span></span><br><span class="line"><span class="string">  *  </span></span><br><span class="line"><span class="string">  *  问题:</span></span><br><span class="line"><span class="string">  *    同步方法有锁吗,肯定有,同步方法中的对象锁,是本类对象引用 this</span></span><br><span class="line"><span class="string">  *    如果方法是静态的呢,同步有锁吗,绝对不是this</span></span><br><span class="line"><span class="string">  *    锁是本类自己.class 属性</span></span><br><span class="line"><span class="string">  *    静态方法,同步锁,是本类类名.class属性</span></span><br><span class="line"><span class="string">  */"</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Tickets</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//定义出售的票源</span></span><br><span class="line">  <span class="keyword">private</span>  <span class="keyword">int</span> ticket = <span class="number">100</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</span><br><span class="line">      payTicket();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span>  <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">payTicket</span><span class="params">()</span></span>&#123;  </span><br><span class="line">      <span class="keyword">if</span>( ticket &gt; <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">           Thread.sleep(<span class="number">10</span>);</span><br><span class="line">        &#125;<span class="keyword">catch</span>(Exception ex)&#123;&#125;</span><br><span class="line">        System.out.println(Thread.currentThread().getName()+<span class="string">" 出售第 "</span>+ticket--);</span><br><span class="line">      &#125;</span><br><span class="line">    </span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="08JDK1-5新特性Lock接口-实现类ReentrantLock"><a href="#08JDK1-5新特性Lock接口-实现类ReentrantLock" class="headerlink" title="08JDK1.5新特性Lock接口,实现类ReentrantLock"></a>08JDK1.5新特性Lock接口,实现类ReentrantLock</h3><p><strong>Lock 实现提供了比使用 synchronized 方法和语句可获得的更广泛的锁定操作。</strong>此实现允许更灵活的结构，可以具有差别很大的属性，可以支持多个相关的 Condition 对象。 </p>
+<p><strong>锁是控制多个线程对共享资源进行访问的工具</strong>。通常，<strong>锁提供了对共享资源的独占访问。一次只能有一个线程获得锁，对共享资源的所有访问都需要首先获得锁。</strong>不过，某些锁可能允许对共享资源并发访问，如 ReadWriteLock 的读取锁。 </p>
+<p><strong>synchronized 方法或语句</strong>的使用提供了对与每个对象相关的隐式监视器锁的访问，但却强制所有锁获取和释放均要出现在一个块结构中：<strong>当获取了多个锁时，它们必须以相反的顺序释放，且必须在与所有锁被获取时相同的词法范围内释放所有锁。 </strong></p>
+<p>虽然 synchronized 方法和语句的范围机制使得使用监视器锁编程方便了很多，而且还帮助避免了很多涉及到锁的常见编程错误，但<strong>有时也需要以更为灵活的方式使用锁</strong>。例如，某些遍历并发访问的数据结果的算法要求使用 “hand-over-hand” 或 “chain locking”：获取节点 A 的锁，然后再获取节点 B 的锁，然后释放 A 并获取 C，然后释放 B 并获取 D，依此类推。Lock 接口的实现允许锁在不同的作用范围内获取和释放，并允许以任何顺序获取和释放多个锁，从而支持使用这种技术。 </p>
+<p>随着灵活性的增加，也带来了更多的责任。<strong>不使用块结构锁就失去了使用 synchronized 方法和语句时会出现的锁自动释放功能</strong>。在大多数情况下，应该<strong>使用以下语句</strong>： </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Lock l = ...; </span><br><span class="line">     l.lock();</span><br><span class="line">     <span class="keyword">try</span> &#123;</span><br><span class="line">         <span class="comment">// access the resource protected by this lock</span></span><br><span class="line">     &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">         l.unlock();<span class="comment">//最后必须释放锁</span></span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">*A:JDK1.5新特性Lock接口</span><br><span class="line">    查阅API，查阅Lock接口描述，Lock 实现提供了比使用 <span class="keyword">synchronized</span> 方法和语句可获得的更广泛的锁定操作。</span><br><span class="line">   Lock接口中的常用方法</span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">lock</span><span class="params">()</span></span></span><br><span class="line"><span class="function">        <span class="keyword">void</span> <span class="title">unlock</span><span class="params">()</span></span></span><br><span class="line"><span class="function">  Lock提供了一个更加面对对象的锁，在该锁中提供了更多的操作锁的功能。</span></span><br><span class="line"><span class="function">  我们使用Lock接口,以及其中的<span class="title">lock</span><span class="params">()</span>方法和<span class="title">unlock</span><span class="params">()</span>方法替代同步，对电影院卖票案例中Ticket</span></span><br></pre></td></tr></table></figure>
+<h3 id="09利用Lock接口实现类ReentrantLock改进售票案例"><a href="#09利用Lock接口实现类ReentrantLock改进售票案例" class="headerlink" title="09利用Lock接口实现类ReentrantLock改进售票案例"></a>09利用Lock接口实现类ReentrantLock改进售票案例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">*A:Lock接口改进售票案例</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">   * 多线程并发访问同一个数据资源</span></span><br><span class="line"><span class="comment">   * 3个线程,对一个票资源,出售</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">      <span class="comment">//创建Runnable接口实现类对象</span></span><br><span class="line">      Tickets t = <span class="keyword">new</span> Tickets();</span><br><span class="line">      <span class="comment">//创建3个Thread类对象,传递Runnable接口实现类</span></span><br><span class="line">      Thread t0 = <span class="keyword">new</span> Thread(t);</span><br><span class="line">      Thread t1 = <span class="keyword">new</span> Thread(t);</span><br><span class="line">      Thread t2 = <span class="keyword">new</span> Thread(t);</span><br><span class="line">      </span><br><span class="line">      t0.start();</span><br><span class="line">      t1.start();</span><br><span class="line">      t2.start();</span><br><span class="line">      </span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="string">"/*</span></span><br><span class="line"><span class="string">   *  使用JDK1.5 的接口Lock,替换同步代码块,实现线程的安全性</span></span><br><span class="line"><span class="string">   *  Lock接口方法:</span></span><br><span class="line"><span class="string">   *     lock() 获取锁</span></span><br><span class="line"><span class="string">   *     unlock()释放锁</span></span><br><span class="line"><span class="string">   *  实现类ReentrantLock</span></span><br><span class="line"><span class="string">   */"</span></span><br><span class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Tickets</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//定义出售的票源</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> ticket = <span class="number">100</span>;</span><br><span class="line">    <span class="comment">//在类的成员位置,创建Lock接口的实现类对象</span></span><br><span class="line">    <span class="keyword">private</span> Lock lock = <span class="keyword">new</span> ReentrantLock();</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line">      <span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</span><br><span class="line">        <span class="comment">//调用Lock接口方法lock获取锁</span></span><br><span class="line">          lock.lock();</span><br><span class="line">        <span class="comment">//对票数判断,大于0,可以出售,变量--操作</span></span><br><span class="line">          <span class="keyword">if</span>( ticket &gt; <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">try</span>&#123;</span><br><span class="line">               Thread.sleep(<span class="number">10</span>);</span><br><span class="line">               System.out.println(Thread.currentThread().getName()+<span class="string">" 出售第 "</span>+ticket--);</span><br><span class="line">            &#125;<span class="keyword">catch</span>(Exception ex)&#123;</span><br><span class="line">              </span><br><span class="line">            &#125;<span class="keyword">finally</span>&#123;</span><br><span class="line">              <span class="comment">////最后必须释放锁,调用Lock接口方法unlock</span></span><br><span class="line">              lock.unlock();</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="10线程的死锁原理"><a href="#10线程的死锁原理" class="headerlink" title="10线程的死锁原理"></a>10线程的死锁原理</h3><p>*A:线程的死锁原理<br><strong>当线程任务中出现了多个同步(多个锁)  时，如果同步中嵌套了其他的同步。</strong>这时容易引发一种现象：<strong>程序出现无限等待，这种现象我们称为死锁。</strong>这种情况能避免就避免掉。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">synchronzied(A锁)&#123;</span><br><span class="line">    <span class="keyword">synchronized</span>(B锁)&#123;</span><br><span class="line">              </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://res.cloudinary.com/dpvywdzxv/image/upload/v1547729324/samples/java%20files/%E7%BA%BF%E7%A8%8B%E6%AD%BB%E9%94%81%E7%9A%84%E5%8E%9F%E7%90%86.jpg" alt=""></p>
+<h3 id="11线程的死锁代码实现"><a href="#11线程的死锁代码实现" class="headerlink" title="11线程的死锁代码实现"></a>11线程的死锁代码实现</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">*A:线程的死锁代码实现</span><br><span class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DeadLock</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line">      <span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(i%<span class="number">2</span>==<span class="number">0</span>)&#123;</span><br><span class="line">          <span class="comment">//先进入A同步,再进入B同步</span></span><br><span class="line">          <span class="keyword">synchronized</span>(LockA.locka)&#123;</span><br><span class="line">            System.out.println(<span class="string">"if...locka"</span>);</span><br><span class="line">            <span class="keyword">synchronized</span>(LockB.lockb)&#123;</span><br><span class="line">              System.out.println(<span class="string">"if...lockb"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">          <span class="comment">//先进入B同步,再进入A同步</span></span><br><span class="line">          <span class="keyword">synchronized</span>(LockB.lockb)&#123;</span><br><span class="line">            System.out.println(<span class="string">"else...lockb"</span>);</span><br><span class="line">            <span class="keyword">synchronized</span>(LockA.locka)&#123;</span><br><span class="line">              System.out.println(<span class="string">"else...locka"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        i++;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DeadLockDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">      DeadLock dead = <span class="keyword">new</span> DeadLock();</span><br><span class="line">      Thread t0 = <span class="keyword">new</span> Thread(dead);</span><br><span class="line">      Thread t1 = <span class="keyword">new</span> Thread(dead);</span><br><span class="line">      t0.start();</span><br><span class="line">      t1.start();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LockA</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">LockA</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span>  <span class="keyword">static</span> <span class="keyword">final</span> LockA locka = <span class="keyword">new</span> LockA();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LockB</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">LockB</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> LockB lockb = <span class="keyword">new</span> LockB();</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="12线程等待与唤醒案例介绍"><a href="#12线程等待与唤醒案例介绍" class="headerlink" title="12线程等待与唤醒案例介绍"></a>12线程等待与唤醒案例介绍</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">*A:线程等待与唤醒案例介绍 </span><br><span class="line"> 等待唤醒机制所涉及到的方法：</span><br><span class="line">     wait（） :等待，将正在执行的线程释放其执行资格 和 执行权，并存储到线程池中。</span><br><span class="line">     notify（）：唤醒，唤醒线程池中被wait（）的线程，一次唤醒一个，而且是任意的。</span><br><span class="line">     notifyAll（）： 唤醒全部：可以将线程池中的所有wait() 线程都唤醒。</span><br><span class="line">   其实，所谓唤醒的意思就是让 线程池中的线程具备执行资格。必须注意的是，这些方法都是在 同步中才有效。同时这些方法在使用时必须标明所属锁，这样才可以明确出这些方法操作的到底是哪个锁上的线程。</span><br></pre></td></tr></table></figure>
+<h3 id="13线程等待与唤醒案例资源类编写"><a href="#13线程等待与唤醒案例资源类编写" class="headerlink" title="13线程等待与唤醒案例资源类编写"></a>13线程等待与唤醒案例资源类编写</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">*A:线程等待与唤醒案例资源类编写</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *  定义资源类,有2个成员变量</span></span><br><span class="line"><span class="comment"> *  name,sex</span></span><br><span class="line"><span class="comment"> *  同时有2个线程,对资源中的变量操作</span></span><br><span class="line"><span class="comment"> *  1个对name,age赋值</span></span><br><span class="line"><span class="comment"> *  2个对name,age做变量的输出打印</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Resource</span> </span>&#123;</span><br><span class="line">  <span class="keyword">public</span> String name;</span><br><span class="line">  <span class="keyword">public</span> String sex;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="14线程等待与唤醒案例输入和输出线程"><a href="#14线程等待与唤醒案例输入和输出线程" class="headerlink" title="14线程等待与唤醒案例输入和输出线程"></a>14线程等待与唤醒案例输入和输出线程</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">A:线程等待与唤醒案例输入和输出线程</span><br><span class="line"> <span class="comment">/*</span></span><br><span class="line"><span class="comment">   *  输入的线程,对资源对象Resource中成员变量赋值</span></span><br><span class="line"><span class="comment">   *  一次赋值 张三,男</span></span><br><span class="line"><span class="comment">   *  下一次赋值 lisi,nv</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Input</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Resource r=<span class="keyword">new</span> Resource();</span><br><span class="line">   </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">int</span> i=<span class="number">0</span>;</span><br><span class="line">      <span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(i%<span class="number">2</span>==<span class="number">0</span>)&#123;</span><br><span class="line">           r.name=<span class="string">"张三"</span>;</span><br><span class="line">           r.sex=<span class="string">"男"</span>;</span><br><span class="line">         &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            r.name=<span class="string">"lisi"</span>;</span><br><span class="line">            r.sex=<span class="string">"女"</span>;</span><br><span class="line">          &#125;</span><br><span class="line">        i++;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">   *  输出线程,对资源对象Resource中成员变量,输出值</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Output</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Resource r=<span class="keyword">new</span> Resource() ;</span><br><span class="line">     </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</span><br><span class="line">         System.out.println(r.name+<span class="string">"..."</span>+r.sex); </span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="15线程等待与唤醒案例测试类"><a href="#15线程等待与唤醒案例测试类" class="headerlink" title="15线程等待与唤醒案例测试类"></a>15线程等待与唤醒案例测试类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">A:线程等待与唤醒案例测试类</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">   *  开启输入线程和输出线程,实现赋值和打印值</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadDemo</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">      </span><br><span class="line">      Resource r = <span class="keyword">new</span> Resource();</span><br><span class="line">      </span><br><span class="line">      Input in = <span class="keyword">new</span> Input();</span><br><span class="line">      Output out = <span class="keyword">new</span> Output();</span><br><span class="line">      </span><br><span class="line">      Thread tin = <span class="keyword">new</span> Thread(in);</span><br><span class="line">      Thread tout = <span class="keyword">new</span> Thread(out);</span><br><span class="line">      </span><br><span class="line">      tin.start();</span><br><span class="line">      tout.start();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="16线程等待与唤醒案例null值解决"><a href="#16线程等待与唤醒案例null值解决" class="headerlink" title="16线程等待与唤醒案例null值解决"></a>16线程等待与唤醒案例null值解决</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">A:线程等待与唤醒案例<span class="keyword">null</span>值解决</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">*  输入的线程,对资源对象Resource中成员变量赋值</span></span><br><span class="line"><span class="comment">*  一次赋值 张三,男</span></span><br><span class="line"><span class="comment">*  下一次赋值 lisi,nv</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Input</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line"> <span class="keyword">private</span> Resource r;</span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="title">Input</span><span class="params">(Resource r)</span></span>&#123;</span><br><span class="line">   <span class="keyword">this</span>.r=r;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   <span class="keyword">int</span> i=<span class="number">0</span>;</span><br><span class="line">   <span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</span><br><span class="line">     <span class="keyword">if</span>(i%<span class="number">2</span>==<span class="number">0</span>)&#123;</span><br><span class="line">        r.name=<span class="string">"张三"</span>;</span><br><span class="line">        r.sex=<span class="string">"男"</span>;</span><br><span class="line">      &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">         r.name=<span class="string">"lisi"</span></span><br><span class="line">         r.sex=<span class="string">"女"</span></span><br><span class="line">       &#125;</span><br><span class="line">     i++;</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">*  输出线程,对资源对象Resource中成员变量,输出值</span></span><br><span class="line"><span class="comment">*/</span> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Output</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line"> <span class="keyword">private</span> Resource r;</span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="title">Output</span><span class="params">(Resource r)</span></span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.r=r;</span><br><span class="line"> &#125; </span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   <span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</span><br><span class="line">      System.out.println(r.name+<span class="string">"..."</span>+r.sex); </span><br><span class="line">     &#125;</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">*  开启输入线程和输出线程,实现赋值和打印值</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadDemo</span></span>&#123;</span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">   </span><br><span class="line">   Resource r = <span class="keyword">new</span> Resource();</span><br><span class="line">   </span><br><span class="line">   Input in = <span class="keyword">new</span> Input(r);</span><br><span class="line">   Output out = <span class="keyword">new</span> Output(r);</span><br><span class="line">   </span><br><span class="line">   Thread tin = <span class="keyword">new</span> Thread(in);</span><br><span class="line">   Thread tout = <span class="keyword">new</span> Thread(out);</span><br><span class="line">   </span><br><span class="line">   tin.start();</span><br><span class="line">   tout.start();</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="17线程等待与唤醒案例数据安全解决"><a href="#17线程等待与唤醒案例数据安全解决" class="headerlink" title="17线程等待与唤醒案例数据安全解决"></a>17线程等待与唤醒案例数据安全解决</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">A:线程等待与唤醒案例数据安全解决</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">  *  输入的线程,对资源对象Resource中成员变量赋值</span></span><br><span class="line"><span class="comment">  *  一次赋值 张三,男</span></span><br><span class="line"><span class="comment">  *  下一次赋值 lisi,nv</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Input</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">   <span class="keyword">private</span> Resource r;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="title">Input</span><span class="params">(Resource r)</span></span>&#123;</span><br><span class="line">     <span class="keyword">this</span>.r=r;</span><br><span class="line">   &#125;</span><br><span class="line">  </span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">     <span class="keyword">int</span> i=<span class="number">0</span>;</span><br><span class="line">     <span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</span><br><span class="line">      <span class="keyword">synchronized</span>(r)&#123;</span><br><span class="line">       <span class="keyword">if</span>(i%<span class="number">2</span>==<span class="number">0</span>)&#123;</span><br><span class="line">          r.name=<span class="string">"张三"</span>;</span><br><span class="line">          r.sex=<span class="string">"男"</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">           r.name=<span class="string">"lisi"</span></span><br><span class="line">           r.sex=<span class="string">"女"</span></span><br><span class="line">         &#125;</span><br><span class="line">       i++;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="comment">/*</span></span><br><span class="line"><span class="comment">  *  输出线程,对资源对象Resource中成员变量,输出值</span></span><br><span class="line"><span class="comment">  */</span> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Output</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">   <span class="keyword">private</span> Resource r;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="title">Output</span><span class="params">(Resource r)</span></span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.r=r;</span><br><span class="line">   &#125; </span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">     <span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</span><br><span class="line">        <span class="keyword">synchronized</span>(r)&#123;</span><br><span class="line">         System.out.println(r.name+<span class="string">"..."</span>+r.sex); </span><br><span class="line">        &#125;</span><br><span class="line">       &#125;</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">/*</span></span><br><span class="line"><span class="comment">  *  开启输入线程和输出线程,实现赋值和打印值</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadDemo</span></span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">     </span><br><span class="line">     Resource r = <span class="keyword">new</span> Resource();</span><br><span class="line">     </span><br><span class="line">     Input in = <span class="keyword">new</span> Input(r);</span><br><span class="line">     Output out = <span class="keyword">new</span> Output(r);</span><br><span class="line">     </span><br><span class="line">     Thread tin = <span class="keyword">new</span> Thread(in);</span><br><span class="line">     Thread tout = <span class="keyword">new</span> Thread(out);</span><br><span class="line">     </span><br><span class="line">     tin.start();</span><br><span class="line">     tout.start();</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="18线程等待与唤醒案例通信的分析"><a href="#18线程等待与唤醒案例通信的分析" class="headerlink" title="18线程等待与唤醒案例通信的分析"></a>18线程等待与唤醒案例通信的分析</h3><p>*A:线程等待与唤醒案例通信的分析<br>输入:赋值后,执行方法wait()永远等待<br>输出:变量值打印输出,在输出等待之前,唤醒<br>输入的notify(),自己在wait()永远等待<br>输入:被唤醒后,重新对变量赋值,赋值后,必须唤醒输出的线程notify(),<br>自己的wait()</p>
+<h3 id="19线程等待与唤醒案例的实现"><a href="#19线程等待与唤醒案例的实现" class="headerlink" title="19线程等待与唤醒案例的实现"></a>19线程等待与唤醒案例的实现</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line">*A 线程等待与唤醒案例的实现</span><br><span class="line"></span><br><span class="line"> <span class="comment">/*</span></span><br><span class="line"><span class="comment">  *  定义资源类,有2个成员变量</span></span><br><span class="line"><span class="comment">  *  name,sex</span></span><br><span class="line"><span class="comment">  *  同时有2个线程,对资源中的变量操作</span></span><br><span class="line"><span class="comment">  *  1个对name,age赋值</span></span><br><span class="line"><span class="comment">  *  2个对name,age做变量的输出打印</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Resource</span> </span>&#123;</span><br><span class="line">  <span class="keyword">public</span> String name;</span><br><span class="line">  <span class="keyword">public</span> String sex;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">boolean</span> flag = <span class="keyword">false</span>;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="comment">/*</span></span><br><span class="line"><span class="comment">  *  输入的线程,对资源对象Resource中成员变量赋值</span></span><br><span class="line"><span class="comment">  *  一次赋值 张三,男</span></span><br><span class="line"><span class="comment">  *  下一次赋值 lisi,nv</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Input</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> Resource r ;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Input</span><span class="params">(Resource r)</span></span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.r = r;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span> ;</span><br><span class="line">    <span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</span><br><span class="line">      <span class="keyword">synchronized</span>(r)&#123;</span><br><span class="line">        <span class="comment">//标记是true,等待</span></span><br><span class="line">          <span class="keyword">if</span>(r.flag)&#123;</span><br><span class="line">            <span class="keyword">try</span>&#123;r.wait();&#125;<span class="keyword">catch</span>(Exception ex)&#123;&#125;</span><br><span class="line">          &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(i%<span class="number">2</span>==<span class="number">0</span>)&#123;</span><br><span class="line">          r.name = <span class="string">"张三"</span>;</span><br><span class="line">          r.sex = <span class="string">"男"</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">          r.name = <span class="string">"lisi"</span>;</span><br><span class="line">          r.sex = <span class="string">"nv"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//将对方线程唤醒,标记改为true</span></span><br><span class="line">        r.flag = <span class="keyword">true</span>;</span><br><span class="line">        r.notify();</span><br><span class="line">      &#125;</span><br><span class="line">      i++;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"> &#125;</span><br><span class="line"> </span><br><span class="line"> <span class="comment">/*</span></span><br><span class="line"><span class="comment">  *  输出线程,对资源对象Resource中成员变量,输出值</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Output</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> Resource r ;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Output</span><span class="params">(Resource r)</span></span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.r = r;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</span><br><span class="line">      <span class="keyword">synchronized</span>(r)&#123;  </span><br><span class="line">        <span class="comment">//判断标记,是false,等待</span></span><br><span class="line">      <span class="keyword">if</span>(!r.flag)&#123;</span><br><span class="line">        <span class="keyword">try</span>&#123;r.wait();&#125;<span class="keyword">catch</span>(Exception ex)&#123;&#125;</span><br><span class="line">        &#125;</span><br><span class="line">      System.out.println(r.name+<span class="string">".."</span>+r.sex);</span><br><span class="line">      <span class="comment">//标记改成false,唤醒对方线程</span></span><br><span class="line">      r.flag = <span class="keyword">false</span>;</span><br><span class="line">      r.notify();</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="comment">/*</span></span><br><span class="line"><span class="comment">  *  开启输入线程和输出线程,实现赋值和打印值</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadDemo</span></span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    Resource r = <span class="keyword">new</span> Resource();</span><br><span class="line">    </span><br><span class="line">    Input in = <span class="keyword">new</span> Input(r);</span><br><span class="line">    Output out = <span class="keyword">new</span> Output(r);</span><br><span class="line">    </span><br><span class="line">    Thread tin = <span class="keyword">new</span> Thread(in);</span><br><span class="line">    Thread tout = <span class="keyword">new</span> Thread(out);</span><br><span class="line">    </span><br><span class="line">    tin.start();</span><br><span class="line">    tout.start();</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="20eclipse问题"><a href="#20eclipse问题" class="headerlink" title="20eclipse问题"></a>20eclipse问题</h3><p>A:eclipse问题</p>
 
       
     </div>
@@ -1102,8 +606,8 @@ public class ThreadDemo{
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/11/20/day26笔记/" rel="next" title="java学习笔记——基础24(多线程、线程池)">
-                <i class="fa fa-chevron-left"></i> java学习笔记——基础24(多线程、线程池)
+              <a href="/2016/11/20/day26笔记/" rel="next" title="java学习笔记——基础24(多线程及其创建方式、线程池)">
+                <i class="fa fa-chevron-left"></i> java学习笔记——基础24(多线程及其创建方式、线程池)
               </a>
             
           </div>
@@ -1331,7 +835,7 @@ public class ThreadDemo{
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#01线程操作共享数据的安全问题"><span class="nav-number">1.</span> <span class="nav-text">01线程操作共享数据的安全问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#02售票的案例"><span class="nav-number">2.</span> <span class="nav-text">02售票的案例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#03线程安全问题引发"><span class="nav-number">3.</span> <span class="nav-text">03线程安全问题引发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#04同步代码块解决线程安全问题"><span class="nav-number">4.</span> <span class="nav-text">04同步代码块解决线程安全问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#05同步代码块的执行原理"><span class="nav-number">5.</span> <span class="nav-text">05同步代码块的执行原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#06同步的上厕所原理"><span class="nav-number">6.</span> <span class="nav-text">06同步的上厕所原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#07同步方法"><span class="nav-number">7.</span> <span class="nav-text">07同步方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#08JDK1-5新特性Lock接口"><span class="nav-number">8.</span> <span class="nav-text">08JDK1.5新特性Lock接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#09Lock接口改进售票案例"><span class="nav-number">9.</span> <span class="nav-text">09Lock接口改进售票案例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10线程的死锁原理"><span class="nav-number">10.</span> <span class="nav-text">10线程的死锁原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11线程的死锁代码实现"><span class="nav-number">11.</span> <span class="nav-text">11线程的死锁代码实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12线程等待与唤醒案例介绍"><span class="nav-number">12.</span> <span class="nav-text">12线程等待与唤醒案例介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13线程等待与唤醒案例资源类编写"><span class="nav-number">13.</span> <span class="nav-text">13线程等待与唤醒案例资源类编写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14线程等待与唤醒案例输入和输出线程"><span class="nav-number">14.</span> <span class="nav-text">14线程等待与唤醒案例输入和输出线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15线程等待与唤醒案例测试类"><span class="nav-number">15.</span> <span class="nav-text">15线程等待与唤醒案例测试类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16线程等待与唤醒案例null值解决"><span class="nav-number">16.</span> <span class="nav-text">16线程等待与唤醒案例null值解决</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17线程等待与唤醒案例数据安全解决"><span class="nav-number">17.</span> <span class="nav-text">17线程等待与唤醒案例数据安全解决</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#18线程等待与唤醒案例通信的分析"><span class="nav-number">18.</span> <span class="nav-text">18线程等待与唤醒案例通信的分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#19线程等待与唤醒案例的实现"><span class="nav-number">19.</span> <span class="nav-text">19线程等待与唤醒案例的实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#20eclipse问题"><span class="nav-number">20.</span> <span class="nav-text">20eclipse问题</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#01线程操作共享数据的安全问题"><span class="nav-number">1.</span> <span class="nav-text">01线程操作共享数据的安全问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#02售票的案例"><span class="nav-number">2.</span> <span class="nav-text">02售票的案例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#03线程安全问题引发"><span class="nav-number">3.</span> <span class="nav-text">03线程安全问题引发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#04同步代码块解决线程安全问题"><span class="nav-number">4.</span> <span class="nav-text">04同步代码块解决线程安全问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#05同步代码块的执行原理"><span class="nav-number">5.</span> <span class="nav-text">05同步代码块的执行原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#06同步的上厕所原理"><span class="nav-number">6.</span> <span class="nav-text">06同步的上厕所原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#07同步方法"><span class="nav-number">7.</span> <span class="nav-text">07同步方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#08JDK1-5新特性Lock接口-实现类ReentrantLock"><span class="nav-number">8.</span> <span class="nav-text">08JDK1.5新特性Lock接口,实现类ReentrantLock</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#09利用Lock接口实现类ReentrantLock改进售票案例"><span class="nav-number">9.</span> <span class="nav-text">09利用Lock接口实现类ReentrantLock改进售票案例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10线程的死锁原理"><span class="nav-number">10.</span> <span class="nav-text">10线程的死锁原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11线程的死锁代码实现"><span class="nav-number">11.</span> <span class="nav-text">11线程的死锁代码实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12线程等待与唤醒案例介绍"><span class="nav-number">12.</span> <span class="nav-text">12线程等待与唤醒案例介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13线程等待与唤醒案例资源类编写"><span class="nav-number">13.</span> <span class="nav-text">13线程等待与唤醒案例资源类编写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14线程等待与唤醒案例输入和输出线程"><span class="nav-number">14.</span> <span class="nav-text">14线程等待与唤醒案例输入和输出线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15线程等待与唤醒案例测试类"><span class="nav-number">15.</span> <span class="nav-text">15线程等待与唤醒案例测试类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16线程等待与唤醒案例null值解决"><span class="nav-number">16.</span> <span class="nav-text">16线程等待与唤醒案例null值解决</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17线程等待与唤醒案例数据安全解决"><span class="nav-number">17.</span> <span class="nav-text">17线程等待与唤醒案例数据安全解决</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#18线程等待与唤醒案例通信的分析"><span class="nav-number">18.</span> <span class="nav-text">18线程等待与唤醒案例通信的分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#19线程等待与唤醒案例的实现"><span class="nav-number">19.</span> <span class="nav-text">19线程等待与唤醒案例的实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#20eclipse问题"><span class="nav-number">20.</span> <span class="nav-text">20eclipse问题</span></a></li></ol></div>
             
 
           </div>
