@@ -166,7 +166,7 @@
 <meta property="og:description" content="1、JDBC2、DBUtils">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1547297625/samples/java%20files/photo-1546868871-08b8ebc35c09.jpg">
-<meta property="og:updated_time" content="2019-01-12T12:56:40.857Z">
+<meta property="og:updated_time" content="2019-01-20T02:03:06.496Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java学习笔记——基础27()">
 <meta name="twitter:description" content="1、JDBC2、DBUtils">
@@ -502,59 +502,41 @@
 <p><img src="https://res.cloudinary.com/dpvywdzxv/image/upload/v1547297625/samples/java%20files/photo-1546868871-08b8ebc35c09.jpg" alt="" style="width:100%"></p>
 <p>1、JDBC<br>2、DBUtils</p>
 <a id="more"></a>    
-<h3 id="01JDBC概念和数据库驱动程序"><a href="#01JDBC概念和数据库驱动程序" class="headerlink" title="01JDBC概念和数据库驱动程序"></a>01JDBC概念和数据库驱动程序</h3><pre><code>* A: JDBC概念和数据库驱动程序
-    * a: JDBC概述        
-        * JDBC（Java Data Base Connectivity,java数据库连接）是一种用于执行SQL语句的Java API，
-            可以为多种关系数据库提供统一访问，它由一组用Java语言编写的类和接口组成。是Java访问数据库的标准规范
-        * JDBC提供了一种基准,据此可以构建更高级的工具和接口，使数据库开发人员能够编写数据库应用程序。
-        * JDBC需要连接驱动，驱动是两个设备要进行通信，满足一定通信数据格式，数据格式由设备提供商规定，
-            设备提供商为设备提供驱动软件，通过软件可以与该设备进行通信。
-        * 我们使用的是mysql的驱动mysql-connector-java-5.1.39-bin.jar
-    * b: 总结
-        * JDBC是java提供给开发人员的一套操作数据库的接口
-        * 数据库驱动就是实现该接口的实现类
-</code></pre><h3 id="02JDBC原理"><a href="#02JDBC原理" class="headerlink" title="02JDBC原理"></a>02JDBC原理</h3><pre><code>* A: JDBC原理
-    * a: 描述
-        * Java提供访问数据库规范称为JDBC，而生产厂商提供规范的实现类称为驱动
-        * DBC是接口，驱动是接口的实现，没有驱动将无法完成数据库连接，从而不能操作数据库！
-            每个数据库厂商都需要提供自己的驱动，用来连接自己公司的数据库，也就是说驱动一般都由数据库生成厂商提供。
-        * 图解见day29_source/JDBC实现原理.JPG
-</code></pre><h3 id="03准备数据"><a href="#03准备数据" class="headerlink" title="03准备数据"></a>03准备数据</h3><pre><code>* A: 准备数据
-    * a: 创建数据库和表结构
-        #创建数据库
-        create database mybase;
-        #使用数据库
-        use mybase;
-        ###创建分类表
-        create table sort(
-          sid int PRIMARY KEY AUTO_INCREMENT,
-          sname varchar(100),
-          sprice DOUBLE,
-          sdesc VARCHAR(500)
-        );
-
-    * b: 向表中插入数据
-        #初始化数据
-        insert into sort(sname,sprice,sdesc) values(&apos;家电&apos;,2000, &apos;优惠的促销&apos;);
-        insert into sort(sname,sprice,sdesc) values(&apos;家具&apos;,8900, &apos;家具价格上调,原材料涨价&apos;);
-        insert into sort(sname,sprice,sdesc) values(&apos;儿童玩具&apos;,290, &apos;赚家长的钱&apos;);
-        insert into sort(sname,sprice,sdesc) values(&apos;生鲜&apos;,500.99, &apos;生鲜商品&apos;);
-        insert into sort(sname,sprice,sdesc) values(&apos;服装&apos;,24000, &apos;换季销售&apos;);
-        insert into sort(sname,sprice,sdesc) values(&apos;洗涤&apos;,50, &apos;洗发水促销&apos;);            
-</code></pre><h3 id="04JDBC的开发步骤"><a href="#04JDBC的开发步骤" class="headerlink" title="04JDBC的开发步骤"></a>04JDBC的开发步骤</h3><pre><code>* A: JDBC的开发步骤
-    * a: 步骤介绍
-        1.注册驱动
-            告知JVM使用的是哪一个数据库的驱动
-        2.获得连接
-            使用JDBC中的类,完成对MySQL数据库的连接
-        3.获得语句执行平台
-            通过连接对象获取对SQL语句的执行者对象
-        4.执行sql语句
-            使用执行者对象,向数据库执行SQL语句
-            获取到数据库的执行后的结果
-        5.处理结果
-        6.释放资源  一堆close()
-</code></pre><h3 id="05导入mysql数据库驱动程序jar包"><a href="#05导入mysql数据库驱动程序jar包" class="headerlink" title="05导入mysql数据库驱动程序jar包"></a>05导入mysql数据库驱动程序jar包</h3><pre><code>* A: 导入mysql数据库驱动程序jar包
+<h3 id="01JDBC概念和数据库驱动程序"><a href="#01JDBC概念和数据库驱动程序" class="headerlink" title="01JDBC概念和数据库驱动程序"></a>01JDBC概念和数据库驱动程序</h3><ul>
+<li>A: JDBC概念和数据库驱动程序</li>
+<li>a: JDBC概述        <ul>
+<li>JDBC（Java Data Base Connectivity,java数据库连接）是一种用于执行SQL语句的Java API，<br>  可以为多种关系数据库提供统一访问，它由一组用Java语言编写的类和接口组成。是Java访问数据库的标准规范</li>
+<li>JDBC提供了一种基准,据此可以构建更高级的工具和接口，使数据库开发人员能够编写数据库应用程序。</li>
+<li>JDBC需要连接驱动，驱动是两个设备要进行通信，满足一定通信数据格式，数据格式由设备提供商规定，<br>  设备提供商为设备提供驱动软件，通过软件可以与该设备进行通信。</li>
+<li>我们使用的是mysql的驱动mysql-connector-java-5.1.39-bin.jar</li>
+</ul>
+</li>
+<li>b: 总结<ul>
+<li>JDBC是java提供给开发人员的一套操作数据库的接口</li>
+<li>数据库驱动就是实现该接口的实现类</li>
+</ul>
+</li>
+</ul>
+<h3 id="02JDBC原理"><a href="#02JDBC原理" class="headerlink" title="02JDBC原理"></a>02JDBC原理</h3><ul>
+<li>A: JDBC原理</li>
+<li>a: 描述<ul>
+<li>Java提供访问数据库规范称为JDBC，而生产厂商提供规范的实现类称为驱动</li>
+<li>DBC是接口，驱动是接口的实现，没有驱动将无法完成数据库连接，从而不能操作数据库！<br>  每个数据库厂商都需要提供自己的驱动，用来连接自己公司的数据库，也就是说驱动一般都由数据库生成厂商提供。</li>
+<li>图解见day29_source/JDBC实现原理.JPG</li>
+</ul>
+</li>
+</ul>
+<h3 id="03准备数据"><a href="#03准备数据" class="headerlink" title="03准备数据"></a>03准备数据</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">* A: 准备数据</span><br><span class="line">		* a: 创建数据库和表结构</span><br><span class="line">			#创建数据库</span><br><span class="line">			create database mybase;</span><br><span class="line">			#使用数据库</span><br><span class="line">			use mybase;</span><br><span class="line">			###创建分类表</span><br><span class="line">			<span class="function">create table <span class="title">sort</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">			  sid <span class="keyword">int</span> PRIMARY KEY AUTO_INCREMENT,</span></span></span><br><span class="line"><span class="function"><span class="params">			  sname varchar(<span class="number">100</span>)</span>,</span></span><br><span class="line"><span class="function">			  sprice DOUBLE,</span></span><br><span class="line"><span class="function">			  sdesc <span class="title">VARCHAR</span><span class="params">(<span class="number">500</span>)</span></span></span><br><span class="line"><span class="function">			)</span>;</span><br><span class="line">			</span><br><span class="line">		* b: 向表中插入数据</span><br><span class="line">			#初始化数据</span><br><span class="line">			<span class="function">insert into <span class="title">sort</span><span class="params">(sname,sprice,sdesc)</span> <span class="title">values</span><span class="params">(<span class="string">'家电'</span>,<span class="number">2000</span>, <span class="string">'优惠的促销'</span>)</span></span>;</span><br><span class="line">			<span class="function">insert into <span class="title">sort</span><span class="params">(sname,sprice,sdesc)</span> <span class="title">values</span><span class="params">(<span class="string">'家具'</span>,<span class="number">8900</span>, <span class="string">'家具价格上调,原材料涨价'</span>)</span></span>;</span><br><span class="line">			<span class="function">insert into <span class="title">sort</span><span class="params">(sname,sprice,sdesc)</span> <span class="title">values</span><span class="params">(<span class="string">'儿童玩具'</span>,<span class="number">290</span>, <span class="string">'赚家长的钱'</span>)</span></span>;</span><br><span class="line">			<span class="function">insert into <span class="title">sort</span><span class="params">(sname,sprice,sdesc)</span> <span class="title">values</span><span class="params">(<span class="string">'生鲜'</span>,<span class="number">500.99</span>, <span class="string">'生鲜商品'</span>)</span></span>;</span><br><span class="line">			<span class="function">insert into <span class="title">sort</span><span class="params">(sname,sprice,sdesc)</span> <span class="title">values</span><span class="params">(<span class="string">'服装'</span>,<span class="number">24000</span>, <span class="string">'换季销售'</span>)</span></span>;</span><br><span class="line">			<span class="function">insert into <span class="title">sort</span><span class="params">(sname,sprice,sdesc)</span> <span class="title">values</span><span class="params">(<span class="string">'洗涤'</span>,<span class="number">50</span>, <span class="string">'洗发水促销'</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+<h3 id="04JDBC的开发步骤"><a href="#04JDBC的开发步骤" class="headerlink" title="04JDBC的开发步骤"></a>04JDBC的开发步骤</h3><ul>
+<li>A: JDBC的开发步骤</li>
+<li>a: 步骤介绍<br>  1.注册驱动<pre><code>告知JVM使用的是哪一个数据库的驱动
+</code></pre>  2.获得连接<pre><code>使用JDBC中的类,完成对MySQL数据库的连接
+</code></pre>  3.获得语句执行平台<pre><code>通过连接对象获取对SQL语句的执行者对象
+</code></pre>  4.执行sql语句<pre><code>使用执行者对象,向数据库执行SQL语句
+获取到数据库的执行后的结果
+</code></pre>  5.处理结果<br>  6.释放资源  一堆close()</li>
+</ul>
+<h3 id="05导入mysql数据库驱动程序jar包"><a href="#05导入mysql数据库驱动程序jar包" class="headerlink" title="05导入mysql数据库驱动程序jar包"></a>05导入mysql数据库驱动程序jar包</h3><pre><code>* A: 导入mysql数据库驱动程序jar包
     * a: 步骤
         * 创建lib目录，用于存放当前项目需要的所有jar包
         * 选择jar包，右键执行build path / Add to Build Path
