@@ -166,7 +166,7 @@
 <meta property="og:description" content="1、DBUtils2、连接池">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1547297590/samples/java%20files/photo-1545382142-c3d9b8168eeb.jpg">
-<meta property="og:updated_time" content="2019-01-20T02:20:35.076Z">
+<meta property="og:updated_time" content="2019-01-20T14:42:08.803Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java学习笔记——基础28(DBUtils,连接池)">
 <meta name="twitter:description" content="1、DBUtils2、连接池">
@@ -502,21 +502,7 @@
 <p><img src="https://res.cloudinary.com/dpvywdzxv/image/upload/v1547297590/samples/java%20files/photo-1545382142-c3d9b8168eeb.jpg" alt="" style="width:100%"></p>
 <p>1、DBUtils<br>2、连接池    </p>
 <a id="more"></a>    
-<h3 id="01DButils工具类的介绍个三个核心类"><a href="#01DButils工具类的介绍个三个核心类" class="headerlink" title="01DButils工具类的介绍个三个核心类"></a>01DButils工具类的介绍个三个核心类</h3><ul>
-<li>A: DButils工具类的介绍个三个核心类</li>
-<li>a: 概述</li>
-<li>DBUtils是java编程中的数据库操作实用工具，小巧简单实用。</li>
-<li>DBUtils封装了对JDBC的操作，简化了JDBC操作，可以少写代码。</li>
-<li>DBUtils就是JDBC的简化开发工具包。需要项目导入commons-dbutils-1.6.jar才能够正常使用DBUtils工具。</li>
-<li>b: Dbutils三个核心功能介绍</li>
-<li>QueryRunner中提供对sql语句操作的API.</li>
-<li>update(Connection conn, String sql, Object… params) ，用来完成表数据的增加、删除、更新操作</li>
-<li>query(Connection conn, String sql, ResultSetHandler<t> rsh, Object… params) ，用来完成表数据的查询操作<ul>
-<li>ResultSetHandler接口，用于定义select操作后，怎样封装结果集.</li>
-<li>DbUtils类，它就是一个工具类,定义了关闭资源与事务处理的方法</li>
-</ul>
-</t></li>
-</ul>
+<h3 id="01DButils工具类的介绍个三个核心类"><a href="#01DButils工具类的介绍个三个核心类" class="headerlink" title="01DButils工具类的介绍个三个核心类"></a>01DButils工具类的介绍个三个核心类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* A: DButils工具类的介绍个三个核心类</span><br><span class="line">* a: 概述</span><br><span class="line">* DBUtils是java编程中的数据库操作实用工具，小巧简单实用。</span><br><span class="line">* DBUtils封装了对JDBC的操作，简化了JDBC操作，可以少写代码。</span><br><span class="line">* DBUtils就是JDBC的简化开发工具包。需要项目导入commons-dbutils-<span class="number">1.6</span>.jar才能够正常使用DBUtils工具。</span><br><span class="line">* b: Dbutils三个核心功能介绍</span><br><span class="line">* QueryRunner中提供对sql语句操作的API.</span><br><span class="line">* update(Connection conn, String sql, Object... params) ，用来完成表数据的增加、删除、更新操作</span><br><span class="line">* query(Connection conn, String sql, ResultSetHandler&lt;T&gt; rsh, Object... params) ，用来完成表数据的查询操作</span><br><span class="line">	* ResultSetHandler接口，用于定义select操作后，怎样封装结果集.</span><br><span class="line">	* DbUtils类，它就是一个工具类,定义了关闭资源与事务处理的方法</span><br></pre></td></tr></table></figure>
 <h3 id="02事务的简单介绍-此知识点简单了解，难度较大"><a href="#02事务的简单介绍-此知识点简单了解，难度较大" class="headerlink" title="02事务的简单介绍(此知识点简单了解，难度较大)"></a>02事务的简单介绍(此知识点简单了解，难度较大)</h3><ul>
 <li>A: 事务的简单介绍</li>
 <li>a: 见day32/day32_source/事务.jgp</li>
