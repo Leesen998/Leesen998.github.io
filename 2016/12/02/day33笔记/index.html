@@ -160,15 +160,15 @@
   <meta name="description" content="1、类加载器2、反射构造方法3、反射成员变量4、反射成员方法5、反射配置文件运行类中的方法">
 <meta name="keywords" content="java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="java学习笔记——基础31()">
+<meta property="og:title" content="java学习笔记——基础31(类加载器,反射)">
 <meta property="og:url" content="https://leesen998.github.io/2016/12/02/day33笔记/index.html">
 <meta property="og:site_name" content="QJun">
 <meta property="og:description" content="1、类加载器2、反射构造方法3、反射成员变量4、反射成员方法5、反射配置文件运行类中的方法">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1547297948/samples/java%20files/photo-1544728344-7efa025e5603.jpg">
-<meta property="og:updated_time" content="2019-01-12T13:00:28.273Z">
+<meta property="og:updated_time" content="2019-01-22T12:59:50.369Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="java学习笔记——基础31()">
+<meta name="twitter:title" content="java学习笔记——基础31(类加载器,反射)">
 <meta name="twitter:description" content="1、类加载器2、反射构造方法3、反射成员变量4、反射成员方法5、反射配置文件运行类中的方法">
 <meta name="twitter:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1547297948/samples/java%20files/photo-1544728344-7efa025e5603.jpg">
 
@@ -189,7 +189,7 @@
   };
 </script>
 
-  <title>java学习笔记——基础31() | QJun</title>
+  <title>java学习笔记——基础31(类加载器,反射) | QJun</title>
   
 
 
@@ -412,7 +412,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">java学习笔记——基础31()
+          <h1 class="post-title" itemprop="name headline">java学习笔记——基础31(类加载器,反射)
               
             
           </h1>
@@ -502,505 +502,19 @@
 <p><img src="https://res.cloudinary.com/dpvywdzxv/image/upload/v1547297948/samples/java%20files/photo-1544728344-7efa025e5603.jpg" alt="" style="width:100%"></p>
 <p>1、类加载器<br>2、反射构造方法<br>3、反射成员变量<br>4、反射成员方法<br>5、反射配置文件运行类中的方法 </p>
 <a id="more"></a>
-<h3 id="01类加载器"><a href="#01类加载器" class="headerlink" title="01类加载器"></a>01类加载器</h3><pre><code>* A.类的加载
-    当程序要使用某个类时，如果该类还未被加载到内存中，则系统会通过加载，连接，初始化三步来实现对这个类进行初始化。
-    * a 加载 
-        * 就是指将class文件读入内存，并为之创建一个Class对象。
-        * 任何类被使用时系统都会建立一个Class对象
-    * b 连接
-        * 验证 是否有正确的内部结构，并和其他类协调一致
-        * 准备 负责为类的静态成员分配内存，并设置默认初始化值
-        * 解析 将类的二进制数据中的符号引用替换为直接引用
-    * c 初始化 
-        * 就是我们以前讲过的初始化步骤（new 对象）
-    * 注：简单的说就是：把.class文件加载到内存里，并把这个.class文件封装成一个Class类型的对象。
-* B.类的加载时机
-    以下的情况，会加载这个类。
-    * a. 创建类的实例
-    * b. 类的静态变量，或者为静态变量赋值
-    * c. 类的静态方法
-    * d. 使用反射方式来强制创建某个类或接口对应的java.lang.Class对象
-    * e. 初始化某个类的子类
-    * f. 直接使用java.exe命令来运行某个主类
-
-* C: 类加载器(了解)
-    负责将.class文件加载到内在中，并为之生成对应的Class对象。
-    * a. Bootstrap ClassLoader 根类加载器
-        * 也被称为引导类加载器，负责Java核心类的加载
-        * 比如System,String等。在JDK中JRE的lib目录下rt.jar文件中
-</code></pre><p>        * b. Extension ClassLoader 扩展类加载器</p>
-<pre><code>* 负责JRE的扩展目录中jar包的加载。
-* 在JDK中JRE的lib目录下ext目录
-</code></pre><p>        * c. System ClassLoader 系统类加载器</p>
-<pre><code>* 负责在JVM启动时加载来自java命令的class文件，以及classpath环境变量所指定的jar包和类路径。
-* 我们用的是System ClassLoader 系统类加载器
-</code></pre><h3 id="02-反射定义"><a href="#02-反射定义" class="headerlink" title="02 反射定义"></a>02 反射定义</h3><pre><code>* a. JAVA反射机制是在运行状态中，
-        对于任意一个类，都能够知道这个类的所有属性和方法；
-        对于任意一个对象，都能够调用它的任意一个方法和属性；
-    这种动态获取的信息以及动态调用对象的方法的功能称为java语言的反射机制。
-
-* b.反射技术
-    条件：运行状态
-    已知：一个类或一个对象(根本是已知.class文件)
-    结果：得到这个类或对象的所有方法和属性
-
-* 注: 要想解剖一个类,必须先要获取到该类的字节码文件对象。而解剖使用的就是Class类中的方法.所以先要获取到每一个字节码文件对应的Class类型的对象。
-</code></pre><h3 id="B-Class类"><a href="#B-Class类" class="headerlink" title="* B. Class类"></a>* B. Class类</h3><pre><code>* a. Class类及Class对象的了解
-    要想解剖一个类，必须先了解Class对象。
-    阅读API的Class类得知，Class 没有公共构造方法。Class 对象是在加载类时由 Java 虚拟机以及通过调用类加载器中的 defineClass 方法自动构造的。
-* b. 得到Class对象
-    * 1. 有三个方法
-        方式一: 通过Object类中的getClass()方法
-            Person person = new Person();
-            Class clazz = person.getClass();
-        方式二: 通过 类名.class 获取到字节码文件对象（任意数据类型都具备一个class静态属性,看上去要比第一种方式简单）。
-            Class clazz = Person.class;
-        方式三: 通过Class类中的方法（将类名作为字符串传递给Class类中的静态方法forName即可）。
-            Class c3 = Class.forName(&quot;Person&quot;);
-        注：第三种和前两种的区别是：
-                前两种你必须明确Person类型.
-                后面是指定这种类型的字符串就行.这种扩展更强.我不需要知道你的类.我只提供字符串,按照配置文件加载就可以了
-
-    * 2. 得到Class对象的三个方法代码演示：
-        代码演示
-        /*
-         * 获取.class字节码文件对象的方式
-         *         1：通过Object类中的getObject()方法
-         *         2: 通过 类名.class 获取到字节码文件对象
-         *         3: 反射中的方法,
-         *             public static Class&lt;?&gt; forName(String className) throws ClassNotFoundException
-         *             返回与带有给定字符串名的类或接口相关联的 Class 对象 
-         */
-        public class ReflectDemo {
-            public static void main(String[] args) throws ClassNotFoundException {
-                // 1： 通过Object类中的getObject()方法
-                // Person p1 = new Person();
-                // Class c1 = p1.getClass();
-                // System.out.println(&quot;c1 = &quot;+ c1);
-
-                // 2: 通过 类名.class 获取到字节码文件对象
-                // Class c2 = Person.class;
-                // System.out.println(&quot;c2 = &quot;+ c2);
-
-                // 3: 反射中的方法
-                Class c3 = Class.forName(&quot;cn.itcast_01_Reflect.Person&quot;);// 包名.类名
-                System.out.println(&quot;c3 = &quot; + c3);
-            }
-        }
-</code></pre><p>                Person类<br>                package cn.itcast_01_Reflect;<br>                public class Person {<br>                    //成员变量<br>                    public String name;<br>                    public int age;<br>                    private String address;</p>
-<pre><code>        //构造方法
-        public Person() {
-            System.out.println(&quot;空参数构造方法&quot;);
-        }
-
-        public Person(String name) {
-            this.name = name;
-            System.out.println(&quot;带有String的构造方法&quot;);
-        }
-        //私有的构造方法
-        private Person(String name, int age){
-            this.name = name;
-            this.age = age;
-            System.out.println(&quot;带有String，int的构造方法&quot;);
-        }
-
-        public Person(String name, int age, String address){
-            this.name = name;
-            this.age = age;
-            this.address = address;
-            System.out.println(&quot;带有String, int, String的构造方法&quot;);
-        }
-
-        //成员方法
-        //没有返回值没有参数的方法
-        public void method1(){
-            System.out.println(&quot;没有返回值没有参数的方法&quot;);
-        }
-        //没有返回值，有参数的方法
-        public void method2(String name){
-            System.out.println(&quot;没有返回值，有参数的方法 name= &quot;+ name);
-        }
-        //有返回值，没有参数
-        public int method3(){
-            System.out.println(&quot;有返回值，没有参数的方法&quot;);
-            return 123;
-        }
-        //有返回值，有参数的方法
-        public String method4(String name){
-            System.out.println(&quot;有返回值，有参数的方法&quot;);
-            return &quot;哈哈&quot; + name;
-        }
-        //私有方法
-        private void method5(){
-            System.out.println(&quot;私有方法&quot;);
-        }
-
-        @Override
-        public String toString() {
-            return &quot;Person [name=&quot; + name + &quot;, age=&quot; + age + &quot;, address=&quot; + address+ &quot;]&quot;;
-        }
-    }
-* 注: Class类型的唯一性
-    因为一个.class文件在内存里只生成一个Class对象，所以无论那一种方法得到Class对象，得到的都是同一个对象。
-</code></pre><h3 id="C-通过反射获取无参构造方法并使用"><a href="#C-通过反射获取无参构造方法并使用" class="headerlink" title="* C.通过反射获取无参构造方法并使用"></a>* C.通过反射获取无参构造方法并使用</h3><pre><code>* a. 得到无参构造方法
-    public Constructor&lt;?&gt;[] getConstructors() 
-        获取所有的public 修饰的构造方法。
-        选择无参构造方法，不建议使用。
-    public Constructor&lt;T&gt; getConstructor(Class&lt;?&gt;... parameterTypes) 
-        获取public修饰, 指定参数类型所对应的构造方法。
-        不传参数得到无参构造方法。
-* b. 运行无参构造方法
-    public T newInstance(Object... initargs) 
-        使用此 Constructor 对象表示的构造方法来创建该构造方法的声明类的新实例，并用指定的初始化参数初始化该实例。 
-        因为是无参构造，所以不传参数。
-* c. 通过反射获取无参构造方法并使用的代码演示：
-        package cn.itcast.demo1;
-
-        import java.lang.reflect.Constructor;
-
-        /*
-         *  通过反射获取class文件中的构造方法,运行构造方法
-         *  运行构造方法,创建对象
-         *    获取class文件对象
-         *    从class文件对象中,获取需要的成员
-         *    
-         *  Constructor 描述构造方法对象类
-         */
-        public class ReflectDemo1 {
-            public static void main(String[] args) throws Exception {
-
-                Class c = Class.forName(&quot;cn.itcast.demo1.Person&quot;);
-                //使用class文件对象,获取类中的构造方法
-                //  Constructor[]  getConstructors() 获取class文件对象中的所有公共的构造方法
-                /*Constructor[] cons = c.getConstructors();
-                for(Constructor con : cons){
-                    System.out.println(con);
-                }*/
-                //获取指定的构造方法,空参数的构造方法
-                Constructor con =  c.getConstructor();
-                //运行空参数构造方法,Constructor类方法 newInstance()运行获取到的构造方法
-                Object obj = con.newInstance();
-                System.out.println(obj.toString());
-            }
-        }
-</code></pre><h3 id="D-通过反射获取有参构造方法并使用"><a href="#D-通过反射获取有参构造方法并使用" class="headerlink" title="* D. 通过反射获取有参构造方法并使用"></a>* D. 通过反射获取有参构造方法并使用</h3><pre><code>* a. 得到有参的构造方法
-    public Constructor&lt;T&gt; getConstructor(Class&lt;?&gt;... parameterTypes) 
-        获取public修饰, 指定参数类型所对应的构造方法。
-        传相应的参数类型得到有参构造方法。
-* b. 运行无参构造方法
-    public T newInstance(Object... initargs) 
-        使用此 Constructor 对象表示的构造方法来创建该构造方法的声明类的新实例，并用指定的初始化参数初始化该实例。 
-        因为是有参构造，所以传相应的参数值。
-* c. 通过反射获取有参构造方法并使用的代码演示：
-    package cn.itcast.demo1;
-
-    import java.lang.reflect.Constructor;
-
-    /*
-     *  通过反射,获取有参数的构造方法并运行
-     *  方法getConstructor,传递可以构造方法相对应的参数列表即可
-     */
-    public class ReflectDemo2 {
-        public static void main(String[] args)throws Exception {
-            Class c = Class.forName(&quot;cn.itcast.demo1.Person&quot;);
-            //获取带有,String和int参数的构造方法
-            //Constructor&lt;T&gt; getConstructor(Class&lt;?&gt;... parameterTypes)  
-            //Class&lt;?&gt;... parameterTypes 传递要获取的构造方法的参数列表
-            Constructor con = c.getConstructor(String.class,int.class);
-            //运行构造方法
-            // T newInstance(Object... initargs)  
-            //Object... initargs 运行构造方法后,传递的实际参数
-            Object obj = con.newInstance(&quot;张三&quot;,20);
-            System.out.println(obj);
-        }
-    }
-</code></pre><h3 id="E-通过反射获取有参构造方法并使用快捷方式"><a href="#E-通过反射获取有参构造方法并使用快捷方式" class="headerlink" title="* E. 通过反射获取有参构造方法并使用快捷方式"></a>* E. 通过反射获取有参构造方法并使用快捷方式</h3><pre><code>* a. 使用的前提
-    类有空参的公共构造方法。（如果是同包，默认权限也可以）
-* b. 使用的基础
-    Class类的 public T newInstance() 方法
-         创建此 Class 对象所表示的类的一个新实例。
-* c. 通过反射获取有参构造方法并使用快捷方式的代码演示：
-    package cn.itcast.demo1;
-    /*
-     * 反射获取构造方法并运行,有快捷点的方式
-     * 有前提:
-     *   被反射的类,必须具有空参数构造方法
-     *   构造方法权限必须public
-     */
-    public class ReflectDemo3 {
-        public static void main(String[] args) throws Exception {
-            Class c = Class.forName(&quot;cn.itcast.demo1.Person&quot;);
-            // Class类中定义方法, T newInstance() 直接创建被反射类的对象实例
-            Object obj = c.newInstance();
-            System.out.println(obj);
-        }
-    }
-</code></pre><h3 id="F-通过反射获取私有构造方法并使用"><a href="#F-通过反射获取私有构造方法并使用" class="headerlink" title="* F. 通过反射获取私有构造方法并使用"></a>* F. 通过反射获取私有构造方法并使用</h3><pre><code>* a. 得到私有的构造方法
-    public Constructor&lt;T&gt; getDeclaredConstructor(Class&lt;?&gt;... parameterTypes) 
-        获取指定参数类型所对应的构造方法(包含私有的)。
-    public Constructor&lt;?&gt;[] getDeclaredConstructors() 
-        获取所有的构造方法(包含私有的)。
-* b. 运行私有构造方法
-    public void setAccessible(boolean flag)
-        将此对象的 accessible 标志设置为指示的布尔值。
-        设置为true,这个方法保证我们得到的私有构造方法的运行。（取消运行时期的权限检查。）
-    public T newInstance(Object... initargs) 
-        使用此 Constructor 对象表示的构造方法来创建该构造方法的声明类的新实例，并用指定的初始化参数初始化该实例。 
-* c. 通过反射获取私有构造方法并使用的代码演示：
-    package cn.itcast.demo1;
-
-    import java.lang.reflect.Constructor;
-
-    /*
-     *  反射获取私有的构造方法运行
-     *  不推荐,破坏了程序的封装性,安全性
-     *  暴力反射
-     */
-    public class ReflectDemo4 {
-        public static void main(String[] args) throws Exception{
-            Class c = Class.forName(&quot;cn.itcast.demo1.Person&quot;);
-            //Constructor[] getDeclaredConstructors()获取所有的构造方法,包括私有的
-            /*Constructor[] cons = c.getDeclaredConstructors();
-            for(Constructor con : cons){
-                System.out.println(con);
-            }*/
-            //Constructor getDeclaredConstructor(Class...c)获取到指定参数列表的构造方法
-            Constructor con = c.getDeclaredConstructor(int.class,String.class);
-
-            //Constructor类,父类AccessibleObject,定义方法setAccessible(boolean b)
-            con.setAccessible(true);
-
-            Object obj = con.newInstance(18,&quot;lisi&quot;);
-            System.out.println(obj);
-        }
-    }
-* 注：不推荐，破坏了程序的封装性,安全性。
-</code></pre><h3 id="G-反射获取成员变量并改值"><a href="#G-反射获取成员变量并改值" class="headerlink" title="* G. 反射获取成员变量并改值"></a>* G. 反射获取成员变量并改值</h3><pre><code>* a. 获取成员变量
-    * 得到公共的成员变量
-        public Field getField(String name) 
-            返回一个 Field 对象，它反映此 Class 对象所表示的类或接口的指定公共成员字段。 
-        public Field[] getFields() 
-            返回一个包含某些 Field 对象的数组，这些对象反映此 Class 对象所表示的类或接口的所有可访问公共字段。 
-    * 得到所有的成员变量(包括私有的，如果要进行修改私有成员变量，要先进行public void setAccessible(boolean flag) 设置。)
-        public Field getDeclaredField(String name) 
-            返回一个 Field 对象，该对象反映此 Class 对象所表示的类或接口的指定已声明字段。 
-        public Field[] getDeclaredFields() 
-            返回 Field 对象的一个数组，这些对象反映此 Class 对象所表示的类或接口所声明的所有字段。 
-* b. 修改成员变量(Field)的值
-    * 修改公共的成员变量
-        public void set(Object obj, Object value) 
-            将指定对象变量上此 Field 对象表示的字段设置为指定的新值。 
-            obj指的是修改的是那个对象的这个成员变量值。
-* c. 反射获取成员变量并改值的代码演示
-    package cn.itcast.demo1;
-    import java.lang.reflect.Field;
-    /*
-     *  反射获取成员变量,并修改值
-     *  Person类中的成员String name
-     */
-    public class ReflectDemo5 {
-        public static void main(String[] args) throws Exception{
-            Class c = Class.forName(&quot;cn.itcast.demo1.Person&quot;);
-            Object obj = c.newInstance();
-            //获取成员变量 Class类的方法 getFields() class文件中的所有公共的成员变量
-            //返回值是Field[]    Field类描述成员变量对象的类
-            /*Field[] fields = c.getFields();
-            for(Field f : fields){
-                System.out.println(f);
-            }*/
-
-            //获取指定的成员变量 String name
-            //Class类的方法  Field getField(传递字符串类型的变量名) 获取指定的成员变量
-            Field field = c.getField(&quot;name&quot;);
-
-            //Field类的方法 void set(Object obj, Object value) ,修改成员变量的值
-            //Object obj 必须有对象的支持,  Object value 修改后的值
-            field.set(obj,&quot;王五&quot;);
-            System.out.println(obj);
-
-        }
-    }
-</code></pre><h3 id="H-反射获取空参数成员方法并运行"><a href="#H-反射获取空参数成员方法并运行" class="headerlink" title="* H. 反射获取空参数成员方法并运行"></a>* H. 反射获取空参数成员方法并运行</h3><pre><code>* a. 获取空参数成员方法
-    * 得到公共的成员方法
-        public Method getMethod(String name, Class&lt;?&gt;... parameterTypes) 
-            返回一个 Method 对象，它反映此 Class 对象所表示的类或接口的指定公共成员方法。 
-        public Method[] getMethods()
-            返回一个包含某些 Method 对象的数组，这些对象反映此 Class对象所表示的类或接口（包括那些由该类或接口声明的以及从超类和超接口继承的那些的类或接口）的公共 member 方法。
-    * 得到全部的成员方法(包括私有的，如果要使用私有成员方法，要先进行public void setAccessible(boolean flag) 设置。)
-        public Method getDeclaredMethod(String name, Class&lt;?&gt;... parameterTypes) 
-            返回一个 Method 对象，该对象反映此 Class 对象所表示的类或接口的指定已声明方法。 
-        public Method[] getDeclaredMethods() 
-            返回 Method 对象的一个数组，这些对象反映此 Class 对象表示的类或接口声明的所有方法，包括公共、保护、默认（包）访问和私有方法，但不包括继承的方法。 
-* b. 使用Method方法对象
-    public Object invoke(Object obj, Object... args) 
-        对带有指定参数的指定对象调用由此 Method 对象表示的底层方法。 
-        obj 指的是调这个方法的对象。
-        args 指的是调用这个方法所要用到的参数列表。
-        返回值Object就是方法的返回对象。如果方法没有返回值 ，返回的是null.
-* c. 反射获取空参数成员方法并运行代码演示
-    package cn.itcast.demo1;
-
-    import java.lang.reflect.Method;
-
-    /*
-     *  反射获取成员方法并运行
-     *  public void eat(){}
-     */
-    public class ReflectDemo6 {
-        public static void main(String[] args) throws Exception{
-            Class c = Class.forName(&quot;cn.itcast.demo1.Person&quot;);
-            Object obj = c.newInstance();
-            //获取class对象中的成员方法
-            // Method[] getMethods()获取的是class文件中的所有公共成员方法,包括继承的
-            // Method类是描述成员方法的对象
-            /*Method[] methods = c.getMethods();
-            for(Method m : methods){
-                System.out.println(m);
-            }*/
-
-            //获取指定的方法eat运行
-            // Method getMethod(String methodName,Class...c)
-            // methodName获取的方法名  c 方法的参数列表
-            Method method = c.getMethod(&quot;eat&quot;);
-            //使用Method类中的方法,运行获取到的方法eat
-            //Object invoke(Object obj, Object...o)
-            method.invoke(obj);
-        }
-    }
-</code></pre><h3 id="I-反射获取有参数成员方法并运行"><a href="#I-反射获取有参数成员方法并运行" class="headerlink" title="* I. 反射获取有参数成员方法并运行"></a>* I. 反射获取有参数成员方法并运行</h3><pre><code>* a. 获取有参数成员方法
-    * 得到公共的成员方法
-        public Method getMethod(String name, Class&lt;?&gt;... parameterTypes) 
-            返回一个 Method 对象，它反映此 Class 对象所表示的类或接口的指定公共成员方法。 
-        public Method[] getMethods()
-            返回一个包含某些 Method 对象的数组，这些对象反映此 Class对象所表示的类或接口（包括那些由该类或接口声明的以及从超类和超接口继承的那些的类或接口）的公共 member 方法。
-    * 得到全部的成员方法(包括私有的，如果要使用私有成员方法，要先进行public void setAccessible(boolean flag) 设置。)
-        public Method getDeclaredMethod(String name, Class&lt;?&gt;... parameterTypes) 
-            返回一个 Method 对象，该对象反映此 Class 对象所表示的类或接口的指定已声明方法。 
-        public Method[] getDeclaredMethods() 
-            返回 Method 对象的一个数组，这些对象反映此 Class 对象表示的类或接口声明的所有方法，包括公共、保护、默认（包）访问和私有方法，但不包括继承的方法。 
-* b. 使用Method方法对象
-    public Object invoke(Object obj, Object... args) 
-        对带有指定参数的指定对象调用由此 Method 对象表示的底层方法。 
-        obj 指的是调这个方法的对象。
-        args 指的是调用这个方法所要用到的参数列表。
-        返回值Object就是方法的返回对象。如果方法没有返回值 ，返回的是null.
-* c. 反射获取有参数成员方法并运行代码演示
-    package cn.itcast.demo1;
-    import java.lang.reflect.Method;
-
-    /*
-     *  反射获取有参数的成员方法并执行
-     *  public void sleep(String,int,double){}
-     */
-    public class ReflectDemo7 {
-        public static void main(String[] args) throws Exception{
-            Class c = Class.forName(&quot;cn.itcast.demo1.Person&quot;);
-            Object obj = c.newInstance();
-            //调用Class类的方法getMethod获取指定的方法sleep
-            Method method = c.getMethod(&quot;sleep&quot;, String.class,int.class,double.class);
-            //调用Method类的方法invoke运行sleep方法
-            method.invoke(obj, &quot;休眠&quot;,100,888.99);
-        }
-    }
-</code></pre><h3 id="J-反射泛型擦除"><a href="#J-反射泛型擦除" class="headerlink" title="* J. 反射泛型擦除"></a>* J. 反射泛型擦除</h3><pre><code>* a. 使用情况
-    例如：在泛型为String的集合里，添加Integer的数据
-    ArrayList&lt;String&gt; list = new ArrayList&lt;String&gt;();
-    list.add(100);
-* b. 能用泛型擦除的理论
-    伪泛型：在编译后的.class文件里面是没有泛型的。类型为Object。
-    用反射的方法绕过编译，得到Class文件对象，直接调用add方法。
-* c. 反射泛型擦除的代码演示
-    package cn.itcast.demo2;
-    import java.lang.reflect.Method;
-    import java.util.ArrayList;
-
-    /*
-     *   定义集合类,泛型String
-     *   要求向集合中添加Integer类型
-     *   
-     *   反射方式,获取出集合ArrayList类的class文件对象
-     *   通过class文件对象,调用add方法
-     *   
-     *   对反射调用方法是否理解
-     */
-    public class ReflectTest {
-        public static void main(String[] args)throws Exception {
-            ArrayList&lt;String&gt; array  = new ArrayList&lt;String&gt;();
-            array.add(&quot;a&quot;);
-            //反射方式,获取出集合ArrayList类的class文件对象
-            Class c = array.getClass();
-            //获取ArrayList.class文件中的方法add
-            Method method = c.getMethod(&quot;add&quot;,Object.class);
-            //使用invoke运行ArrayList方法add
-            method.invoke(array, 150);
-            method.invoke(array, 1500);
-            method.invoke(array, 15000);
-            System.out.println(array);
-
-
-        }
-    }
-</code></pre><h3 id="K-反射通过配置文件来决定运行的步骤"><a href="#K-反射通过配置文件来决定运行的步骤" class="headerlink" title="* K. 反射通过配置文件来决定运行的步骤"></a>* K. 反射通过配置文件来决定运行的步骤</h3><pre><code>* a. 操作依据
-        通过配置文件得到类名和要运行的方法名,用反射的操作类名得到对象和调用方法
-* b. 实现步骤:
-     *    1. 准备配置文件,键值对
-     *    2. IO流读取配置文件  Reader
-     *    3. 文件中的键值对存储到集合中 Properties
-     *        集合保存的键值对,就是类名和方法名
-     *    4. 反射获取指定类的class文件对象
-     *    5. class文件对象,获取指定的方法
-     *    6. 运行方法
-* c. 代码演示
-    代码：
-    package cn.itcast.demo3;
-
-    import java.io.FileReader;
-    import java.lang.reflect.Method;
-    import java.util.Properties;
-
-    /*
-     *  调用Person方法,调用Student方法,调用Worker方法
-     *  类不清楚,方法也不清楚
-     *  通过配置文件实现此功能
-     *    运行的类名和方法名字,以键值对的形式,写在文本中
-     *    运行哪个类,读取配置文件即可
-     *  实现步骤:
-     *    1. 准备配置文件,键值对
-     *    2. IO流读取配置文件  Reader
-     *    3. 文件中的键值对存储到集合中 Properties
-     *        集合保存的键值对,就是类名和方法名
-     *    4. 反射获取指定类的class文件对象
-     *    5. class文件对象,获取指定的方法
-     *    6. 运行方法
-     */
-    public class Test {
-        public static void main(String[] args) throws Exception{
-            //IO流读取配置文件
-            FileReader r = new FileReader(&quot;config.properties&quot;);
-            //创建集合对象
-            Properties pro = new Properties();
-            //调用集合方法load,传递流对象
-            pro.load(r);
-            r.close();
-            //通过键获取值
-            String className = pro.getProperty(&quot;className&quot;);
-            String methodName = pro.getProperty(&quot;methodName&quot;);
-            //反射获取指定类的class文件对象
-            Class c = Class.forName(className);
-            Object obj = c.newInstance();
-            //获取指定的方法名
-            Method method = c.getMethod(methodName);
-            method.invoke(obj);
-        }
-    }
-    配置文件：
-    #className=cn.itcast.demo3.Student
-    #methodName=study
-    className=cn.itcast.demo3.Person
-    methodName=eat
-    #className=cn.itcast.demo3.Worker
-    #methodName=job
-</code></pre><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<h3 id="01类加载器"><a href="#01类加载器" class="headerlink" title="01类加载器"></a>01类加载器</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">* A.类的加载</span><br><span class="line">当程序要使用某个类时，如果该类还未被加载到内存中，则系统会通过加载，连接，初始化三步来实现对这个类进行初始化。</span><br><span class="line"></span><br><span class="line">	* a 加载 </span><br><span class="line">* 就是指将<span class="class"><span class="keyword">class</span>文件读入内存，并为之创建一个<span class="title">Class</span>对象。</span></span><br><span class="line"><span class="class">* 任何类被使用时系统都会建立一个<span class="title">Class</span>对象</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class">	* <span class="title">b</span> 连接</span></span><br><span class="line"><span class="class">* 验证 是否有正确的内部结构，并和其他类协调一致</span></span><br><span class="line"><span class="class">* 准备 负责为类的静态成员分配内存，并设置默认初始化值</span></span><br><span class="line"><span class="class">* 解析 将类的二进制数据中的符号引用替换为直接引用</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class">	* <span class="title">c</span> 初始化 </span></span><br><span class="line"><span class="class">* 就是我们以前讲过的初始化步骤（<span class="title">new</span> 对象）</span></span><br><span class="line"><span class="class">* 注：简单的说就是：把.<span class="title">class</span>文件加载到内存里，并把这个.<span class="title">class</span>文件封装成一个<span class="title">Class</span>类型的对象。</span></span><br><span class="line"><span class="class">* </span></span><br><span class="line"><span class="class">* <span class="title">B</span>.类的加载时机</span></span><br><span class="line"><span class="class">	以下的情况，会加载这个类。</span></span><br><span class="line"><span class="class">	* <span class="title">a</span>. 创建类的实例</span></span><br><span class="line"><span class="class">	* <span class="title">b</span>. 类的静态变量，或者为静态变量赋值</span></span><br><span class="line"><span class="class">	* <span class="title">c</span>. 类的静态方法</span></span><br><span class="line"><span class="class">	* <span class="title">d</span>. 使用反射方式来强制创建某个类或接口对应的<span class="title">java</span>.<span class="title">lang</span>.<span class="title">Class</span>对象</span></span><br><span class="line"><span class="class">	* <span class="title">e</span>. 初始化某个类的子类</span></span><br><span class="line"><span class="class">	* <span class="title">f</span>. 直接使用<span class="title">java</span>.<span class="title">exe</span>命令来运行某个主类</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class"></span></span><br><span class="line">* C: 类加载器(了解)</span><br><span class="line">负责将.class文件加载到内在中，并为之生成对应的Class对象。</span><br><span class="line">	* a. Bootstrap ClassLoader 根类加载器</span><br><span class="line">* 也被称为引导类加载器，负责Java核心类的加载</span><br><span class="line">* 比如System,String等。在JDK中JRE的lib目录下rt.jar文件中</span><br><span class="line">	* b. Extension ClassLoader 扩展类加载器</span><br><span class="line">* 负责JRE的扩展目录中jar包的加载。</span><br><span class="line">* 在JDK中JRE的lib目录下ext目录</span><br><span class="line">	* c. System ClassLoader 系统类加载器</span><br><span class="line">* 负责在JVM启动时加载来自java命令的<span class="class"><span class="keyword">class</span>文件，以及<span class="title">classpath</span>环境变量所指定的<span class="title">jar</span>包和类路径。</span></span><br><span class="line"><span class="class">* 我们用的是<span class="title">System</span> <span class="title">ClassLoader</span> 系统类加载器</span></span><br></pre></td></tr></table></figure>
+<h3 id="02-反射定义"><a href="#02-反射定义" class="headerlink" title="02 反射定义"></a>02 反射定义</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">* a. JAVA反射机制是在运行状态中，</span><br><span class="line">	对于任意一个类，都能够知道这个类的所有属性和方法；</span><br><span class="line">	对于任意一个对象，都能够调用它的任意一个方法和属性；</span><br><span class="line">这种动态获取的信息以及动态调用对象的方法的功能称为java语言的反射机制。</span><br><span class="line"></span><br><span class="line">* b.反射技术</span><br><span class="line">条件：运行状态</span><br><span class="line">已知：一个类或一个对象(根本是已知.class文件)</span><br><span class="line">结果：得到这个类或对象的所有方法和属性</span><br><span class="line"></span><br><span class="line">* 注: 要想解剖一个类,必须先要获取到该类的字节码文件对象。而解剖使用的就是Class类中的方法.所以先要获取到每一个字节码文件对应的Class类型的对象。</span><br><span class="line">*</span><br></pre></td></tr></table></figure>
+<h3 id="B-Class类"><a href="#B-Class类" class="headerlink" title="* B. Class类"></a>* B. Class类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><span class="line">* a. Class类及Class对象的了解</span><br><span class="line">要想解剖一个类，必须先了解Class对象。</span><br><span class="line">阅读API的Class类得知，Class 没有公共构造方法。Class 对象是在加载类时由 Java 虚拟机以及通过调用类加载器中的 defineClass 方法自动构造的。</span><br><span class="line">* b. 得到Class对象</span><br><span class="line">* <span class="number">1</span>. 有三个方法</span><br><span class="line">* </span><br><span class="line">	方式一: 通过Object类中的getClass()方法</span><br><span class="line">		Person person = <span class="keyword">new</span> Person();</span><br><span class="line">		Class clazz = person.getClass();</span><br><span class="line"></span><br><span class="line">	方式二: 通过 类名.class 获取到字节码文件对象（任意数据类型都具备一个<span class="class"><span class="keyword">class</span>静态属性,看上去要比第一种方式简单）。</span></span><br><span class="line"><span class="class">		<span class="title">Class</span> <span class="title">clazz</span> </span>= Person.class;</span><br><span class="line"></span><br><span class="line">	方式三: 通过Class类中的方法（将类名作为字符串传递给Class类中的静态方法forName即可）。</span><br><span class="line">		Class c3 = Class.forName(<span class="string">"Person"</span>);</span><br><span class="line">	注：第三种和前两种的区别是：</span><br><span class="line">			前两种你必须明确Person类型.</span><br><span class="line">			后面是指定这种类型的字符串就行.这种扩展更强.我不需要知道你的类.我只提供字符串,按照配置文件加载就可以了</span><br><span class="line"></span><br><span class="line">* <span class="number">2</span>. 得到Class对象的三个方法代码演示：</span><br><span class="line">	代码演示</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * 获取.class字节码文件对象的方式</span></span><br><span class="line"><span class="comment">	 * 		1：通过Object类中的getObject()方法</span></span><br><span class="line"><span class="comment">	 * 		2: 通过 类名.class 获取到字节码文件对象</span></span><br><span class="line"><span class="comment">	 * 		3: 反射中的方法,</span></span><br><span class="line"><span class="comment">	 * 			public static Class&lt;?&gt; forName(String className) throws ClassNotFoundException</span></span><br><span class="line"><span class="comment">	 * 			返回与带有给定字符串名的类或接口相关联的 Class 对象 </span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReflectDemo</span> </span>&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ClassNotFoundException </span>&#123;</span><br><span class="line">			<span class="comment">// 1： 通过Object类中的getObject()方法</span></span><br><span class="line">			<span class="comment">// Person p1 = new Person();</span></span><br><span class="line">			<span class="comment">// Class c1 = p1.getClass();</span></span><br><span class="line">			<span class="comment">// System.out.println("c1 = "+ c1);</span></span><br><span class="line"></span><br><span class="line">			<span class="comment">// 2: 通过 类名.class 获取到字节码文件对象</span></span><br><span class="line">			<span class="comment">// Class c2 = Person.class;</span></span><br><span class="line">			<span class="comment">// System.out.println("c2 = "+ c2);</span></span><br><span class="line"></span><br><span class="line">			<span class="comment">// 3: 反射中的方法</span></span><br><span class="line">			Class c3 = Class.forName(<span class="string">"cn.itcast_01_Reflect.Person"</span>);<span class="comment">// 包名.类名</span></span><br><span class="line">			System.out.println(<span class="string">"c3 = "</span> + c3);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">				Person类</span><br><span class="line">	<span class="keyword">package</span> cn.itcast_01_Reflect;</span><br><span class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">		<span class="comment">//成员变量</span></span><br><span class="line">		<span class="keyword">public</span> String name;</span><br><span class="line">		<span class="keyword">public</span> <span class="keyword">int</span> age;</span><br><span class="line">		<span class="keyword">private</span> String address;</span><br><span class="line"></span><br><span class="line">		<span class="comment">//构造方法</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">()</span> </span>&#123;</span><br><span class="line">			System.out.println(<span class="string">"空参数构造方法"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">			<span class="keyword">this</span>.name = name;</span><br><span class="line">			System.out.println(<span class="string">"带有String的构造方法"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//私有的构造方法</span></span><br><span class="line">		<span class="function"><span class="keyword">private</span> <span class="title">Person</span><span class="params">(String name, <span class="keyword">int</span> age)</span></span>&#123;</span><br><span class="line">			<span class="keyword">this</span>.name = name;</span><br><span class="line">			<span class="keyword">this</span>.age = age;</span><br><span class="line">			System.out.println(<span class="string">"带有String，int的构造方法"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">(String name, <span class="keyword">int</span> age, String address)</span></span>&#123;</span><br><span class="line">			<span class="keyword">this</span>.name = name;</span><br><span class="line">			<span class="keyword">this</span>.age = age;</span><br><span class="line">			<span class="keyword">this</span>.address = address;</span><br><span class="line">			System.out.println(<span class="string">"带有String, int, String的构造方法"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//成员方法</span></span><br><span class="line">		<span class="comment">//没有返回值没有参数的方法</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method1</span><span class="params">()</span></span>&#123;</span><br><span class="line">			System.out.println(<span class="string">"没有返回值没有参数的方法"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//没有返回值，有参数的方法</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method2</span><span class="params">(String name)</span></span>&#123;</span><br><span class="line">			System.out.println(<span class="string">"没有返回值，有参数的方法 name= "</span>+ name);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//有返回值，没有参数</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">method3</span><span class="params">()</span></span>&#123;</span><br><span class="line">			System.out.println(<span class="string">"有返回值，没有参数的方法"</span>);</span><br><span class="line">			<span class="keyword">return</span> <span class="number">123</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//有返回值，有参数的方法</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> String <span class="title">method4</span><span class="params">(String name)</span></span>&#123;</span><br><span class="line">			System.out.println(<span class="string">"有返回值，有参数的方法"</span>);</span><br><span class="line">			<span class="keyword">return</span> <span class="string">"哈哈"</span> + name;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//私有方法</span></span><br><span class="line">		<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">method5</span><span class="params">()</span></span>&#123;</span><br><span class="line">			System.out.println(<span class="string">"私有方法"</span>);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="meta">@Override</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="string">"Person [name="</span> + name + <span class="string">", age="</span> + age + <span class="string">", address="</span> + address+ <span class="string">"]"</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">* 注: Class类型的唯一性</span><br><span class="line">	因为一个.class文件在内存里只生成一个Class对象，所以无论那一种方法得到Class对象，得到的都是同一个对象。</span><br></pre></td></tr></table></figure>
+<h3 id="C-通过反射获取无参构造方法并使用"><a href="#C-通过反射获取无参构造方法并使用" class="headerlink" title="* C.通过反射获取无参构造方法并使用"></a>* C.通过反射获取无参构造方法并使用</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">* a. 得到无参构造方法</span><br><span class="line"><span class="keyword">public</span> Constructor&lt;?&gt;[] getConstructors() </span><br><span class="line">	获取所有的<span class="keyword">public</span> 修饰的构造方法。</span><br><span class="line">	选择无参构造方法，不建议使用。</span><br><span class="line"><span class="function"><span class="keyword">public</span> Constructor&lt;T&gt; <span class="title">getConstructor</span><span class="params">(Class&lt;?&gt;... parameterTypes)</span> </span></span><br><span class="line"><span class="function">	获取<span class="keyword">public</span>修饰, 指定参数类型所对应的构造方法。</span></span><br><span class="line"><span class="function">	不传参数得到无参构造方法。</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">* b. 运行无参构造方法</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> T <span class="title">newInstance</span><span class="params">(Object... initargs)</span> </span></span><br><span class="line"><span class="function">	使用此 Constructor 对象表示的构造方法来创建该构造方法的声明类的新实例，并用指定的初始化参数初始化该实例。 </span></span><br><span class="line"><span class="function">	因为是无参构造，所以不传参数。</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">* c. 通过反射获取无参构造方法并使用的代码演示：</span></span><br><span class="line"><span class="function">	<span class="keyword">package</span> cn.itcast.demo1</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">import</span> java.lang.reflect.Constructor;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 *  通过反射获取class文件中的构造方法,运行构造方法</span></span><br><span class="line"><span class="comment">	 *  运行构造方法,创建对象</span></span><br><span class="line"><span class="comment">	 *    获取class文件对象</span></span><br><span class="line"><span class="comment">	 *    从class文件对象中,获取需要的成员</span></span><br><span class="line"><span class="comment">	 *    </span></span><br><span class="line"><span class="comment">	 *  Constructor 描述构造方法对象类</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReflectDemo1</span> </span>&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		</span><br><span class="line">			Class c = Class.forName(<span class="string">"cn.itcast.demo1.Person"</span>);</span><br><span class="line">			<span class="comment">//使用class文件对象,获取类中的构造方法</span></span><br><span class="line">			<span class="comment">//  Constructor[]  getConstructors() 获取class文件对象中的所有公共的构造方法</span></span><br><span class="line">			<span class="comment">/*Constructor[] cons = c.getConstructors();</span></span><br><span class="line"><span class="comment">			for(Constructor con : cons)&#123;</span></span><br><span class="line"><span class="comment">				System.out.println(con);</span></span><br><span class="line"><span class="comment">			&#125;*/</span></span><br><span class="line">			<span class="comment">//获取指定的构造方法,空参数的构造方法</span></span><br><span class="line">			Constructor con =  c.getConstructor();</span><br><span class="line">			<span class="comment">//运行空参数构造方法,Constructor类方法 newInstance()运行获取到的构造方法</span></span><br><span class="line">			Object obj = con.newInstance();</span><br><span class="line">			System.out.println(obj.toString());</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="D-通过反射获取有参构造方法并使用"><a href="#D-通过反射获取有参构造方法并使用" class="headerlink" title="* D. 通过反射获取有参构造方法并使用"></a>* D. 通过反射获取有参构造方法并使用</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">* a. 得到有参的构造方法</span><br><span class="line"><span class="function"><span class="keyword">public</span> Constructor&lt;T&gt; <span class="title">getConstructor</span><span class="params">(Class&lt;?&gt;... parameterTypes)</span> </span></span><br><span class="line"><span class="function">	获取<span class="keyword">public</span>修饰, 指定参数类型所对应的构造方法。</span></span><br><span class="line"><span class="function">	传相应的参数类型得到有参构造方法。</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">* b. 运行无参构造方法</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> T <span class="title">newInstance</span><span class="params">(Object... initargs)</span> </span></span><br><span class="line"><span class="function">	使用此 Constructor 对象表示的构造方法来创建该构造方法的声明类的新实例，并用指定的初始化参数初始化该实例。 </span></span><br><span class="line"><span class="function">	因为是有参构造，所以传相应的参数值。</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">* c. 通过反射获取有参构造方法并使用的代码演示：</span></span><br><span class="line"><span class="function"><span class="keyword">package</span> cn.itcast.demo1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Constructor;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *  通过反射,获取有参数的构造方法并运行</span></span><br><span class="line"><span class="comment"> *  方法getConstructor,传递可以构造方法相对应的参数列表即可</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReflectDemo2</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span><span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		Class c = Class.forName(<span class="string">"cn.itcast.demo1.Person"</span>);</span><br><span class="line">		<span class="comment">//获取带有,String和int参数的构造方法</span></span><br><span class="line">		<span class="comment">//Constructor&lt;T&gt; getConstructor(Class&lt;?&gt;... parameterTypes)  </span></span><br><span class="line">		<span class="comment">//Class&lt;?&gt;... parameterTypes 传递要获取的构造方法的参数列表</span></span><br><span class="line">		Constructor con = c.getConstructor(String.class,<span class="keyword">int</span>.class);</span><br><span class="line">		<span class="comment">//运行构造方法</span></span><br><span class="line">		<span class="comment">// T newInstance(Object... initargs)  </span></span><br><span class="line">		<span class="comment">//Object... initargs 运行构造方法后,传递的实际参数</span></span><br><span class="line">		Object obj = con.newInstance(<span class="string">"张三"</span>,<span class="number">20</span>);</span><br><span class="line">		System.out.println(obj);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="E-通过反射获取有参构造方法并使用快捷方式"><a href="#E-通过反射获取有参构造方法并使用快捷方式" class="headerlink" title="* E. 通过反射获取有参构造方法并使用快捷方式"></a>* E. 通过反射获取有参构造方法并使用快捷方式</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">* a. 使用的前提</span><br><span class="line">类有空参的公共构造方法。（如果是同包，默认权限也可以）</span><br><span class="line">* b. 使用的基础</span><br><span class="line">Class类的 <span class="function"><span class="keyword">public</span> T <span class="title">newInstance</span><span class="params">()</span> 方法</span></span><br><span class="line"><span class="function">	 创建此 Class 对象所表示的类的一个新实例。</span></span><br><span class="line"><span class="function">* c. 通过反射获取有参构造方法并使用快捷方式的代码演示：</span></span><br><span class="line"><span class="function">* </span></span><br><span class="line"><span class="function"><span class="keyword">package</span> cn.itcast.demo1</span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 反射获取构造方法并运行,有快捷点的方式</span></span><br><span class="line"><span class="comment"> * 有前提:</span></span><br><span class="line"><span class="comment"> *   被反射的类,必须具有空参数构造方法</span></span><br><span class="line"><span class="comment"> *   构造方法权限必须public</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReflectDemo3</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		Class c = Class.forName(<span class="string">"cn.itcast.demo1.Person"</span>);</span><br><span class="line">		<span class="comment">// Class类中定义方法, T newInstance() 直接创建被反射类的对象实例</span></span><br><span class="line">		Object obj = c.newInstance();</span><br><span class="line">		System.out.println(obj);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="F-通过反射获取私有构造方法并使用"><a href="#F-通过反射获取私有构造方法并使用" class="headerlink" title="* F. 通过反射获取私有构造方法并使用"></a>* F. 通过反射获取私有构造方法并使用</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">* a. 得到私有的构造方法</span><br><span class="line"><span class="function"><span class="keyword">public</span> Constructor&lt;T&gt; <span class="title">getDeclaredConstructor</span><span class="params">(Class&lt;?&gt;... parameterTypes)</span> </span></span><br><span class="line"><span class="function">	获取指定参数类型所对应的构造方法<span class="params">(包含私有的)</span>。</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Constructor&lt;?&gt;[] <span class="title">getDeclaredConstructors</span><span class="params">()</span> </span></span><br><span class="line"><span class="function">	获取所有的构造方法<span class="params">(包含私有的)</span>。</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">* b. 运行私有构造方法</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAccessible</span><span class="params">(<span class="keyword">boolean</span> flag)</span></span></span><br><span class="line"><span class="function">	将此对象的 accessible 标志设置为指示的布尔值。</span></span><br><span class="line"><span class="function">	设置为<span class="keyword">true</span>,这个方法保证我们得到的私有构造方法的运行。（取消运行时期的权限检查。）</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> T <span class="title">newInstance</span><span class="params">(Object... initargs)</span> </span></span><br><span class="line"><span class="function">	使用此 Constructor 对象表示的构造方法来创建该构造方法的声明类的新实例，并用指定的初始化参数初始化该实例。</span></span><br><span class="line"><span class="function"> </span></span><br><span class="line"><span class="function">* c. 通过反射获取私有构造方法并使用的代码演示：</span></span><br><span class="line"><span class="function"><span class="keyword">package</span> cn.itcast.demo1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Constructor;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *  反射获取私有的构造方法运行</span></span><br><span class="line"><span class="comment"> *  不推荐,破坏了程序的封装性,安全性</span></span><br><span class="line"><span class="comment"> *  暴力反射</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReflectDemo4</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">		Class c = Class.forName(<span class="string">"cn.itcast.demo1.Person"</span>);</span><br><span class="line">		<span class="comment">//Constructor[] getDeclaredConstructors()获取所有的构造方法,包括私有的</span></span><br><span class="line">		<span class="comment">/*Constructor[] cons = c.getDeclaredConstructors();</span></span><br><span class="line"><span class="comment">		for(Constructor con : cons)&#123;</span></span><br><span class="line"><span class="comment">			System.out.println(con);</span></span><br><span class="line"><span class="comment">		&#125;*/</span></span><br><span class="line">		<span class="comment">//Constructor getDeclaredConstructor(Class...c)获取到指定参数列表的构造方法</span></span><br><span class="line">		Constructor con = c.getDeclaredConstructor(<span class="keyword">int</span>.class,String.class);</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//Constructor类,父类AccessibleObject,定义方法setAccessible(boolean b)</span></span><br><span class="line">		con.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">		</span><br><span class="line">		Object obj = con.newInstance(<span class="number">18</span>,<span class="string">"lisi"</span>);</span><br><span class="line">		System.out.println(obj);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">* 注：不推荐，破坏了程序的封装性,安全性。</span><br></pre></td></tr></table></figure>
+<h3 id="G-反射获取成员变量并改值"><a href="#G-反射获取成员变量并改值" class="headerlink" title="* G. 反射获取成员变量并改值"></a>* G. 反射获取成员变量并改值</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">* a. 获取成员变量</span><br><span class="line">* 得到公共的成员变量</span><br><span class="line">	<span class="function"><span class="keyword">public</span> Field <span class="title">getField</span><span class="params">(String name)</span> </span></span><br><span class="line"><span class="function">		返回一个 Field 对象，它反映此 Class 对象所表示的类或接口的指定公共成员字段。 </span></span><br><span class="line"><span class="function">	<span class="keyword">public</span> Field[] <span class="title">getFields</span><span class="params">()</span> </span></span><br><span class="line"><span class="function">		返回一个包含某些 Field 对象的数组，这些对象反映此 Class 对象所表示的类或接口的所有可访问公共字段。 </span></span><br><span class="line"><span class="function">* 得到所有的成员变量<span class="params">(包括私有的，如果要进行修改私有成员变量，要先进行<span class="keyword">public</span> <span class="keyword">void</span> setAccessible(<span class="keyword">boolean</span> flag)</span> 设置。)</span></span><br><span class="line"><span class="function">	<span class="keyword">public</span> Field <span class="title">getDeclaredField</span><span class="params">(String name)</span> </span></span><br><span class="line"><span class="function">		返回一个 Field 对象，该对象反映此 Class 对象所表示的类或接口的指定已声明字段。 </span></span><br><span class="line"><span class="function">	<span class="keyword">public</span> Field[] <span class="title">getDeclaredFields</span><span class="params">()</span> </span></span><br><span class="line"><span class="function">		返回 Field 对象的一个数组，这些对象反映此 Class 对象所表示的类或接口所声明的所有字段。 </span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">* b. 修改成员变量<span class="params">(Field)</span>的值</span></span><br><span class="line"><span class="function">* 修改公共的成员变量</span></span><br><span class="line"><span class="function">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title">set</span><span class="params">(Object obj, Object value)</span> </span></span><br><span class="line"><span class="function">		将指定对象变量上此 Field 对象表示的字段设置为指定的新值。 </span></span><br><span class="line"><span class="function">		obj指的是修改的是那个对象的这个成员变量值。</span></span><br><span class="line"><span class="function">* c. 反射获取成员变量并改值的代码演示</span></span><br><span class="line"><span class="function"><span class="keyword">package</span> cn.itcast.demo1</span>;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Field;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *  反射获取成员变量,并修改值</span></span><br><span class="line"><span class="comment"> *  Person类中的成员String name</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReflectDemo5</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">		Class c = Class.forName(<span class="string">"cn.itcast.demo1.Person"</span>);</span><br><span class="line">		Object obj = c.newInstance();</span><br><span class="line">		<span class="comment">//获取成员变量 Class类的方法 getFields() class文件中的所有公共的成员变量</span></span><br><span class="line">		<span class="comment">//返回值是Field[]    Field类描述成员变量对象的类</span></span><br><span class="line">		<span class="comment">/*Field[] fields = c.getFields();</span></span><br><span class="line"><span class="comment">		for(Field f : fields)&#123;</span></span><br><span class="line"><span class="comment">			System.out.println(f);</span></span><br><span class="line"><span class="comment">		&#125;*/</span></span><br><span class="line">		</span><br><span class="line">		<span class="comment">//获取指定的成员变量 String name</span></span><br><span class="line">		<span class="comment">//Class类的方法  Field getField(传递字符串类型的变量名) 获取指定的成员变量</span></span><br><span class="line">		Field field = c.getField(<span class="string">"name"</span>);</span><br><span class="line">	   </span><br><span class="line">		<span class="comment">//Field类的方法 void set(Object obj, Object value) ,修改成员变量的值</span></span><br><span class="line">		<span class="comment">//Object obj 必须有对象的支持,  Object value 修改后的值</span></span><br><span class="line">		field.set(obj,<span class="string">"王五"</span>);</span><br><span class="line">		System.out.println(obj);</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="H-反射获取空参数成员方法并运行"><a href="#H-反射获取空参数成员方法并运行" class="headerlink" title="* H. 反射获取空参数成员方法并运行"></a>* H. 反射获取空参数成员方法并运行</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">* a. 获取空参数成员方法</span><br><span class="line">* 得到公共的成员方法</span><br><span class="line">	<span class="function"><span class="keyword">public</span> Method <span class="title">getMethod</span><span class="params">(String name, Class&lt;?&gt;... parameterTypes)</span> </span></span><br><span class="line"><span class="function">		返回一个 Method 对象，它反映此 Class 对象所表示的类或接口的指定公共成员方法。 </span></span><br><span class="line"><span class="function">	<span class="keyword">public</span> Method[] <span class="title">getMethods</span><span class="params">()</span></span></span><br><span class="line"><span class="function">		返回一个包含某些 Method 对象的数组，这些对象反映此 Class对象所表示的类或接口（包括那些由该类或接口声明的以及从超类和超接口继承的那些的类或接口）的公共 member 方法。</span></span><br><span class="line"><span class="function">* 得到全部的成员方法<span class="params">(包括私有的，如果要使用私有成员方法，要先进行</span></span></span><br><span class="line"><span class="function"><span class="params">* </span></span></span><br><span class="line"><span class="function"><span class="params">* <span class="keyword">public</span> <span class="keyword">void</span> setAccessible(<span class="keyword">boolean</span> flag)</span> 设置。)</span></span><br><span class="line"><span class="function">	<span class="keyword">public</span> Method <span class="title">getDeclaredMethod</span><span class="params">(String name, Class&lt;?&gt;... parameterTypes)</span> </span></span><br><span class="line"><span class="function">		返回一个 Method 对象，该对象反映此 Class 对象所表示的类或接口的指定已声明方法。 </span></span><br><span class="line"><span class="function">	<span class="keyword">public</span> Method[] <span class="title">getDeclaredMethods</span><span class="params">()</span> </span></span><br><span class="line"><span class="function">		返回 Method 对象的一个数组，这些对象反映此 Class 对象表示的类或接口声明的所有方法，包括公共、保护、默认（包）访问和私有方法，但不包括继承的方法。 </span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">* b. 使用Method方法对象</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object obj, Object... args)</span> </span></span><br><span class="line"><span class="function">	对带有指定参数的指定对象调用由此 Method 对象表示的底层方法。 </span></span><br><span class="line"><span class="function">	obj 指的是调这个方法的对象。</span></span><br><span class="line"><span class="function">	args 指的是调用这个方法所要用到的参数列表。</span></span><br><span class="line"><span class="function">	返回值Object就是方法的返回对象。如果方法没有返回值 ，返回的是<span class="keyword">null</span>.</span></span><br><span class="line"><span class="function">* c. 反射获取空参数成员方法并运行代码演示</span></span><br><span class="line"><span class="function"><span class="keyword">package</span> cn.itcast.demo1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *  反射获取成员方法并运行</span></span><br><span class="line"><span class="comment"> *  public void eat()&#123;&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReflectDemo6</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">		Class c = Class.forName(<span class="string">"cn.itcast.demo1.Person"</span>);</span><br><span class="line">		Object obj = c.newInstance();</span><br><span class="line">		<span class="comment">//获取class对象中的成员方法</span></span><br><span class="line">		<span class="comment">// Method[] getMethods()获取的是class文件中的所有公共成员方法,包括继承的</span></span><br><span class="line">		<span class="comment">// Method类是描述成员方法的对象</span></span><br><span class="line">		<span class="comment">/*Method[] methods = c.getMethods();</span></span><br><span class="line"><span class="comment">		for(Method m : methods)&#123;</span></span><br><span class="line"><span class="comment">			System.out.println(m);</span></span><br><span class="line"><span class="comment">		&#125;*/</span></span><br><span class="line">		</span><br><span class="line">		<span class="comment">//获取指定的方法eat运行</span></span><br><span class="line">		<span class="comment">// Method getMethod(String methodName,Class...c)</span></span><br><span class="line">		<span class="comment">// methodName获取的方法名  c 方法的参数列表</span></span><br><span class="line">		Method method = c.getMethod(<span class="string">"eat"</span>);</span><br><span class="line">		<span class="comment">//使用Method类中的方法,运行获取到的方法eat</span></span><br><span class="line">		<span class="comment">//Object invoke(Object obj, Object...o)</span></span><br><span class="line">		method.invoke(obj);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="I-反射获取有参数成员方法并运行"><a href="#I-反射获取有参数成员方法并运行" class="headerlink" title="* I. 反射获取有参数成员方法并运行"></a>* I. 反射获取有参数成员方法并运行</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">* a. 获取有参数成员方法</span><br><span class="line">* 得到公共的成员方法</span><br><span class="line">	<span class="function"><span class="keyword">public</span> Method <span class="title">getMethod</span><span class="params">(String name, Class&lt;?&gt;... parameterTypes)</span> </span></span><br><span class="line"><span class="function">		返回一个 Method 对象，它反映此 Class 对象所表示的类或接口的指定公共成员方法。 </span></span><br><span class="line"><span class="function">	<span class="keyword">public</span> Method[] <span class="title">getMethods</span><span class="params">()</span></span></span><br><span class="line"><span class="function">		返回一个包含某些 Method 对象的数组，这些对象反映此 Class对象所表示的类或接口（包括那些由该类或接口声明的以及从超类和超接口继承的那些的类或接口）的公共 member 方法。</span></span><br><span class="line"><span class="function">* 得到全部的成员方法<span class="params">(包括私有的，如果要使用私有成员方法，要先进行<span class="keyword">public</span> <span class="keyword">void</span> setAccessible(<span class="keyword">boolean</span> flag)</span> 设置。)</span></span><br><span class="line"><span class="function">	<span class="keyword">public</span> Method <span class="title">getDeclaredMethod</span><span class="params">(String name, Class&lt;?&gt;... parameterTypes)</span> </span></span><br><span class="line"><span class="function">		返回一个 Method 对象，该对象反映此 Class 对象所表示的类或接口的指定已声明方法。 </span></span><br><span class="line"><span class="function">	<span class="keyword">public</span> Method[] <span class="title">getDeclaredMethods</span><span class="params">()</span> </span></span><br><span class="line"><span class="function">		返回 Method 对象的一个数组，这些对象反映此 Class 对象表示的类或接口声明的所有方法，包括公共、保护、默认（包）访问和私有方法，但不包括继承的方法。 </span></span><br><span class="line"><span class="function">* b. 使用Method方法对象</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object obj, Object... args)</span> </span></span><br><span class="line"><span class="function">	对带有指定参数的指定对象调用由此 Method 对象表示的底层方法。 </span></span><br><span class="line"><span class="function">	obj 指的是调这个方法的对象。</span></span><br><span class="line"><span class="function">	args 指的是调用这个方法所要用到的参数列表。</span></span><br><span class="line"><span class="function">	返回值Object就是方法的返回对象。如果方法没有返回值 ，返回的是<span class="keyword">null</span>.</span></span><br><span class="line"><span class="function">* c. 反射获取有参数成员方法并运行代码演示</span></span><br><span class="line"><span class="function"><span class="keyword">package</span> cn.itcast.demo1</span>;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *  反射获取有参数的成员方法并执行</span></span><br><span class="line"><span class="comment"> *  public void sleep(String,int,double)&#123;&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReflectDemo7</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">		Class c = Class.forName(<span class="string">"cn.itcast.demo1.Person"</span>);</span><br><span class="line">		Object obj = c.newInstance();</span><br><span class="line">		<span class="comment">//调用Class类的方法getMethod获取指定的方法sleep</span></span><br><span class="line">		Method method = c.getMethod(<span class="string">"sleep"</span>, String.class,<span class="keyword">int</span>.class,<span class="keyword">double</span>.class);</span><br><span class="line">		<span class="comment">//调用Method类的方法invoke运行sleep方法</span></span><br><span class="line">		method.invoke(obj, <span class="string">"休眠"</span>,<span class="number">100</span>,<span class="number">888.99</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="J-反射泛型擦除"><a href="#J-反射泛型擦除" class="headerlink" title="* J. 反射泛型擦除"></a>* J. 反射泛型擦除</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">* a. 使用情况</span><br><span class="line">例如：在泛型为String的集合里，添加Integer的数据</span><br><span class="line">ArrayList&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">list.add(<span class="number">100</span>);</span><br><span class="line">* b. 能用泛型擦除的理论</span><br><span class="line">伪泛型：在编译后的.class文件里面是没有泛型的。类型为Object。</span><br><span class="line">用反射的方法绕过编译，得到Class文件对象，直接调用add方法。</span><br><span class="line">* c. 反射泛型擦除的代码演示</span><br><span class="line"><span class="keyword">package</span> cn.itcast.demo2;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *   定义集合类,泛型String</span></span><br><span class="line"><span class="comment"> *   要求向集合中添加Integer类型</span></span><br><span class="line"><span class="comment"> *   </span></span><br><span class="line"><span class="comment"> *   反射方式,获取出集合ArrayList类的class文件对象</span></span><br><span class="line"><span class="comment"> *   通过class文件对象,调用add方法</span></span><br><span class="line"><span class="comment"> *   </span></span><br><span class="line"><span class="comment"> *   对反射调用方法是否理解</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReflectTest</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span><span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		ArrayList&lt;String&gt; array  = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">		array.add(<span class="string">"a"</span>);</span><br><span class="line">		<span class="comment">//反射方式,获取出集合ArrayList类的class文件对象</span></span><br><span class="line">		Class c = array.getClass();</span><br><span class="line">		<span class="comment">//获取ArrayList.class文件中的方法add</span></span><br><span class="line">		Method method = c.getMethod(<span class="string">"add"</span>,Object.class);</span><br><span class="line">		<span class="comment">//使用invoke运行ArrayList方法add</span></span><br><span class="line">		method.invoke(array, <span class="number">150</span>);</span><br><span class="line">		method.invoke(array, <span class="number">1500</span>);</span><br><span class="line">		method.invoke(array, <span class="number">15000</span>);</span><br><span class="line">		System.out.println(array);</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="K-反射通过配置文件来决定运行的步骤"><a href="#K-反射通过配置文件来决定运行的步骤" class="headerlink" title="* K. 反射通过配置文件来决定运行的步骤"></a>* K. 反射通过配置文件来决定运行的步骤</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">* a. 操作依据</span><br><span class="line">	通过配置文件得到类名和要运行的方法名,用反射的操作类名得到对象和调用方法</span><br><span class="line">* b. 实现步骤:</span><br><span class="line"> *    <span class="number">1</span>. 准备配置文件,键值对</span><br><span class="line"> *    <span class="number">2</span>. IO流读取配置文件  Reader</span><br><span class="line"> *    <span class="number">3</span>. 文件中的键值对存储到集合中 Properties</span><br><span class="line"> *        集合保存的键值对,就是类名和方法名</span><br><span class="line"> *    <span class="number">4</span>. 反射获取指定类的<span class="class"><span class="keyword">class</span>文件对象</span></span><br><span class="line"><span class="class"> *    5. <span class="title">class</span>文件对象,获取指定的方法</span></span><br><span class="line"><span class="class"> *    6. 运行方法</span></span><br><span class="line"><span class="class">* <span class="title">c</span>. 代码演示</span></span><br><span class="line"><span class="class">代码：</span></span><br><span class="line"><span class="class"><span class="title">package</span> <span class="title">cn</span>.<span class="title">itcast</span>.<span class="title">demo3</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.FileReader;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"><span class="keyword">import</span> java.util.Properties;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *  调用Person方法,调用Student方法,调用Worker方法</span></span><br><span class="line"><span class="comment"> *  类不清楚,方法也不清楚</span></span><br><span class="line"><span class="comment"> *  通过配置文件实现此功能</span></span><br><span class="line"><span class="comment"> *    运行的类名和方法名字,以键值对的形式,写在文本中</span></span><br><span class="line"><span class="comment"> *    运行哪个类,读取配置文件即可</span></span><br><span class="line"><span class="comment"> *  实现步骤:</span></span><br><span class="line"><span class="comment"> *    1. 准备配置文件,键值对</span></span><br><span class="line"><span class="comment"> *    2. IO流读取配置文件  Reader</span></span><br><span class="line"><span class="comment"> *    3. 文件中的键值对存储到集合中 Properties</span></span><br><span class="line"><span class="comment"> *        集合保存的键值对,就是类名和方法名</span></span><br><span class="line"><span class="comment"> *    4. 反射获取指定类的class文件对象</span></span><br><span class="line"><span class="comment"> *    5. class文件对象,获取指定的方法</span></span><br><span class="line"><span class="comment"> *    6. 运行方法</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">		<span class="comment">//IO流读取配置文件</span></span><br><span class="line">		FileReader r = <span class="keyword">new</span> FileReader(<span class="string">"config.properties"</span>);</span><br><span class="line">		<span class="comment">//创建集合对象</span></span><br><span class="line">		Properties pro = <span class="keyword">new</span> Properties();</span><br><span class="line">		<span class="comment">//调用集合方法load,传递流对象</span></span><br><span class="line">		pro.load(r);</span><br><span class="line">		r.close();</span><br><span class="line">		<span class="comment">//通过键获取值</span></span><br><span class="line">		String className = pro.getProperty(<span class="string">"className"</span>);</span><br><span class="line">		String methodName = pro.getProperty(<span class="string">"methodName"</span>);</span><br><span class="line">		<span class="comment">//反射获取指定类的class文件对象</span></span><br><span class="line">		Class c = Class.forName(className);</span><br><span class="line">		Object obj = c.newInstance();</span><br><span class="line">		<span class="comment">//获取指定的方法名</span></span><br><span class="line">		Method method = c.getMethod(methodName);</span><br><span class="line">		method.invoke(obj);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">配置文件：</span><br><span class="line">#className=cn.itcast.demo3.Student</span><br><span class="line">#methodName=study</span><br><span class="line">className=cn.itcast.demo3.Person</span><br><span class="line">methodName=eat</span><br><span class="line">#className=cn.itcast.demo3.Worker</span><br><span class="line">#methodName=job</span><br></pre></td></tr></table></figure>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
 <li>把今天的知识点总结一遍。</li>
 </ul>
 
@@ -1071,8 +585,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/12/01/day32笔记 /" rel="next" title="java学习笔记——基础30()">
-                <i class="fa fa-chevron-left"></i> java学习笔记——基础30()
+              <a href="/2016/12/01/day32笔记 /" rel="next" title="java学习笔记——基础30(网络编程)">
+                <i class="fa fa-chevron-left"></i> java学习笔记——基础30(网络编程)
               </a>
             
           </div>
