@@ -1,0 +1,1470 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#fff">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="https://fonts.cat.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#fff">
+
+
+  <link rel="manifest" href="/images/manifest.json">
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="keywords" content="推荐系统实践">
+<meta property="og:type" content="article">
+<meta property="og:title" content="推荐系统--DeepFM模型理论和实践">
+<meta property="og:url" content="https://leesen998.github.io/2018/10/08/推荐系统--DeepFM模型理论和实践/index.html">
+<meta property="og:site_name" content="QJun">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://desk-fd.zol-img.com.cn/t_s1920x1080c5/g2/M00/0B/0F/ChMlWlyAyIiIQH8pABv6qMmlUWEAAIp0AAv7LcAG_rA821.jpg">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4155986-f4363ca2be689dbb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4155986-5f476d2c5b616232.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4155986-12f3119df69b7b5b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4155986-7e036f56982d323b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4155986-2b8d2e22017ad339.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4155986-cd51e0bd97ab285d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4155986-1118724d47e2c65e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4155986-21fa429e42108e99.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/535/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4155986-7984bc2c7474d6ea.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/646/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4155986-d144aba541c68a34.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/582/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4155986-f9af97ad7e0f5b88.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/558/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4155986-366d825a661466a3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/538/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4155986-cc075cd266bf2d5f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/467/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4155986-295f18796ee0030e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/903/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4155986-b8943ac16560285b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/908/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4155986-53a1ed7584a8bb71.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/978/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4155986-55ff1b9e36979f20.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/326/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4155986-a9ead5ad8ff9d2d3?imageMogr2/auto-orient/strip%7CimageView2/2/w/413/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4155986-908ee89d46240580.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp">
+<meta property="og:updated_time" content="2019-03-22T08:28:37.901Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="推荐系统--DeepFM模型理论和实践">
+<meta name="twitter:image" content="https://desk-fd.zol-img.com.cn/t_s1920x1080c5/g2/M00/0B/0F/ChMlWlyAyIiIQH8pABv6qMmlUWEAAIp0AAv7LcAG_rA821.jpg">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="QJun" type="application/atom+xml" />
+
+
+
+
+  <link rel="canonical" href="https://leesen998.github.io/2018/10/08/推荐系统--DeepFM模型理论和实践/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>推荐系统--DeepFM模型理论和实践 | QJun</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://leesen998.github.io" class="github-corner" aria-label="View source on GitHub"><svg width="120" height="120" viewBox="0 0 250 250" style="fill:#64CEAA; color:#fff; position: absolute; top: 194; border: 0; left: 0; transform: scale(-1, 1);" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">QJun</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">QJun's Homepage</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://leesen998.github.io/2018/10/08/推荐系统--DeepFM模型理论和实践/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QJun">
+      <meta itemprop="description" content="Stay Hungry, Stay Foolish!">
+      <meta itemprop="image" content="/images/10.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QJun">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">推荐系统--DeepFM模型理论和实践
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-10-08 19:48:29" itemprop="dateCreated datePublished" datetime="2018-10-08T19:48:29+08:00">2018-10-08</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/推荐系统/" itemprop="url" rel="index"><span itemprop="name">推荐系统</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p class="description"></p>
+
+<p><img src="https://desk-fd.zol-img.com.cn/t_s1920x1080c5/g2/M00/0B/0F/ChMlWlyAyIiIQH8pABv6qMmlUWEAAIp0AAv7LcAG_rA821.jpg" alt="" style="width:100%"></p>
+<a id="more"></a>
+<h1 id="推荐系统–DeepFM模型理论和实践"><a href="#推荐系统–DeepFM模型理论和实践" class="headerlink" title="推荐系统–DeepFM模型理论和实践"></a>推荐系统–DeepFM模型理论和实践</h1><h1 id="1、背景"><a href="#1、背景" class="headerlink" title="1、背景"></a>1、背景</h1><p><strong>特征组合的挑战</strong><br>对于一个基于CTR预估的推荐系统，最重要的是学习到用户点击行为背后隐含的特征组合。在不同的推荐场景中，低阶组合特征或者高阶组合特征可能都会对最终的CTR产生影响。</p>
+<p>之前介绍的因子分解机(Factorization Machines, FM)通过对于每一维特征的隐变量内积来提取特征组合。最终的结果也非常好。但是，虽然理论上来讲FM可以对高阶特征组合进行建模，但实际上因为计算复杂度的原因一般都只用到了二阶特征组合。</p>
+<p>那么对于高阶的特征组合来说，我们很自然的想法，通过多层的神经网络即DNN去解决。</p>
+<p><strong>DNN的局限</strong><br>下面的图片来自于张俊林教授在AI大会上所使用的PPT。</p>
+<p>我们之前也介绍过了，对于离散特征的处理，我们使用的是将特征转换成为one-hot的形式，但是将One-hot类型的特征输入到DNN中，会导致网络参数太多：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4155986-f4363ca2be689dbb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp" alt="img"></p>
+<p>如何解决这个问题呢，类似于FFM中的思想，将特征分为不同的field：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4155986-5f476d2c5b616232.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp" alt="img"></p>
+<p>再加两层的全链接层，让Dense Vector进行组合，那么高阶特征的组合就出来了</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4155986-12f3119df69b7b5b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp" alt="img"></p>
+<p>但是低阶和高阶特征组合隐含地体现在隐藏层中，如果我们希望把低阶特征组合单独建模，然后融合高阶特征组合。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4155986-7e036f56982d323b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp" alt="img"></p>
+<p>即将DNN与FM进行一个合理的融合：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4155986-2b8d2e22017ad339.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp" alt="img"></p>
+<p>二者的融合总的来说有两种形式，一是串行结构，二是并行结构</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4155986-cd51e0bd97ab285d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp" alt="img"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4155986-1118724d47e2c65e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp" alt="img"></p>
+<p>而我们今天要讲到的DeepFM，就是并行结构中的一种典型代表。</p>
+<h1 id="2、DeepFM模型"><a href="#2、DeepFM模型" class="headerlink" title="2、DeepFM模型"></a>2、DeepFM模型</h1><p>我们先来看一下DeepFM的模型结构：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4155986-21fa429e42108e99.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/535/format/webp" alt="img"></p>
+<p>DeepFM包含两部分：神经网络部分与因子分解机部分，分别负责低阶特征的提取和高阶特征的提取。这两部分<strong>共享同样的输入</strong>。DeepFM的预测结果可以写为：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4155986-7984bc2c7474d6ea.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/646/format/webp" alt="img"></p>
+<p><strong>FM部分</strong></p>
+<p>FM部分的详细结构如下：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4155986-d144aba541c68a34.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/582/format/webp" alt="img"></p>
+<p>FM部分是一个因子分解机。关于因子分解机可以参阅文章[Rendle, 2010] Steffen Rendle. Factorization machines. In ICDM, 2010.。因为引入了隐变量的原因，对于几乎不出现或者很少出现的隐变量，FM也可以很好的学习。</p>
+<p>FM的输出公式为：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4155986-f9af97ad7e0f5b88.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/558/format/webp" alt="img"></p>
+<p><strong>深度部分</strong></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4155986-366d825a661466a3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/538/format/webp" alt="img"></p>
+<p>深度部分是一个前馈神经网络。与图像或者语音这类输入不同，图像语音的输入一般是连续而且密集的，然而用于CTR的输入一般是及其稀疏的。因此需要重新设计网络结构。具体实现中为，在第一层隐含层之前，引入一个嵌入层来完成将输入向量压缩到低维稠密向量。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4155986-cc075cd266bf2d5f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/467/format/webp" alt="img"></p>
+<p>嵌入层(embedding layer)的结构如上图所示。当前网络结构有两个有趣的特性，1）尽管不同field的输入长度不同，但是embedding之后向量的长度均为K。2)在FM里得到的隐变量Vik现在作为了嵌入层网络的权重。</p>
+<p>这里的第二点如何理解呢，假设我们的k=5，首先，对于输入的一条记录，同一个field 只有一个位置是1，那么在由输入得到dense vector的过程中，输入层只有一个神经元起作用，得到的dense vector其实就是输入层到embedding层该神经元相连的五条线的权重，即vi1，vi2，vi3，vi4，vi5。这五个值组合起来就是我们在FM中所提到的Vi。在FM部分和DNN部分，这一块是共享权重的，对同一个特征来说，得到的Vi是相同的。</p>
+<p>有关模型具体如何操作，我们可以通过代码来进一步加深认识。</p>
+<h1 id="3、相关知识"><a href="#3、相关知识" class="headerlink" title="3、相关知识"></a>3、相关知识</h1><p>我们先来讲两个代码中会用到的相关知识吧，代码是参考的github上星数最多的DeepFM实现代码。</p>
+<p><strong>Gini Normalization</strong><br>代码中将CTR预估问题设定为一个二分类问题，绘制了Gini Normalization来评价不同模型的效果。这个是什么东西，不太懂，百度了很多，发现了一个比较通俗易懂的介绍。</p>
+<p>假设我们有下面两组结果，分别表示预测值和实际值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">predictions = [0.9, 0.3, 0.8, 0.75, 0.65, 0.6, 0.78, 0.7, 0.05, 0.4, 0.4, 0.05, 0.5, 0.1, 0.1]</span><br><span class="line">actual = [1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0]</span><br></pre></td></tr></table></figure>
+<p>然后我们将预测值按照从小到大排列，并根据索引序对实际值进行排序：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Sorted Actual Values [0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1]</span><br></pre></td></tr></table></figure>
+<p>然后，我们可以画出如下的图片：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4155986-295f18796ee0030e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/903/format/webp" alt="img"></p>
+<p>接下来我们将数据Normalization到0，1之间。并画出45度线。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4155986-b8943ac16560285b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/908/format/webp" alt="img"></p>
+<p>橙色区域的面积，就是我们得到的Normalization的Gini系数。</p>
+<p>这里，由于我们是将预测概率从小到大排的，所以我们希望实际值中的0尽可能出现在前面，因此Normalization的Gini系数越大，分类效果越好。</p>
+<p><strong>embedding_lookup</strong><br>在tensorflow中有个embedding_lookup函数，我们可以直接根据一个序号来得到一个词或者一个特征的embedding值，那么他内部其实是包含一个网络结构的，如下图所示：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4155986-53a1ed7584a8bb71.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/978/format/webp" alt="img"></p>
+<p>假设我们想要找到2的embedding值，这个值其实是输入层第二个神经元与embedding层连线的权重值。</p>
+<p>之前有大佬跟我探讨word2vec输入的问题，现在也算是有个比较明确的答案，输入其实就是one-hot Embedding，而word2vec要学习的是new Embedding。</p>
+<h1 id="4、代码解析"><a href="#4、代码解析" class="headerlink" title="4、代码解析"></a>4、代码解析</h1><p>好，一贯的风格，先来介绍几个地址：<br>原代码地址：<a href="https://github.com/ChenglongChen/tensorflow-DeepFM" target="_blank" rel="noopener">https://github.com/ChenglongChen/tensorflow-DeepFM</a></p>
+<p><strong>项目结构</strong><br>项目结构如下：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4155986-55ff1b9e36979f20.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/326/format/webp" alt="img"></p>
+<p>其实还应该有一个存放data的路径。config.py保存了我们模型的一些配置。DataReader对数据进行处理，得到模型可以使用的输入。DeepFM是我们构建的模型。main是项目的入口。metrics是计算normalized gini系数的代码。</p>
+<p><strong>模型输入</strong></p>
+<p>模型的输入主要有下面几个部分：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">self.feat_index = tf.placeholder(tf.int32,</span><br><span class="line">                                 shape=[<span class="keyword">None</span>,<span class="keyword">None</span>],</span><br><span class="line">                                 name=<span class="string">'feat_index'</span>)</span><br><span class="line">self.feat_value = tf.placeholder(tf.float32,</span><br><span class="line">                               shape=[<span class="keyword">None</span>,<span class="keyword">None</span>],</span><br><span class="line">                               name=<span class="string">'feat_value'</span>)</span><br><span class="line"></span><br><span class="line">self.label = tf.placeholder(tf.float32,shape=[<span class="keyword">None</span>,<span class="number">1</span>],name=<span class="string">'label'</span>)</span><br><span class="line">self.dropout_keep_fm = tf.placeholder(tf.float32,shape=[<span class="keyword">None</span>],name=<span class="string">'dropout_keep_fm'</span>)</span><br><span class="line">self.dropout_keep_deep = tf.placeholder(tf.float32,shape=[<span class="keyword">None</span>],name=<span class="string">'dropout_deep_deep'</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>feat_index</strong>是特征的一个序号，主要用于通过embedding_lookup选择我们的embedding。<strong>feat_value</strong>是对应的特征值，如果是离散特征的话，就是1，如果不是离散特征的话，就保留原来的特征值。<strong>label</strong>是实际值。还定义了两个dropout来防止过拟合。</p>
+<p><strong>权重构建</strong><br>权重的设定主要有两部分，第一部分是从输入到embedding中的权重，其实也就是我们的dense vector。另一部分就是深度神经网络每一层的权重。第二部分很好理解，我们主要来看看第一部分：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#embeddings</span></span><br><span class="line">weights[<span class="string">'feature_embeddings'</span>] = tf.Variable(</span><br><span class="line">    tf.random_normal([self.feature_size,self.embedding_size],<span class="number">0.0</span>,<span class="number">0.01</span>),</span><br><span class="line">    name=<span class="string">'feature_embeddings'</span>)</span><br><span class="line">weights[<span class="string">'feature_bias'</span>] = tf.Variable(tf.random_normal([self.feature_size,<span class="number">1</span>],<span class="number">0.0</span>,<span class="number">1.0</span>),name=<span class="string">'feature_bias'</span>)</span><br></pre></td></tr></table></figure>
+<p>weights[‘feature_embeddings’] 存放的每一个值其实就是FM中的vik，所以它是F * K的。其中，F代表feture的大小(将离散特征转换成one-hot之后的特征总量),K代表dense vector的大小。</p>
+<p>weights[‘feature_bias’]是FM中的一次项的权重。</p>
+<p><strong>Embedding part</strong><br>这个部分很简单啦，是根据feat_index选择对应的weights[‘feature_embeddings’]中的embedding值，然后再与对应的feat_value相乘就可以了：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># model</span></span><br><span class="line">self.embeddings = tf.nn.embedding_lookup(self.weights[<span class="string">'feature_embeddings'</span>],self.feat_index) <span class="comment"># N * F * K</span></span><br><span class="line">feat_value = tf.reshape(self.feat_value,shape=[<span class="number">-1</span>,self.field_size,<span class="number">1</span>])</span><br><span class="line">self.embeddings = tf.multiply(self.embeddings,feat_value)</span><br></pre></td></tr></table></figure>
+<p><strong>FM part</strong><br>首先来回顾一下我们之前对FM的化简公式，之前去今日头条面试还问到过公式的推导。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4155986-a9ead5ad8ff9d2d3?imageMogr2/auto-orient/strip%7CimageView2/2/w/413/format/webp" alt="img"></p>
+<p>所以我们的二次项可以根据化简公式轻松的得到，再加上我们的一次项，FM的part就算完了。同时更为方便的是，由于权重共享，我们这里可以直接用<strong>Embedding part</strong>计算出的embeddings来得到我们的二次项：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># first order term</span></span><br><span class="line">self.y_first_order = tf.nn.embedding_lookup(self.weights[<span class="string">'feature_bias'</span>],self.feat_index)</span><br><span class="line">self.y_first_order = tf.reduce_sum(tf.multiply(self.y_first_order,feat_value),<span class="number">2</span>)</span><br><span class="line">self.y_first_order = tf.nn.dropout(self.y_first_order,self.dropout_keep_fm[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># second order term</span></span><br><span class="line"><span class="comment"># sum-square-part</span></span><br><span class="line">self.summed_features_emb = tf.reduce_sum(self.embeddings,<span class="number">1</span>) <span class="comment"># None * k</span></span><br><span class="line">self.summed_features_emb_square = tf.square(self.summed_features_emb) <span class="comment"># None * K</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># squre-sum-part</span></span><br><span class="line">self.squared_features_emb = tf.square(self.embeddings)</span><br><span class="line">self.squared_sum_features_emb = tf.reduce_sum(self.squared_features_emb, <span class="number">1</span>)  <span class="comment"># None * K</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#second order</span></span><br><span class="line">self.y_second_order = <span class="number">0.5</span> * tf.subtract(self.summed_features_emb_square,self.squared_sum_features_emb)</span><br><span class="line">self.y_second_order = tf.nn.dropout(self.y_second_order,self.dropout_keep_fm[<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+<p><strong>DNN part</strong><br>DNNpart的话，就是将<strong>Embedding part</strong>的输出再经过几层全链接层：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Deep component</span></span><br><span class="line">self.y_deep = tf.reshape(self.embeddings,shape=[<span class="number">-1</span>,self.field_size * self.embedding_size])</span><br><span class="line">self.y_deep = tf.nn.dropout(self.y_deep,self.dropout_keep_deep[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,len(self.deep_layers)):</span><br><span class="line">    self.y_deep = tf.add(tf.matmul(self.y_deep,self.weights[<span class="string">"layer_%d"</span> %i]), self.weights[<span class="string">"bias_%d"</span>%I])</span><br><span class="line">    self.y_deep = self.deep_layers_activation(self.y_deep)</span><br><span class="line">    self.y_deep = tf.nn.dropout(self.y_deep,self.dropout_keep_deep[i+<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+<p>最后，我们要将DNN和FM两部分的输出进行结合：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">concat_input = tf.concat([self.y_first_order, self.y_second_order, self.y_deep], axis=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>损失及优化器</strong><br>我们可以使用logloss(如果定义为分类问题)，或者mse(如果定义为预测问题)，以及多种的优化器去进行尝试，这些根据不同的参数设定得到：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># loss</span></span><br><span class="line"><span class="keyword">if</span> self.loss_type == <span class="string">"logloss"</span>:</span><br><span class="line">    self.out = tf.nn.sigmoid(self.out)</span><br><span class="line">    self.loss = tf.losses.log_loss(self.label, self.out)</span><br><span class="line"><span class="keyword">elif</span> self.loss_type == <span class="string">"mse"</span>:</span><br><span class="line">    self.loss = tf.nn.l2_loss(tf.subtract(self.label, self.out))</span><br><span class="line"><span class="comment"># l2 regularization on weights</span></span><br><span class="line"><span class="keyword">if</span> self.l2_reg &gt; <span class="number">0</span>:</span><br><span class="line">    self.loss += tf.contrib.layers.l2_regularizer(</span><br><span class="line">        self.l2_reg)(self.weights[<span class="string">"concat_projection"</span>])</span><br><span class="line">    <span class="keyword">if</span> self.use_deep:</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(self.deep_layers)):</span><br><span class="line">            self.loss += tf.contrib.layers.l2_regularizer(</span><br><span class="line">                self.l2_reg)(self.weights[<span class="string">"layer_%d"</span> % I])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> self.optimizer_type == <span class="string">"adam"</span>:</span><br><span class="line">    self.optimizer = tf.train.AdamOptimizer(learning_rate=self.learning_rate, beta1=<span class="number">0.9</span>, beta2=<span class="number">0.999</span>,</span><br><span class="line">                                            epsilon=<span class="number">1e-8</span>).minimize(self.loss)</span><br><span class="line"><span class="keyword">elif</span> self.optimizer_type == <span class="string">"adagrad"</span>:</span><br><span class="line">    self.optimizer = tf.train.AdagradOptimizer(learning_rate=self.learning_rate,</span><br><span class="line">                                               initial_accumulator_value=<span class="number">1e-8</span>).minimize(self.loss)</span><br><span class="line"><span class="keyword">elif</span> self.optimizer_type == <span class="string">"gd"</span>:</span><br><span class="line">    self.optimizer = tf.train.GradientDescentOptimizer(learning_rate=self.learning_rate).minimize(self.loss)</span><br><span class="line"><span class="keyword">elif</span> self.optimizer_type == <span class="string">"momentum"</span>:</span><br><span class="line">    self.optimizer = tf.train.MomentumOptimizer(learning_rate=self.learning_rate, momentum=<span class="number">0.95</span>).minimize(</span><br><span class="line">        self.loss)</span><br></pre></td></tr></table></figure>
+<p><strong>模型效果</strong><br>前面提到了，我们用logloss作为损失函数去进行模型的参数更新，但是代码中输出了模型的 Normalization 的 Gini值来进行模型评价，我们可以对比一下(记住，Gini值越大越好呦)：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4155986-908ee89d46240580.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp" alt="img"></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+    
+	<div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ff73b3;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+	
+	
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>感谢您的支持，我会继续努力的!</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wexin.JPG" alt="QJun 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/推荐系统实践/" rel="tag"># 推荐系统实践</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/15/推荐系统--FFM模型理论和实践/" rel="next" title="推荐系统--FFM模型理论和实践">
+                <i class="fa fa-chevron-left"></i> 推荐系统--FFM模型理论和实践
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/19/推荐系统--神经协同过滤NCF原理及实战/" rel="prev" title="推荐系统--神经协同过滤NCF原理及实战">
+                推荐系统--神经协同过滤NCF原理及实战 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MDE0MS8xNjY2OA=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/10.jpg"
+                alt="QJun" />
+            
+              <p class="site-author-name" itemprop="name">QJun</p>
+              <p class="site-description motion-element" itemprop="description">Stay Hungry, Stay Foolish!</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">75</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:qjun@hust.edu.cn" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plus.google.com/" target="_blank" title="Google"><i class="fa fa-fw fa-google"></i>Google</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/" target="_blank" title="Twitter"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.facebook.com/" target="_blank" title="FB Page"><i class="fa fa-fw fa-facebook"></i>FB Page</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://leesen998.github.io/about/" title="关于此博客" target="_blank">关于此博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://poetryscience.ink/" title="Huixin" target="_blank">Huixin</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://ultimatehy.github.io/" title="Yong Huang" target="_blank">Yong Huang</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#推荐系统–DeepFM模型理论和实践"><span class="nav-number">1.</span> <span class="nav-text">推荐系统–DeepFM模型理论和实践</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1、背景"><span class="nav-number">2.</span> <span class="nav-text">1、背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2、DeepFM模型"><span class="nav-number">3.</span> <span class="nav-text">2、DeepFM模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3、相关知识"><span class="nav-number">4.</span> <span class="nav-text">3、相关知识</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4、代码解析"><span class="nav-number">5.</span> <span class="nav-text">4、代码解析</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="heart">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">QJun</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<div class="weixin-box">
+  <div class="weixin-menu">
+    <div class="weixin-hover">
+      <div class="weixin-description">微信扫一扫，订阅本博客</div>
+    </div>
+  </div>
+</div>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+
+
+  
+    <script type="text/javascript">
+      window.livereOptions = {
+        refer: '2018/10/08/推荐系统--DeepFM模型理论和实践/'
+      };
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"tagMode":true,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":100,"height":200,"hOffset":10,"vOffset":10},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/"});</script>
+
+
+  
+  
+  
+  <script type="text/javascript" src="/js/src/dytitle.js"></script>
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+
+<!-- 代码块复制功能 -->
+<script type="text/javascript" src="/js/src/clipboard.min.js"></script>  
+<script type="text/javascript" src="/js/src/clipboard-use.js"></script>
+

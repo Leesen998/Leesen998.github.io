@@ -1,0 +1,1453 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#fff">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="https://fonts.cat.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#fff">
+
+
+  <link rel="manifest" href="/images/manifest.json">
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="keywords" content="强化学习实践">
+<meta property="og:type" content="article">
+<meta property="og:title" content="强化学习-MADDPG算法原理及简单实现">
+<meta property="og:url" content="https://leesen998.github.io/2018/06/19/强化学习-MADDPG算法原理及简单实现/index.html">
+<meta property="og:site_name" content="QJun">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://desk-fd.zol-img.com.cn/t_s1920x1080c5/g2/M00/0B/0F/ChMlWlyAyIiIQH8pABv6qMmlUWEAAIp0AAv7LcAG_rA821.jpg">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4155986-d1bfab0264feea59?imageMogr2/auto-orient/strip%7CimageView2/2/w/638/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4155986-271e1b4fa039af90?imageMogr2/auto-orient/strip%7CimageView2/2/w/506/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4155986-587e0300af3b40ee?imageMogr2/auto-orient/strip%7CimageView2/2/w/698/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4155986-a7d13457262f5430?imageMogr2/auto-orient/strip%7CimageView2/2/w/700/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4155986-d81f7a8bd9a5e382?imageMogr2/auto-orient/strip%7CimageView2/2/w/700/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4155986-9e4407a715d94b0a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4155986-95ae63a6d0aa3057.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4155986-090bb37270692cd4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4155986-b97d1c907335a35d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/982/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4155986-fe12dd703e1f8bde.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/868/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4155986-c39c33fe58d97910.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/550/format/webp">
+<meta property="og:updated_time" content="2019-03-22T04:03:06.742Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="强化学习-MADDPG算法原理及简单实现">
+<meta name="twitter:image" content="https://desk-fd.zol-img.com.cn/t_s1920x1080c5/g2/M00/0B/0F/ChMlWlyAyIiIQH8pABv6qMmlUWEAAIp0AAv7LcAG_rA821.jpg">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="QJun" type="application/atom+xml" />
+
+
+
+
+  <link rel="canonical" href="https://leesen998.github.io/2018/06/19/强化学习-MADDPG算法原理及简单实现/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>强化学习-MADDPG算法原理及简单实现 | QJun</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://leesen998.github.io" class="github-corner" aria-label="View source on GitHub"><svg width="120" height="120" viewBox="0 0 250 250" style="fill:#64CEAA; color:#fff; position: absolute; top: 194; border: 0; left: 0; transform: scale(-1, 1);" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">QJun</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">QJun's Homepage</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://leesen998.github.io/2018/06/19/强化学习-MADDPG算法原理及简单实现/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QJun">
+      <meta itemprop="description" content="Stay Hungry, Stay Foolish!">
+      <meta itemprop="image" content="/images/10.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QJun">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">强化学习-MADDPG算法原理及简单实现
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-06-19 19:48:29" itemprop="dateCreated datePublished" datetime="2018-06-19T19:48:29+08:00">2018-06-19</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/强化学习/" itemprop="url" rel="index"><span itemprop="name">强化学习</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p class="description"></p>
+
+<p><img src="https://desk-fd.zol-img.com.cn/t_s1920x1080c5/g2/M00/0B/0F/ChMlWlyAyIiIQH8pABv6qMmlUWEAAIp0AAv7LcAG_rA821.jpg" alt="" style="width:100%"></p>
+<a id="more"></a>
+<h1 id="强化学习-MADDPG算法原理及简单实现"><a href="#强化学习-MADDPG算法原理及简单实现" class="headerlink" title="强化学习-MADDPG算法原理及简单实现"></a>强化学习-MADDPG算法原理及简单实现</h1><p>之前接触的强化学习算法都是单个智能体的强化学习算法，但是也有很多重要的应用场景牵涉到多个智能体之间的交互，比如说，多个机器人的控制，语言的交流，多玩家的游戏等等。本文，就带你简单了解一下Open-AI的<strong>MADDPG(Multi-Agent Deep Deterministic Policy Gradient)</strong>算法，来共同体验一下多智能体强化学习的魅力。</p>
+<p>论文全称：Multi-Agent Actor-Critic for Mixed Cooperative-Competitive Environments<br>下载地址：<a href="https://arxiv.org/pdf/1706.02275.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1706.02275.pdf</a></p>
+<h1 id="1、引言"><a href="#1、引言" class="headerlink" title="1、引言"></a>1、引言</h1><p>强化学习中很多场景涉及多个智能体的交互，比如多个机器人的控制，语言的交流，多玩家的游戏等等。不过传统的RL方法，比如Q-Learning或者policy gradient都不适用于多智能体环境。主要的问题是，在训练过程中，每个智能体的策略都在变化，因此从每个智能体的角度来看，环境变得十分不稳定(其他智能体的行动带来环境变化)。对DQN来说，经验重放的方法变的不再适用(如果不知道其他智能体的状态，那么不同情况下自身的状态转移会不同），而对PG的方法来说，环境的不断变化导致了学习的方差进一步增大。</p>
+<p>因此，本文提出了<strong>MADDPG(Multi-Agent Deep Deterministic Policy Gradient)</strong>方法。为什么要使用DDPG方法作为基准模型呢？主要是<strong>集中训练和分散执行的策略</strong>。</p>
+<p>本文提出的方法框架是集中训练，分散执行的。我们先回顾一下DDPG的方式，DDPG本质上是一个AC方法。训练时，Actor根据当前的state选择一个action，然后Critic可以根据state-action计算一个Q值，作为对Actor动作的反馈。Critic根据估计的Q值和实际的Q值来进行训练，Actor根据Critic的反馈来更新策略。测试时，我们只需要Actor就可以完成，此时不需要Critic的反馈。因此，在训练时，我们可以在Critic阶段加上一些额外的信息来得到更准确的Q值，比如其他智能体的状态和动作等，这也就是集中训练的意思，即每个智能体不仅仅根据自身的情况，还根据其他智能体的行为来评估当前动作的价值。分散执行指的是，当每个Agent都训练充分之后，每个Actor就可以自己根据状态采取合适的动作，此时是不需要其他智能体的状态或者动作的。DQN不适合这么做，因为DQN训练和预测是同一个网络，二者的输入信息必须保持一致，我们不能只在训练阶段加入其他智能体的信息。</p>
+<h1 id="2、DDPG算法的简单回顾"><a href="#2、DDPG算法的简单回顾" class="headerlink" title="2、DDPG算法的简单回顾"></a>2、DDPG算法的简单回顾</h1><p><strong>什么是DDPG</strong><br>什么是DDPG呢？一句话描述，它是Actor-Critic 和 DQN 算法的结合体。</p>
+<p>DDPG的全称是Deep Deterministic Policy Gradient。</p>
+<p>我们首先来看Deep，正如Q-learning加上一个Deep就变成了DQN一样，这里的Deep即同样使用DQN中的经验池和双网络结构来促进神经网络能够有效学习。</p>
+<p>再来看Deterministic，即我们的Actor不再输出每个动作的概率，而是一个具体的动作，这更有助于我们连续动作空间中进行学习。</p>
+<p><strong>DDPG的网络结构</strong><br>盗用莫烦老师的一张图片来形象的表示DDPG的网络结构，同图片里一样，我们称Actor里面的两个网络分别是动作估计网络和动作现实网络，我们称Critic中的两个网络分别是状态现实网络和状态估计网络：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4155986-d1bfab0264feea59?imageMogr2/auto-orient/strip%7CimageView2/2/w/638/format/webp" alt="img"></p>
+<p>image</p>
+<p>我们采用了类似DQN的双网络结构，而且Actor和Critic都有target-net和eval-net。我们需要强调一点的事，我们只需要训练动作估计网络和状态估计网络的参数，而动作现实网络和状态现实网络的参数是由前面两个网络每隔一定的时间复制过去的。</p>
+<p>我们先来说说Critic这边，Critic这边的学习过程跟DQN类似，我们都知道DQN根据下面的损失函数来进行网络学习，即现实的Q值和估计的Q值的平方损失：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4155986-271e1b4fa039af90?imageMogr2/auto-orient/strip%7CimageView2/2/w/506/format/webp" alt="img"></p>
+<p>上面式子中Q(S,A)是根据状态估计网络得到的，A是动作估计网络传过来的动作。而前面部分R + gamma * maxQ(S’,A’)是现实的Q值，这里不一样的是，我们计算现实的Q值，不在使用贪心算法，来选择动作A’,而是动作现实网络得到这里的A’。总的来说，Critic的状态估计网络的训练还是基于现实的Q值和估计的Q值的平方损失，估计的Q值根据当前的状态S和动作估计网络输出的动作A输入状态估计网络得到，而现实的Q值根据现实的奖励R，以及将下一时刻的状态S’和动作现实网络得到的动作A’ 输入到状态现实网络 而得到的Q值的折现值加和得到(这里运用的是贝尔曼方程)。</p>
+<p>我们再来说一下Actor这边，论文中，我们基于下面的式子进行动作估计网络的参数：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4155986-587e0300af3b40ee?imageMogr2/auto-orient/strip%7CimageView2/2/w/698/format/webp" alt="img"></p>
+<p>这个式子看上去很吓人，但是其实理解起来很简单。假如对同一个状态，我们输出了两个不同的动作a1和a2，从状态估计网络得到了两个反馈的Q值，分别是Q1和Q2，假设Q1&gt;Q2,即采取动作1可以得到更多的奖励，那么Policy gradient的思想是什么呢，就是增加a1的概率，降低a2的概率，也就是说，Actor想要尽可能的得到更大的Q值。所以我们的Actor的损失可以简单的理解为得到的反馈Q值越大损失越小，得到的反馈Q值越小损失越大，因此只要对状态估计网络返回的Q值取个负号就好啦。是不是很简单。</p>
+<p><strong>DDPG学习中的小trick</strong></p>
+<p>与传统的DQN不同的是，传统的DQN采用的是一种被称为’hard’模式的target-net网络参数更新，即每隔一定的步数就将eval-net中的网络参数赋值过去，而在DDPG中，采用的是一种’soft’模式的target-net网络参数更新，即每一步都对target-net网络中的参数更新一点点，这种参数更新方式经过试验表明可以大大的提高学习的稳定性。’soft’模式到底是如何更新网络的？我们可以通过代码更好的理解。</p>
+<p>论文中提到的另一个小trick是对采取的动作增加一定的噪声：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4155986-a7d13457262f5430?imageMogr2/auto-orient/strip%7CimageView2/2/w/700/format/webp" alt="img"></p>
+<p><strong>DDPG的完整流程</strong></p>
+<p>介绍了这么多，我们也就能顺利理解原文中的DDPG算法的流程：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4155986-d81f7a8bd9a5e382?imageMogr2/auto-orient/strip%7CimageView2/2/w/700/format/webp" alt="img"></p>
+<h1 id="3、MADDPG算法简介"><a href="#3、MADDPG算法简介" class="headerlink" title="3、MADDPG算法简介"></a>3、MADDPG算法简介</h1><p><strong>算法流程</strong></p>
+<p>理解了DDPG的算法过程，那么MADDPG的过程也是不难理解的，我们一起来看一下吧。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4155986-9e4407a715d94b0a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp" alt="img"></p>
+<p>每个Agent的训练同单个DDPG算法的训练过程类似，不同的地方主要体现在<strong>Critic的输入</strong>上：在单个Agent的DDPG算法中，Critic的输入是一个state-action对信息，但是在MADDPG中，每个Agent的Critic输入除自身的state-action信息外，还可以有额外的信息，比如其他Agent的动作。</p>
+<p><strong>多Agent之间的关系形式</strong></p>
+<p>不同的Agent之间的关系大体可以分为三种，合作型，对抗性，半合作半对抗型。我们可以根据不同的合作关系来设计我们的奖励函数。</p>
+<h1 id="4、模型实验"><a href="#4、模型实验" class="headerlink" title="4、模型实验"></a>4、模型实验</h1><p>文章中设置了多组实验环境，有合作型的，有对抗型的也有半合作半对抗型的。如下图所示：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4155986-95ae63a6d0aa3057.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp" alt="img"></p>
+<p>这里只重点讲我们后面代码中实现的实验。</p>
+<p>实验的名称为Predator-prey。其英文解释为Good agents (green) are faster and want to avoid being hit by adversaries (red). Adversaries are slower and want to hit good agents. Obstacles (large black circles) block the way.</p>
+<p>不过我们在代码中只实现了三个Adversaries，而Good agents处于随机游走状态。</p>
+<p>在合作交流的环境下，论文中将MADDPG与传统的算法进行了对比，得到的结果如下：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4155986-090bb37270692cd4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp" alt="img"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4155986-b97d1c907335a35d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/982/format/webp" alt="img"></p>
+<p>可以看到，MADDPG与传统的RL算法相比，在多智能体的环境下，能够取得更加突出的效果。</p>
+<h1 id="5、MADDPG算法的简单实现"><a href="#5、MADDPG算法的简单实现" class="headerlink" title="5、MADDPG算法的简单实现"></a>5、MADDPG算法的简单实现</h1><p>本文实践了Predator-prey这一环境，如下图所示：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4155986-fe12dd703e1f8bde.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/868/format/webp" alt="img"></p>
+<p>绿色的球为目标，在二维空间中随机游走，躲避红色的球的攻击。三个红色的球是我们定义的Agent，它们处在互相对抗的环境中，想要击中绿色的球，从而获得奖励。黑色的地方时障碍。</p>
+<p><strong>实验环境安装</strong></p>
+<p>下载<a href="https://github.com/openai/multiagent-particle-envs" target="_blank" rel="noopener">https://github.com/openai/multiagent-particle-envs</a>中的代码。</p>
+<p>进入到代码主路径中，执行命令安装所需的环境</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -e .</span><br></pre></td></tr></table></figure>
+<p><strong>代码结构</strong><br>本项目的代码结构如下：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4155986-c39c33fe58d97910.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/550/format/webp" alt="img"></p>
+<p><strong>model_agent_maddpg.py</strong>:该文件定义了单个Agent的DDPG结构，及一些函数<br><strong>replay_buffer.py</strong>：定义了两种不同的经验池，一种是普通的经验池，一种是优先采样经验池<br><strong>segment_tree.py</strong> :只有在使用优先采样经验池的时候才用到。定义一种树结构根据经验的优先级进行采样<br><strong>test_three_agent_maddpg.py</strong>:对训练好的模型进行测试<br><strong>three_agent_maddpg.py</strong>:模型训练的主代码</p>
+<p><strong>DDPG-Actor实现</strong><br>我们首先来实现单个的DDPG结构<br>Actor的输入是一个具体的状态，经过两层的全链接网络输出选择的Action。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">actor_network</span><span class="params">(name)</span>:</span></span><br><span class="line">    <span class="keyword">with</span> tf.variable_scope(name) <span class="keyword">as</span> scope:</span><br><span class="line">        x = state_input</span><br><span class="line">        x = tf.layers.dense(x, <span class="number">64</span>)</span><br><span class="line">        <span class="keyword">if</span> self.layer_norm:</span><br><span class="line">            x = tc.layers.layer_norm(x, center=<span class="keyword">True</span>, scale=<span class="keyword">True</span>)</span><br><span class="line">        x = tf.nn.relu(x)</span><br><span class="line"></span><br><span class="line">        x = tf.layers.dense(x, <span class="number">64</span>)</span><br><span class="line">        <span class="keyword">if</span> self.layer_norm:</span><br><span class="line">            x = tc.layers.layer_norm(x, center=<span class="keyword">True</span>, scale=<span class="keyword">True</span>)</span><br><span class="line">        x = tf.nn.relu(x)</span><br><span class="line"></span><br><span class="line">        x = tf.layers.dense(x, self.nb_actions,</span><br><span class="line">                            kernel_initializer=tf.random_uniform_initializer(minval=<span class="number">-3e-3</span>, maxval=<span class="number">3e-3</span>))</span><br><span class="line">        x = tf.nn.tanh(x)</span><br><span class="line">    <span class="keyword">return</span> x</span><br></pre></td></tr></table></figure>
+<p><strong>DDPG-Critic实现</strong></p>
+<p>Critic的输入是state，以及所有Agent当前的action信息：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">critic_network</span><span class="params">(name, action_input, reuse=False)</span>:</span></span><br><span class="line">    <span class="keyword">with</span> tf.variable_scope(name) <span class="keyword">as</span> scope:</span><br><span class="line">        <span class="keyword">if</span> reuse:</span><br><span class="line">            scope.reuse_variables()</span><br><span class="line"></span><br><span class="line">        x = state_input</span><br><span class="line">        x = tf.layers.dense(x, <span class="number">64</span>)</span><br><span class="line">        <span class="keyword">if</span> self.layer_norm:</span><br><span class="line">            x = tc.layers.layer_norm(x, center=<span class="keyword">True</span>, scale=<span class="keyword">True</span>)</span><br><span class="line">        x = tf.nn.relu(x)</span><br><span class="line"></span><br><span class="line">        x = tf.concat([x, action_input], axis=<span class="number">-1</span>)</span><br><span class="line">        x = tf.layers.dense(x, <span class="number">64</span>)</span><br><span class="line">        <span class="keyword">if</span> self.layer_norm:</span><br><span class="line">            x = tc.layers.layer_norm(x, center=<span class="keyword">True</span>, scale=<span class="keyword">True</span>)</span><br><span class="line">        x = tf.nn.relu(x)</span><br><span class="line"></span><br><span class="line">        x = tf.layers.dense(x, <span class="number">1</span>, kernel_initializer=tf.random_uniform_initializer(minval=<span class="number">-3e-3</span>, maxval=<span class="number">3e-3</span>))</span><br><span class="line">    <span class="keyword">return</span> x</span><br></pre></td></tr></table></figure>
+<p><strong>训练Actor和Critic</strong></p>
+<p>Actor的训练目标是Q值的最大化，而Critic的训练目标是最小化Q估计值和Q实际值之间的差距：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">self.actor_optimizer = tf.train.AdamOptimizer(<span class="number">1e-4</span>)</span><br><span class="line">self.critic_optimizer = tf.train.AdamOptimizer(<span class="number">1e-3</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 最大化Q值</span></span><br><span class="line">self.actor_loss = -tf.reduce_mean(</span><br><span class="line">    critic_network(name + <span class="string">'_critic'</span>, action_input=tf.concat([self.action_output, other_action_input], axis=<span class="number">1</span>),</span><br><span class="line">                   reuse=<span class="keyword">True</span>))</span><br><span class="line">self.actor_train = self.actor_optimizer.minimize(self.actor_loss)</span><br><span class="line"></span><br><span class="line">self.target_Q = tf.placeholder(shape=[<span class="keyword">None</span>, <span class="number">1</span>], dtype=tf.float32)</span><br><span class="line">self.critic_loss = tf.reduce_mean(tf.square(self.target_Q - self.critic_output))</span><br><span class="line">self.critic_train = self.critic_optimizer.minimize(self.critic_loss)</span><br></pre></td></tr></table></figure>
+<p><strong>定义三个Agent</strong></p>
+<p>随后，我们分别建立三个Agent，每个Agent对应两个DDPG结构，一个是eval-net，一个是target-net：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">agent1_ddpg = MADDPG(<span class="string">'agent1'</span>)</span><br><span class="line">agent1_ddpg_target = MADDPG(<span class="string">'agent1_target'</span>)</span><br><span class="line"></span><br><span class="line">agent2_ddpg = MADDPG(<span class="string">'agent2'</span>)</span><br><span class="line">agent2_ddpg_target = MADDPG(<span class="string">'agent2_target'</span>)</span><br><span class="line"></span><br><span class="line">agent3_ddpg = MADDPG(<span class="string">'agent3'</span>)</span><br><span class="line">agent3_ddpg_target = MADDPG(<span class="string">'agent3_target'</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>模型训练</strong></p>
+<p>在训练过程中，假设当前的状态是o_n，我们首先通过Actor得到每个Agent的动作，这里我们将动作定义为一个二维的向量，不过根据OpenAi的环境设置，我们需要将动作展开成一个五维的向量，同时绿色的球也需要定义动作，因此一共将四组动作输入到我们的环境中，可以得到奖励及下一个时刻的状态o_n_next以及当前的奖励r_n：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">agent1_action, agent2_action, agent3_action = get_agents_action(o_n, sess, noise_rate=<span class="number">0.2</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#三个agent的行动</span></span><br><span class="line">a = [[<span class="number">0</span>, i[<span class="number">0</span>][<span class="number">0</span>], <span class="number">0</span>, i[<span class="number">0</span>][<span class="number">1</span>], <span class="number">0</span>] <span class="keyword">for</span> i <span class="keyword">in</span> [agent1_action, agent2_action, agent3_action]]</span><br><span class="line"><span class="comment">#绿球的行动</span></span><br><span class="line">a.append([<span class="number">0</span>, np.random.rand() * <span class="number">2</span> - <span class="number">1</span>, <span class="number">0</span>, np.random.rand() * <span class="number">2</span> - <span class="number">1</span>, <span class="number">0</span>])</span><br><span class="line"></span><br><span class="line">o_n_next, r_n, d_n, i_n = env.step(a)</span><br></pre></td></tr></table></figure>
+<p>随后，我们需要将经验存放到经验池中，供Critic反馈和训练：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">agent1_memory.add(np.vstack([o_n[<span class="number">0</span>], o_n[<span class="number">1</span>], o_n[<span class="number">2</span>]]),</span><br><span class="line">                  np.vstack([agent1_action[<span class="number">0</span>], agent2_action[<span class="number">0</span>], agent3_action[<span class="number">0</span>]]),</span><br><span class="line">                  r_n[<span class="number">0</span>], np.vstack([o_n_next[<span class="number">0</span>], o_n_next[<span class="number">1</span>], o_n_next[<span class="number">2</span>]]), <span class="keyword">False</span>)</span><br><span class="line"></span><br><span class="line">agent2_memory.add(np.vstack([o_n[<span class="number">1</span>], o_n[<span class="number">2</span>], o_n[<span class="number">0</span>]]),</span><br><span class="line">                  np.vstack([agent2_action[<span class="number">0</span>], agent3_action[<span class="number">0</span>], agent1_action[<span class="number">0</span>]]),</span><br><span class="line">                  r_n[<span class="number">1</span>], np.vstack([o_n_next[<span class="number">1</span>], o_n_next[<span class="number">2</span>], o_n_next[<span class="number">0</span>]]), <span class="keyword">False</span>)</span><br><span class="line"></span><br><span class="line">agent3_memory.add(np.vstack([o_n[<span class="number">2</span>], o_n[<span class="number">0</span>], o_n[<span class="number">1</span>]]),</span><br><span class="line">                  np.vstack([agent3_action[<span class="number">0</span>], agent1_action[<span class="number">0</span>], agent2_action[<span class="number">0</span>]]),</span><br><span class="line">                  r_n[<span class="number">2</span>], np.vstack([o_n_next[<span class="number">2</span>], o_n_next[<span class="number">0</span>], o_n_next[<span class="number">1</span>]]), <span class="keyword">False</span>)</span><br></pre></td></tr></table></figure>
+<p>当经验池中存储了一定的经验之后，我们就可以根据前文介绍过的双网络结构和损失函数来训练每个Agent的Actor和Critic：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">train_agent(agent1_ddpg, agent1_ddpg_target, agent1_memory, agent1_actor_target_update,</span><br><span class="line">            agent1_critic_target_update, sess, [agent2_ddpg_target, agent3_ddpg_target])</span><br><span class="line"></span><br><span class="line">train_agent(agent2_ddpg, agent2_ddpg_target, agent2_memory, agent2_actor_target_update,</span><br><span class="line">            agent2_critic_target_update, sess, [agent3_ddpg_target, agent1_ddpg_target])</span><br><span class="line"></span><br><span class="line">train_agent(agent3_ddpg, agent3_ddpg_target, agent3_memory, agent3_actor_target_update,</span><br><span class="line">            agent3_critic_target_update, sess, [agent1_ddpg_target, agent2_ddpg_target]</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+
+    
+    
+    
+    
+	<div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ff73b3;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+	
+	
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>感谢您的支持，我会继续努力的!</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wexin.JPG" alt="QJun 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/强化学习实践/" rel="tag"># 强化学习实践</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/01/深度强化学习-DDPG算法原理和实现/" rel="next" title="深度强化学习-DDPG算法原理和实现">
+                <i class="fa fa-chevron-left"></i> 深度强化学习-DDPG算法原理和实现
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/15/推荐系统--FFM模型理论和实践/" rel="prev" title="推荐系统--FFM模型理论和实践">
+                推荐系统--FFM模型理论和实践 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MDE0MS8xNjY2OA=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/10.jpg"
+                alt="QJun" />
+            
+              <p class="site-author-name" itemprop="name">QJun</p>
+              <p class="site-description motion-element" itemprop="description">Stay Hungry, Stay Foolish!</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">75</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:qjun@hust.edu.cn" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plus.google.com/" target="_blank" title="Google"><i class="fa fa-fw fa-google"></i>Google</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/" target="_blank" title="Twitter"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.facebook.com/" target="_blank" title="FB Page"><i class="fa fa-fw fa-facebook"></i>FB Page</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://leesen998.github.io/about/" title="关于此博客" target="_blank">关于此博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://poetryscience.ink/" title="Huixin" target="_blank">Huixin</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://ultimatehy.github.io/" title="Yong Huang" target="_blank">Yong Huang</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#强化学习-MADDPG算法原理及简单实现"><span class="nav-number">1.</span> <span class="nav-text">强化学习-MADDPG算法原理及简单实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1、引言"><span class="nav-number">2.</span> <span class="nav-text">1、引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2、DDPG算法的简单回顾"><span class="nav-number">3.</span> <span class="nav-text">2、DDPG算法的简单回顾</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3、MADDPG算法简介"><span class="nav-number">4.</span> <span class="nav-text">3、MADDPG算法简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4、模型实验"><span class="nav-number">5.</span> <span class="nav-text">4、模型实验</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5、MADDPG算法的简单实现"><span class="nav-number">6.</span> <span class="nav-text">5、MADDPG算法的简单实现</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="heart">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">QJun</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<div class="weixin-box">
+  <div class="weixin-menu">
+    <div class="weixin-hover">
+      <div class="weixin-description">微信扫一扫，订阅本博客</div>
+    </div>
+  </div>
+</div>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+
+
+  
+    <script type="text/javascript">
+      window.livereOptions = {
+        refer: '2018/06/19/强化学习-MADDPG算法原理及简单实现/'
+      };
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"tagMode":true,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":100,"height":200,"hOffset":10,"vOffset":10},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/"});</script>
+
+
+  
+  
+  
+  <script type="text/javascript" src="/js/src/dytitle.js"></script>
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+
+<!-- 代码块复制功能 -->
+<script type="text/javascript" src="/js/src/clipboard.min.js"></script>  
+<script type="text/javascript" src="/js/src/clipboard-use.js"></script>
+

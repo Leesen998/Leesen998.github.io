@@ -1,0 +1,1415 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#fff">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="https://fonts.cat.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#fff">
+
+
+  <link rel="manifest" href="/images/manifest.json">
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="keywords" content="深度学习基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深度学习 NLP">
+<meta property="og:url" content="https://leesen998.github.io/2017/12/29/第十六章_NLP/index.html">
+<meta property="og:site_name" content="QJun">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1547297948/samples/java%20files/photo-1544728344-7efa025e5603.jpg">
+<meta property="og:updated_time" content="2019-03-22T07:36:53.784Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深度学习 NLP">
+<meta name="twitter:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1547297948/samples/java%20files/photo-1544728344-7efa025e5603.jpg">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="QJun" type="application/atom+xml" />
+
+
+
+
+  <link rel="canonical" href="https://leesen998.github.io/2017/12/29/第十六章_NLP/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>深度学习 NLP | QJun</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://leesen998.github.io" class="github-corner" aria-label="View source on GitHub"><svg width="120" height="120" viewBox="0 0 250 250" style="fill:#64CEAA; color:#fff; position: absolute; top: 194; border: 0; left: 0; transform: scale(-1, 1);" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">QJun</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">QJun's Homepage</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://leesen998.github.io/2017/12/29/第十六章_NLP/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QJun">
+      <meta itemprop="description" content="Stay Hungry, Stay Foolish!">
+      <meta itemprop="image" content="/images/10.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QJun">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">深度学习 NLP
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-12-29 19:48:29" itemprop="dateCreated datePublished" datetime="2017-12-29T19:48:29+08:00">2017-12-29</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/机器学习/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://res.cloudinary.com/dpvywdzxv/image/upload/v1547297948/samples/java%20files/photo-1544728344-7efa025e5603.jpg" alt="" style="width:100%"></p>
+<a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Markdown Revision 1;</span><br><span class="line">Editor: 盛泳潘-电子科技大学;何建宏-学生</span><br><span class="line">Contact: shengyp2011@163.com;Bonopengate@gmail.com</span><br></pre></td></tr></table></figure>
+<h2 id="16-0-NLP-发展史简述"><a href="#16-0-NLP-发展史简述" class="headerlink" title="16.0 NLP 发展史简述"></a>16.0 NLP 发展史简述</h2><p>50多年来 NLP 的历史发展可以分为三个浪潮，前两波以理性主义和经验主义的形式出现，为当前的深度学习浪潮铺平了道路。NLP的深层学习革命的主要支柱是: （1）语言嵌入实体的分布式表征，（2）由于嵌入而产生的语义泛化， （3）自然语言的大跨度深序列建模，（4）能够从低到高表示语言层次的分层网络，以及（5）解决许多联合 NLP 问题的端对端深度学习方法。</p>
+<h3 id="第一个浪潮：理性主义"><a href="#第一个浪潮：理性主义" class="headerlink" title="第一个浪潮：理性主义"></a>第一个浪潮：理性主义</h3><p>在第一个浪潮中，NLP的实验持续了很长一段时间，可以追溯到20世纪50年代。1950年，阿兰·图灵提出了图灵测试，以评估计算机表现出与人类无法区分的智能行为的能力。这项测试是基于人类和计算机之间的自然语言对话，旨在生成类似人类的反应。1954年，George-IBM 实验产出了能够将60多个俄语句子翻译成英语的rrst机器翻译系统。</p>
+<p>这些方法是基于这样一种信念，即人类思维中的语言知识是由泛型继承提前进行的，而这种信念，在大约1960年至1980年代后期，占据了NLP的大部分研究中的主导地位。这些方法被称为理性主义方法（Church 2007）。理性主义方法在 NLP 中的主导地位主要是由于诺姆·乔姆斯基（Noam Chomsky）关于先天语言结构的论点被广泛接受以及他对 N-grams 方法的批评（Chomsky 1957）。理性主义者一般假设语言的关键部分在出生时就被硬连接到大脑中，作为人类遗传遗传的一部分，因此他们试图设计手工制作的规则，将知识和推理机制纳入智能 NLP 系统。直到20世纪80年代，最著名的成功的NLP系统，如为模拟 Rogerian psychotherapist 的 ELIZA 系统和为了规则化真实世界信息为规则本体的 MARGIE 系统，都是基于复杂的手写规则。</p>
+<p>这一时期恰逢以专家知识工程为特点的早期智能的早期发展，即领域专家根据其所掌握的（非常狭窄的）应用领域的知识设计计算机程序（Nilsson 1982; Winston 1993）。专家们使用符号逻辑规则设计了这些程序，这些规则基于对这些知识的仔细表征和工程。这些以知识为基础的智能系统往往通过检测”Head”或最重要的参数，并就每种特殊情况采取特定的解决办法，而这在解决狭义问题方面往往是有效的。这些“Head”参数由人类专家预先确定，使“tail”参数和案例不受影响。由于缺乏学习能力，他们有必要将解决方案推广到新的情况和领域。这一时期的典型方法是专家系统所提供的证据，这是一个模拟人类专家决策能力的计算机系统。这种系统旨在通过知识推理来解决复杂的问题（Nilsson 1982）。第一个专家系统建立于1970年代，然后在1980年代推广。使用的主要”算法”是以”if-then-else”为形式的推断规则（Jackson 1998）。这些智能系统的主要优点是其在进行逻辑推理方面（有限）能力的透明度和可解释性。像NLP系统，如 ELIZA 和 MARGIE ，一般专家系统在早期使用手工制作的专家知识，这往往是有效的狭隘的问题，虽然推理无法处理不确定性，是普遍存在的实际应用。</p>
+<p>同样，语音识别研究和系统设计，这又是另一个长期存在的 NLP 和反智能挑战，在这个理性主义时代，主要基于专家知识工程的范式，如elegantly analyzed in（Church and Mercer 1993）。在1970年代和1980年代初，专家系统的语音识别方法相当流行（Reddy 1976; Zue 1985）。然而，研究人员敏锐地认识到，缺乏从数据中学习和处理推理不确定性的能力，导致了接下来描述的第二波语音识别、NLP和对于文本的人工智能浪潮也走向失败。</p>
+<h3 id="第二波浪潮：经验主义"><a href="#第二波浪潮：经验主义" class="headerlink" title="第二波浪潮：经验主义"></a>第二波浪潮：经验主义</h3><p>第二波 NLP 浪潮的特点是利用语料库数据以及基于（浅层）机器学习、统计学等来利用这些数据（Manning and Schtze 1999）。由于许多自然语言的结构和理论都被贬低或抛弃，而倾向于数据驱动的方法，这个时代发展的主要方法被称为经验或务实的方法（ChurchandMercer 1993;Church 2014）。NLP 的一个主要会议甚至被命名为“自然语言处理的经验方法（Empirical Methods in Natural Language Processing）（EMNLP）”，最直接地反映了NLP研究人员在那个时代对经验方法的强烈积极情绪。</p>
+<p>与理性主义方法相反，经验方法认为人类的思维只是从关联、模式识别和泛化的常规操作开始。丰富的感官输入需要使大脑学习自然语言的详细结构。经验主义盛行于1920年至1960年间，自1990年以来一直在兴起。NLP的早期经验方法主要是开发生成模型，如隐马尔可夫模型 （HMM） （Baum and Petrie 1966）， IBM 翻译模型 （Brown et al. 1993）， 和 head-driven parsing 模型（Collins 1997），以发现大型语料库的规律性。自1990年代后期以来，在各种NLP任务中，歧视性模式已成为事实上的做法。NLP的典型判别模型和方法包括最大熵模型（ratnaparkhi 1997）、支持向量机（Vapnik 1998）、条件随机（Lafferty et al. 2001）、最大相互信息和最小区分器错误（He et al. 2008）还有感知器（Collins 2002）。</p>
+<p>在这种经验主义时代中、NLP 与同样的智能方法如语音识别和计算机视觉是平行的。这是在明确的证据表明，学习和感知能力对复杂的智能系统至关重要，但在前一波流行的专家系统中却不存在。例如，当 DARPA 开始对自动驾驶提出重大挑战时，大多数车辆随后依赖于基于知识的智能智能。正如语音识别和NLP 一样，自主驾驶和计算机视觉研究人员意识到基于知识的范式的局限性，因为机器学习需要进行不确定性处理和泛化能力。</p>
+<p>在第二波浪潮中，NLP的经验主义和语音识别是基于数据密集型机器学习的，我们现在称之为“shallow”，因为在下一节中描述的第三波浪潮中，数据的多层或“deep”表征通常缺乏抽象结构。在机器学习中，在第一次浪潮中，研究人员不需要考虑构造精确规则，为知识为基础的 NLP 和语音系统。相反，他们把重点放在统计模型（Bishop 2006; Murphy 2012）或作为一个基本引擎的简单的神经网络（Bishop 1995）。然后，他们使用足够的训练数据进行自动学习或“tune（调整）”系统的参数，使它们能够处理不确定性，并尝试从一个条件泛化到另一个条件，从一个领域泛化到另一个领域。机器学习的关键算法和方法包括EM （期望最大化）、贝叶斯网络、支持向量机、决策树以及神经网络的反向传播算法。</p>
+<p>一般来说，基于机器学习的NLP、语音和其他智能系统的性能比早期的基于知识的智能系统要好得多。成功的例子包括语音识别 （Jelinek 1998）， 脸部识别 （Viola and Jones 2004）， 实体识别 （Fei-Fei and Perona 2005）， 手写字体识别 （Plamondon and Srihari 2000）， 以及机器翻译 （Och 2003）。</p>
+<p>在语音识别方面，从20世纪80年代初到2010年前后近30年，利用基于 HMM 与高斯混合模型相结合的统计生成模型，以及其推广的各种版本（Baker et al. 2009a，b; Deng and O’Shaughnessy 2003; Rabiner and Juang 1993）的统计生成模式。泛化 HMM 的许多版本都是基于统计和神经网络的隐动态模型（Deng 1998; Bridle et al. 1998; Deng and Yu 2007）。前者采用 EM 和 switching extended Kalman ﬁlter 算法学习模型参数（Ma and Deng 2004; Lee et al. 2004），后者采用反向传播（Picone et al. 1999），两者都广泛地利用多个潜在层表示法进行语音分析的生成过程。将这种“深度”生成过程转化为端到端过程的对应方案，导致了深度学习的工业化成功（Deng et al. 2010， 2013; Hinton et al. 2012） ，从而形成了第三波浪潮的驱动力。</p>
+<h3 id="第三波浪潮：深度学习"><a href="#第三波浪潮：深度学习" class="headerlink" title="第三波浪潮：深度学习"></a>第三波浪潮：深度学习</h3><p>在第二波浪潮中开发的 NLP 系统，包括语音识别、语言理解和机器翻译，表现得比在第一波浪潮时更好，鲁棒性更高，但它们远远没有达到人的水平，而这留下了很多需求。除了少数例外，NLP的（浅层）机器学习模型通常没有足够的容量来吸收大量的训练数据。此外，学习算法、方法和基础设施也都不够强大。所有这一切都在几年前发生了变化，而这导致了第三波 NLP 浪潮，这股浪潮是由深层机器学习或深度学习的新范式推动的（Bengio 2009; Deng and Yu 2014; LeCun et al. 2015; Goodfellow et al. 2016）。</p>
+<p>深度学习起源于人工神经网络，它可以被看作是受生物神经系统启发的细胞类型的级联模型。随着反向传播算法的出现（Rumelhart et al. 1986），90年代对深度神经网络的训练引起了广泛关注。在没有大量训练数据和没有适当的设计和学习范式的情况下，在神经网络训练过程中，学习信号随着层次数（或更严格的信用分配深度）在层层传播时呈指数形式消失，使得调整深层神经网络特别是递归的版本的连接权重变得异常艰难。Hinton 等人（2006）克服了这个问题，使用无人监督的预训练模型来进行学习有用的特征探测器。然后，通过监督学习进一步训练网络，对标记数据进行分类。因此，可以学习使用低维表征的方式来学习高维的表征的分布。这项开创性的工作标志着神经网络的复兴。此后提出和发展了各种网络结构，包括 Deep Belief 网络（Hinton et al.2006）、堆积自编码器（Vincent et al.2010）、深层玻尔兹曼机（Hinton and Salakhutdinov 2012）、深度卷积神经网络（Krizhevsky et al. 2012），深层堆积网络 （Deng et al. 2012），和深层 Q-networks （Mnih et al. 2015）。深度学习自2010年以来已成功地应用于实际智能领域的实际任务，包括语音识别（Yu et al. 2010; Hinton et al. 2012），图像识别（Krizhevsky et al. 2012; He et al. 2016），以及 NLP 绝大多数领域。 </p>
+<p>其中由于微软公司在工业化上的成功，以及愈来愈高的准确率等迹象，这些2010-2011年语音识别的惊人成功预示着 NLP 的第三波浪潮和人工智能的到来。随着深度学习在语音识别方面取得成功，计算机视觉（Krizhevsky et al. 2012）和机器翻译（Bahdanau et al. 2015）被类似的深度学习范式所取代。特别是，虽然 Bengio 等人在2001的工作，在2011年就开发了强大的神经词嵌入技术（Bengio et al. 2001），但由于大数据的可用性和更快的计算，它直到10多年后才被证明在一个大规模和实际有用的规模上才能够实际有用（Mikolov et al. 2013）。此外，许多其他现实世界的NLP应用，如图像字幕（Karpathy and Fei-Fei 2015; Fang et al. 2015; Gan et al. 2017），视觉问题回答（Fei-Fei and Perona 2016），语音理解系统（Mesnil et al. 2013），网络搜索（Huang et al. 2013b）和推荐系统由于深度学习而取得成功，此外还有许多非NLP任务，包括药物发现和药理学、客户关系管理、推荐系统、手势识别、医学信息、广告投放、医学图像分析、机器人、自动驾驶车辆、纸板和电子游戏（例如 Atari， Go， Poker， and the latest， DOTA2）等。详情请参阅维基上的深度学习领域。</p>
+<p>在更多基于文本的应用领域中，机器翻译可能受到深度学习的影响最大。从 NLP 第二波浪潮中发展起来的浅层——统计机器翻译开始看起的话，目前在实际应用中最好的机器翻译系统是基于深神经网络的。例如，谷歌在2016年9月宣布了其转向神经机器翻译的阶段，两个月后微软也发布了类似的声明。Facebook已经进行了大约一年的机器神经网络翻译的转换工作，到2017年8月它已经完全将这个系统部署成功。</p>
+<p>在口语理解和对话系统领域，深度学习也正在产生巨大影响。目前流行的技术以多种方式维护和扩展了第二波时代浪潮中发展起来的统计方法。与经验（浅层）机器学习方法一样，深度学习也是基于数据密集型方法，以降低手工制作规则的成本，对噪声环境下的语音识别错误和语言理解错误具有很强的鲁棒性，并利用决策过程和强化学习的力量来设计对话策略，例如（Gasic et al. 2017; Dhingra et al. 2017）。与早期的方法相比，深度神经网络模型和表征方法更强大，它们使端到端学习成为可能。然而，深度学习也没有解决可解释性和领域泛化问题。</p>
+<p>将深度学习应用于 NLP 问题方面的最近的两个重要技术突破是序列到序列学习（Sutskevar et al. 2014）和注意力机制建模（Bahdanau et al. 2015），以及最近的 BERT模型（Jacob el al.2018） 。序列到序列学习引入了一个强大的学习范式，即使用递归神经网络以端到端的方式进行编码和解码。注意力机制建模最初是为了克服编码一个长序列的难度而开发的，后来的持续发展又扩展了它的能力，提供了两个任意序列的高度可塑对齐能力，而其两个可以同时学习神经网络参数。而 BERT 则是实现了双向建模获取以得到更好的语言表征能力。序列到序列学习和注意力机制的关键概念在基于统计学习和词局部表征的最佳系统上提高了基于分布式单词嵌入的神经机器翻译的性能，而 BERT 更重要的意义是双向获取同一文段的高维意义。在这一成功之后，这些概念也被成功地应用到许多其他与NLP相关的任务中，如图像字幕（Karpathy and Fei-Fei 2015; Devlin et al. 2015）、语音识别（Chorowski et al. 2015）、一次性学习、句法分析、唇读、文本理解、摘要以及问答系统等。撇开他们巨大的经验成功不谈，基于神经网络的深度学习模型往往比早期浪潮中的传统机器学习模型更简单、更容易设计。在许多应用中，在端到端的任务中，模型的所有部分都同时进行深度学习，从特征抽取到预测。导致神经网络模型相对简单的另一个因素是，相同的模型构建成的块（即不同类型的层）通常在许多不同的应用中使用。为多种任务使用相同的构建块，这种方法使得模型更容易迁移到其它任务和数据上。此外，谷歌等公司还开发了软件工具包，以便更快、更有效地实现这些模型。由于以上这些原因，神经网络在数据量大而且基于云的方式上，是更常用的。</p>
+<p>尽管深度学习在重塑语音、图像和视频的处理方面被证明是有效的，而且具有它的革命性，但在将深度学习与基于文本的 NLP 相结合方面的有效性并不那么明确，尽管它在一些实用的 NLP 任务中取得了经验上的成功。在语音、图像和视频处理中，深度学习通过直接从原始数据学习规律来解决语义差距问题。然而，在 NLP 中，人们提出了更强的理论和结构化模型，即语音、语法和语义，来提取理解和生成自然语言的基本机制，这些机制与神经网络不那么容易兼容。与语音、图像和视频信号相比，从文本数据中学习的神经表征可以对自然语言提供同样直接的见解，但是这个也不够直接。因此，将神经网络，特别是那些具有复杂层次结构的神经网络应用于 NLP，已成为 NLP 和深度学习社区中最活跃的领域，近年来取得了非常显著的进展（Deng 2016; Manning and Socher 2017;Jacob el al.2018）。</p>
+<h2 id="16-1-如何理解序列到序列模型？"><a href="#16-1-如何理解序列到序列模型？" class="headerlink" title="16.1 如何理解序列到序列模型？"></a>16.1 如何理解序列到序列模型？</h2><h2 id="16-2-序列到序列模型有什么限制吗？"><a href="#16-2-序列到序列模型有什么限制吗？" class="headerlink" title="16.2 序列到序列模型有什么限制吗？"></a>16.2 序列到序列模型有什么限制吗？</h2><h2 id="16-3-如果不采用序列到序列模型，可以考虑用其它模型方法吗？"><a href="#16-3-如果不采用序列到序列模型，可以考虑用其它模型方法吗？" class="headerlink" title="16.3 如果不采用序列到序列模型，可以考虑用其它模型方法吗？"></a>16.3 如果不采用序列到序列模型，可以考虑用其它模型方法吗？</h2><h2 id="16-4-如何理解词向量？"><a href="#16-4-如何理解词向量？" class="headerlink" title="16.4 如何理解词向量？"></a>16.4 如何理解词向量？</h2><h2 id="16-5-词向量哪家好？"><a href="#16-5-词向量哪家好？" class="headerlink" title="16.5 词向量哪家好？"></a>16.5 词向量哪家好？</h2><h2 id="16-6-解释一下注意力机制的原理？"><a href="#16-6-解释一下注意力机制的原理？" class="headerlink" title="16.6 解释一下注意力机制的原理？"></a>16.6 解释一下注意力机制的原理？</h2><h2 id="16-7-注意力机制是不是适用于所有场景呢？它的鲁棒性如何？"><a href="#16-7-注意力机制是不是适用于所有场景呢？它的鲁棒性如何？" class="headerlink" title="16.7 注意力机制是不是适用于所有场景呢？它的鲁棒性如何？"></a>16.7 注意力机制是不是适用于所有场景呢？它的鲁棒性如何？</h2><h2 id="16-8-怎么将原有的模型加上注意力机制呢？"><a href="#16-8-怎么将原有的模型加上注意力机制呢？" class="headerlink" title="16.8 怎么将原有的模型加上注意力机制呢？"></a>16.8 怎么将原有的模型加上注意力机制呢？</h2><h2 id="16-9-通俗地解释一下词法分析是什么？有什么应用场景？"><a href="#16-9-通俗地解释一下词法分析是什么？有什么应用场景？" class="headerlink" title="16.9 通俗地解释一下词法分析是什么？有什么应用场景？"></a>16.9 通俗地解释一下词法分析是什么？有什么应用场景？</h2><h2 id="16-10-深度学习中的词法分析有哪些常见模型呢？"><a href="#16-10-深度学习中的词法分析有哪些常见模型呢？" class="headerlink" title="16.10 深度学习中的词法分析有哪些常见模型呢？"></a>16.10 深度学习中的词法分析有哪些常见模型呢？</h2><h2 id="16-11-通俗地解释一下知识图谱是什么？有什么应用场景？"><a href="#16-11-通俗地解释一下知识图谱是什么？有什么应用场景？" class="headerlink" title="16.11 通俗地解释一下知识图谱是什么？有什么应用场景？"></a>16.11 通俗地解释一下知识图谱是什么？有什么应用场景？</h2><h2 id="16-12-深度学习中的知识图谱有哪些常见模型呢？"><a href="#16-12-深度学习中的知识图谱有哪些常见模型呢？" class="headerlink" title="16.12 深度学习中的知识图谱有哪些常见模型呢？"></a>16.12 深度学习中的知识图谱有哪些常见模型呢？</h2><h2 id="16-13-深度学习中的机器翻译有哪些常见模型呢？"><a href="#16-13-深度学习中的机器翻译有哪些常见模型呢？" class="headerlink" title="16.13 深度学习中的机器翻译有哪些常见模型呢？"></a>16.13 深度学习中的机器翻译有哪些常见模型呢？</h2><h2 id="16-14-机器翻译的通俗实现以及部署过程是怎样的呢？"><a href="#16-14-机器翻译的通俗实现以及部署过程是怎样的呢？" class="headerlink" title="16.14 机器翻译的通俗实现以及部署过程是怎样的呢？"></a>16.14 机器翻译的通俗实现以及部署过程是怎样的呢？</h2><h2 id="16-15-通俗地解释一下文本情感分析是什么？常见的应用场景是？"><a href="#16-15-通俗地解释一下文本情感分析是什么？常见的应用场景是？" class="headerlink" title="16.15 通俗地解释一下文本情感分析是什么？常见的应用场景是？"></a>16.15 通俗地解释一下文本情感分析是什么？常见的应用场景是？</h2><h2 id="16-16-最常用的情感分析模型是什么呢？如何快速部署呢？"><a href="#16-16-最常用的情感分析模型是什么呢？如何快速部署呢？" class="headerlink" title="16.16 最常用的情感分析模型是什么呢？如何快速部署呢？"></a>16.16 最常用的情感分析模型是什么呢？如何快速部署呢？</h2><h2 id="16-17-通俗地解释一下问答系统？它涵盖哪些领域？常见的应用场景是？"><a href="#16-17-通俗地解释一下问答系统？它涵盖哪些领域？常见的应用场景是？" class="headerlink" title="16.17 通俗地解释一下问答系统？它涵盖哪些领域？常见的应用场景是？"></a>16.17 通俗地解释一下问答系统？它涵盖哪些领域？常见的应用场景是？</h2><h2 id="16-18-常见的问答系统模型是什么？如何快速部署呢？"><a href="#16-18-常见的问答系统模型是什么？如何快速部署呢？" class="headerlink" title="16.18 常见的问答系统模型是什么？如何快速部署呢？"></a>16.18 常见的问答系统模型是什么？如何快速部署呢？</h2><h2 id="16-19-图像文字生成是什么？它的技术原理是什么？"><a href="#16-19-图像文字生成是什么？它的技术原理是什么？" class="headerlink" title="16.19 图像文字生成是什么？它的技术原理是什么？"></a>16.19 图像文字生成是什么？它的技术原理是什么？</h2><h2 id="16-20-常见的图像文字生成模型是什么？"><a href="#16-20-常见的图像文字生成模型是什么？" class="headerlink" title="16.20 常见的图像文字生成模型是什么？"></a>16.20 常见的图像文字生成模型是什么？</h2><h2 id="16-21-NLP-的无监督学习发展动态是怎样的？有哪些领域在尝试无监督学习？"><a href="#16-21-NLP-的无监督学习发展动态是怎样的？有哪些领域在尝试无监督学习？" class="headerlink" title="16.21 NLP 的无监督学习发展动态是怎样的？有哪些领域在尝试无监督学习？"></a>16.21 NLP 的无监督学习发展动态是怎样的？有哪些领域在尝试无监督学习？</h2><h2 id="16-22-NLP-和强化学习的结合方式是怎样的？有哪些方向在尝试强化学习？"><a href="#16-22-NLP-和强化学习的结合方式是怎样的？有哪些方向在尝试强化学习？" class="headerlink" title="16.22 NLP 和强化学习的结合方式是怎样的？有哪些方向在尝试强化学习？"></a>16.22 NLP 和强化学习的结合方式是怎样的？有哪些方向在尝试强化学习？</h2><h2 id="16-23-NLP-和元学习？元学习如何能够和-NLP-结合起来？"><a href="#16-23-NLP-和元学习？元学习如何能够和-NLP-结合起来？" class="headerlink" title="16.23 NLP 和元学习？元学习如何能够和 NLP 结合起来？"></a>16.23 NLP 和元学习？元学习如何能够和 NLP 结合起来？</h2><h2 id="16-24-能说一下各自领域最常用且常见的基准模型有哪些吗？"><a href="#16-24-能说一下各自领域最常用且常见的基准模型有哪些吗？" class="headerlink" title="16.24 能说一下各自领域最常用且常见的基准模型有哪些吗？"></a>16.24 能说一下各自领域最常用且常见的基准模型有哪些吗？</h2>
+      
+    </div>
+
+    
+
+    
+    
+    
+    
+	<div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ff73b3;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+	
+	
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>感谢您的支持，我会继续努力的!</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wexin.JPG" alt="QJun 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/深度学习基础/" rel="tag"># 深度学习基础</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/20/第十五章_异构运算、GPU及框架选型/" rel="next" title="异构计算， GPU和框架选型指南">
+                <i class="fa fa-chevron-left"></i> 异构计算， GPU和框架选型指南
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/15/第十七章_模型压缩、加速及移动端部署/" rel="prev" title="模型压缩及移动端部署">
+                模型压缩及移动端部署 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MDE0MS8xNjY2OA=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/10.jpg"
+                alt="QJun" />
+            
+              <p class="site-author-name" itemprop="name">QJun</p>
+              <p class="site-description motion-element" itemprop="description">Stay Hungry, Stay Foolish!</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">75</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:qjun@hust.edu.cn" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plus.google.com/" target="_blank" title="Google"><i class="fa fa-fw fa-google"></i>Google</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/" target="_blank" title="Twitter"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.facebook.com/" target="_blank" title="FB Page"><i class="fa fa-fw fa-facebook"></i>FB Page</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://leesen998.github.io/about/" title="关于此博客" target="_blank">关于此博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://poetryscience.ink/" title="Huixin" target="_blank">Huixin</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://ultimatehy.github.io/" title="Yong Huang" target="_blank">Yong Huang</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#16-0-NLP-发展史简述"><span class="nav-number">1.</span> <span class="nav-text">16.0 NLP 发展史简述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一个浪潮：理性主义"><span class="nav-number">1.1.</span> <span class="nav-text">第一个浪潮：理性主义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二波浪潮：经验主义"><span class="nav-number">1.2.</span> <span class="nav-text">第二波浪潮：经验主义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三波浪潮：深度学习"><span class="nav-number">1.3.</span> <span class="nav-text">第三波浪潮：深度学习</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-1-如何理解序列到序列模型？"><span class="nav-number">2.</span> <span class="nav-text">16.1 如何理解序列到序列模型？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-2-序列到序列模型有什么限制吗？"><span class="nav-number">3.</span> <span class="nav-text">16.2 序列到序列模型有什么限制吗？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-3-如果不采用序列到序列模型，可以考虑用其它模型方法吗？"><span class="nav-number">4.</span> <span class="nav-text">16.3 如果不采用序列到序列模型，可以考虑用其它模型方法吗？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-4-如何理解词向量？"><span class="nav-number">5.</span> <span class="nav-text">16.4 如何理解词向量？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-5-词向量哪家好？"><span class="nav-number">6.</span> <span class="nav-text">16.5 词向量哪家好？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-6-解释一下注意力机制的原理？"><span class="nav-number">7.</span> <span class="nav-text">16.6 解释一下注意力机制的原理？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-7-注意力机制是不是适用于所有场景呢？它的鲁棒性如何？"><span class="nav-number">8.</span> <span class="nav-text">16.7 注意力机制是不是适用于所有场景呢？它的鲁棒性如何？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-8-怎么将原有的模型加上注意力机制呢？"><span class="nav-number">9.</span> <span class="nav-text">16.8 怎么将原有的模型加上注意力机制呢？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-9-通俗地解释一下词法分析是什么？有什么应用场景？"><span class="nav-number">10.</span> <span class="nav-text">16.9 通俗地解释一下词法分析是什么？有什么应用场景？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-10-深度学习中的词法分析有哪些常见模型呢？"><span class="nav-number">11.</span> <span class="nav-text">16.10 深度学习中的词法分析有哪些常见模型呢？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-11-通俗地解释一下知识图谱是什么？有什么应用场景？"><span class="nav-number">12.</span> <span class="nav-text">16.11 通俗地解释一下知识图谱是什么？有什么应用场景？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-12-深度学习中的知识图谱有哪些常见模型呢？"><span class="nav-number">13.</span> <span class="nav-text">16.12 深度学习中的知识图谱有哪些常见模型呢？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-13-深度学习中的机器翻译有哪些常见模型呢？"><span class="nav-number">14.</span> <span class="nav-text">16.13 深度学习中的机器翻译有哪些常见模型呢？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-14-机器翻译的通俗实现以及部署过程是怎样的呢？"><span class="nav-number">15.</span> <span class="nav-text">16.14 机器翻译的通俗实现以及部署过程是怎样的呢？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-15-通俗地解释一下文本情感分析是什么？常见的应用场景是？"><span class="nav-number">16.</span> <span class="nav-text">16.15 通俗地解释一下文本情感分析是什么？常见的应用场景是？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-16-最常用的情感分析模型是什么呢？如何快速部署呢？"><span class="nav-number">17.</span> <span class="nav-text">16.16 最常用的情感分析模型是什么呢？如何快速部署呢？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-17-通俗地解释一下问答系统？它涵盖哪些领域？常见的应用场景是？"><span class="nav-number">18.</span> <span class="nav-text">16.17 通俗地解释一下问答系统？它涵盖哪些领域？常见的应用场景是？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-18-常见的问答系统模型是什么？如何快速部署呢？"><span class="nav-number">19.</span> <span class="nav-text">16.18 常见的问答系统模型是什么？如何快速部署呢？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-19-图像文字生成是什么？它的技术原理是什么？"><span class="nav-number">20.</span> <span class="nav-text">16.19 图像文字生成是什么？它的技术原理是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-20-常见的图像文字生成模型是什么？"><span class="nav-number">21.</span> <span class="nav-text">16.20 常见的图像文字生成模型是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-21-NLP-的无监督学习发展动态是怎样的？有哪些领域在尝试无监督学习？"><span class="nav-number">22.</span> <span class="nav-text">16.21 NLP 的无监督学习发展动态是怎样的？有哪些领域在尝试无监督学习？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-22-NLP-和强化学习的结合方式是怎样的？有哪些方向在尝试强化学习？"><span class="nav-number">23.</span> <span class="nav-text">16.22 NLP 和强化学习的结合方式是怎样的？有哪些方向在尝试强化学习？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-23-NLP-和元学习？元学习如何能够和-NLP-结合起来？"><span class="nav-number">24.</span> <span class="nav-text">16.23 NLP 和元学习？元学习如何能够和 NLP 结合起来？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-24-能说一下各自领域最常用且常见的基准模型有哪些吗？"><span class="nav-number">25.</span> <span class="nav-text">16.24 能说一下各自领域最常用且常见的基准模型有哪些吗？</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="heart">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">QJun</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<div class="weixin-box">
+  <div class="weixin-menu">
+    <div class="weixin-hover">
+      <div class="weixin-description">微信扫一扫，订阅本博客</div>
+    </div>
+  </div>
+</div>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+
+
+  
+    <script type="text/javascript">
+      window.livereOptions = {
+        refer: '2017/12/29/第十六章_NLP/'
+      };
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"tagMode":true,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":100,"height":200,"hOffset":10,"vOffset":10},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/"});</script>
+
+
+  
+  
+  
+  <script type="text/javascript" src="/js/src/dytitle.js"></script>
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+
+<!-- 代码块复制功能 -->
+<script type="text/javascript" src="/js/src/clipboard.min.js"></script>  
+<script type="text/javascript" src="/js/src/clipboard-use.js"></script>
+

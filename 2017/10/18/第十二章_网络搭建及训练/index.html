@@ -1,0 +1,1644 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#fff">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="https://fonts.cat.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#fff">
+
+
+  <link rel="manifest" href="/images/manifest.json">
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="keywords" content="深度学习基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络搭建及训练">
+<meta property="og:url" content="https://leesen998.github.io/2017/10/18/第十二章_网络搭建及训练/index.html">
+<meta property="og:site_name" content="QJun">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1547297948/samples/java%20files/photo-1544728344-7efa025e5603.jpg">
+<meta property="og:image" content="https://leesen998.github.io/2017/10/18/第十二章_网络搭建及训练/img/ch12/1.bmp">
+<meta property="og:image" content="https://leesen998.github.io/2017/10/18/第十二章_网络搭建及训练/img/ch12/网络结构演进.png">
+<meta property="og:image" content="https://leesen998.github.io/2017/10/18/第十二章_网络搭建及训练/img/ch12/历年冠军.png">
+<meta property="og:updated_time" content="2019-03-22T07:34:35.287Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="网络搭建及训练">
+<meta name="twitter:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1547297948/samples/java%20files/photo-1544728344-7efa025e5603.jpg">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="QJun" type="application/atom+xml" />
+
+
+
+
+  <link rel="canonical" href="https://leesen998.github.io/2017/10/18/第十二章_网络搭建及训练/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>网络搭建及训练 | QJun</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://leesen998.github.io" class="github-corner" aria-label="View source on GitHub"><svg width="120" height="120" viewBox="0 0 250 250" style="fill:#64CEAA; color:#fff; position: absolute; top: 194; border: 0; left: 0; transform: scale(-1, 1);" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">QJun</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">QJun's Homepage</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://leesen998.github.io/2017/10/18/第十二章_网络搭建及训练/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QJun">
+      <meta itemprop="description" content="Stay Hungry, Stay Foolish!">
+      <meta itemprop="image" content="/images/10.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QJun">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">网络搭建及训练
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-10-18 19:48:29" itemprop="dateCreated datePublished" datetime="2017-10-18T19:48:29+08:00">2017-10-18</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/机器学习/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://res.cloudinary.com/dpvywdzxv/image/upload/v1547297948/samples/java%20files/photo-1544728344-7efa025e5603.jpg" alt="" style="width:100%"></p>
+<a id="more"></a>
+<h1 id="第十二章-网络搭建及训练"><a href="#第十二章-网络搭建及训练" class="headerlink" title="第十二章 网络搭建及训练"></a>第十二章 网络搭建及训练</h1><p>目录<br>常用框架介绍<br>常用框架对比(表格展示)  16个最棒的深度学习框架 <a href="https://baijiahao.baidu.com/s?id=1599943447101946075&amp;wfr=spider&amp;for=pc" target="_blank" rel="noopener">https://baijiahao.baidu.com/s?id=1599943447101946075&amp;wfr=spider&amp;for=pc</a><br>基于tensorfolw网络搭建实例<br>CNN训练注意事项<br>训练技巧<br>深度学习模型训练痛点及解决方法 <a href="https://blog.csdn.net/weixin_40581617/article/details/80537559" target="_blank" rel="noopener">https://blog.csdn.net/weixin_40581617/article/details/80537559</a><br>深度学习模型训练流程 <a href="https://blog.csdn.net/Quincuntial/article/details/79242364" target="_blank" rel="noopener">https://blog.csdn.net/Quincuntial/article/details/79242364</a><br>深度学习模型训练技巧 <a href="https://blog.csdn.net/w7256037/article/details/52071345" target="_blank" rel="noopener">https://blog.csdn.net/w7256037/article/details/52071345</a><br><a href="https://blog.csdn.net/u012033832/article/details/79017951" target="_blank" rel="noopener">https://blog.csdn.net/u012033832/article/details/79017951</a><br><a href="https://blog.csdn.net/u012968002/article/details/72122965" target="_blank" rel="noopener">https://blog.csdn.net/u012968002/article/details/72122965</a>   </p>
+<p>深度学习几大难点 <a href="https://blog.csdn.net/m0_37867246/article/details/79766371" target="_blank" rel="noopener">https://blog.csdn.net/m0_37867246/article/details/79766371</a>   </p>
+<h2 id="CNN训练注意事项"><a href="#CNN训练注意事项" class="headerlink" title="CNN训练注意事项"></a>CNN训练注意事项</h2><p><a href="http://www.cnblogs.com/softzrp/p/6724884.html" target="_blank" rel="noopener">http://www.cnblogs.com/softzrp/p/6724884.html</a><br>1.用Mini-batch SGD对神经网络做训练的过程如下：</p>
+<p>不断循环 ：</p>
+<p>①  采样一个 batch 数据( ( 比如 32 张 ）</p>
+<p>②前向计算得到损失 loss</p>
+<p>③  反向传播计算梯度( 一个 batch）</p>
+<p>④  用这部分梯度迭代更新权重参数</p>
+<p>2.去均值</p>
+<p>去均值一般有两种方式：第一种是在每个像素点都算出3个颜色通道上的平均值，然后对应减去，如AlexNet。 第二种是在整个样本上就只得到一组数，不分像素点了，如VGGNet。<br>3.权重初始化<br>4.Dropout</p>
+<h1 id="第十二章-TensorFlow、pytorch和caffe介绍"><a href="#第十二章-TensorFlow、pytorch和caffe介绍" class="headerlink" title="第十二章 TensorFlow、pytorch和caffe介绍"></a>第十二章 TensorFlow、pytorch和caffe介绍</h1><h1 id="12-1-TensorFlow"><a href="#12-1-TensorFlow" class="headerlink" title="12.1 TensorFlow"></a>12.1 TensorFlow</h1><h2 id="12-1-1-TensorFlow是什么？"><a href="#12-1-1-TensorFlow是什么？" class="headerlink" title="12.1.1 TensorFlow是什么？"></a>12.1.1 TensorFlow是什么？</h2><p>&emsp;&emsp;TensorFlow支持各种异构平台，支持多CPU/GPU、服务器、移动设备，具有良好的跨平台的特性；TensorFlow架构灵活，能够支持各种网络模型，具有良好的通用性；此外，TensorFlow架构具有良好的可扩展性，对OP的扩展支持，Kernel特化方面表现出众。</p>
+<p>&emsp;&emsp;TensorFlow最初由Google大脑的研究员和工程师开发出来，用于机器学习和神经网络方面的研究，于2015.10宣布开源，在众多深度学习框架中脱颖而出，在Github上获得了最多的Star量。</p>
+<h2 id="12-1-2-TensorFlow的设计理念是什么？"><a href="#12-1-2-TensorFlow的设计理念是什么？" class="headerlink" title="12.1.2 TensorFlow的设计理念是什么？"></a>12.1.2 TensorFlow的设计理念是什么？</h2><p>TensorFlow的设计理念主要体现在两个方面：</p>
+<p>（1）将图定义和图运算完全分开。<br>&emsp;&emsp;TensorFlow 被认为是一个“符号主义”的库。我们知道，编程模式通常分为命令式编程（imperative style programming）和符号式编程（symbolic style programming）。命令式编程就是编写我们理解的通常意义上的程序，很容易理解和调试，按照原有逻辑执行。符号式编程涉及很多的嵌入和优化，不容易理解和调试，但运行速度相对有所提升。现有的深度学习框架中，Torch 是典型的命令式的，Caffe、MXNet 采用了两种编程模式混合的方法，而 TensorFlow 完全采用符号式编程。</p>
+<p>&emsp;&emsp;符号式计算一般是先定义各种变量，然后建立一个数据流图，在数据流图中规定各个变量间的计算关系，最后需要对据流图进行编译，但此时的数据流图还是一个空壳儿，里面没有任何实际数据，只有把需要运算的输入放进去后，才能在整个模型中形成数据流，从而形成输出值。</p>
+<p>　　例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">t = 8 + 9</span><br><span class="line">print(t)</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;在传统的程序操作中，定义了 t 的运算，在运行时就执行了，并输出 17。而在 TensorFlow中，数据流图中的节点，实际上对应的是 TensorFlow API 中的一个操作，并没有真正去运行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import tensorflow as tf</span><br><span class="line">t = tf.add(8,9)</span><br><span class="line">print(t)</span><br><span class="line"></span><br><span class="line">#输出  Tensor&#123;&quot;Add_1:0&quot;,shape=&#123;&#125;,dtype=int32&#125;</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;（2）TensorFlow 中涉及的运算都要放在图中，而图的运行只发生在会话（session）中。开启会话后，就可以用数据去填充节点，进行运算；关闭会话后，就不能进行计算了。因此，会话提供了操作运行和 Tensor 求值的环境。</p>
+<p>　　例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import tensorflow as tf</span><br><span class="line">#创建图</span><br><span class="line">a = tf.constant([4.0,5.0])</span><br><span class="line">b = tf.constant([6.0,7.0])</span><br><span class="line">c = a * b</span><br><span class="line">#创建会话</span><br><span class="line">sess  = tf.Session()</span><br><span class="line">#计算c</span><br><span class="line">print(sess.run(c))   #进行矩阵乘法，输出[24.,35.]</span><br><span class="line">sess.close()</span><br></pre></td></tr></table></figure>
+<h2 id="12-1-3-TensorFlow特点有哪些？"><a href="#12-1-3-TensorFlow特点有哪些？" class="headerlink" title="12.1.3 TensorFlow特点有哪些？"></a>12.1.3 TensorFlow特点有哪些？</h2><h3 id="1-高度的灵活性"><a href="#1-高度的灵活性" class="headerlink" title="1.高度的灵活性"></a>1.高度的灵活性</h3><p>&emsp;&emsp;TensorFlow 并不仅仅是一个深度学习库，只要可以把你的计算过程表示称一个数据流图的过程，我们就可以使用 TensorFlow 来进行计算。TensorFlow 允许我们用计算图的方式建立计算网络，同时又可以很方便的对网络进行操作。用户可以基于 TensorFlow 的基础上用 python 编写自己的上层结构和库，如果TensorFlow没有提供我们需要的API的，我们也可以自己编写底层的 C++ 代码，通过自定义操作将新编写的功能添加到 TensorFlow 中。</p>
+<h3 id="2-真正的可移植性"><a href="#2-真正的可移植性" class="headerlink" title="2.真正的可移植性"></a>2.真正的可移植性</h3><p>&emsp;&emsp;TensorFlow 可以在 CPU 和 GPU 上运行，可以在台式机、服务器、移动设备上运行。你想在你的笔记本上跑一下深度学习的训练，或者又不想修改代码，想把你的模型在多个CPU上运行， 亦或想将训练好的模型放到移动设备上跑一下，这些TensorFlow都可以帮你做到。</p>
+<h3 id="3-多语言支持"><a href="#3-多语言支持" class="headerlink" title="3.多语言支持"></a>3.多语言支持</h3><p>&emsp;&emsp;TensorFlow采用非常易用的python来构建和执行我们的计算图，同时也支持 C++ 的语言。我们可以直接写python和C++的程序来执行TensorFlow，也可以采用交互式的ipython来方便的尝试我们的想法。当然，这只是一个开始，后续会支持更多流行的语言，比如Lua，JavaScript 或者R语言。</p>
+<h3 id="4-丰富的算法库"><a href="#4-丰富的算法库" class="headerlink" title="4.丰富的算法库"></a>4.丰富的算法库</h3><p>&emsp;&emsp;TensorFlow提供了所有开源的深度学习框架里，最全的算法库，并且在不断的添加新的算法库。这些算法库基本上已经满足了大部分的需求，对于普通的应用，基本上不用自己再去自定义实现基本的算法库了。</p>
+<h3 id="5-完善的文档"><a href="#5-完善的文档" class="headerlink" title="5.完善的文档"></a>5.完善的文档</h3><p>&emsp;&emsp;TensorFlow的官方网站，提供了非常详细的文档介绍，内容包括各种API的使用介绍和各种基础应用的使用例子，也包括一部分深度学习的基础理论。</p>
+<p>&emsp;&emsp;自从宣布开源以来，大量人员对TensorFlow做出贡献，其中包括Google员工，外部研究人员和独立程序员，全球各地的工程师对TensorFlow的完善，已经让TensorFlow社区变成了Github上最活跃的深度学习框架。</p>
+<h2 id="12-1-4-TensorFlow的系统架构是怎样的？"><a href="#12-1-4-TensorFlow的系统架构是怎样的？" class="headerlink" title="12.1.4 TensorFlow的系统架构是怎样的？"></a>12.1.4 TensorFlow的系统架构是怎样的？</h2><h3 id="emsp-emsp-整个系统从底层到上层可分为七层："><a href="#emsp-emsp-整个系统从底层到上层可分为七层：" class="headerlink" title="&emsp;&emsp;整个系统从底层到上层可分为七层："></a>&emsp;&emsp;整个系统从底层到上层可分为七层：</h3><p><img src="/2017/10/18/第十二章_网络搭建及训练/img\ch12\1.bmp" alt=""></p>
+<p>&emsp;&emsp;设备层：硬件计算资源，支持CPU、GPU</p>
+<p>&emsp;&emsp;网络层：支持两种通信协议</p>
+<p>&emsp;&emsp;数值计算层：提供最基础的计算，有线性计算、卷积计算</p>
+<p>&emsp;&emsp;高维计算层：数据的计算都是以数组的形式参与计算</p>
+<p>&emsp;&emsp;计算图层：用来设计神经网络的结构</p>
+<p>&emsp;&emsp;工作流层：提供轻量级的框架调用</p>
+<p>&emsp;&emsp;构造层：最后构造的深度学习网络可以通过TensorBoard服务端可视化</p>
+<h2 id="12-1-5-TensorFlow编程模型是怎样的？"><a href="#12-1-5-TensorFlow编程模型是怎样的？" class="headerlink" title="12.1.5 TensorFlow编程模型是怎样的？"></a>12.1.5 TensorFlow编程模型是怎样的？</h2><p>TensorFlow的编程模型：让向量数据在计算图里流动。那么在编程时至少有这几个过程：1.构建图，2.启动图，3.给图输入数据并获取结果。</p>
+<h3 id="1-构建图"><a href="#1-构建图" class="headerlink" title="1.构建图"></a>1.构建图</h3><p>TensorFlow的图的类型是tf.Graph，它包含着计算节点和tensor的集合。</p>
+<p>&emsp;&emsp;这里引用了两个新概念：tensor和计算节点。<br>&emsp;&emsp;我们先介绍tensor，一开始我们就介绍了，我们需要把数据输入给启动的图才能获取计算结果。那么问题来了，在构建图时用什么表示中间计算结果？这个时候tensor的概念就需要引入了。<br>&emsp;&emsp;类型是tf.Tensor，代表某个计算节点的输出，一定要看清楚是“代表”。它主要有两个作用：</p>
+<p>1.构建不同计算节点之间的数据流</p>
+<p>2.在启动图时，可以设置某些tensor的值，然后获取指定tensor的值。这样就完成了计算的输入输出功能。</p>
+<p>如下代码所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">inImage = tf.placeholder(tf.float32,[32,32,3],&quot;inputImage&quot;)</span><br><span class="line">processedImage = tf.image.per_image_standardization(inImage,&quot;processedImage&quot;)</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;这里inImage和processedImage都是tensor类型。它们代表着计算节点输出的数据，数据的值具体是多少在启动图的时候才知道。上面两个方法调用都传递了一个字符串，它是计算节点的名字，最好给节点命名，这样我们可以在图上调用get_tensor_by_name(name)获取对应的tensor对象，十分方便。（tensor名字为“&lt;计算节点名字&gt;:&lt;tensor索引&gt;”）</p>
+<p>&emsp;&emsp;创建tensor时，需要指定类型和shape。对不同tensor进行计算时要求类型相同，可以使用 tf.cast 进行类型转换。同时也要求 shape (向量维度)满足运算的条件，我们可以使用 tf.reshape 改变shape。</p>
+<p>&emsp;&emsp;现在了解计算节点的概念，其功能是对tensor进行计算、创建tensor或进行其他操作，类型是tf.Operation。获取节点对象的方法为get_operation_by_name(name)。</p>
+<p>构建图，如下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">g=tf.Graph()</span><br><span class="line"></span><br><span class="line">with g.as_default():</span><br><span class="line">    input_data=tf.placeholder(tf.float32,[None,2],&quot;input_data&quot;)</span><br><span class="line">    input_label=tf.placeholder(tf.float32,[None,2],&quot;input_label&quot;)</span><br><span class="line"></span><br><span class="line">    W1=tf.Variable(tf.truncated_normal([2,2]),name=&quot;W1&quot;)</span><br><span class="line">    B1=tf.Variable(tf.zeros([2]),name=&quot;B1&quot;)</span><br><span class="line"></span><br><span class="line">    output=tf.add(tf.matmul(input_data,W1),B1,name=&quot;output&quot;)</span><br><span class="line">    cross_entropy=tf.nn.softmax_cross_entropy_with_logits(logits=output,labels=input_label)</span><br><span class="line"></span><br><span class="line">    train_step=tf.train.AdamOptimizer().minimize(cross_entropy,name=&quot;train_step&quot;)</span><br><span class="line"></span><br><span class="line">    initer=tf.global_variables_initializer()</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;上面的代码中我们创建了一个图，并在上面添加了很多节点。我们可以通过调用get_default_graph()获取默认的图。</p>
+<p>&emsp;&emsp;Input_data，input_label，W1，B1，output，cross_entropy都是tensor类型，train_step，initer，是节点类型。</p>
+<p>有几类tensor或节点比较重要，下面介绍一下：</p>
+<h4 id="1-placeholder"><a href="#1-placeholder" class="headerlink" title="1.placeholder"></a>1.placeholder</h4><p>&emsp;&emsp;Tensorflow，顾名思义， tensor代表张量数据，flow代表流，其最初的设计理念就是构建一张静态的数据流图。图是有各个计算节点连接而成，计算节点之间流动的便是中间的张量数据。要想让张量数据在我们构建的静态计算图中流动起来，就必须有最初的输入数据流。而placeholder，翻译过来叫做占位符，顾名思义，是给我们的输入数据提供一个接口，也就是说我们的一切输入数据，例如训练样本数据，超参数数据等都可以通过占位符接口输送到数据流图之中。使用实例如下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import tensorflow as tf</span><br><span class="line">x = tf.placeholder(dtype=tf.float32,shape=[],name=&apos;x&apos;)</span><br><span class="line">y = tf.placeholder(dtpe=tf.float32,shape=[],nmae=&apos;y&apos;)</span><br><span class="line">z = x*y</span><br><span class="line">with tf.Session() as sess:</span><br><span class="line">	prod = sess.run(z,feed_dict=&#123;x:1.,y:5.2&#125;)</span><br><span class="line">	print(prod)</span><br><span class="line">[out]:5.2</span><br></pre></td></tr></table></figure>
+<h4 id="2-variable"><a href="#2-variable" class="headerlink" title="2. variable"></a>2. variable</h4><p>&emsp;&emsp;无论是传统的机器学习算法，例如线性支持向量机（Support Vector Machine, SVM)，其数学模型为y = &lt;w,x&gt; + b，还是更先进的深度学习算法，例如卷积神经网络（Convolutional Neural Network， CNN）单个神经元输出的模型y = w*x + b。可以看到，w和b就是我们要求的模型，模型的求解是通过优化算法（对于SVM，使用<br>SMO[1]算法，对于CNN，一般基于梯度下降法）来一步一步更新w和b的值直到满足停止条件。因此，大多数机器学习的模型中的w和b实际上是以变量的形式出现在代码中的，这就要求我们在代码中定义模型变量。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">import tensorflow as tf</span><br><span class="line">a = tf.Variable(2.)</span><br><span class="line">b = tf.Variable(3.)</span><br><span class="line">with tf.Session() as sess:</span><br><span class="line">	sess.run(tf.global_variables_initializer()) #变量初始化</span><br><span class="line">    print(sess.run(a*b))</span><br><span class="line">[out]:6.</span><br></pre></td></tr></table></figure>
+<p>[1] Platt, John. “Sequential minimal optimization: A fast algorithm for training support vector machines.” (1998).</p>
+<h4 id="3-initializer"><a href="#3-initializer" class="headerlink" title="3. initializer"></a>3. initializer</h4><p>&emsp;&emsp;由于tensorflow构建的是静态的计算流图，在开启会话之前，所有的操作都不会被执行。因此为了执行在计算图中所构建的赋值初始化计算节点，需要在开启会话之后，在会话环境下运行初始化。如果计算图中定义了变量，而会话环境下为执行初始化命令，则程序报错，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">import tensorflow as tf</span><br><span class="line">a = tf.Variable(2.)</span><br><span class="line">b = tf.Variable(3.)</span><br><span class="line">with tf.Session() as sess:</span><br><span class="line">	#sess.run(tf.global_variables_initializer()) #注释掉初始化命令</span><br><span class="line">    print(sess.run(a*b))</span><br><span class="line">[Error]: Attempting to use uninitialized value Variable</span><br></pre></td></tr></table></figure>
+<h3 id="2-启动图"><a href="#2-启动图" class="headerlink" title="2.启动图"></a>2.启动图</h3><p>&emsp;&emsp;先了解session的概念，然后才能更好的理解图的启动。<br>&emsp;&emsp;图的每个运行实例都必须在一个session里，session为图的运行提供环境。Session的类型是tf.Session，在实例化session对象时我们需要给它传递一个图对象，如果不显示给出将使用默认的图。Session有一个graph属性，我们可以通过它获取session对应的图。</p>
+<p>代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">numOfBatch=5</span><br><span class="line">datas=np.zeros([numOfBatch,2],np.float32)</span><br><span class="line">labels=np.zeros([numOfBatch,2],np.float32)</span><br><span class="line"></span><br><span class="line">sess=tf.Session(graph=g)</span><br><span class="line">graph=sess.graph</span><br><span class="line">sess.run([graph.get_operation_by_name(&quot;initer&quot;)])</span><br><span class="line"></span><br><span class="line">dataHolder=graph.get_tensor_by_name(&quot;input_data:0&quot;)</span><br><span class="line">labelHolder=graph.get_tensor_by_name(&quot;input_label:0&quot;)</span><br><span class="line">train=graph.get_operation_by_name(&quot;train_step&quot;)</span><br><span class="line">out=graph.get_tensor_by_name(&quot;output:0&quot;)</span><br><span class="line"></span><br><span class="line">for i inrange(200):</span><br><span class="line">   result=sess.run([out,train],feed_dict=&#123;dataHolder:datas,labelHolder:labels&#125;)</span><br><span class="line">   if i%100==0:</span><br><span class="line">       saver.save(sess,&quot;./moules&quot;)</span><br><span class="line"></span><br><span class="line">sess.close()</span><br></pre></td></tr></table></figure>
+<p>代码都比较简单，就不介绍了。不过要注意2点：1.别忘记运行初始化节点，2.别忘记close掉session对象以释放资源。</p>
+<h4 id="3-给图输入数据并获取结果"><a href="#3-给图输入数据并获取结果" class="headerlink" title="3.给图输入数据并获取结果"></a>3.给图输入数据并获取结果</h4><p>代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">for i inrange(200):</span><br><span class="line">    result=sess.run([out,train],feed_dict=&#123;dataHolder:datas,labelHolder:labels&#125;)</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;这里主要用到了session对象的run方法，它用来运行某个节点或tensor并获取对应的值。我们一般会一次传递一小部分数据进行mini-batch梯度下降来优化模型。</p>
+<p>&emsp;&emsp;我们需要把我们需要运行的节点或tensor放入一个列表，然后作为第一个参数(不考虑self)传递给run方法，run方法会返回一个计算结果的列表，与我们传递的参数一一对应。</p>
+<p>&emsp;&emsp;如果我们运行的节点依赖某个placeholder，那我们必须给这个placeholder指定值，怎么指定代码里面很清楚，给关键字参数feed_dict传递一个字典即可，字典里的元素的key是placeholder对象，value是我们指定的值。值的数据的类型必须和placeholder一致，包括shape。值本身的类型是numpy数组。</p>
+<p>这里再解释一个细节，在定义placeholder时代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">input_data=tf.placeholder(tf.float32,[None,2],&quot;input_data&quot;)</span><br><span class="line">input_label=tf.placeholder(tf.float32,[None,2],&quot;input_label&quot;)</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;shape为[None,2]，说明数据第一个维度是不确定的，然后TensorFlow会根据我们传递的数据动态推断第一个维度，这样我们就可以在运行时改变batch的大小。比如一个数据是2维，一次传递10个数据对应的tensor的shape就是[10,2]。可不可以把多个维度指定为None？理论上不可以！</p>
+<h2 id="12-1-6-如何基于tensorflow搭建VGG16"><a href="#12-1-6-如何基于tensorflow搭建VGG16" class="headerlink" title="12.1.6 如何基于tensorflow搭建VGG16"></a>12.1.6 如何基于tensorflow搭建VGG16</h2><p>​    介绍完关于tensorflow的基础知识，是时候来一波网络搭建实战了。虽然网上有很多相关教程，但我想从最标准的tensorflow代码和语法出发（而不是调用更高级的API，失去了原来的味道），向大家展示如何搭建其标准的VGG16网络架构。话不多说，上代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_weight_variable</span><span class="params">(shape)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> tf.get_variable(<span class="string">'weight'</span>, shape=shape, initializer=tf.truncated_normal_initializer(stddev=<span class="number">0.1</span>))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_bias_variable</span><span class="params">(shape)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> tf.get_variable(<span class="string">'bias'</span>, shape=shape, initializer=tf.constant_initializer(<span class="number">0</span>))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">conv2d</span><span class="params">(x, w, padding = <span class="string">'SAME'</span>, s=<span class="number">1</span>)</span>:</span></span><br><span class="line">    x = tf.nn.conv2d(x, w, strides=[<span class="number">1</span>, s, s, <span class="number">1</span>], padding = padding)</span><br><span class="line">    <span class="keyword">return</span> x</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">maxPoolLayer</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> tf.nn.max_pool(x, ksize = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">1</span>],</span><br><span class="line">                          strides = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">1</span>], padding = <span class="string">'SAME'</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">conv2d_layer</span><span class="params">(x,in_chs, out_chs, ksize, layer_name)</span>:</span></span><br><span class="line">    <span class="keyword">with</span> tf.variable_scope(layer_name):</span><br><span class="line">        w = get_weight_variable([ksize, ksize, in_chs, out_chs])</span><br><span class="line">        b = get_bias_variable([out_chs])</span><br><span class="line">        y = tf.nn.relu(tf.bias_add(conv2d(x,w,padding = <span class="string">'SAME'</span>, s=<span class="number">1</span>), b))</span><br><span class="line">    <span class="keyword">return</span> y</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fc_layer</span><span class="params">(x,in_kernels, out_kernels, layer_name)</span>:</span></span><br><span class="line">    <span class="keyword">with</span> tf.variable_scope(layer_name):</span><br><span class="line">        w = get_weight_variable([in_kernels,out_kernels])</span><br><span class="line">        b = get_bias_variable([out_kernels])</span><br><span class="line">        y = tf.nn.relu(tf.bias_add(tf.matmul(x,w),b))</span><br><span class="line">    <span class="keyword">return</span> y</span><br><span class="line">        </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">VGG16</span><span class="params">(x)</span>:</span></span><br><span class="line">    conv1_1 = conv2d_layer(x,tf.get_shape(x).as_list()[<span class="number">-1</span>], <span class="number">64</span>, <span class="number">3</span>, <span class="string">'conv1_1'</span>)</span><br><span class="line">    conv1_2 = conv2d_layer(conv1_1,<span class="number">64</span>, <span class="number">64</span>, <span class="number">3</span>, <span class="string">'conv1_2'</span>)</span><br><span class="line">    pool_1 = maxPoolLayer(conv1_2)</span><br><span class="line">    </span><br><span class="line">    conv2_1 = conv2d_layer(pool1,<span class="number">64</span>, <span class="number">128</span>, <span class="number">3</span>, <span class="string">'conv2_1'</span>)</span><br><span class="line">    conv2_2 = conv2d_layer(conv2_1,<span class="number">128</span>, <span class="number">128</span>, <span class="number">3</span>, <span class="string">'conv2_2'</span>)</span><br><span class="line">    pool2 = maxPoolLayer(conv2_2)</span><br><span class="line">    </span><br><span class="line">	conv3_1 = conv2d_layer(pool2,<span class="number">128</span>, <span class="number">256</span>, <span class="number">3</span>, <span class="string">'conv3_1'</span>)</span><br><span class="line">    conv3_2 = conv2d_layer(conv3_1,<span class="number">256</span>, <span class="number">256</span>, <span class="number">3</span>, <span class="string">'conv3_2'</span>)</span><br><span class="line">	conv3_3 = conv2d_layer(conv3_2,<span class="number">256</span>, <span class="number">256</span>, <span class="number">3</span>, <span class="string">'conv3_3'</span>)</span><br><span class="line">    pool3 = maxPoolLayer(conv3_3)</span><br><span class="line">    </span><br><span class="line">	conv4_1 = conv2d_layer(pool3,<span class="number">256</span>, <span class="number">512</span>, <span class="number">3</span>, <span class="string">'conv4_1'</span>)</span><br><span class="line">    conv4_2 = conv2d_layer(conv4_1,<span class="number">512</span>, <span class="number">512</span>, <span class="number">3</span>, <span class="string">'conv4_2'</span>)</span><br><span class="line">	conv4_3 = conv2d_layer(conv4_2,<span class="number">512</span>, <span class="number">512</span>, <span class="number">3</span>, <span class="string">'conv4_3'</span>)</span><br><span class="line">    pool4 = maxPoolLayer(conv4_3)</span><br><span class="line">    </span><br><span class="line">	conv5_1 = conv2d_layer(pool4,<span class="number">512</span>, <span class="number">512</span>, <span class="number">3</span>, <span class="string">'conv5_1'</span>)</span><br><span class="line">    conv5_2 = conv2d_layer(conv5_1,<span class="number">512</span>, <span class="number">512</span>, <span class="number">3</span>, <span class="string">'conv5_2'</span>)</span><br><span class="line">	conv5_3 = conv2d_layer(conv5_1,<span class="number">512</span>, <span class="number">512</span>, <span class="number">3</span>, <span class="string">'conv5_3'</span>)</span><br><span class="line">    pool5 = maxPoolLayer(conv5_3)</span><br><span class="line">    </span><br><span class="line">	pool5_flatten_dims = int(np.prod(pool5.get_shape().as_list()[<span class="number">1</span>:]))</span><br><span class="line">    pool5_flatten = tf.reshape(pool5,[<span class="number">-1</span>,pool5_flatten_dims])</span><br><span class="line">    </span><br><span class="line">    fc_6 = fc_layer(pool5_flatten, pool5_flatten_dims, <span class="number">4096</span>, <span class="string">'fc6'</span>)</span><br><span class="line">	fc_7 = fc_layer(fc_6, <span class="number">4096</span>, <span class="number">4096</span>, <span class="string">'fc7'</span>)</span><br><span class="line">	fc_8 = fc_layer(fc_7, <span class="number">4096</span>, <span class="number">10</span>, <span class="string">'fc8'</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> fc_8</span><br></pre></td></tr></table></figure>
+<h1 id="12-2-Pytorch"><a href="#12-2-Pytorch" class="headerlink" title="12.2 Pytorch"></a>12.2 Pytorch</h1><h2 id="12-2-1-Pytorch是什么？"><a href="#12-2-1-Pytorch是什么？" class="headerlink" title="12.2.1 Pytorch是什么？"></a>12.2.1 Pytorch是什么？</h2><p>&emsp;&emsp;Pytorch是torch的python版本，是由Facebook开源的神经网络框架，专门针对 GPU 加速的深度神经网络（DNN）编程。Torch 是一个经典的对多维矩阵数据进行操作的张量（tensor ）库，在机器学习和其他数学密集型应用有广泛应用。与Tensorflow的静态计算图不同，pytorch的计算图是动态的，可以根据计算需要实时改变计算图。但由于Torch语言采用 Lua，导致在国内一直很小众，并逐渐被支持 Python 的 Tensorflow 抢走用户。作为经典机器学习库 Torch 的端口，PyTorch 为 Python 语言使用者提供了舒适的写代码选择。</p>
+<h2 id="12-2-2-为什么选择-Pytorch？"><a href="#12-2-2-为什么选择-Pytorch？" class="headerlink" title="12.2.2 为什么选择 Pytorch？"></a>12.2.2 为什么选择 Pytorch？</h2><h3 id="1-简洁："><a href="#1-简洁：" class="headerlink" title="1.简洁："></a>1.简洁：</h3><p>&emsp;&emsp;PyTorch的设计追求最少的封装，尽量避免重复造轮子。不像 TensorFlow 中充斥着session、graph、operation、name_scope、variable、tensor、layer等全新的概念，PyTorch 的设计遵循tensor→variable(autograd)→nn.Module 三个由低到高的抽象层次，分别代表高维数组（张量）、自动求导（变量）和神经网络（层/模块），而且这三个抽象之间联系紧密，可以同时进行修改和操作。<br>简洁的设计带来的另外一个好处就是代码易于理解。PyTorch的源码只有TensorFlow的十分之一左右，更少的抽象、更直观的设计使得PyTorch的源码十分易于阅读。</p>
+<h3 id="2-速度："><a href="#2-速度：" class="headerlink" title="2.速度："></a>2.速度：</h3><p>&emsp;&emsp;PyTorch 的灵活性不以速度为代价，在许多评测中，PyTorch 的速度表现胜过 TensorFlow和Keras 等框架。框架的运行速度和程序员的编码水平有极大关系，但同样的算法，使用PyTorch实现的那个更有可能快过用其他框架实现的。</p>
+<h3 id="3-易用："><a href="#3-易用：" class="headerlink" title="3.易用："></a>3.易用：</h3><p>&emsp;&emsp;PyTorch 是所有的框架中面向对象设计的最优雅的一个。PyTorch的面向对象的接口设计来源于Torch，而Torch的接口设计以灵活易用而著称，Keras作者最初就是受Torch的启发才开发了Keras。PyTorch继承了Torch的衣钵，尤其是API的设计和模块的接口都与Torch高度一致。PyTorch的设计最符合人们的思维，它让用户尽可能地专注于实现自己的想法，即所思即所得，不需要考虑太多关于框架本身的束缚。</p>
+<h3 id="4-活跃的社区："><a href="#4-活跃的社区：" class="headerlink" title="4.活跃的社区："></a>4.活跃的社区：</h3><p>&emsp;&emsp;PyTorch 提供了完整的文档，循序渐进的指南，作者亲自维护的论坛 供用户交流和求教问题。Facebook 人工智能研究院对 PyTorch 提供了强力支持，作为当今排名前三的深度学习研究机构，FAIR的支持足以确保PyTorch获得持续的开发更新，不至于像许多由个人开发的框架那样昙花一现。</p>
+<h2 id="12-2-3-PyTorch-的架构是怎样的？"><a href="#12-2-3-PyTorch-的架构是怎样的？" class="headerlink" title="12.2.3 PyTorch 的架构是怎样的？"></a>12.2.3 PyTorch 的架构是怎样的？</h2><p>&emsp;&emsp;PyTorch(Caffe2) 通过混合前端，分布式训练以及工具和库生态系统实现快速，灵活的实验和高效生产。PyTorch 和 TensorFlow 具有不同计算图实现形式，TensorFlow 采用静态图机制(预定义后再使用)，PyTorch采用动态图机制(运行时动态定义)。PyTorch 具有以下高级特征：</p>
+<p>&emsp;&emsp;混合前端:新的混合前端在急切模式下提供易用性和灵活性，同时无缝转换到图形模式，以便在C ++运行时环境中实现速度，优化和功能。<br>&emsp;&emsp;分布式训练:通过利用本地支持集合操作的异步执行和可从Python和C ++访问的对等通信，优化了性能。<br>&emsp;&emsp;Python优先: PyTorch为了深入集成到Python中而构建的，因此它可以与流行的库和Cython和Numba等软件包一起使用。<br>&emsp;&emsp;丰富的工具和库:活跃的研究人员和开发人员社区建立了丰富的工具和库生态系统，用于扩展PyTorch并支持从计算机视觉到强化学习等领域的开发。<br>&emsp;&emsp;本机ONNX支持:以标准ONNX（开放式神经网络交换）格式导出模型，以便直接访问与ONNX兼容的平台，运行时，可视化工具等。<br>&emsp;&emsp;C++前端：C++前端是PyTorch的纯C++接口，它遵循已建立的Python前端的设计和体系结构。它旨在实现高性能，低延迟和裸机C++应用程序的研究。<br>使用GPU和CPU优化的深度学习张量库。</p>
+<h2 id="12-2-4-Pytorch-与-tensorflow-之间的差异在哪里？"><a href="#12-2-4-Pytorch-与-tensorflow-之间的差异在哪里？" class="headerlink" title="12.2.4 Pytorch 与 tensorflow 之间的差异在哪里？"></a>12.2.4 Pytorch 与 tensorflow 之间的差异在哪里？</h2><p>&emsp;&emsp;上面也将了PyTorch 最大优势是建立的神经网络是动态的, 对比静态的 Tensorflow, 它能更有效地处理一些问题, 比如说 RNN 变化时间长度的输出。各有各的优势和劣势。两者都是大公司发布的, Tensorflow（Google）宣称在分布式训练上下了很大的功夫, 那就默认 Tensorflow 在分布式训练上要超出 Pytorch（Facebook），还有tensorboard可视化工具, 但是 Tensorflow 的静态计算图使得在 RNN 上有一点点被动 (虽然它用其他途径解决了), 不过用 PyTorch 的时候, 会对这种动态的 RNN 有更好的理解。而且 Tensorflow 的高度工业化, 它的底层代码很难看懂， Pytorch 好那么一点点, 如果深入 PytorchAPI, 至少能比看 Tensorflow 多看懂一点点 Pytorch 的底层在干啥。</p>
+<h2 id="12-2-5-Pytorch有哪些常用工具包？"><a href="#12-2-5-Pytorch有哪些常用工具包？" class="headerlink" title="12.2.5 Pytorch有哪些常用工具包？"></a>12.2.5 Pytorch有哪些常用工具包？</h2><p>&emsp;&emsp;torch ：类似 NumPy 的张量库，强 GPU 支持 ；<br>&emsp;&emsp;torch.autograd ：基于 tape 的自动区别库，支持 torch 之中的所有可区分张量运行；<br>&emsp;&emsp;torch.nn ：为最大化灵活性未涉及、与 autograd 深度整合的神经网络库；<br>&emsp;&emsp;torch.optim：与 torch.nn 一起使用的优化包，包含 SGD、RMSProp、LBFGS、Adam 等标准优化方式；<br>&emsp;&emsp;torch.multiprocessing： python 多进程并发，进程之间 torch Tensors 的内存共享；<br>&emsp;&emsp;torch.utils：数据载入器。具有训练器和其他便利功能；<br>&emsp;&emsp;torch.legacy(.nn/.optim) ：处于向后兼容性考虑，从 Torch 移植来的 legacy 代码；</p>
+<h1 id="12-3-Caffe"><a href="#12-3-Caffe" class="headerlink" title="12.3 Caffe"></a>12.3 Caffe</h1><h2 id="12-3-1-什么是-Caffe？"><a href="#12-3-1-什么是-Caffe？" class="headerlink" title="12.3.1 什么是 Caffe？"></a>12.3.1 什么是 Caffe？</h2><p>&emsp;&emsp;Caffe的全称应该是Convolutional Architecture for Fast Feature Embedding，它是一个清晰、高效的深度学习框架，它是开源的，核心语言是C++，它支持命令行、Python和Matlab接口，它既可以在CPU上运行也可以在GPU上运行。它的license是BSD 2-Clause。</p>
+<h2 id="12-3-2-Caffe的特点是什么？"><a href="#12-3-2-Caffe的特点是什么？" class="headerlink" title="12.3.2 Caffe的特点是什么？"></a>12.3.2 Caffe的特点是什么？</h2><p>(1)、模块化：Caffe从一开始就设计得尽可能模块化，允许对新数据格式、网络层和损失函数进行扩展。</p>
+<p>(2)、表示和实现分离：Caffe的模型(model)定义是用Protocol Buffer语言写进配置文件的。以任意有向无环图的形式，Caffe支持网络架构。Caffe会根据网络的需要来正确占用内存。通过一个函数调用，实现CPU和GPU之间的切换。</p>
+<p>(3)、测试覆盖：在Caffe中，每一个单一的模块都对应一个测试。</p>
+<p>(4)、python和Matlab接口：同时提供Python和Matlab接口。</p>
+<p>(5)、预训练参考模型：针对视觉项目，Caffe提供了一些参考模型，这些模型仅应用在学术和非商业领域，它们的license不是BSD。</p>
+<h2 id="12-3-3-Caffe的设计思想是怎样的？"><a href="#12-3-3-Caffe的设计思想是怎样的？" class="headerlink" title="12.3.3 Caffe的设计思想是怎样的？"></a>12.3.3 Caffe的设计思想是怎样的？</h2><p>&emsp;&emsp;基本上，Caffe 沿用了神经网络的一个简单假设—-所有的计算都是以layer的形式表示的，layer做的事情就是take一些数据，然后输出一些计算以后的结果，比如说卷积，就是输入一个图像，然后和这一层的参数（filter）做卷积，然后输出卷积的结果。每一个layer需要做两个计算：forward是从输入计算输出，然后backward是从上面给的gradient来计算相对于输入的gradient，只要这两个函数实现了以后，我们就可以把很多层连接成一个网络，这个网络做的事情就是输入我们的数据（图像或者语音或者whatever），然后来计算我们需要的输出（比如说识别的label），在training的时候，我们可以根据已有的label来计算loss和gradient，然后用gradient来update网络的参数，这个就是Caffe的一个基本流程。</p>
+<p>&emsp;&emsp;基本上，最简单地用Caffe上手的方法就是先把数据写成Caffe的格式，然后设计一个网络，然后用Caffe提供的solver来做优化看效果如何，如果你的数据是图像的话，可以从现有的网络，比如说alexnet或者googlenet开始，然后做fine tuning，如果你的数据稍有不同，比如说是直接的float vector，你可能需要做一些custom的configuration，Caffe的logistic regression example兴许会很有帮助。</p>
+<p>&emsp;&emsp;Fine tune方法：fine tuning的想法就是说，在imagenet那么大的数据集上train好一个很牛的网络了，那别的task上肯定也不错，所以我们可以把pretrain的网络拿过来，然后只重新train最后几层，重新train的意思是说，比如我以前需要classify imagenet的一千类，现在我只想识别是狗还是猫，或者是不是车牌，于是我就可以把最后一层softmax从一个4096<em>1000的分类器变成一个4096</em>2的分类器，这个strategy在应用中非常好使，所以我们经常会先在imagenet上pretrain一个网络，因为我们知道imagenet上training的大概过程会怎么样。</p>
+<h2 id="12-3-4-Caffe架构是怎样的？"><a href="#12-3-4-Caffe架构是怎样的？" class="headerlink" title="12.3.4 Caffe架构是怎样的？"></a>12.3.4 Caffe架构是怎样的？</h2><p>&emsp;&emsp;Caffe的架构与其它的深度学习框架稍微不同，它没有根据算法实现过程的方式来进行编码，而是以系统级的抽象作为整体架构，逐层的封装实现细节，使得上层的架构变得很清晰。Caffe的整体架构如下：</p>
+<h3 id="1-SyncedMem"><a href="#1-SyncedMem" class="headerlink" title="1. SyncedMem"></a>1. SyncedMem</h3><p>&emsp;&emsp;这个类的主要功能是封装CPU和GPU的数据交互操作。一般来说，数据的流动形式都是：硬盘-&gt;CPU内存-&gt;GPU内存-&gt;CPU内存-&gt;（硬盘），所以在写代码的过程中经常会写CPU/GPU之间数据传输的代码，同时还要维护CPU和GPU两个处理端的内存指针。这些事情处理起来不会很难，但是会很繁琐。因此SyncedMem的出现就是把CPU/GPU的数据传输操作封装起来，只需要调用简单的接口就可以获得两个处理端同步后的数据。</p>
+<h3 id="2-Blob"><a href="#2-Blob" class="headerlink" title="2. Blob"></a>2. Blob</h3><p>&emsp;&emsp;Blob是用于存储数据的对象，在Caffe中各种数据(图像输入、模型参数)都是以Blob的形式在网络中传输的，Blob提供统一的存储操作接口，可用来保存训练数据、模型参数等，同时Blob还能在CPU和GPU之间进行同步以支持CPU/GPU的混合运算。<br>&emsp;&emsp;这个类做了两个封装：一个是操作数据的封装，使用Blob可以操纵高维的数据，快速访问其中的数据，变换数据的维度等；另一个是对原始数据和更新量的封装，每一个Blob中都有data和diff两个数据指针，data用于存储原始数据，diff 用于存储反向传播（Backpropagation）的梯度更新值。Blob使用了SyncedMem，这样便于访问不同的处理端。Blob基本实现了整个Caffe数据结构部分的封装，在Net类中可以看到所有的前后向数据和参数都用Blob来表示就足够了。数据的抽象到这个就可以了，接下来作层级的抽象。神经网络的前后向计算可以做到层与层之间完全独立，只要每个层按照一定的接口规则实现，就可以确保整个网络的正确性。</p>
+<h3 id="3-Layer"><a href="#3-Layer" class="headerlink" title="3. Layer"></a>3. Layer</h3><p>&emsp;&emsp;Layer是网络Net的基本单元，也是Caffe中能在外部进行调整的最小网络结构单元，每个Layer都有输入Blob和输出Blob。Layer（层）是Caffe中最庞大最繁杂的模块，它是神经网络的基本计算单元。由于Caffe强调模块化设计，因此只允许每个layer完成一类特定的计算，例如convolution操作、pooling、非线性变换、内积运算，以及数据加载、归一化和损失计算等。Caffe中layer的种类有很多，具体的种类及功能请看官方文档。在创建一个Caffe模型的时候，也是以Layer为基础进行的。Layer是一个父类，它的下面还有各种实现特定功能的子类，例如data_layer，conv_layer，loss_layer等。Layer是通过LayFactory来创建的。</p>
+<h3 id="4-Net"><a href="#4-Net" class="headerlink" title="4. Net"></a>4. Net</h3><p>&emsp;&emsp;Net是一个完整的深度网络，包含输入层、隐藏层、输出层，在Caffe中一般是一个卷积神经网络(Convolution Neural Networ，CNN)。通过定义不同类型的Layer，并用Blob将不同的Layer连接起来，就能产生一个Net。Net将数据Blob和层Layer组合起来做进一步的封装，对外提供了初始化和前后传播的接口，使得整体看上去和一个层的功能类似，但内部的组合可以是多种多样的。值得一提的是，每一层的输入输出数据统一保存在Net中，同时每个层内的参数指针也保存在Net中，不同的层可以通过WeightShare共享相同的参数，因此可以通过配置来实现多个神经网络层之间共享参数的功能。一个Net由多个Layer组成。一个典型的网络从data layer（从磁盘中载入数据）出发到loss layer结束。</p>
+<h3 id="5-Solver"><a href="#5-Solver" class="headerlink" title="5. Solver"></a>5. Solver</h3><p>&emsp;&emsp;有了Net就可以进行神经网络的前后向传播计算了，但是还缺少神经网络的训练和预测功能，Solver类进一步封装了训练和预测相关的一些功能。它还提供了两个接口：一个是更新参数的接口，继承Solver可以实现不同的参数更新方法，如Momentum，Nesterov，Adagrad等，因此可以使用不同的优化算法。另一个接口是训练过程中每一轮特定状态下的可注入的一些回调函数，在代码中这个回调点的直接使用者就是多GPU训练算法。Solver定义了针对Net网络模型的求解方法，记录网络的训练过程，保存网络模型参数，中断并恢复网络的训练过程。自定义Solver能够实现不同的神经网络求解方式。阅读Solver的代码可以了解网络的求解优化过程。Solver是一个父类，它下面还有实现不同优化方法的子类，例如sgd_solver，adagrad_sovler等，Solver是通过SolverFactory来创建的。</p>
+<h3 id="6-Proto"><a href="#6-Proto" class="headerlink" title="6. Proto"></a>6. Proto</h3><p>&emsp;&emsp;caffe.proto位于…/src/caffe/proto目录下，在这个文件夹下还有一个.pb.cc和一个.pb.h文件，这两个文件都是由caffe.proto编译而来的。 在caffe.proto中定义了很多结构化数据，包括：<br>BlobProto、Datum、FillerParameter、NetParameter、SolverParameter、SolverState、LayerParameter、ConcatParameter、ConvolutionParameter、DataParameter、DropoutParameter、HDF5DataParameter、HDF5OutputParameter、ImageDataParameter、InfogainLossParameter、InnerProductParameter、LRNParameter、MemoryDataParameter、PoolingParameter、PowerParameter、WindowDataParameter、V0LayerParameter。</p>
+<h3 id="7-IO"><a href="#7-IO" class="headerlink" title="7. IO"></a>7. IO</h3><p>&emsp;&emsp;除了上面的东西之外，还需要输入数据和参数。DataReader和DataTransformer帮助准备输入数据，Filler对参数进行初始化，一些Snapshot方法可以对模型进行持久化。</p>
+<h2 id="12-3-5-Caffe的有哪些接口？"><a href="#12-3-5-Caffe的有哪些接口？" class="headerlink" title="12.3.5 Caffe的有哪些接口？"></a>12.3.5 Caffe的有哪些接口？</h2><p>&emsp;&emsp;Caffe深度学习框架支持多种编程接口，包括命令行、Python和Matlab,下面将介绍如何使用这些接口。</p>
+<h3 id="1-Caffe-Python接口"><a href="#1-Caffe-Python接口" class="headerlink" title="1. Caffe Python接口"></a>1. Caffe Python接口</h3><p>&emsp;&emsp;Caffe提供 Python 接口，即Pycaffe，具体实现在caffe、python文件夹内。在Python代码中import caffe，可以load models（导入模型）、forward and backward （前向、反向迭代）、handle IO（数据输入输出）、visualize networks（绘制net）和instrument model solving（自定义优化方法)。所有的模型数据、计算参数都是暴露在外、可供读写的。<br>&emsp;&emsp;(1)caffe.Net 是主要接口，负责导入数据、校验数据、计算模型。<br>&emsp;&emsp;(2)caffe.Classsifier 用于图像分类。<br>&emsp;&emsp;(3)caffe.Detector 用于图像检测。<br>&emsp;&emsp;(4)caffe.SGDSolver 是露在外的 solver 的接口。<br>&emsp;&emsp;(5)caffe.io 处理输入输出，数据预处理。<br>&emsp;&emsp;(6)caffe.draw 可视化 net 的结构。<br>&emsp;&emsp;(7)caffe blobs 以 numpy ndarrys 的形式表示，方便而且高效。</p>
+<h3 id="2-Caffe-MATLAB接口"><a href="#2-Caffe-MATLAB接口" class="headerlink" title="2. Caffe MATLAB接口"></a>2. Caffe MATLAB接口</h3><p>&emsp;&emsp;MATLAB接口（Matcaffe）在 caffe/matlab 目录的 caffe 软件包。在 matcaffe 的基础上，可将Caffe整合到MATLAB代码中。<br>&emsp;&emsp;MATLAB接口包括：<br>&emsp;&emsp;(1)MATLAB 中创建多个网络结构。<br>&emsp;&emsp;(2)网络的前向传播（Forward）与反向传播（Backward）计算。<br>&emsp;&emsp;(3)网络中的任意一层以及参数的存取。<br>&emsp;&emsp;(4)网络参数保存至文件或从文件夹加载。<br>&emsp;&emsp;(5)blob 和 network 形状调整。<br>&emsp;&emsp;(6)网络参数编辑和调整。<br>&emsp;&emsp;(7)创建多个 solvers 进行训练。<br>&emsp;&emsp;(8)从solver 快照（Snapshots）恢复并继续训练。<br>&emsp;&emsp;(9)访问训练网络（Train nets）和测试网络(Test nets)。<br>&emsp;&emsp;(10)迭代后网络交由 MATLAB 控制。<br>&emsp;&emsp;(11)MATLAB代码融合梯度算法。</p>
+<h3 id="3-Caffe-命令行接口"><a href="#3-Caffe-命令行接口" class="headerlink" title="3. Caffe 命令行接口"></a>3. Caffe 命令行接口</h3><p>&emsp;&emsp;命令行接口 Cmdcaffe 是 Caffe 中用来训练模型、计算得分以及方法判断的工具。Cmdcaffe 存放在 caffe/build/tools 目录下。</p>
+<h4 id="1-caffe-train"><a href="#1-caffe-train" class="headerlink" title="1. caffe train"></a>1. caffe train</h4><p>&emsp;&emsp;caffe train 命令用于模型学习，具体包括：<br>&emsp;&emsp;(1)caffe train 带 solver.prototxt 参数完成配置。<br>&emsp;&emsp;(2)caffe train 带 snapshot mode_iter_1000.solverstate 参数加载 solver snapshot。<br>&emsp;&emsp;(3)caffe train 带 weights 参数 model.caffemodel 完成 Fine-tuning 模型初始化。</p>
+<h4 id="2-caffe-test"><a href="#2-caffe-test" class="headerlink" title="2. caffe test"></a>2. caffe test</h4><p>&emsp;&emsp;caffe test 命令用于测试运行模型的得分，并且用百分比表示网络输出的最终结果，比如 accuracyhuoloss 作为其结果。测试过程中，显示每个 batch 的得分，最后输出全部 batch 的平均得分值。</p>
+<h4 id="3-caffe-time"><a href="#3-caffe-time" class="headerlink" title="3. caffe time"></a>3. caffe time</h4><p>&emsp;&emsp;caffe time 命令用来检测系统性能和测量模型相对执行时间，此命令通过逐层计时与同步，执行模型检测。</p>
+<p>参考文献：<br>1.深度学习：Caffe之经典模型讲解与实战/ 乐毅，王斌</p>
+<h3 id="10-4-网络搭建有什么原则？"><a href="#10-4-网络搭建有什么原则？" class="headerlink" title="10.4 网络搭建有什么原则？"></a>10.4 网络搭建有什么原则？</h3><h3 id="10-4-1新手原则。"><a href="#10-4-1新手原则。" class="headerlink" title="10.4.1新手原则。"></a>10.4.1新手原则。</h3><p>刚入门的新手不建议直接上来就开始搭建网络模型。比较建议的学习顺序如下：</p>
+<ul>
+<li>1.了解神经网络工作原理，熟悉基本概念及术语。</li>
+<li>2.阅读经典网络模型论文+实现源码(深度学习框架视自己情况而定)。</li>
+<li>3.找数据集动手跑一个网络，可以尝试更改已有的网络模型结构。</li>
+<li>4.根据自己的项目需要设计网络。</li>
+</ul>
+<h3 id="10-4-2深度优先原则。"><a href="#10-4-2深度优先原则。" class="headerlink" title="10.4.2深度优先原则。"></a>10.4.2深度优先原则。</h3><p>通常增加网络深度可以提高准确率，但同时会牺牲一些速度和内存。但深度不是盲目堆起来的，一定要在浅层网络有一定效果的基础上，增加深度。深度增加是为了增加模型的准确率，如果浅层都学不到东西，深了也没效果。</p>
+<h3 id="10-4-3卷积核size一般为奇数。"><a href="#10-4-3卷积核size一般为奇数。" class="headerlink" title="10.4.3卷积核size一般为奇数。"></a>10.4.3卷积核size一般为奇数。</h3><p>卷积核为奇数有以下好处：</p>
+<ul>
+<li>1 保证锚点刚好在中间，方便以 central pixel为标准进行滑动卷积，避免了位置信息发生偏移 。</li>
+<li>2 保证在填充（Padding）时，在图像之间添加额外的零层，图像的两边仍然对称。</li>
+</ul>
+<h3 id="10-4-4卷积核不是越大越好。"><a href="#10-4-4卷积核不是越大越好。" class="headerlink" title="10.4.4卷积核不是越大越好。"></a>10.4.4卷积核不是越大越好。</h3><p>AlexNet中用到了一些非常大的卷积核，比如11×11、5×5卷积核，之前人们的观念是，卷积核越大，感受野越大，看到的图片信息越多，因此获得的特征越好。但是大的卷积核会导致计算量的暴增，不利于模型深度的增加，计算性能也会降低。于是在VGG、Inception网络中，利用2个3×3卷积核的组合比1个5×5卷积核的效果更佳，同时参数量（3×3×2+1=19&lt;26=5×5×1+1）被降低，因此后来3×3卷积核被广泛应用在各种模型中。</p>
+<h2 id="10-5-有哪些经典的网络模型值得我们去学习的？"><a href="#10-5-有哪些经典的网络模型值得我们去学习的？" class="headerlink" title="10.5 有哪些经典的网络模型值得我们去学习的？"></a>10.5 有哪些经典的网络模型值得我们去学习的？</h2><p>提起经典的网络模型就不得不提起计算机视觉领域的经典比赛：ILSVRC .其全称是 ImageNet Large Scale Visual Recognition Challenge.正是因为ILSVRC 2012挑战赛上的AlexNet横空出世，使得全球范围内掀起了一波深度学习热潮。这一年也被称作“深度学习元年”。而在历年ILSVRC比赛中每次刷新比赛记录的那些神经网络也成为了人们心中的经典，成为学术界与工业届竞相学习与复现的对象，并在此基础上展开新的研究。</p>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>年份</th>
+<th>网络名称</th>
+<th>获得荣誉</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>2012</td>
+<td>AlexNet</td>
+<td>ILSVRC图像分类冠军</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2014</td>
+<td>VGGNet</td>
+<td>ILSVRC图像分类亚军</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2014</td>
+<td>GoogLeNet</td>
+<td>ILSVRC图像分类冠军</td>
+</tr>
+<tr>
+<td>4</td>
+<td>2015</td>
+<td>ResNet</td>
+<td>ILSVRC图像分类冠军</td>
+</tr>
+<tr>
+<td>5</td>
+<td>2017</td>
+<td>SeNet</td>
+<td>ILSVRC图像分类冠军</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<ul>
+<li>1 AlexNet<br>论文:<a href="https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf" target="_blank" rel="noopener">ImageNet Classification with Deep Convolutional Neural Networks</a><br>代码实现:<a href="https://github.com/tensorflow/tensorflow/blob/361a82d73a50a800510674b3aaa20e4845e56434/tensorflow/contrib/slim/python/slim/nets/alexnet.py" target="_blank" rel="noopener">tensorflow</a><br>主要特点：<blockquote>
+<ul>
+<li>1.第一次使用非线性激活函数ReLU。</li>
+<li>2.增加防加过拟合方法：Droupout层,提升了模型鲁棒性。</li>
+<li>3.首次使用数据增强。  </li>
+<li>4.首次使用GPU加速运算。</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>2 VGGNet<br>论文:<a href="https://arxiv.org/abs/1409.1556" target="_blank" rel="noopener">Very Deep Convolutional Networks for Large-Scale Image Recognition</a><br>代码实现:<a href="https://github.com/tensorflow/tensorflow/blob/361a82d73a50a800510674b3aaa20e4845e56434/tensorflow/contrib/slim/python/slim/nets/vgg.py" target="_blank" rel="noopener">tensorflow</a><br>主要特点：<blockquote>
+<ul>
+<li>1.网络结构更深。</li>
+<li>2.普遍使用小卷积核。</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>3 GoogLeNet<br>论文:<a href="https://arxiv.org/abs/1409.4842" target="_blank" rel="noopener">Going Deeper with Convolutions</a><br>代码实现:<a href="https://github.com/tensorflow/tensorflow/blob/361a82d73a50a800510674b3aaa20e4845e56434/tensorflow/contrib/slim/python/slim/nets/inception_v1.py" target="_blank" rel="noopener">tensorflow</a><br>主要特点：<blockquote>
+<ul>
+<li>1.增强卷积模块功能。<br>主要的创新在于他的Inception，这是一种网中网（Network In Network）的结构，即原来的结点也是一个网络。Inception一直在不断发展，目前已经V2、V3、V4。其中1*1卷积主要用来降维，用了Inception之后整个网络结构的宽度和深度都可扩大，能够带来2-3倍的性能提升。</li>
+<li>2.连续小卷积代替大卷积，保证感受野不变的同时，减少了参数数目。</li>
+</ul>
+</blockquote>
+</li>
+<li>4 ResNet<br>论文:<a href="https://arxiv.org/abs/1512.03385" target="_blank" rel="noopener">Deep Residual Learning for Image Recognition</a><br>代码实现:<a href="https://github.com/tensorflow/tensorflow/blob/361a82d73a50a800510674b3aaa20e4845e56434/tensorflow/contrib/slim/python/slim/nets/inception_v1.py" target="_blank" rel="noopener">tensorflow</a><br>主要特点:<blockquote>
+<p>解决了“退化”问题，即当模型的层次加深时，错误率却提高了。</p>
+</blockquote>
+</li>
+<li>5 SeNet<br>论文:<a href="https://arxiv.org/abs/1709.01507" target="_blank" rel="noopener">Squeeze-and-Excitation Networks</a><br>代码实现:<a href="https://github.com/ry/tensorflow-resnet" target="_blank" rel="noopener">tensorflow</a><br>主要特点:<blockquote>
+<p>提出了feature recalibration，通过引入 attention 重新加权，可以得到抑制无效特征，提升有效特征的权重，并很容易地和现有网络结合，提升现有网络性能，而计算量不会增加太多。</p>
+</blockquote>
+</li>
+</ul>
+</blockquote>
+<p><strong>CV领域网络结构演进历程：</strong><br><img src="/2017/10/18/第十二章_网络搭建及训练/img/ch12/网络结构演进.png" alt="CV领域网络结构演进历程"></p>
+<p><strong>ILSVRC挑战赛历年冠军:</strong><br><img src="/2017/10/18/第十二章_网络搭建及训练/img/ch12/历年冠军.png" alt="ILSVRC挑战赛历年冠军"></p>
+<p>此后，ILSVRC挑战赛的名次一直是衡量一个研究机构或企业技术水平的重要标尺。<br>ILSVRC 2017 已是最后一届举办.2018年起，将由WebVision竞赛（Challenge on Visual Understanding by Learning from Web Data）来接棒。因此，即使ILSVRC挑战赛停办了，但其对深度学习的深远影响和巨大贡献，将永载史册。</p>
+<h2 id="10-6-网络训练有哪些技巧吗？"><a href="#10-6-网络训练有哪些技巧吗？" class="headerlink" title="10.6 网络训练有哪些技巧吗？"></a>10.6 网络训练有哪些技巧吗？</h2><h3 id="10-6-1-合适的数据集。"><a href="#10-6-1-合适的数据集。" class="headerlink" title="10.6.1.合适的数据集。"></a>10.6.1.合适的数据集。</h3><ul>
+<li>1 没有明显脏数据(可以极大避免Loss输出为NaN)。</li>
+<li>2 样本数据分布均匀。</li>
+</ul>
+<h3 id="10-6-2-合适的预处理方法。"><a href="#10-6-2-合适的预处理方法。" class="headerlink" title="10.6.2.合适的预处理方法。"></a>10.6.2.合适的预处理方法。</h3><p>关于数据预处理，在Batch Normalization未出现之前预处理的主要做法是减去均值，然后除去方差。在Batch Normalization出现之后，减均值除方差的做法已经没有必要了。对应的预处理方法主要是数据筛查、数据增强等。</p>
+<h3 id="10-6-3-网络的初始化。"><a href="#10-6-3-网络的初始化。" class="headerlink" title="10.6.3.网络的初始化。"></a>10.6.3.网络的初始化。</h3><p>网络初始化最粗暴的做法是参数赋值为全0，这是绝对不可取的。因为如果所有的参数都是0，那么所有神经元的输出都将是相同的，那在back propagation的时候同一层内所有神经元的行为也是相同的，这可能会直接导致模型失效，无法收敛。吴恩达视频中介绍的方法是将网络权重初始化均值为0、方差为1符合的正态分布的随机数据。</p>
+<h3 id="10-6-4-小规模数据试练。"><a href="#10-6-4-小规模数据试练。" class="headerlink" title="10.6.4.小规模数据试练。"></a>10.6.4.小规模数据试练。</h3><p>在正式开始训练之前，可以先用小规模数据进行试练。原因如下：</p>
+<ul>
+<li>1 可以验证自己的训练流程对否。</li>
+<li>2 可以观察收敛速度，帮助调整学习速率。</li>
+<li>3 查看GPU显存占用情况，最大化batch_size(前提是进行了batch normalization，只要显卡不爆，尽量挑大的)。</li>
+</ul>
+<h3 id="10-6-5-设置合理Learning-Rate。"><a href="#10-6-5-设置合理Learning-Rate。" class="headerlink" title="10.6.5.设置合理Learning Rate。"></a>10.6.5.设置合理Learning Rate。</h3><ul>
+<li>1 太大。Loss爆炸、输出NaN等。</li>
+<li>2 太小。收敛速度过慢，训练时长大大延长。</li>
+<li>3 可变的学习速率。比如当输出准确率到达某个阈值后，可以让Learning Rate减半继续训练。</li>
+</ul>
+<h3 id="10-6-6-损失函数"><a href="#10-6-6-损失函数" class="headerlink" title="10.6.6.损失函数"></a>10.6.6.损失函数</h3><p>损失函数主要分为两大类:分类损失和回归损失</p>
+<blockquote>
+<p>1.回归损失：</p>
+<blockquote>
+<ul>
+<li>1 均方误差(MSE 二次损失 L2损失)<br>它是我们的目标变量与预测值变量差值平方。</li>
+<li>2 平均绝对误差(MAE L1损失)<br>它是我们的目标变量与预测值变量差值绝对值。<br>关于MSE与MAE的比较。MSE更容易解决问题，但是MAE对于异常值更加鲁棒。更多关于MAE和MSE的性能，可以参考<a href="https://rishy.github.io/ml/2015/07/28/l1-vs-l2-loss/" target="_blank" rel="noopener">L1vs.L2 Loss Function</a></li>
+</ul>
+</blockquote>
+</blockquote>
+<blockquote>
+<p>2.分类损失：</p>
+<blockquote>
+<ul>
+<li>1 交叉熵损失函数。<br>是目前神经网络中最常用的分类目标损失函数。</li>
+<li>2 合页损失函数<br>合页损失函数广泛在支持向量机中使用，有时也会在损失函数中使用。缺点:合页损失函数是对错误越大的样本施以更严重的惩罚，但是这样会导致损失函数对噪声敏感。</li>
+</ul>
+</blockquote>
+</blockquote>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+    
+	<div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ff73b3;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+	
+	
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>感谢您的支持，我会继续努力的!</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wexin.JPG" alt="QJun 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/深度学习基础/" rel="tag"># 深度学习基础</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/01/第十一章_迁移学习/" rel="next" title="迁移学习">
+                <i class="fa fa-chevron-left"></i> 迁移学习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/26/机器学习算法优缺点对比及选择/" rel="prev" title="机器学习算法优缺点对比及选择-小结">
+                机器学习算法优缺点对比及选择-小结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MDE0MS8xNjY2OA=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/10.jpg"
+                alt="QJun" />
+            
+              <p class="site-author-name" itemprop="name">QJun</p>
+              <p class="site-description motion-element" itemprop="description">Stay Hungry, Stay Foolish!</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">75</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:qjun@hust.edu.cn" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plus.google.com/" target="_blank" title="Google"><i class="fa fa-fw fa-google"></i>Google</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/" target="_blank" title="Twitter"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.facebook.com/" target="_blank" title="FB Page"><i class="fa fa-fw fa-facebook"></i>FB Page</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://leesen998.github.io/about/" title="关于此博客" target="_blank">关于此博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://poetryscience.ink/" title="Huixin" target="_blank">Huixin</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://ultimatehy.github.io/" title="Yong Huang" target="_blank">Yong Huang</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第十二章-网络搭建及训练"><span class="nav-number">1.</span> <span class="nav-text">第十二章 网络搭建及训练</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CNN训练注意事项"><span class="nav-number">1.1.</span> <span class="nav-text">CNN训练注意事项</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第十二章-TensorFlow、pytorch和caffe介绍"><span class="nav-number">2.</span> <span class="nav-text">第十二章 TensorFlow、pytorch和caffe介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#12-1-TensorFlow"><span class="nav-number">3.</span> <span class="nav-text">12.1 TensorFlow</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#12-1-1-TensorFlow是什么？"><span class="nav-number">3.1.</span> <span class="nav-text">12.1.1 TensorFlow是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-1-2-TensorFlow的设计理念是什么？"><span class="nav-number">3.2.</span> <span class="nav-text">12.1.2 TensorFlow的设计理念是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-1-3-TensorFlow特点有哪些？"><span class="nav-number">3.3.</span> <span class="nav-text">12.1.3 TensorFlow特点有哪些？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-高度的灵活性"><span class="nav-number">3.3.1.</span> <span class="nav-text">1.高度的灵活性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-真正的可移植性"><span class="nav-number">3.3.2.</span> <span class="nav-text">2.真正的可移植性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-多语言支持"><span class="nav-number">3.3.3.</span> <span class="nav-text">3.多语言支持</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-丰富的算法库"><span class="nav-number">3.3.4.</span> <span class="nav-text">4.丰富的算法库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-完善的文档"><span class="nav-number">3.3.5.</span> <span class="nav-text">5.完善的文档</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-1-4-TensorFlow的系统架构是怎样的？"><span class="nav-number">3.4.</span> <span class="nav-text">12.1.4 TensorFlow的系统架构是怎样的？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#emsp-emsp-整个系统从底层到上层可分为七层："><span class="nav-number">3.4.1.</span> <span class="nav-text">  整个系统从底层到上层可分为七层：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-1-5-TensorFlow编程模型是怎样的？"><span class="nav-number">3.5.</span> <span class="nav-text">12.1.5 TensorFlow编程模型是怎样的？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-构建图"><span class="nav-number">3.5.1.</span> <span class="nav-text">1.构建图</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-placeholder"><span class="nav-number">3.5.1.1.</span> <span class="nav-text">1.placeholder</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-variable"><span class="nav-number">3.5.1.2.</span> <span class="nav-text">2. variable</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-initializer"><span class="nav-number">3.5.1.3.</span> <span class="nav-text">3. initializer</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-启动图"><span class="nav-number">3.5.2.</span> <span class="nav-text">2.启动图</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-给图输入数据并获取结果"><span class="nav-number">3.5.2.1.</span> <span class="nav-text">3.给图输入数据并获取结果</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-1-6-如何基于tensorflow搭建VGG16"><span class="nav-number">3.6.</span> <span class="nav-text">12.1.6 如何基于tensorflow搭建VGG16</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#12-2-Pytorch"><span class="nav-number">4.</span> <span class="nav-text">12.2 Pytorch</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#12-2-1-Pytorch是什么？"><span class="nav-number">4.1.</span> <span class="nav-text">12.2.1 Pytorch是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-2-2-为什么选择-Pytorch？"><span class="nav-number">4.2.</span> <span class="nav-text">12.2.2 为什么选择 Pytorch？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-简洁："><span class="nav-number">4.2.1.</span> <span class="nav-text">1.简洁：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-速度："><span class="nav-number">4.2.2.</span> <span class="nav-text">2.速度：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-易用："><span class="nav-number">4.2.3.</span> <span class="nav-text">3.易用：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-活跃的社区："><span class="nav-number">4.2.4.</span> <span class="nav-text">4.活跃的社区：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-2-3-PyTorch-的架构是怎样的？"><span class="nav-number">4.3.</span> <span class="nav-text">12.2.3 PyTorch 的架构是怎样的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-2-4-Pytorch-与-tensorflow-之间的差异在哪里？"><span class="nav-number">4.4.</span> <span class="nav-text">12.2.4 Pytorch 与 tensorflow 之间的差异在哪里？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-2-5-Pytorch有哪些常用工具包？"><span class="nav-number">4.5.</span> <span class="nav-text">12.2.5 Pytorch有哪些常用工具包？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#12-3-Caffe"><span class="nav-number">5.</span> <span class="nav-text">12.3 Caffe</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#12-3-1-什么是-Caffe？"><span class="nav-number">5.1.</span> <span class="nav-text">12.3.1 什么是 Caffe？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-3-2-Caffe的特点是什么？"><span class="nav-number">5.2.</span> <span class="nav-text">12.3.2 Caffe的特点是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-3-3-Caffe的设计思想是怎样的？"><span class="nav-number">5.3.</span> <span class="nav-text">12.3.3 Caffe的设计思想是怎样的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-3-4-Caffe架构是怎样的？"><span class="nav-number">5.4.</span> <span class="nav-text">12.3.4 Caffe架构是怎样的？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-SyncedMem"><span class="nav-number">5.4.1.</span> <span class="nav-text">1. SyncedMem</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Blob"><span class="nav-number">5.4.2.</span> <span class="nav-text">2. Blob</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Layer"><span class="nav-number">5.4.3.</span> <span class="nav-text">3. Layer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Net"><span class="nav-number">5.4.4.</span> <span class="nav-text">4. Net</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Solver"><span class="nav-number">5.4.5.</span> <span class="nav-text">5. Solver</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-Proto"><span class="nav-number">5.4.6.</span> <span class="nav-text">6. Proto</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-IO"><span class="nav-number">5.4.7.</span> <span class="nav-text">7. IO</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-3-5-Caffe的有哪些接口？"><span class="nav-number">5.5.</span> <span class="nav-text">12.3.5 Caffe的有哪些接口？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Caffe-Python接口"><span class="nav-number">5.5.1.</span> <span class="nav-text">1. Caffe Python接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Caffe-MATLAB接口"><span class="nav-number">5.5.2.</span> <span class="nav-text">2. Caffe MATLAB接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Caffe-命令行接口"><span class="nav-number">5.5.3.</span> <span class="nav-text">3. Caffe 命令行接口</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-caffe-train"><span class="nav-number">5.5.3.1.</span> <span class="nav-text">1. caffe train</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-caffe-test"><span class="nav-number">5.5.3.2.</span> <span class="nav-text">2. caffe test</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-caffe-time"><span class="nav-number">5.5.3.3.</span> <span class="nav-text">3. caffe time</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-4-网络搭建有什么原则？"><span class="nav-number">5.5.4.</span> <span class="nav-text">10.4 网络搭建有什么原则？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-4-1新手原则。"><span class="nav-number">5.5.5.</span> <span class="nav-text">10.4.1新手原则。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-4-2深度优先原则。"><span class="nav-number">5.5.6.</span> <span class="nav-text">10.4.2深度优先原则。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-4-3卷积核size一般为奇数。"><span class="nav-number">5.5.7.</span> <span class="nav-text">10.4.3卷积核size一般为奇数。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-4-4卷积核不是越大越好。"><span class="nav-number">5.5.8.</span> <span class="nav-text">10.4.4卷积核不是越大越好。</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-5-有哪些经典的网络模型值得我们去学习的？"><span class="nav-number">5.6.</span> <span class="nav-text">10.5 有哪些经典的网络模型值得我们去学习的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-6-网络训练有哪些技巧吗？"><span class="nav-number">5.7.</span> <span class="nav-text">10.6 网络训练有哪些技巧吗？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#10-6-1-合适的数据集。"><span class="nav-number">5.7.1.</span> <span class="nav-text">10.6.1.合适的数据集。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-6-2-合适的预处理方法。"><span class="nav-number">5.7.2.</span> <span class="nav-text">10.6.2.合适的预处理方法。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-6-3-网络的初始化。"><span class="nav-number">5.7.3.</span> <span class="nav-text">10.6.3.网络的初始化。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-6-4-小规模数据试练。"><span class="nav-number">5.7.4.</span> <span class="nav-text">10.6.4.小规模数据试练。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-6-5-设置合理Learning-Rate。"><span class="nav-number">5.7.5.</span> <span class="nav-text">10.6.5.设置合理Learning Rate。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-6-6-损失函数"><span class="nav-number">5.7.6.</span> <span class="nav-text">10.6.6.损失函数</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="heart">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">QJun</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<div class="weixin-box">
+  <div class="weixin-menu">
+    <div class="weixin-hover">
+      <div class="weixin-description">微信扫一扫，订阅本博客</div>
+    </div>
+  </div>
+</div>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+
+
+  
+    <script type="text/javascript">
+      window.livereOptions = {
+        refer: '2017/10/18/第十二章_网络搭建及训练/'
+      };
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"tagMode":true,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":100,"height":200,"hOffset":10,"vOffset":10},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/"});</script>
+
+
+  
+  
+  
+  <script type="text/javascript" src="/js/src/dytitle.js"></script>
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+
+<!-- 代码块复制功能 -->
+<script type="text/javascript" src="/js/src/clipboard.min.js"></script>  
+<script type="text/javascript" src="/js/src/clipboard-use.js"></script>
+

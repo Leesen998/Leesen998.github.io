@@ -1,0 +1,1455 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#fff">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="https://fonts.cat.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#fff">
+
+
+  <link rel="manifest" href="/images/manifest.json">
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="keywords" content="推荐系统实践">
+<meta property="og:type" content="article">
+<meta property="og:title" content="推荐系统--神经协同过滤NCF原理及实战">
+<meta property="og:url" content="https://leesen998.github.io/2018/11/19/推荐系统--神经协同过滤NCF原理及实战/index.html">
+<meta property="og:site_name" content="QJun">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://desk-fd.zol-img.com.cn/t_s1920x1080c5/g2/M00/0B/0F/ChMlWlyAyIiIQH8pABv6qMmlUWEAAIp0AAv7LcAG_rA821.jpg">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4155986-9cab8ff893c16d2a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/702/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4155986-4cf5e3db52a1c7d3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/352/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4155986-875ca45170bf6cf9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/105/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4155986-4603109b9e326aa7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/361/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4155986-b381c43ffb45efad.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/471/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4155986-c104fa23f3d69c0b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/780/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4155986-7448a3708977e2ca.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/883/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4155986-9c075241d934afaa.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/651/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4155986-0cc3550bf20a608c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/699/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4155986-f33f0e781fce1331.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/316/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4155986-cd8744d945dab6c9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/301/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4155986-4f43b020b149514f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/477/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4155986-c5c67c9c159e7820.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/696/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4155986-f625ccafecdd8070.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/883/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4155986-619cfe110711228a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/858/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4155986-fc499022ad1423cf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/608/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4155986-abf4284380169268.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/187/format/webp">
+<meta property="og:updated_time" content="2019-03-22T08:28:17.071Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="推荐系统--神经协同过滤NCF原理及实战">
+<meta name="twitter:image" content="https://desk-fd.zol-img.com.cn/t_s1920x1080c5/g2/M00/0B/0F/ChMlWlyAyIiIQH8pABv6qMmlUWEAAIp0AAv7LcAG_rA821.jpg">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="QJun" type="application/atom+xml" />
+
+
+
+
+  <link rel="canonical" href="https://leesen998.github.io/2018/11/19/推荐系统--神经协同过滤NCF原理及实战/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>推荐系统--神经协同过滤NCF原理及实战 | QJun</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://leesen998.github.io" class="github-corner" aria-label="View source on GitHub"><svg width="120" height="120" viewBox="0 0 250 250" style="fill:#64CEAA; color:#fff; position: absolute; top: 194; border: 0; left: 0; transform: scale(-1, 1);" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">QJun</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">QJun's Homepage</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://leesen998.github.io/2018/11/19/推荐系统--神经协同过滤NCF原理及实战/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QJun">
+      <meta itemprop="description" content="Stay Hungry, Stay Foolish!">
+      <meta itemprop="image" content="/images/10.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QJun">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">推荐系统--神经协同过滤NCF原理及实战
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-11-19 19:48:29" itemprop="dateCreated datePublished" datetime="2018-11-19T19:48:29+08:00">2018-11-19</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/推荐系统/" itemprop="url" rel="index"><span itemprop="name">推荐系统</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p class="description"></p>
+
+<p><img src="https://desk-fd.zol-img.com.cn/t_s1920x1080c5/g2/M00/0B/0F/ChMlWlyAyIiIQH8pABv6qMmlUWEAAIp0AAv7LcAG_rA821.jpg" alt="" style="width:100%"></p>
+<a id="more"></a>
+<h1 id="推荐系统–神经协同过滤NCF原理及实战"><a href="#推荐系统–神经协同过滤NCF原理及实战" class="headerlink" title="推荐系统–神经协同过滤NCF原理及实战"></a>推荐系统–神经协同过滤NCF原理及实战</h1><p>论文地址：<a href="https://www.comp.nus.edu.sg/~xiangnan/papers/ncf.pdf" target="_blank" rel="noopener">https://www.comp.nus.edu.sg/~xiangnan/papers/ncf.pdf</a></p>
+<h1 id="1、Neural-Collaborative-Filtering"><a href="#1、Neural-Collaborative-Filtering" class="headerlink" title="1、Neural Collaborative Filtering"></a>1、Neural Collaborative Filtering</h1><h2 id="1-1-背景"><a href="#1-1-背景" class="headerlink" title="1.1 背景"></a>1.1 背景</h2><p>本文讨论的主要是隐性反馈协同过滤解决方案，先来明确两个概念：显性反馈和隐性反馈：</p>
+<p><strong>显性反馈</strong>行为包括用户明确表示对物品喜好的行为<br><strong>隐性反馈</strong>行为指的是那些不能明确反应用户喜好</p>
+<p>举例来说：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4155986-9cab8ff893c16d2a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/702/format/webp" alt="img"></p>
+<p>很多应用场景，并没有显性反馈的存在。因为大部分用户是沉默的用户，并不会明确给系统反馈“我对这个物品的偏好值是多少”。因此，推荐系统可以根据大量的隐性反馈来推断用户的偏好值。</p>
+<p>根据已得到的隐性反馈数据，我们将用户-条目交互矩阵Y定义为：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4155986-4cf5e3db52a1c7d3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/352/format/webp" alt="img"></p>
+<p>但是，Yui为1仅代表二者有交互记录，并不代表用户u真的喜欢项目i，同理，u和i没有交互记录也不能代表u不喜欢i。这对隐性反馈的学习提出了挑战，因为它提供了关于用户偏好的噪声信号。虽然观察到的条目至少反映了用户对项目的兴趣，但是未查看的条目可能只是丢失数据，并且这其中存在自然稀疏的负反馈。</p>
+<p>在隐性反馈上的推荐问题可以表达为估算矩阵 Y中未观察到的条目的分数问题（这个分数被用来评估项目的排名）。形式上它可以被抽象为学习函数：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4155986-875ca45170bf6cf9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/105/format/webp" alt="img"></p>
+<p>为了处理缺失数据，有两种常见的做法：要么将所有未观察到的条目视作负反馈，要么从没有观察到条目中抽样作为负反馈实例。</p>
+<h2 id="1-2-矩阵分解及其缺陷"><a href="#1-2-矩阵分解及其缺陷" class="headerlink" title="1.2 矩阵分解及其缺陷"></a>1.2 矩阵分解及其缺陷</h2><p>传统的求解方法是矩阵分解(MF,Matrix Factorization)，为每个user和item找到一个隐向量，问题变为：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4155986-4603109b9e326aa7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/361/format/webp" alt="img"></p>
+<p>这里的 K表示隐式空间（latent space）的维度。正如我们所看到的，MF模型是用户和项目的潜在因素的双向互动，它假设潜在空间的每一维都是相互独立的并且用相同的权重将它们线性结合。因此，MF可视为隐向量（latent factor）的线性模型。</p>
+<p>论文中给出了一个例子来说明这种算法的局限性：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4155986-b381c43ffb45efad.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/471/format/webp" alt="img"></p>
+<p>1(a)是user-item交互矩阵，1(b)是用户的隐式空间，论文中强调了两点来理解这张图片：<br>1）MF将user和item分布到同样的隐式空间中，那么两个用户之间的相似性也可以用二者在隐式空间中的向量夹角来确定。<br>2）使用Jaccard系数来作为真实的用户相似性。<br>通过MF计算的相似性与Jaccard系数计算的相似性也可以用来评判MF的性能。我们先来看看Jaccard系数</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4155986-c104fa23f3d69c0b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/780/format/webp" alt="img"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4155986-7448a3708977e2ca.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/883/format/webp" alt="img"></p>
+<p>上面的示例显示了MF因为使用一个简单的和固定的内积，来估计在低维潜在空间中用户-项目的复杂交互，从而所可能造成的限制。解决该问题的方法之一是使用大量的潜在因子 K (就是隐式空间向量的维度)。然而这可能对模型的泛化能力产生不利的影响（e.g. 数据的过拟合问题），特别是在稀疏的集合上。论文通过使用DNNs从数据中学习交互函数，突破了这个限制。</p>
+<h2 id="1-3-NCF"><a href="#1-3-NCF" class="headerlink" title="1.3 NCF"></a>1.3 NCF</h2><p>本文先提出了一种通用框架：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4155986-9c075241d934afaa.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/651/format/webp" alt="img"></p>
+<p>针对这个通用框架，论文提出了三种不同的实现，三种实现可以用一张图来说明：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4155986-0cc3550bf20a608c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/699/format/webp" alt="img"></p>
+<p><strong>GMF</strong>：<br>上图中仅使用GMF layer，就得到了第一种实现方式GMF，GMF被称为广义矩阵分解，输出层的计算公式为：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4155986-f33f0e781fce1331.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/316/format/webp" alt="img"></p>
+<p><strong>MLP</strong><br>上图中仅使用右侧的MLP Layers，就得到了第二种学习方式，通过多层神经网络来学习user和item的隐向量。这样，输出层的计算公式为：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4155986-cd8744d945dab6c9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/301/format/webp" alt="img"></p>
+<p><strong>NeuMF</strong><br>结合GMF和MLP，得到的就是第三种实现方式，上图是该方式的完整实现，输出层的计算公式为：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4155986-4f43b020b149514f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/477/format/webp" alt="img"></p>
+<h2 id="1-4-模型实验"><a href="#1-4-模型实验" class="headerlink" title="1.4 模型实验"></a>1.4 模型实验</h2><p>论文通过三个角度进行了试验：</p>
+<p><strong>RQ1</strong> 我们提出的NCF方法是否胜过 state-of-the-art 的隐性协同过滤方法？<br><strong>RQ2</strong> 我们提出的优化框架（消极样本抽样的logloss）怎样为推荐任务服务？<br><strong>RQ3</strong> 更深的隐藏单元是不是有助于对用户项目交互数据的学习？</p>
+<p><strong>使用的数据集</strong>：MovieLens 和 Pinterest 两个数据集</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4155986-c5c67c9c159e7820.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/696/format/webp" alt="img"></p>
+<p><strong>评估方案</strong>：为了评价项目推荐的性能，论文采用了leave-one-out方法评估，即：对于每个用户，我们将其<strong>最近的一次交互作为测试集</strong>（数据集一般都有时间戳），并利用余下的培训作为训练集。由于在评估过程中为每个用户排列所有项目花费的时间太多，所以遵循一般的策略，随机抽取100个不与用户进行交互的项目，将测试项目排列在这100个项目中。排名列表的性能由<strong>命中率（HR）</strong>和<strong>归一化折扣累积增益（NDCG）</strong>来衡量。同时，论文将这两个指标的排名列表截断为10。如此一来，HR直观地衡量测试项目是否存在于前10名列表中，而NDCG通过将较高分数指定为顶级排名来计算命中的位置。本文计算每个测试用户的这两个指标，并求取了平均分。</p>
+<p><strong>Baselines</strong>，论文将NCF方法与下列方法进行了比较：ItemPop，ItemKNN，BPR，eALS。</p>
+<p>以下是三个结果的贴图，关于试验结果的解读，由于篇幅的原因，大家可以查看原论文。</p>
+<p><strong>RQ1试验结果</strong></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4155986-f625ccafecdd8070.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/883/format/webp" alt="img"></p>
+<p>简单的结论，即NCF效果好于BaseLine模型，如果不好的话论文也不用写了，哈哈。</p>
+<p><strong>RQ2试验结果</strong></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4155986-619cfe110711228a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/858/format/webp" alt="img"></p>
+<p>Figure 6 表示将模型看作一个二分类任务并使用logloss作为损失函数时的训练效果。<br>Figure7 表示采样率对模型性能的影响（横轴是采样率，即负样本与正样本的比例）。</p>
+<p><strong>RQ3试验结果</strong></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4155986-fc499022ad1423cf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/608/format/webp" alt="img"></p>
+<p>上面的表格设置了两个变量，分别是Embedding的长度K和神经网络的层数，使用类似网格搜索的方式展示了在两个数据集上的结果。增加Embedding的长度和神经网络的层数是可以提升训练效果的。</p>
+<h1 id="2、NCF实战"><a href="#2、NCF实战" class="headerlink" title="2、NCF实战"></a>2、NCF实战</h1><p>项目结构如下：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4155986-abf4284380169268.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/187/format/webp" alt="img"></p>
+<p><strong>数据输入</strong><br>本文使用了一种新的数据处理方式，不过我们的输入就是三个：userid，itemid以及label，对训练集来说，label是0-1值，对测试集来说，是具体的itemid</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_data</span><span class="params">(self)</span>:</span></span><br><span class="line">    sample = self.iterator.get_next()</span><br><span class="line">    self.user = sample[<span class="string">'user'</span>]</span><br><span class="line">    self.item = sample[<span class="string">'item'</span>]</span><br><span class="line">    self.label = tf.cast(sample[<span class="string">'label'</span>],tf.float32)</span><br></pre></td></tr></table></figure>
+<p><strong>定义初始化方式、损失函数、优化器</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">inference</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="string">""" Initialize important settings """</span></span><br><span class="line">    self.regularizer = tf.contrib.layers.l2_regularizer(self.regularizer_rate)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> self.initializer == <span class="string">'Normal'</span>:</span><br><span class="line">        self.initializer = tf.truncated_normal_initializer(stddev=<span class="number">0.01</span>)</span><br><span class="line">    <span class="keyword">elif</span> self.initializer == <span class="string">'Xavier_Normal'</span>:</span><br><span class="line">        self.initializer = tf.contrib.layers.xavier_initializer()</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        self.initializer = tf.glorot_uniform_initializer()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> self.activation_func == <span class="string">'ReLU'</span>:</span><br><span class="line">        self.activation_func = tf.nn.relu</span><br><span class="line">    <span class="keyword">elif</span> self.activation_func == <span class="string">'Leaky_ReLU'</span>:</span><br><span class="line">        self.activation_func = tf.nn.leaky_relu</span><br><span class="line">    <span class="keyword">elif</span> self.activation_func == <span class="string">'ELU'</span>:</span><br><span class="line">        self.activation_func = tf.nn.elu</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> self.loss_func == <span class="string">'cross_entropy'</span>:</span><br><span class="line">        <span class="comment"># self.loss_func = lambda labels, logits: -tf.reduce_sum(</span></span><br><span class="line">        <span class="comment">#       (labels * tf.log(logits) + (</span></span><br><span class="line">        <span class="comment">#       tf.ones_like(labels, dtype=tf.float32) - labels) *</span></span><br><span class="line">        <span class="comment">#       tf.log(tf.ones_like(logits, dtype=tf.float32) - logits)), 1)</span></span><br><span class="line">        self.loss_func = tf.nn.sigmoid_cross_entropy_with_logits</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> self.optim == <span class="string">'SGD'</span>:</span><br><span class="line">        self.optim = tf.train.GradientDescentOptimizer(self.lr,</span><br><span class="line">                                                       name=<span class="string">'SGD'</span>)</span><br><span class="line">    <span class="keyword">elif</span> self.optim == <span class="string">'RMSProp'</span>:</span><br><span class="line">        self.optim = tf.train.RMSPropOptimizer(self.lr, decay=<span class="number">0.9</span>,</span><br><span class="line">                                               momentum=<span class="number">0.0</span>, name=<span class="string">'RMSProp'</span>)</span><br><span class="line">    <span class="keyword">elif</span> self.optim == <span class="string">'Adam'</span>:</span><br><span class="line">        self.optim = tf.train.AdamOptimizer(self.lr, name=<span class="string">'Adam'</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>得到embedding值</strong><br>分别得到GMF和MLP的embedding向量，当然也可以使用embedding_lookup方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">'input'</span>):</span><br><span class="line">    self.user_onehot = tf.one_hot(self.user,self.user_size,name=<span class="string">'user_onehot'</span>)</span><br><span class="line">    self.item_onehot = tf.one_hot(self.item,self.item_size,name=<span class="string">'item_onehot'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">'embed'</span>):</span><br><span class="line">    self.user_embed_GMF = tf.layers.dense(inputs = self.user_onehot,</span><br><span class="line">                                          units = self.embed_size,</span><br><span class="line">                                          activation = self.activation_func,</span><br><span class="line">                                          kernel_initializer=self.initializer,</span><br><span class="line">                                          kernel_regularizer=self.regularizer,</span><br><span class="line">                                          name=<span class="string">'user_embed_GMF'</span>)</span><br><span class="line"></span><br><span class="line">    self.item_embed_GMF = tf.layers.dense(inputs=self.item_onehot,</span><br><span class="line">                                          units=self.embed_size,</span><br><span class="line">                                          activation=self.activation_func,</span><br><span class="line">                                          kernel_initializer=self.initializer,</span><br><span class="line">                                          kernel_regularizer=self.regularizer,</span><br><span class="line">                                          name=<span class="string">'item_embed_GMF'</span>)</span><br><span class="line"></span><br><span class="line">    self.user_embed_MLP = tf.layers.dense(inputs=self.user_onehot,</span><br><span class="line">                                          units=self.embed_size,</span><br><span class="line">                                          activation=self.activation_func,</span><br><span class="line">                                          kernel_initializer=self.initializer,</span><br><span class="line">                                          kernel_regularizer=self.regularizer,</span><br><span class="line">                                          name=<span class="string">'user_embed_MLP'</span>)</span><br><span class="line">    self.item_embed_MLP = tf.layers.dense(inputs=self.item_onehot,</span><br><span class="line">                                          units=self.embed_size,</span><br><span class="line">                                          activation=self.activation_func,</span><br><span class="line">                                          kernel_initializer=self.initializer,</span><br><span class="line">                                          kernel_regularizer=self.regularizer,</span><br><span class="line">                                          name=<span class="string">'item_embed_MLP'</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>GMF</strong><br>GMF部分就是求两个embedding的内积：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">"GMF"</span>):</span><br><span class="line">    self.GMF = tf.multiply(self.user_embed_GMF,self.item_embed_GMF,name=<span class="string">'GMF'</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>MLP</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">"MLP"</span>):</span><br><span class="line">    self.interaction = tf.concat([self.user_embed_MLP, self.item_embed_MLP],</span><br><span class="line">                                 axis=<span class="number">-1</span>, name=<span class="string">'interaction'</span>)</span><br><span class="line"></span><br><span class="line">    self.layer1_MLP = tf.layers.dense(inputs=self.interaction,</span><br><span class="line">                                      units=self.embed_size * <span class="number">2</span>,</span><br><span class="line">                                      activation=self.activation_func,</span><br><span class="line">                                      kernel_initializer=self.initializer,</span><br><span class="line">                                      kernel_regularizer=self.regularizer,</span><br><span class="line">                                      name=<span class="string">'layer1_MLP'</span>)</span><br><span class="line">    self.layer1_MLP = tf.layers.dropout(self.layer1_MLP, rate=self.dropout)</span><br><span class="line"></span><br><span class="line">    self.layer2_MLP = tf.layers.dense(inputs=self.layer1_MLP,</span><br><span class="line">                                      units=self.embed_size,</span><br><span class="line">                                      activation=self.activation_func,</span><br><span class="line">                                      kernel_initializer=self.initializer,</span><br><span class="line">                                      kernel_regularizer=self.regularizer,</span><br><span class="line">                                      name=<span class="string">'layer2_MLP'</span>)</span><br><span class="line">    self.layer2_MLP = tf.layers.dropout(self.layer2_MLP, rate=self.dropout)</span><br><span class="line"></span><br><span class="line">    self.layer3_MLP = tf.layers.dense(inputs=self.layer2_MLP,</span><br><span class="line">                                      units=self.embed_size // <span class="number">2</span>,</span><br><span class="line">                                      activation=self.activation_func,</span><br><span class="line">                                      kernel_initializer=self.initializer,</span><br><span class="line">                                      kernel_regularizer=self.regularizer,</span><br><span class="line">                                      name=<span class="string">'layer3_MLP'</span>)</span><br><span class="line">    self.layer3_MLP = tf.layers.dropout(self.layer3_MLP, rate=self.dropout)</span><br></pre></td></tr></table></figure>
+<p><strong>得到预测值</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">'concatenation'</span>):</span><br><span class="line">    self.concatenation = tf.concat([self.GMF,self.layer3_MLP],axis=<span class="number">-1</span>,name=<span class="string">'concatenation'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    self.logits = tf.layers.dense(inputs= self.concatenation,</span><br><span class="line">                                  units = <span class="number">1</span>,</span><br><span class="line">                                  activation=<span class="keyword">None</span>,</span><br><span class="line">                                  kernel_initializer=self.initializer,</span><br><span class="line">                                  kernel_regularizer=self.regularizer,</span><br><span class="line">                                  name=<span class="string">'predict'</span>)</span><br><span class="line"></span><br><span class="line">    self.logits_dense = tf.reshape(self.logits,[<span class="number">-1</span>])</span><br></pre></td></tr></table></figure>
+<p><strong>测试集构建</strong><br>这里只介绍几行关键的测试集构建代码，整个流程希望大家可以看一下完整的代码。<br>需要明确的一点是，对于测试集，我们的评价不只是对错，还要关注排名，所以测试集的label不是0-1，而是具体的itemid<br>首先，对每个user取最后一行作为测试集的正样本：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">split_train_test = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(user_set)):</span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> range(user_length[i] - <span class="number">1</span>):</span><br><span class="line">        split_train_test.append(<span class="string">'train'</span>)</span><br><span class="line">    split_train_test.append(<span class="string">'test'</span>)</span><br><span class="line"></span><br><span class="line">full_data[<span class="string">'split'</span>] = split_train_test</span><br><span class="line"></span><br><span class="line">train_data = full_data[full_data[<span class="string">'split'</span>] == <span class="string">'train'</span>].reset_index(drop=<span class="keyword">True</span>)</span><br><span class="line">test_data = full_data[full_data[<span class="string">'split'</span>] == <span class="string">'test'</span>].reset_index(drop=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure>
+<p>添加一些负采样的样本， 这里顺序是，1正样本-n负样本-1正样本-n负样本….，每个用户有n+1条数据，便于计算HR和NDCG：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">feature_user.append(user)</span><br><span class="line">feature_item.append(item)</span><br><span class="line">labels_add.append(label)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> k <span class="keyword">in</span> neg_samples:</span><br><span class="line">    feature_user.append(user)</span><br><span class="line">    feature_item.append(k)</span><br><span class="line">    labels_add.append(k)</span><br></pre></td></tr></table></figure>
+<p>不打乱测试集的顺序，设置batch的大小为1+n:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dataset = tf.data.Dataset.from_tensor_slices(data)</span><br><span class="line">dataset = dataset.batch(test_neg + <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>计算HR和NDCG</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hr</span><span class="params">(gt_item, pred_items)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> gt_item <span class="keyword">in</span> pred_items:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">ndcg</span><span class="params">(gt_item, pred_items)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> gt_item <span class="keyword">in</span> pred_items:</span><br><span class="line">        index = np.where(pred_items == gt_item)[<span class="number">0</span>][<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">return</span> np.reciprocal(np.log2(index + <span class="number">2</span>))</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+
+    
+    
+    
+    
+	<div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ff73b3;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+	
+	
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>感谢您的支持，我会继续努力的!</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wexin.JPG" alt="QJun 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/推荐系统实践/" rel="tag"># 推荐系统实践</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/08/推荐系统--DeepFM模型理论和实践/" rel="next" title="推荐系统--DeepFM模型理论和实践">
+                <i class="fa fa-chevron-left"></i> 推荐系统--DeepFM模型理论和实践
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MDE0MS8xNjY2OA=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/10.jpg"
+                alt="QJun" />
+            
+              <p class="site-author-name" itemprop="name">QJun</p>
+              <p class="site-description motion-element" itemprop="description">Stay Hungry, Stay Foolish!</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">75</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:qjun@hust.edu.cn" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plus.google.com/" target="_blank" title="Google"><i class="fa fa-fw fa-google"></i>Google</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/" target="_blank" title="Twitter"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.facebook.com/" target="_blank" title="FB Page"><i class="fa fa-fw fa-facebook"></i>FB Page</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://leesen998.github.io/about/" title="关于此博客" target="_blank">关于此博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://poetryscience.ink/" title="Huixin" target="_blank">Huixin</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://ultimatehy.github.io/" title="Yong Huang" target="_blank">Yong Huang</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#推荐系统–神经协同过滤NCF原理及实战"><span class="nav-number">1.</span> <span class="nav-text">推荐系统–神经协同过滤NCF原理及实战</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1、Neural-Collaborative-Filtering"><span class="nav-number">2.</span> <span class="nav-text">1、Neural Collaborative Filtering</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-背景"><span class="nav-number">2.1.</span> <span class="nav-text">1.1 背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-矩阵分解及其缺陷"><span class="nav-number">2.2.</span> <span class="nav-text">1.2 矩阵分解及其缺陷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-NCF"><span class="nav-number">2.3.</span> <span class="nav-text">1.3 NCF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-模型实验"><span class="nav-number">2.4.</span> <span class="nav-text">1.4 模型实验</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2、NCF实战"><span class="nav-number">3.</span> <span class="nav-text">2、NCF实战</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="heart">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">QJun</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<div class="weixin-box">
+  <div class="weixin-menu">
+    <div class="weixin-hover">
+      <div class="weixin-description">微信扫一扫，订阅本博客</div>
+    </div>
+  </div>
+</div>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+
+
+  
+    <script type="text/javascript">
+      window.livereOptions = {
+        refer: '2018/11/19/推荐系统--神经协同过滤NCF原理及实战/'
+      };
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"tagMode":true,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":100,"height":200,"hOffset":10,"vOffset":10},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/"});</script>
+
+
+  
+  
+  
+  <script type="text/javascript" src="/js/src/dytitle.js"></script>
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+
+<!-- 代码块复制功能 -->
+<script type="text/javascript" src="/js/src/clipboard.min.js"></script>  
+<script type="text/javascript" src="/js/src/clipboard-use.js"></script>
+

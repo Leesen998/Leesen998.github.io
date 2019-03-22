@@ -1,0 +1,1552 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#fff">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="https://fonts.cat.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#fff">
+
+
+  <link rel="manifest" href="/images/manifest.json">
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="keywords" content="机器学习基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="迁移学习">
+<meta property="og:url" content="https://leesen998.github.io/2017/10/01/第十一章_迁移学习/index.html">
+<meta property="og:site_name" content="QJun">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1547297948/samples/java%20files/photo-1544728344-7efa025e5603.jpg">
+<meta property="og:image" content="https://leesen998.github.io/2017/10/01/第十一章_迁移学习/img/ch11/1542972502781.png">
+<meta property="og:image" content="https://leesen998.github.io/2017/10/01/第十一章_迁移学习/img/ch11/1542974131814.png">
+<meta property="og:image" content="https://leesen998.github.io/2017/10/01/第十一章_迁移学习/img/ch11/1542973960796.png">
+<meta property="og:updated_time" content="2019-03-22T07:33:59.084Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="迁移学习">
+<meta name="twitter:image" content="https://res.cloudinary.com/dpvywdzxv/image/upload/v1547297948/samples/java%20files/photo-1544728344-7efa025e5603.jpg">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="QJun" type="application/atom+xml" />
+
+
+
+
+  <link rel="canonical" href="https://leesen998.github.io/2017/10/01/第十一章_迁移学习/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>迁移学习 | QJun</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://leesen998.github.io" class="github-corner" aria-label="View source on GitHub"><svg width="120" height="120" viewBox="0 0 250 250" style="fill:#64CEAA; color:#fff; position: absolute; top: 194; border: 0; left: 0; transform: scale(-1, 1);" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">QJun</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">QJun's Homepage</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://leesen998.github.io/2017/10/01/第十一章_迁移学习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QJun">
+      <meta itemprop="description" content="Stay Hungry, Stay Foolish!">
+      <meta itemprop="image" content="/images/10.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QJun">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">迁移学习
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-10-01 19:48:29" itemprop="dateCreated datePublished" datetime="2017-10-01T19:48:29+08:00">2017-10-01</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/机器学习/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://res.cloudinary.com/dpvywdzxv/image/upload/v1547297948/samples/java%20files/photo-1544728344-7efa025e5603.jpg" alt="" style="width:100%"></p>
+<a id="more"></a>
+<h2 id="10-1-为什么需要迁移学习？（中科院计算所-王晋东）"><a href="#10-1-为什么需要迁移学习？（中科院计算所-王晋东）" class="headerlink" title="10.1 为什么需要迁移学习？（中科院计算所-王晋东）"></a>10.1 为什么需要迁移学习？（中科院计算所-王晋东）</h2><ol>
+<li><strong>大数据与少标注的矛盾</strong>：虽然有大量的数据，但往往都是没有标注的，无法训练机器学习模型。人工进行数据标定太耗时。</li>
+<li><strong>大数据与弱计算的矛盾</strong>：普通人无法拥有庞大的数据量与计算资源。因此需要借助于模型的迁移。</li>
+<li><strong>普适化模型与个性化需求的矛盾</strong>：即使是在同一个任务上，一个模型也往往难以满足每个人的个性化需求，比如特定的隐私设置。这就需要在不同人之间做模型的适配。</li>
+<li><strong>特定应用（如冷启动）的需求</strong>。</li>
+</ol>
+<h2 id="10-2-迁移学习的基本问题有哪些？（中科院计算所-王晋东）"><a href="#10-2-迁移学习的基本问题有哪些？（中科院计算所-王晋东）" class="headerlink" title="10.2 迁移学习的基本问题有哪些？（中科院计算所-王晋东）"></a>10.2 迁移学习的基本问题有哪些？（中科院计算所-王晋东）</h2><p>基本问题主要有3个：</p>
+<ul>
+<li><strong>How to transfer</strong>： 如何进行迁移学习？（设计迁移方法）</li>
+<li><strong>What to transfer</strong>： 给定一个目标领域，如何找到相对应的源领域，然后进行迁移？（源领域选择）</li>
+<li><strong>When to transfer</strong>： 什么时候可以进行迁移，什么时候不可以？（避免负迁移）</li>
+</ul>
+<h2 id="10-3-迁移学习有哪些常用概念？（KeyFoece）"><a href="#10-3-迁移学习有哪些常用概念？（KeyFoece）" class="headerlink" title="10.3 迁移学习有哪些常用概念？（KeyFoece）"></a>10.3 迁移学习有哪些常用概念？（KeyFoece）</h2><ul>
+<li>基本定义<ul>
+<li><strong>域(Domain)</strong>：数据特征和特征分布组成，是学习的主体<ul>
+<li><strong>源域 (Source domain)</strong>：已有知识的域</li>
+<li><strong>目标域 (Target domain)</strong>：要进行学习的域</li>
+</ul>
+</li>
+<li><strong>任务 (Task)</strong>：由目标函数和学习结果组成，是学习的结果</li>
+</ul>
+</li>
+<li>按特征空间分类<ul>
+<li><strong>同构迁移学习（Homogeneous TL）</strong>： 源域和目标域的特征空间相同，$D_s=D_t$</li>
+<li><strong>异构迁移学习（Heterogeneous TL）</strong>：源域和目标域的特征空间不同，$D_s\ne D_t$</li>
+</ul>
+</li>
+<li>按迁移情景分类<ul>
+<li><strong>归纳式迁移学习（Inductive TL）</strong>：源域和目标域的学习任务不同</li>
+<li><strong>直推式迁移学习（Transductive TL)</strong>：源域和目标域不同，学习任务相同</li>
+<li><strong>无监督迁移学习（Unsupervised TL)</strong>：源域和目标域均没有标签</li>
+</ul>
+</li>
+<li>按迁移方法分类<ul>
+<li><strong>基于实例的迁移 (Instance based TL)</strong>：通过权重重用源域和目标域的样例进行迁移</li>
+<li><strong>基于特征的迁移 (Feature based TL)</strong>：将源域和目标域的特征变换到相同空间</li>
+<li><strong>基于模型的迁移 (Parameter based TL)</strong>：利用源域和目标域的参数共享模型</li>
+<li><strong>基于关系的迁移 (Relation based TL)</strong>：利用源域中的逻辑网络关系进行迁移</li>
+</ul>
+</li>
+</ul>
+<p><img src="/2017/10/01/第十一章_迁移学习/img/ch11/1542972502781.png" alt="1542972502781"></p>
+<p><img src="/2017/10/01/第十一章_迁移学习/img/ch11/1542974131814.png" alt="1542974131814"></p>
+<h2 id="10-4-迁移学习与传统机器学习有什么区别？（KeyFoece）"><a href="#10-4-迁移学习与传统机器学习有什么区别？（KeyFoece）" class="headerlink" title="10.4 迁移学习与传统机器学习有什么区别？（KeyFoece）"></a>10.4 迁移学习与传统机器学习有什么区别？（KeyFoece）</h2><table>
+<thead>
+<tr>
+<th></th>
+<th>迁移学习</th>
+<th>传统机器学习</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据分布</td>
+<td>训练和测试数据不需要同分布</td>
+<td>训练和测试数据同分布</td>
+</tr>
+<tr>
+<td>数据标签</td>
+<td>不需要足够的数据标注</td>
+<td>足够的数据标注</td>
+</tr>
+<tr>
+<td>建模</td>
+<td>可以重用之前的模型</td>
+<td>每个任务分别建模</td>
+</tr>
+</tbody>
+</table>
+<p><img src="/2017/10/01/第十一章_迁移学习/img/ch11/1542973960796.png" alt="1542973960796"></p>
+<h2 id="10-5-迁移学习的基本思路？（中科院计算所-王晋东）"><a href="#10-5-迁移学习的基本思路？（中科院计算所-王晋东）" class="headerlink" title="10.5 迁移学习的基本思路？（中科院计算所-王晋东）"></a>10.5 迁移学习的基本思路？（中科院计算所-王晋东）</h2><p><strong>迁移学习的总体思路可以概括为</strong>：开发算法来最大限度地利用有标注的领域的知识，来辅助目标领域的知识获取和学习。</p>
+<p><strong>迁移学习的核心是</strong>：找到源领域和目标领域之间的相似性，并加以合理利用。这种相似性非常普遍。比如，不同人的身体构造是相似的；自行车和摩托车的骑行方式是相似的；国际象棋和中国象棋是相似的；羽毛球和网球的打球方式是相似的。这种相似性也可以理解为不变量。以不变应万变，才能立于不败之地。</p>
+<p><strong>有了这种相似性后，下一步工作就是， 如何度量和利用这种相似性。</strong>度量工作的目标有两点：一是很好地度量两个领域的相似性，不仅定性地告诉我们它们是否相似，更定量地给出相似程度。二是以度量为准则，通过我们所要采用的学习手段，增大两个领域之间的相似性，从而完成迁移学习。</p>
+<p><strong>一句话总结： 相似性是核心，度量准则是重要手段。</strong></p>
+<h2 id="10-6-迁移学习与其他概念的区别-Limber"><a href="#10-6-迁移学习与其他概念的区别-Limber" class="headerlink" title="10.6 迁移学习与其他概念的区别(Limber)"></a>10.6 迁移学习与其他概念的区别(Limber)</h2><ol>
+<li>迁移学习与多任务学习关系：<ul>
+<li><strong>多任务学习</strong>：多个相关任务一起协同学习；</li>
+<li><strong>迁移学习</strong>：强调信息复用，从一个领域(domain)迁移到另一个领域。</li>
+</ul>
+</li>
+<li>迁移学习与领域自适应：<strong>领域自适应</strong>：使两个特征分布不一致的domain一致。</li>
+<li>迁移学习与协方差漂移：<strong>协方差漂移</strong>：数据的条件概率分布发生变化。</li>
+</ol>
+<h2 id="10-7-什么是多任务学习？"><a href="#10-7-什么是多任务学习？" class="headerlink" title="10.7 什么是多任务学习？"></a>10.7 什么是多任务学习？</h2><p>在迁移学习中，从<strong>任务A</strong>里学习只是然后迁移到<strong>任务B</strong>。<br>在多任务学习中，同时开始学习的，试图让<strong>单个神经网络</strong>同时做<strong>几件事情</strong>，然后希望这里每个任务都能帮到其他所有任务。</p>
+<blockquote>
+<p>指多个相关任务一起协同学习</p>
+</blockquote>
+<h2 id="10-8-多任务学习有什么意义？"><a href="#10-8-多任务学习有什么意义？" class="headerlink" title="10.8 多任务学习有什么意义？"></a>10.8 多任务学习有什么意义？</h2><ol>
+<li>第一，如果你训练的一组任务，可以共用<strong>低层次特征</strong>。<br>对于无人驾驶的例子，同时识别交通灯、汽车和行人是有道理的，这些物体有相似的特征，也许能帮你识别停车标志，因为这些都是道路上的特征。</li>
+<li>第二，这个<strong>准则没有那么绝对</strong>，所以不一定是对的。<br>但我从很多成功的多任务学习案例中看到，如果每个任务的数据量很接近，你还记得迁移学习时，你从任务学到知识然后迁移到任务，所以如果任务有<strong>1百万个样本</strong>，任务只有<strong>1000个样本</strong>，那么你从这<strong>1百万个样本</strong>学到的知识，真的可以帮你增强对更小数据集任务的训练。<br>那么多任务学习又怎么样呢？在多任务学习中，你通常有更多任务而不仅仅是两个，所以也许你有，以前我们有<strong>4个任务</strong>，但比如说你要完成<strong>100个任务</strong>，而你要做多任务学习，尝试同时识别<strong>100种不同类型的物体</strong>。你可能会发现，每个任务大概有<strong>1000个样本</strong>。<br>所以如果你专注加强单个任务的性能，比如我们专注加强第<strong>100个任务</strong>的表现，我们用表示，如果你试图单独去做这个最后的任务，你只有<strong>1000个样本</strong>去训练这个任务，这是<strong>100项任务</strong>之一，而通过在<strong>其他99项任务</strong>的训练，这些加起来可以一共有<strong>99000个样本</strong>，这可能大幅提升算法性能，可以提供很多知识来增强这个任务的性能。<br>不然对于任务，只有<strong>1000个样本</strong>的训练集，效果可能会很差。如果有对称性，这<strong>其他99个任务</strong>，也许能提供一些数据或提供一些知识来帮到这<strong>100个任务中</strong>的每一个任务。所以第二点不是绝对正确的准则，但我通常会看的是如果你专注于单项任务，如果想要从多任务学习得到很大性能提升，那么其他任务加起来必须要有比单个任务大得多的数据量。<br>要满足这个条件，其中一种方法是，比如右边这个例子这样，或者如果每个任务中的数据量很相近，但关键在于， 如果对于单个任务你已经有<strong>1000个样本</strong>了，那么对于所有其他任务，你最好有超过<strong>1000个样 本</strong>，这样其他任务的知识才能帮你改善这个任务的性能。</li>
+<li>最后多任务学习往往在以下场合<strong>更有意义</strong>，当你可以训练一个足够大的神经网络，同时做好所有的工作，所以多任务学习的<strong>替代方法</strong>是为每个任务<strong>训练一个单独的神经网络</strong>。<br>所以不是训练单个神经网络同时处理行人、汽车、停车标志和交通灯检测。你可以训练一个<strong>用于行人检测的神经网络</strong>，一个<strong>用于汽车检测的神经网络</strong>，一个<strong>用于停车标志检测的神经网络</strong>和一个<strong>用于交通信号灯检测的神经网络</strong>。<br>那么研究员 Rich Carona 几年前发现的是什么呢？<br>多任务学习会降低性能的唯一情况，和训练单个神经网络相比性能更低的情况就是你的神经网络还不够大。 但如果你可以训练一个足够大的神经网络，那么多任务学习肯定<strong>不会或者很少</strong>会<strong>降低性能</strong>，我们都希望它可以提升性能，比单独训练神经网络来单独完成各个任务<strong>性能要更好</strong>。</li>
+<li>所以<strong>这就是多任务学习</strong>，在实践中，多任务学习的使用频率要低于迁移学习。<br>我看到很多迁移学习的应用，你需要解决一个问题，但你的<strong>训练数据很少</strong>，所以你需要找一个数据很多的相关问题来<strong>预先学习</strong>，并将知识迁移到这个新问题上。<br>但多任务学习比较少见，就是你需要同时处理很多任务，都要做好，你可以同时训练所有这些任务，也许计算机视觉是一个例子。<br>在物体检测中，我们看到<strong>更多</strong>使用多任务学习的应用，其中一个神经网络尝试检测一大堆物体，比分别训练不同的神经网络检测物体<strong>更好</strong>。但我说，平均来说，目前迁移学习使用频率<strong>更高</strong>，比多任务学习频率<strong>更高</strong>，但两者都可以成为你的<strong>强力工具</strong>。</li>
+<li>总结一下，多任务学习能让你训练一个神经网络来执行许多任务，这可以给你更高的性能，比单独完成各个任务更高的性能。<br>但要<strong>注意</strong>，<strong>实际上</strong>迁移学习比多任务学习使用频率<strong>更高</strong>。<br>我看到很多任务都是，如果你想解决一个机器学习问题，但你的数据集相对较小，那么迁移学习真的能帮到你，就是如果你找到一个相关问题，其中数据量要大得多，你就能以它为基础训练你的神经网络，然后迁移到这个数据量很少的任务上来。</li>
+<li>今天我们学到了很多和迁移学习有关的问题，还有一些迁移学习和多任务学习的应用。<br>但多任务学习，我觉得使用频率比迁移学习要少得多，也许其中一个例外是计算机视觉，物体检测。在那些任务中，人们经常训练一个神经网络同时检测很多不同物体，这比训练单独的神经网络来检测视觉物体要更好。但平均而言，我认为即使迁移学习和多任务学习工作方式类似。 实际上，我看到用迁移学习比多任务学习要更多，我觉得这是因为你很难找到那么多相似且数据量对等的任务可以用单一神经网络训练。<br>再次，在计算机视觉领域，物体检测这个例子是最显著的例外情况。</li>
+<li>所以这就是多任务学习，多任务学习和迁移学习都是你的工具包中的重要工具。<br>最后，我想继续讨论端到端深度学习，所以我们来看下一个视频来讨论端到端学习。</li>
+</ol>
+<h2 id="10-9-什么是端到端的深度学习？"><a href="#10-9-什么是端到端的深度学习？" class="headerlink" title="10.9 什么是端到端的深度学习？"></a>10.9 什么是端到端的深度学习？</h2><ol>
+<li>深度学习中<strong>最令人振奋</strong>的最新动态之一就是端到端深度学习的兴起，那么端到端学习到底是什么呢？简而言之，以前有一些数据处理系统或者学习系统，它们需要多个阶段的处理。<br>那么端到端深度学习就是<strong>忽略所有这些不同的阶段</strong>，用单个神经网络代替它。</li>
+<li>而端到端深度学习就只需要把训练集拿过来，直接学到了和之间的函数映射，直接绕过了其中很多步骤。对一些学科里的人来说，这点相当难以接受，他们无法接受这样<strong>构建AI系统</strong>，因为有些情况，<strong>端到端方法</strong>完全<strong>取代</strong>了旧系统，某些投入了多年研究的中间组件也许已经<strong>过时</strong>了。</li>
+</ol>
+<h2 id="10-10-端到端的深度学习举例？"><a href="#10-10-端到端的深度学习举例？" class="headerlink" title="10.10 端到端的深度学习举例？"></a>10.10 端到端的深度学习举例？</h2><ol>
+<li>这张图上是一个研究员做的人脸识别门禁，是百度的林元庆研究员做的。<br>这是一个相机，它会拍下接近门禁的人，如果它认出了那个人，门禁系统就自动打开，让他通过，所以你不需要刷一个<strong>RFID工卡</strong>就能进入这个设施。<br>系统部署在越来越多的中国办公室，希望在其他国家也可以部署更多，你可以接近门禁，如果它认出你的脸，它就直接让你通过，你不需要带RFID工卡。</li>
+<li>我们再来看几个例子，比如机器翻译。<br>传统上，机器翻译系统也有一个很复杂的流水线，比如英语机翻得到文本，然后做文本分析，基本上要从文本中提取一些特征之类的，经过很多步骤，你最后会将英文文本翻译成法文。<br>因为对于机器翻译来说的确有很多(英文,法文)的数据对，端到端深度学习在机器翻译领域非常好用，那是因为在今天可以收集对的大数据集，就是英文句子和对应的法语翻译。<br>所以在这个例子中，端到端深度学习效果很好。</li>
+</ol>
+<h2 id="10-11-端到端的深度学习有什么挑战？"><a href="#10-11-端到端的深度学习有什么挑战？" class="headerlink" title="10.11 端到端的深度学习有什么挑战？"></a>10.11 端到端的深度学习有什么挑战？</h2><ol>
+<li>事实证明，端到端深度学习的挑战之一是，你可能需要大量数据才能让系统表现良好，比如，你只有<strong>3000小时数据</strong>去训练你的<strong>语音识别系统</strong>，那么传统的流水线效果真的很好。<br>但当你拥有非常大的数据集时，比如<strong>10,000小时数据</strong>或者<strong>100,000小时</strong>数据，这样端到端方法突然开始很厉害了。所以当你的<strong>数据集较小</strong>的时候，传统流水线方法其实效果也不错，通常做得<strong>更好</strong>。</li>
+<li>你需要<strong>大数据集</strong>才能让<strong>端到端方法</strong>真正发出耀眼光芒。如果你的数据量适中，那么也可以用中间件方法，你可能输入还是音频，然后绕过特征提取，直接尝试从神经网络输出音位，然后也可以在其他阶段用，所以这是往端到端学习迈出的一小步，但还没有到那里。</li>
+</ol>
+<h2 id="10-13-端到端的深度学习优缺点？"><a href="#10-13-端到端的深度学习优缺点？" class="headerlink" title="10.13 端到端的深度学习优缺点？"></a>10.13 端到端的深度学习优缺点？</h2><p>假设你正在搭建一个机器学习系统，你要决定是否使用端对端方法，我们来看看端到端深度学习的一些优缺点，这样你就可以根据一些准则，判断你的应用程序是否有希望使用端到端方法。</p>
+<p>这里是应用端到端学习的一些优点：</p>
+<ol>
+<li>首先端到端学习真的只是让数据说话。所以如果你有足够多的数据，那么不管从 x 到 y 最适合的函数映射是什么，如果你训练一个足够大的神经网 络，希望这个神经网络能自己搞清楚，而使用纯机器学习方法，直接从到输入去训练的神经网 络，可能更能够捕获数据中的任何统计信息，而不是被迫引入人类的成见。<br>例如，在语音识别领域，早期的识别系统有这个音位概念，就是基本的声音单元，如 cat 单词的“cat”的 Cu-、Ah-和 Tu-，我觉得这个音位是人类语言学家生造出来的，我实际上认为音位其实是语音学家的幻想，用音位描述语言也还算合理。但是不要强迫你的学习算法以音位为单位思考，这点有时没那么明显。如果你让你的学习算法学习它想学习的任意表示方式，而不是强迫你的学习算法使用音位作为表示方式，那么其整体表现可能会更好。</li>
+<li>端到端深度学习的第二个好处就是这样，所需手工设计的组件更少，所以这也许能够简化你的设计工作流程，你不需要花太多时间去手工设计功能，手工设计这些中间表示方式。</li>
+</ol>
+<p>这里是应用端到端学习的一些缺点：</p>
+<ol>
+<li>首先，它可能需要大量的数据。要直接学到这个到的映射，你可能需要大量数据。<br>我们在以前的视频里看过一个例子，其中你可以收集大量子任务数据。<br>比如人脸识别，我们可以收集很多数据用来分辨图像中的人脸，当你找到一张脸后，也可以找得到很多人脸识别数据。<br>但是对于整个端到端任务，可能只有更少的数据可用。所以这是端到端学习的输入端，是输出端，所以你需要很多这样的数据，在输入端和输出端都有数据，这样可以训练这些系统。<br>这就是为什么我们称之为端到端学习，因为你直接学习出从系统的一端到 系统的另一端。</li>
+<li>另一个缺点是，它排除了可能有用的手工设计组件。<br>机器学习研究人员一般都很鄙视手工设计的东西，但如果你没有很多数据，你的学习算法就没办法从很小的训练集数据中获得洞察力。<br>所以手工设计组件在这种情况，可能是把人类知识直接注入算法的途径，这总不是一件坏事。<br>我觉得学习算法有两个主要的知识来源，一个是数据，另一个是你手工设计的任何东西，可能是组件，功能，或者其他东西。<br>所以当你有大量数据时，手工设计的东西就不太重要了，但是当你没有太多的数据时，构造一个精心设计的系统，实际上可以将人类对这个问题的很多 认识直接注入到问题里，进入算法里应该挺有帮助的。</li>
+</ol>
+<p>总结：</p>
+<ol>
+<li>所以端到端深度学习的弊端之一是它把可能有用的人工设计的组件排除在外了，精心设计的人工组件可能非常有用，但它们也有可能真的伤害到你的算法表现。<br>例如，强制你的算法以音位为单位思考，也许让算法自己找到更好的表示方法更好。<br>所以这是一把双刃剑，可能有坏处，可能有好处，但往往好处更多，手工设计的组件往往在训练集更小的时候帮助更大。</li>
+</ol>
+<h2 id="10-14-什么是负迁移？产生负迁移的原因有哪些？（中科院计算所-王晋东）"><a href="#10-14-什么是负迁移？产生负迁移的原因有哪些？（中科院计算所-王晋东）" class="headerlink" title="10.14 什么是负迁移？产生负迁移的原因有哪些？（中科院计算所-王晋东）"></a>10.14 什么是负迁移？产生负迁移的原因有哪些？（中科院计算所-王晋东）</h2><p>负迁移(Negative Transfer)指的是，在源域上学习到的知识，对于目标域上的学习产生负面作用。</p>
+<p>产生负迁移的原因主要有：</p>
+<ul>
+<li>数据问题：源域和目标域压根不相似，谈何迁移？</li>
+<li>方法问题：源域和目标域是相似的，但是，迁移学习方法不够好，没找到可迁移的成分。</li>
+</ul>
+<p>负迁移给迁移学习的研究和应用带来了负面影响。在实际应用中，找到合理的相似性，并且选择或开发合理的迁移学习方法，能够避免负迁移现象。</p>
+<h2 id="10-15-什么是迁移学习？"><a href="#10-15-什么是迁移学习？" class="headerlink" title="10.15 什么是迁移学习？"></a>10.15 什么是迁移学习？</h2><ol>
+<li>找到目标问题的相似性，迁移学习任务就是从相似性出发，将旧领域(domain)学习过的模型应用在新领域上。</li>
+<li>迁移学习，是指利用数据、任务、或模型之间的相似性，将在旧领域学习过的模型，应用于新领域的一种学习过程。</li>
+<li>迁移学习<strong>最有用的场合</strong>是，如果你尝试优化任务B的性能，通常这个任务数据相对较少。<br>例如，在放射科中你知道很难收集很多射线扫描图来搭建一个性能良好的放射科诊断系统，所以在这种情况下，你可能会找一个相关但不同的任务，如图像识别，其中你可能用 1 百万张图片训练过了，并从中学到很多低层次特征，所以那也许能帮助网络在任务在放射科任务上做得更好，尽管任务没有这么多数据。</li>
+<li>迁移学习什么时候是有意义的？它确实可以<strong>显著提高</strong>你的<strong>学习任务的性能</strong>，但我有时候也见过有些场合使用迁移学习时，任务实际上数据量比任务要少， 这种情况下增益可能不多。</li>
+</ol>
+<blockquote>
+<p>什么情况下可以使用迁移学习？</p>
+<p>假如两个领域之间的区别特别的大，<strong>不可以直接采用迁移学习</strong>，因为在这种情况下效果不是很好。在这种情况下，推荐使用[3]的工作，在两个相似度很低的domain之间一步步迁移过去（踩着石头过河）。</p>
+</blockquote>
+<blockquote>
+<ol>
+<li>迁移学习主要解决方案有哪些？</li>
+<li>除直接看infer的结果的Accurancy以外，如何衡量迁移学习学习效果？</li>
+<li>对抗网络是如何进行迁移的？</li>
+</ol>
+</blockquote>
+<p>Reference： </p>
+<ol>
+<li><a href="https：//github.com/jindongwang/transferlearning-tutorial">王晋东，迁移学习简明手册</a></li>
+<li>Ben-David, S., Blitzer, J., Crammer, K., Kulesza, A., Pereira, F., &amp; Vaughan, J. W. (2010). A theory of learning from different domains. Machine learning, 79(1-2), 151-175.</li>
+<li>Tan, B., Song, Y., Zhong, E. and Yang, Q., 2015, August. Transitive transfer learning. In Proceedings of the 21th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining (pp. 1155-1164). ACM.</li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+    
+	<div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ff73b3;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+	
+	
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>感谢您的支持，我会继续努力的!</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wexin.JPG" alt="QJun 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习基础/" rel="tag"># 机器学习基础</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/20/第十章_强化学习/" rel="next" title="强化学习">
+                <i class="fa fa-chevron-left"></i> 强化学习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/18/第十二章_网络搭建及训练/" rel="prev" title="网络搭建及训练">
+                网络搭建及训练 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MDE0MS8xNjY2OA=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/10.jpg"
+                alt="QJun" />
+            
+              <p class="site-author-name" itemprop="name">QJun</p>
+              <p class="site-description motion-element" itemprop="description">Stay Hungry, Stay Foolish!</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">75</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:qjun@hust.edu.cn" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plus.google.com/" target="_blank" title="Google"><i class="fa fa-fw fa-google"></i>Google</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/" target="_blank" title="Twitter"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.facebook.com/" target="_blank" title="FB Page"><i class="fa fa-fw fa-facebook"></i>FB Page</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://leesen998.github.io/about/" title="关于此博客" target="_blank">关于此博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://poetryscience.ink/" title="Huixin" target="_blank">Huixin</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://ultimatehy.github.io/" title="Yong Huang" target="_blank">Yong Huang</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#10-1-为什么需要迁移学习？（中科院计算所-王晋东）"><span class="nav-number">1.</span> <span class="nav-text">10.1 为什么需要迁移学习？（中科院计算所-王晋东）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-2-迁移学习的基本问题有哪些？（中科院计算所-王晋东）"><span class="nav-number">2.</span> <span class="nav-text">10.2 迁移学习的基本问题有哪些？（中科院计算所-王晋东）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-3-迁移学习有哪些常用概念？（KeyFoece）"><span class="nav-number">3.</span> <span class="nav-text">10.3 迁移学习有哪些常用概念？（KeyFoece）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-4-迁移学习与传统机器学习有什么区别？（KeyFoece）"><span class="nav-number">4.</span> <span class="nav-text">10.4 迁移学习与传统机器学习有什么区别？（KeyFoece）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-5-迁移学习的基本思路？（中科院计算所-王晋东）"><span class="nav-number">5.</span> <span class="nav-text">10.5 迁移学习的基本思路？（中科院计算所-王晋东）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-6-迁移学习与其他概念的区别-Limber"><span class="nav-number">6.</span> <span class="nav-text">10.6 迁移学习与其他概念的区别(Limber)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-7-什么是多任务学习？"><span class="nav-number">7.</span> <span class="nav-text">10.7 什么是多任务学习？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-8-多任务学习有什么意义？"><span class="nav-number">8.</span> <span class="nav-text">10.8 多任务学习有什么意义？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-9-什么是端到端的深度学习？"><span class="nav-number">9.</span> <span class="nav-text">10.9 什么是端到端的深度学习？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-10-端到端的深度学习举例？"><span class="nav-number">10.</span> <span class="nav-text">10.10 端到端的深度学习举例？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-11-端到端的深度学习有什么挑战？"><span class="nav-number">11.</span> <span class="nav-text">10.11 端到端的深度学习有什么挑战？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-13-端到端的深度学习优缺点？"><span class="nav-number">12.</span> <span class="nav-text">10.13 端到端的深度学习优缺点？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-14-什么是负迁移？产生负迁移的原因有哪些？（中科院计算所-王晋东）"><span class="nav-number">13.</span> <span class="nav-text">10.14 什么是负迁移？产生负迁移的原因有哪些？（中科院计算所-王晋东）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-15-什么是迁移学习？"><span class="nav-number">14.</span> <span class="nav-text">10.15 什么是迁移学习？</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="heart">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">QJun</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<div class="weixin-box">
+  <div class="weixin-menu">
+    <div class="weixin-hover">
+      <div class="weixin-description">微信扫一扫，订阅本博客</div>
+    </div>
+  </div>
+</div>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+
+
+  
+    <script type="text/javascript">
+      window.livereOptions = {
+        refer: '2017/10/01/第十一章_迁移学习/'
+      };
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"tagMode":true,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":100,"height":200,"hOffset":10,"vOffset":10},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/"});</script>
+
+
+  
+  
+  
+  <script type="text/javascript" src="/js/src/dytitle.js"></script>
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+
+<!-- 代码块复制功能 -->
+<script type="text/javascript" src="/js/src/clipboard.min.js"></script>  
+<script type="text/javascript" src="/js/src/clipboard-use.js"></script>
+

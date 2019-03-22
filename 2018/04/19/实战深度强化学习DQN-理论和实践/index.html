@@ -1,0 +1,1444 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#fff">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="https://fonts.cat.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|consolas:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#fff">
+
+
+  <link rel="manifest" href="/images/manifest.json">
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="keywords" content="强化学习实践">
+<meta property="og:type" content="article">
+<meta property="og:title" content="实战深度强化学习DQN-理论和实践">
+<meta property="og:url" content="https://leesen998.github.io/2018/04/19/实战深度强化学习DQN-理论和实践/index.html">
+<meta property="og:site_name" content="QJun">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://desk-fd.zol-img.com.cn/t_s1920x1080c5/g2/M00/0B/0F/ChMlWlyAyIiIQH8pABv6qMmlUWEAAIp0AAv7LcAG_rA821.jpg">
+<meta property="og:image" content="https:////upload-images.jianshu.io/upload_images/4155986-d07028ff460d5979.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp">
+<meta property="og:image" content="https:////upload-images.jianshu.io/upload_images/4155986-23e17f9c5b81efce.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/992/format/webp">
+<meta property="og:image" content="https:////upload-images.jianshu.io/upload_images/4155986-4035ec3ed3ef5d87.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/486/format/webp">
+<meta property="og:image" content="https:////upload-images.jianshu.io/upload_images/4155986-4a043cff8b6469f7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/342/format/webp">
+<meta property="og:image" content="https:////upload-images.jianshu.io/upload_images/4155986-942f42c0296e9b43.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/316/format/webp">
+<meta property="og:image" content="https:////upload-images.jianshu.io/upload_images/4155986-c72188e8486b477a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/874/format/webp">
+<meta property="og:image" content="https:////upload-images.jianshu.io/upload_images/4155986-75b8ec056073baae.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp">
+<meta property="og:image" content="https:////upload-images.jianshu.io/upload_images/4155986-5710fdadc565c0dc?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp">
+<meta property="og:image" content="https:////upload-images.jianshu.io/upload_images/4155986-14d930f99a102729?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp">
+<meta property="og:image" content="https:////upload-images.jianshu.io/upload_images/4155986-fd3c59c61907c4ad.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/542/format/webp">
+<meta property="og:image" content="https:////upload-images.jianshu.io/upload_images/4155986-4035ec3ed3ef5d87.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/486/format/webp">
+<meta property="og:image" content="https:////upload-images.jianshu.io/upload_images/4155986-4035ec3ed3ef5d87.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/486/format/webp">
+<meta property="og:updated_time" content="2019-03-22T03:58:18.876Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="实战深度强化学习DQN-理论和实践">
+<meta name="twitter:image" content="https://desk-fd.zol-img.com.cn/t_s1920x1080c5/g2/M00/0B/0F/ChMlWlyAyIiIQH8pABv6qMmlUWEAAIp0AAv7LcAG_rA821.jpg">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="QJun" type="application/atom+xml" />
+
+
+
+
+  <link rel="canonical" href="https://leesen998.github.io/2018/04/19/实战深度强化学习DQN-理论和实践/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>实战深度强化学习DQN-理论和实践 | QJun</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://leesen998.github.io" class="github-corner" aria-label="View source on GitHub"><svg width="120" height="120" viewBox="0 0 250 250" style="fill:#64CEAA; color:#fff; position: absolute; top: 194; border: 0; left: 0; transform: scale(-1, 1);" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">QJun</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">QJun's Homepage</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://leesen998.github.io/2018/04/19/实战深度强化学习DQN-理论和实践/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QJun">
+      <meta itemprop="description" content="Stay Hungry, Stay Foolish!">
+      <meta itemprop="image" content="/images/10.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QJun">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">实战深度强化学习DQN-理论和实践
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-04-19 19:48:29" itemprop="dateCreated datePublished" datetime="2018-04-19T19:48:29+08:00">2018-04-19</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/强化学习/" itemprop="url" rel="index"><span itemprop="name">强化学习</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p class="description"></p>
+
+<p><img src="https://desk-fd.zol-img.com.cn/t_s1920x1080c5/g2/M00/0B/0F/ChMlWlyAyIiIQH8pABv6qMmlUWEAAIp0AAv7LcAG_rA821.jpg" alt="" style="width:100%"></p>
+<a id="more"></a>
+<h1 id="1、Q-learning回顾"><a href="#1、Q-learning回顾" class="headerlink" title="1、Q-learning回顾"></a>1、Q-learning回顾</h1><p>Q-learning 的 算法过程如下图所示：</p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/4155986-d07028ff460d5979.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp" alt="img"></p>
+<p>在Q-learning中，我们维护一张Q值表，表的维数为：状态数S * 动作数A，表中每个数代表在当前状态S下可以采用动作A可以获得的未来收益的折现和。我们不断的迭代我们的Q值表使其最终收敛，然后根据Q值表我们就可以在每个状态下选取一个最优策略。</p>
+<p>Q值表的更新公式为：</p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/4155986-23e17f9c5b81efce.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/992/format/webp" alt="img"></p>
+<p>公式中，Q(S,A) 我们可以称做Q估计值，即我们当前估计的Q值，而：</p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/4155986-4035ec3ed3ef5d87.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/486/format/webp" alt="img"></p>
+<p>称为Q-target，即我们使用贝尔曼方程加贪心策略认为实际应该得到的奖励，我们的目标就是使我们的Q值不断的接近Q-target值。</p>
+<h1 id="2、深度Q网络-Deep-Q-Network"><a href="#2、深度Q网络-Deep-Q-Network" class="headerlink" title="2、深度Q网络(Deep - Q - Network)"></a>2、深度Q网络(Deep - Q - Network)</h1><h2 id="2-1-DQN简介"><a href="#2-1-DQN简介" class="headerlink" title="2.1 DQN简介"></a>2.1 DQN简介</h2><p><strong>为什么会出现DQN呢</strong><br> 在普通的Q-learning中，当状态和动作空间是离散且维数不高时可使用Q-Table储存每个状态动作对的Q值，而当状态和动作空间是高维连续时，使用Q-Table不现实。</p>
+<p><strong>两篇DQN奠基之作</strong></p>
+<p>[1]<a href="https://link.jianshu.com?t=https%3A%2F%2Fpdfs.semanticscholar.org%2F667f%2Fb84bfca10bec165f9e2cca3e21f5e4829ca7.pdf" target="_blank" rel="noopener">Playing Atari with Deep Reinforcement Learning</a><br> [2]<a href="https://link.jianshu.com?t=http%3A%2F%2Fwww.nature.com%2Fnature%2Fjournal%2Fv518%2Fn7540%2Fabs%2Fnature14236.html" target="_blank" rel="noopener">Human-level control through deep reinforcement learning</a></p>
+<p><strong>如何将原始的Q-learning转换成深度学习问题</strong><br> 将Q-Table的更新问题变成一个函数拟合问题，相近的状态得到相近的输出动作。如下式，通过更新参数 θ 使Q函数逼近最优Q值 。因此，DQN就是要设计一个神经网络结构，通过函数来拟合Q值，即：</p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/4155986-4a043cff8b6469f7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/342/format/webp" alt="img"></p>
+<h2 id="2-2-DL和RL结合带来的问题"><a href="#2-2-DL和RL结合带来的问题" class="headerlink" title="2.2 DL和RL结合带来的问题"></a>2.2 DL和RL结合带来的问题</h2><p>1、DL需要大量带标签的样本进行监督学习；RL只有reward返回值，而且伴随着噪声，延迟（过了几十毫秒才返回），稀疏（很多State的reward是0）等问题；<br> 2、DL的样本独立；RL前后state状态相关；<br> 3、DL目标分布固定；RL的分布一直变化，比如你玩一个游戏，一个关卡和下一个关卡的状态分布是不同的，所以训练好了前一个关卡，下一个关卡又要重新训练；<br> 4、过往的研究表明，使用非线性网络表示值函数时出现不稳定等问题。</p>
+<h2 id="2-3-DQN解决问题方法"><a href="#2-3-DQN解决问题方法" class="headerlink" title="2.3 DQN解决问题方法"></a>2.3 DQN解决问题方法</h2><p>那么DQN是如何解决上述问题的呢？</p>
+<p>1、通过Q-Learning使用reward来构造标签（对应问题1）<br> 2、通过experience replay（经验池）的方法来解决相关性及非静态分布问题（对应问题2、3）<br> 3、使用一个神经网络产生当前Q值，使用另外一个神经网络产生Target Q值（对应问题4）</p>
+<p><strong>构造标签</strong><br> 对于函数优化问题，监督学习的一般方法是先确定Loss Function，然后求梯度，使用随机梯度下降等方法更新参数。DQN则基于Q-Learning来确定Loss Function。我们想要使q-target值和q-eval值相差越小越好。DQN中的损失函数是：</p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/4155986-942f42c0296e9b43.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/316/format/webp" alt="img"></p>
+<p>这里yi是根据上一个迭代周期或者说target-net网络的参数计算出的q-target值，跟当前网络结构中的参数无关，yi的计算如下：</p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/4155986-c72188e8486b477a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/874/format/webp" alt="img"></p>
+<p>这样，整个目标函数就可以通过随机梯度下降方法来进行优化：</p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/4155986-75b8ec056073baae.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp" alt="img"></p>
+<p><strong>经验回放</strong><br> 经验池的功能主要是解决相关性及非静态分布问题。具体做法是把每个时间步agent与环境交互得到的转移样本 (st,at,rt,st+1) 储存到回放记忆单元，要训练时就随机拿出一些（minibatch）来训练。（其实就是将游戏的过程打成碎片存储，训练时随机抽取就避免了相关性问题）</p>
+<p><strong>双网络结构</strong><br> 在Nature 2015版本的DQN中提出了这个改进，使用另一个网络（这里称为target_net）产生Target Q值。具体地，Q(s,a;θi) 表示当前网络eval_net的输出，用来评估当前状态动作对的值函数；Q(s,a;θ−i) 表示target_net的输出，代入上面求 TargetQ 值的公式中得到目标Q值。根据上面的Loss Function更新eval_net的参数，每经过N轮迭代，将MainNet的参数复制给target_net。</p>
+<p>引入target_net后，再一段时间里目标Q值使保持不变的，一定程度降低了当前Q值和目标Q值的相关性，提高了算法稳定性。</p>
+<h2 id="2-4-DQN算法流程"><a href="#2-4-DQN算法流程" class="headerlink" title="2.4 DQN算法流程"></a>2.4 DQN算法流程</h2><p><strong>NIPS 2013版</strong></p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/4155986-5710fdadc565c0dc?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp" alt="img"></p>
+<p><strong>Nature 2015版</strong></p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/4155986-14d930f99a102729?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp" alt="img"></p>
+<p>可以看到，两版的DQN都使用了经验池，而2015版的DQN增加了target-net，提高了算法稳定性。</p>
+<h1 id="3、DQN实现DEMO"><a href="#3、DQN实现DEMO" class="headerlink" title="3、DQN实现DEMO"></a>3、DQN实现DEMO</h1><p>找了很多DQN的例子，有原版的实现Atari的，也有Flappy Bird的，但是最简单的还是莫烦大神的Demo，github地址是：<a href="https://link.jianshu.com?t=https%3A%2F%2Fgithub.com%2FMorvanZhou%2FReinforcement-learning-with-tensorflow" target="_blank" rel="noopener">https://github.com/MorvanZhou/Reinforcement-learning-with-tensorflow</a>。</p>
+<p>在介绍整个Demo前，我们介绍两种DQN的实现方式，一种是将s和a输入到网络，得到q值，另一种是只将s输入到网络，输出为s和每个a结合的q值。这里莫烦大神的代码采取了后一种方式。</p>
+<p>如果你对DQN的原理有比较深刻的认识，那么读莫烦大神的代码也并不是十分困难。这里我们想要实现的效果类似于寻宝。</p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/4155986-fd3c59c61907c4ad.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/542/format/webp" alt="img"></p>
+<p>其中，红色的方块代表寻宝人，黑色的方块代表陷阱，黄色的方块代表宝藏，我们的目标就是让寻宝人找到最终的宝藏。</p>
+<p>这里，我们的状态可以用横纵坐标表示，而动作有上下左右四个动作。使用tkinter来做这样一个动画效果。宝藏的奖励是1，陷阱的奖励是-1，而其他时候的奖励都为0。</p>
+<p>接下来，我们重点看一下我们DQN相关的代码。<br> <strong>定义相关输入</strong><br> 这了，我们用s代表当前状态，用a代表当前状态下采取的动作，r代表获得的奖励，s_代表转移后的状态。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">self.s = tf.placeholder(tf.float32,[<span class="keyword">None</span>,self.n_features],name=<span class="string">'s'</span>)</span><br><span class="line">self.s_ = tf.placeholder(tf.float32,[<span class="keyword">None</span>,self.n_features],name=<span class="string">'s_'</span>)</span><br><span class="line">self.r = tf.placeholder(tf.float32,[<span class="keyword">None</span>,],name=<span class="string">'r'</span>)</span><br><span class="line">self.a = tf.placeholder(tf.int32,[<span class="keyword">None</span>,],name=<span class="string">'a'</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>经验池</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">store_transition</span><span class="params">(self,s,a,r,s_)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> hasattr(self, <span class="string">'memory_counter'</span>):</span><br><span class="line">        self.memory_counter = <span class="number">0</span></span><br><span class="line">    <span class="comment"># hstack:Stack arrays in sequence horizontally</span></span><br><span class="line">    transition = np.hstack((s,[a,r],s_))</span><br><span class="line">    index = self.memory_counter % self.memory_size</span><br><span class="line">    self.memory[index,:] = transition</span><br><span class="line">    self.memory_counter += <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p><strong>双网络结构</strong><br> target_net和eval_net的网络结构必须保持一致，这里我们使用的是两层全链接的神经网络，值得注意的一点是对于eval_net来说，网络的输入是当前的状态s，而对target_net网络来说，网络的输入是下一个状态s_，因为target_net的输出要根据贝尔曼公式计算q-target值，即</p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/4155986-4035ec3ed3ef5d87.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/486/format/webp" alt="img"></p>
+<p>代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">w_initializer, b_initializer = tf.random_normal_initializer(<span class="number">0.</span>, <span class="number">0.3</span>), tf.constant_initializer(<span class="number">0.1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># ------------------ build evaluate_net ------------------</span></span><br><span class="line"><span class="keyword">with</span> tf.variable_scope(<span class="string">'eval_net'</span>):</span><br><span class="line">    e1 = tf.layers.dense(self.s,<span class="number">20</span>,tf.nn.relu,kernel_initializer=w_initializer,</span><br><span class="line">                         bias_initializer=b_initializer,name=<span class="string">'e1'</span></span><br><span class="line">                         )</span><br><span class="line"></span><br><span class="line">    self.q_eval = tf.layers.dense(e1,self.n_actions,kernel_initializer=w_initializer,</span><br><span class="line">                                  bias_initializer=b_initializer,name=<span class="string">'q'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># ------------------ build target_net ------------------</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> tf.variable_scope(<span class="string">'target_net'</span>):</span><br><span class="line">    t1 = tf.layers.dense(self.s_, <span class="number">20</span>, tf.nn.relu, kernel_initializer=w_initializer,</span><br><span class="line">                         bias_initializer=b_initializer, name=<span class="string">'t1'</span>)</span><br><span class="line">    self.q_next = tf.layers.dense(t1, self.n_actions, kernel_initializer=w_initializer,</span><br><span class="line">                                  bias_initializer=b_initializer, name=<span class="string">'t2'</span>)</span><br></pre></td></tr></table></figure>
+<p>每隔一定的步数，我们就要将target_net中的参数复制到eval_net中：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">t_params = tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES,scope=<span class="string">'target_net'</span>)</span><br><span class="line">e_params = tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES,scope=<span class="string">'eval_net'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> tf.variable_scope(<span class="string">'soft_replacement'</span>):</span><br><span class="line">      self.target_replace_op = [tf.assign(t,e) <span class="keyword">for</span> t,e <span class="keyword">in</span> zip(t_params,e_params)]</span><br></pre></td></tr></table></figure>
+<p><strong>计算损失并优化</strong><br> 首先，对于eval_net来说，我们只要得到当前的网络输出即可，但是我们定义的网络输出是四个动作对应的q-eval值，我们要根据实际的a来选择对应的q-eval值，这一部分的代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> tf.variable_scope(<span class="string">'q_eval'</span>):</span><br><span class="line">    <span class="comment"># tf.stack</span></span><br><span class="line">    <span class="comment">#a = tf.constant([1,2,3])</span></span><br><span class="line">    <span class="comment"># b = tf.constant([4,5,6])</span></span><br><span class="line">    <span class="comment"># c = tf.stack([a,b],axis=1)</span></span><br><span class="line">    <span class="comment"># [[1 4]</span></span><br><span class="line">    <span class="comment">#  [2 5]</span></span><br><span class="line">    <span class="comment"># [3 6]]</span></span><br><span class="line">    a_indices = tf.stack([tf.range(tf.shape(self.a)[<span class="number">0</span>], dtype=tf.int32), self.a], axis=<span class="number">1</span>)</span><br><span class="line">    <span class="comment"># 用indices从张量params得到新张量</span></span><br><span class="line">    <span class="comment"># indices = [[0, 0], [1, 1]]</span></span><br><span class="line">    <span class="comment"># params = [['a', 'b'], ['c', 'd']]</span></span><br><span class="line">    <span class="comment"># output = ['a', 'd']</span></span><br><span class="line">    <span class="comment"># 这里self.q_eval是batch * action_number,a_indices是batch * 1，也就是说选择当前估计每个动作的Q值</span></span><br><span class="line">    self.q_eval_wrt_a = tf.gather_nd(params=self.q_eval, indices=a_indices)</span><br></pre></td></tr></table></figure>
+<p>中间有几个函数不太了解的，上面都有详细的注释，如果还不是很理解的话，大家可以百度或者阅读相应函数的源码。</p>
+<p>对于target_net网络来说，我们要根据下面的式子来计算q-target值：</p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/4155986-4035ec3ed3ef5d87.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/486/format/webp" alt="img"></p>
+<p>第一部分的R我们是已经得到了的，剩下的就是根据贪心策略选择四个输出中最大的一个即可：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> tf.variable_scope(<span class="string">'q_target'</span>):</span><br><span class="line">    q_target = self.r + self.gamma * tf.reduce_max(self.q_next,axis=<span class="number">1</span>,name=<span class="string">'Qmax_s_'</span>)</span><br><span class="line">    <span class="comment"># 一个节点被 stop之后，这个节点上的梯度，就无法再向前BP了</span></span><br><span class="line">    self.q_target = tf.stop_gradient(q_target)</span><br></pre></td></tr></table></figure>
+<p>接下来，我们就可以定义我们的损失函数并选择优化器进行优化：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> tf.variable_scope(<span class="string">'loss'</span>):</span><br><span class="line">    self.loss = tf.reduce_mean(tf.squared_difference(self.q_target,self.q_eval_wrt_a,name=<span class="string">'TD_error'</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> tf.variable_scope(<span class="string">'train'</span>):</span><br><span class="line">    self._train_op = tf.train.RMSPropOptimizer(self.lr).minimize(self.loss)</span><br></pre></td></tr></table></figure>
+<p><strong>网络的训练</strong><br> 每隔一定的步数，我们就要将eval_net中的参数复制到target_net中，同时我们要从经验池中选择batch大小的数据输入到网络中进行训练。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">learn</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> self.learn_step_counter % self.replace_target_iter == <span class="number">0</span>:</span><br><span class="line">        self.sess.run(self.target_replace_op)</span><br><span class="line">        print(<span class="string">'\ntarget_params_replaced\n'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> self.memory_counter &gt; self.memory_size:</span><br><span class="line">        sample_index = np.random.choice(self.memory_size,size=self.batch_size)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        sample_index = np.random.choice(self.memory_counter,size = self.batch_size)</span><br><span class="line"></span><br><span class="line">    batch_memory = self.memory[sample_index,:]</span><br><span class="line"></span><br><span class="line">    _,cost = self.sess.run(</span><br><span class="line">        [self._train_op,self.loss],</span><br><span class="line">        feed_dict=&#123;</span><br><span class="line">            self.s:batch_memory[:,:self.n_features],</span><br><span class="line">            self.a:batch_memory[:,self.n_features],</span><br><span class="line">            self.r:batch_memory[:,self.n_features+<span class="number">1</span>],</span><br><span class="line">            self.s_:batch_memory[:,-self.n_features:]</span><br><span class="line">        &#125;</span><br><span class="line">    )</span><br></pre></td></tr></table></figure>
+<p>剩下的代码就不介绍啦，跟着进行练习，相信会对DQN的原理有一个更进一步的认识。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+    
+	<div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ff73b3;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+	
+	
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>感谢您的支持，我会继续努力的!</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wexin.JPG" alt="QJun 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/强化学习实践/" rel="tag"># 强化学习实践</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/19/DQN三大改进(二)-Prioritised replay/" rel="next" title="DQN三大改进(二)-Prioritised replay">
+                <i class="fa fa-chevron-left"></i> DQN三大改进(二)-Prioritised replay
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/26/SA-ABR Code/" rel="prev" title="SA-ABR Code">
+                SA-ABR Code <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MDE0MS8xNjY2OA=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/10.jpg"
+                alt="QJun" />
+            
+              <p class="site-author-name" itemprop="name">QJun</p>
+              <p class="site-description motion-element" itemprop="description">Stay Hungry, Stay Foolish!</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">75</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:qjun@hust.edu.cn" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plus.google.com/" target="_blank" title="Google"><i class="fa fa-fw fa-google"></i>Google</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/" target="_blank" title="Twitter"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.facebook.com/" target="_blank" title="FB Page"><i class="fa fa-fw fa-facebook"></i>FB Page</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://leesen998.github.io/about/" title="关于此博客" target="_blank">关于此博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://poetryscience.ink/" title="Huixin" target="_blank">Huixin</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://ultimatehy.github.io/" title="Yong Huang" target="_blank">Yong Huang</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1、Q-learning回顾"><span class="nav-number">1.</span> <span class="nav-text">1、Q-learning回顾</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2、深度Q网络-Deep-Q-Network"><span class="nav-number">2.</span> <span class="nav-text">2、深度Q网络(Deep - Q - Network)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-DQN简介"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 DQN简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-DL和RL结合带来的问题"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 DL和RL结合带来的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-DQN解决问题方法"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 DQN解决问题方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-DQN算法流程"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 DQN算法流程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3、DQN实现DEMO"><span class="nav-number">3.</span> <span class="nav-text">3、DQN实现DEMO</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="heart">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">QJun</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<div class="weixin-box">
+  <div class="weixin-menu">
+    <div class="weixin-hover">
+      <div class="weixin-description">微信扫一扫，订阅本博客</div>
+    </div>
+  </div>
+</div>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+
+
+  
+    <script type="text/javascript">
+      window.livereOptions = {
+        refer: '2018/04/19/实战深度强化学习DQN-理论和实践/'
+      };
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"tagMode":true,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":100,"height":200,"hOffset":10,"vOffset":10},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/"});</script>
+
+
+  
+  
+  
+  <script type="text/javascript" src="/js/src/dytitle.js"></script>
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+
+<!-- 代码块复制功能 -->
+<script type="text/javascript" src="/js/src/clipboard.min.js"></script>  
+<script type="text/javascript" src="/js/src/clipboard-use.js"></script>
+
