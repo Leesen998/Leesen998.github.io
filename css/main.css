@@ -2018,7 +2018,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #f20120;
+  background: #f58bff;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2782,8 +2782,7 @@ embed {
   display: inline-block;
 }
 .headband {
-  height: 1.5px;
-  background-image: url("/images/back.png");
+  height: 0px;
 }
 .header {
   line-height: 1.5;
@@ -2817,7 +2816,7 @@ body {
   width: 100%;
 }
 .site-meta {
-  background-image: url("/images/back.png");
+  background-image: url("https://res.cloudinary.com/dpvywdzxv/image/upload/v1553608894/samples/java%20files/back3.png");
 }
 .brand {
   background-color: rgba(255,255,255,0);
@@ -2827,7 +2826,7 @@ body {
 .site-title {
   font-size: 75px;
   font-weight: bold;
-  color: #00bfff;
+  color: #b452cd;
   line-height: 80px;
   letter-spacing: 3px;
 }
